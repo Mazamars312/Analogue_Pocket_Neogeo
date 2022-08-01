@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="pll_cfg_sim/altera_pll_reconfig/altera_pll_reconfig_top.v"
+   type="VERILOG"
+   library="pll_cfg" />
+ <file
+   path="pll_cfg_sim/altera_pll_reconfig/altera_pll_reconfig_core.v"
+   type="VERILOG"
+   library="pll_cfg" />
+ <file
+   path="pll_cfg_sim/altera_pll_reconfig/altera_std_synchronizer.v"
+   type="VERILOG"
+   library="pll_cfg" />
+ <file path="pll_cfg_sim/pll_cfg.v" type="VERILOG" />
+ <topLevel name="pll_cfg" />
+ <deviceFamily name="cyclonev" />
+</simPackage>

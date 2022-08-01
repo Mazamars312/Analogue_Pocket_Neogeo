@@ -1,0 +1,4 @@
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) lc8951.v ]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) drive.v ]
+set_global_assignment -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) cd.sv ]
+set_global_assignment -name QIP_FILE [file join $::quartus(qip_path) cache.qip ]

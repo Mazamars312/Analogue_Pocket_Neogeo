@@ -1,0 +1,48 @@
+set_global_assignment -entity "Video_change" -library "Video_change" -name IP_TOOL_NAME "Qsys"
+set_global_assignment -entity "Video_change" -library "Video_change" -name IP_TOOL_VERSION "20.1"
+set_global_assignment -entity "Video_change" -library "Video_change" -name IP_TOOL_ENV "Qsys"
+set_global_assignment -library "Video_change" -name SOPCINFO_FILE [file join $::quartus(qip_path) "../../Video_change.sopcinfo"]
+set_global_assignment -entity "Video_change" -library "Video_change" -name SLD_INFO "QSYS_NAME Video_change HAS_SOPCINFO 1 GENERATION_ID 1658803908"
+set_global_assignment -library "Video_change" -name MISC_FILE [file join $::quartus(qip_path) "../Video_change.cmp"]
+set_global_assignment -library "Video_change" -name SLD_FILE [file join $::quartus(qip_path) "Video_change.debuginfo"]
+set_global_assignment -entity "Video_change" -library "Video_change" -name IP_TARGETED_DEVICE_FAMILY "Cyclone V"
+set_global_assignment -entity "Video_change" -library "Video_change" -name IP_GENERATED_DEVICE_FAMILY "{Cyclone V}"
+set_global_assignment -entity "Video_change" -library "Video_change" -name IP_QSYS_MODE "STANDALONE"
+set_global_assignment -name SYNTHESIS_ONLY_QIP ON
+set_global_assignment -library "Video_change" -name MISC_FILE [file join $::quartus(qip_path) "../../Video_change.qsys"]
+set_global_assignment -entity "Video_change" -library "Video_change" -name IP_COMPONENT_NAME "VmlkZW9fY2hhbmdl"
+set_global_assignment -entity "Video_change" -library "Video_change" -name IP_COMPONENT_DISPLAY_NAME "VmlkZW9fY2hhbmdl"
+set_global_assignment -entity "Video_change" -library "Video_change" -name IP_COMPONENT_REPORT_HIERARCHY "On"
+set_global_assignment -entity "Video_change" -library "Video_change" -name IP_COMPONENT_INTERNAL "Off"
+set_global_assignment -entity "Video_change" -library "Video_change" -name IP_COMPONENT_VERSION "MS4w"
+set_global_assignment -entity "Video_change" -library "Video_change" -name IP_COMPONENT_PARAMETER "QVVUT19HRU5FUkFUSU9OX0lE::MTY1ODgwMzkwOA==::QXV0byBHRU5FUkFUSU9OX0lE"
+set_global_assignment -entity "Video_change" -library "Video_change" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfRkFNSUxZ::Q3ljbG9uZSBW::QXV0byBERVZJQ0VfRkFNSUxZ"
+set_global_assignment -entity "Video_change" -library "Video_change" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0U=::NUNFQkE0RjIzQzg=::QXV0byBERVZJQ0U="
+set_global_assignment -entity "Video_change" -library "Video_change" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfU1BFRURHUkFERQ==::OA==::QXV0byBERVZJQ0VfU1BFRURHUkFERQ=="
+set_global_assignment -entity "Video_change" -library "Video_change" -name IP_COMPONENT_PARAMETER "QVVUT19TT1VSQ0VfQ0xLX0NMT0NLX1JBVEU=::LTE=::QXV0byBDTE9DS19SQVRF"
+set_global_assignment -entity "Video_change" -library "Video_change" -name IP_COMPONENT_PARAMETER "QVVUT19TT1VSQ0VfQ0xLX0NMT0NLX0RPTUFJTg==::LTE=::QXV0byBDTE9DS19ET01BSU4="
+set_global_assignment -entity "Video_change" -library "Video_change" -name IP_COMPONENT_PARAMETER "QVVUT19TT1VSQ0VfQ0xLX1JFU0VUX0RPTUFJTg==::LTE=::QXV0byBSRVNFVF9ET01BSU4="
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_COMPONENT_NAME "YWx0c291cmNlX3Byb2JlX3RvcA=="
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_COMPONENT_DISPLAY_NAME "SW50ZWwgRlBHQSBJbi1TeXN0ZW0gU291cmNlcyAmIFByb2Jlcw=="
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_COMPONENT_REPORT_HIERARCHY "Off"
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_COMPONENT_INTERNAL "Off"
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_COMPONENT_AUTHOR "SW50ZWwgQ29ycG9yYXRpb24="
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_COMPONENT_VERSION "MjAuMQ=="
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_COMPONENT_DESCRIPTION "SW4tc3lzdGVtIHNvdXJjZXMgJiBwcm9iZXMgZGVidWdnaW5nIG1lZ2FmdW5jdGlvbi4gIFRoZSBJbi1TeXN0ZW0gU291cmNlcyBhbmQgUHJvYmVzIG1lZ2FmdW5jdGlvbiBpcwphdmFpbGFibGUgZm9yIGFsbCBJbnRlbCBGUEdBIGRldmljZSBmYW1pbGllcyBzdXBwb3J0ZWQgYnkgdGhlIFF1YXJ0dXMgUHJpbWUgc29mdHdhcmUu"
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_COMPONENT_PARAMETER "ZGV2aWNlX2ZhbWlseQ==::Q3ljbG9uZSBW::ZGV2aWNlX2ZhbWlseQ=="
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_COMPONENT_PARAMETER "Z3VpX3VzZV9hdXRvX2luZGV4::dHJ1ZQ==::QXV0b21hdGljIEluc3RhbmNlIEluZGV4IEFzc2lnbm1lbnQ="
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_COMPONENT_PARAMETER "c2xkX2F1dG9faW5zdGFuY2VfaW5kZXg=::WUVT::c2xkX2F1dG9faW5zdGFuY2VfaW5kZXg="
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_COMPONENT_PARAMETER "aW5zdGFuY2VfaWQ=::Vk1VWA==::VGhlICdJbnN0YW5jZSBJRCcgb2YgdGhpcyBpbnN0YW5jZSAob3B0aW9uYWwp"
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_COMPONENT_PARAMETER "cHJvYmVfd2lkdGg=::MTY=::UHJvYmUgUG9ydCBXaWR0aCBbMC4uNTEyXQ=="
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_COMPONENT_PARAMETER "c291cmNlX3dpZHRo::MzI=::U291cmNlIFBvcnQgV2lkdGggWzAuLjUxMl0="
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_COMPONENT_PARAMETER "c291cmNlX2luaXRpYWxfdmFsdWU=::MA==::SGV4YWRlY2ltYWwgaW5pdGlhbCB2YWx1ZSBmb3IgdGhlIFNvdXJjZSBQb3J0"
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_COMPONENT_PARAMETER "Y3JlYXRlX3NvdXJjZV9jbG9jaw==::dHJ1ZQ==::VXNlIFNvdXJjZSBDbG9jaw=="
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_COMPONENT_PARAMETER "Y3JlYXRlX3NvdXJjZV9jbG9ja19lbmFibGU=::ZmFsc2U=::VXNlIFNvdXJjZSBDbG9jayBFbmFibGU="
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_COMPONENT_PARAMETER "ZW5hYmxlX21ldGFzdGFiaWxpdHk=::WUVT::ZW5hYmxlX21ldGFzdGFiaWxpdHk="
+
+set_global_assignment -library "Video_change" -name VERILOG_FILE [file join $::quartus(qip_path) "Video_change.v"]
+set_global_assignment -library "Video_change" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/altsource_probe_top.v"]
+
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_TOOL_NAME "altera_in_system_sources_probes"
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_TOOL_VERSION "20.1"
+set_global_assignment -entity "altsource_probe_top" -library "Video_change" -name IP_TOOL_ENV "Qsys"

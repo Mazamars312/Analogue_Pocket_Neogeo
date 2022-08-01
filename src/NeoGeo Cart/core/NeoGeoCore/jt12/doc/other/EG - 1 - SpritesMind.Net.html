@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#5716 -->
+<html dir="ltr" lang="en-gb"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>New Documentation: An authoritative reference on the YM2612 - Page 8 - SpritesMind.Net</title>
+
+	<link rel="alternate" type="application/atom+xml" title="Feed - SpritesMind.Net" href="http://gendev.spritesmind.net/forum/feed.php">							
+	<link rel="canonical" href="http://gendev.spritesmind.net/forum/viewtopic.php?t=386&amp;start=105">
+
+<!--
+	phpBB style name: prosilver
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:
+-->
+
+<link href="./EG - 1 - SpritesMind.Net_files/stylesheet.css" rel="stylesheet">
+<link href="./EG - 1 - SpritesMind.Net_files/stylesheet(1).css" rel="stylesheet">
+<link href="./EG - 1 - SpritesMind.Net_files/responsive.css" rel="stylesheet" media="all and (max-width: 700px)">
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/prosilver/theme/tweaks.css?assets_version=4" rel="stylesheet">
+<![endif]-->
+
+
+
+
+
+</head>
+<body id="phpbb" class="notouch section-viewtopic ltr hasjs">
+
+
+<div id="wrap">
+	<a id="top" class="anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+			<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="http://gendev.spritesmind.net/" title="SpritesMind"><span class="imageset site_logo"></span></a>
+				<h1>SpritesMind.Net</h1>
+				<p>Sega Megadrive/Genesis development</p>
+				<p class="skiplink"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#start_here">Skip to content</a></p>
+			</div>
+
+									<div id="search-box" class="search-box search-header" role="search">
+				<form action="http://gendev.spritesmind.net/forum/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…">
+					<button class="button icon-button search-icon" type="submit" title="Search">Search</button>
+					<a href="http://gendev.spritesmind.net/forum/search.php" class="button icon-button search-adv-icon" title="Advanced search">Advanced search</a>
+					
+				</fieldset>
+				</form>
+			</div>
+			
+			</div>
+		</div>
+				<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="linklist bulletin" role="menubar">
+
+		<li id="quick-links" class="small-icon responsive-menu dropdown-container" data-skip-responsive="true">
+			<a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" class="responsive-menu-link dropdown-trigger dropdown-toggle">Quick links</a>
+			<div class="dropdown hidden">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																								<li class="small-icon icon-search-unanswered"><a href="http://gendev.spritesmind.net/forum/search.php?search_id=unanswered" role="menuitem">Unanswered topics</a></li>
+						<li class="small-icon icon-search-active"><a href="http://gendev.spritesmind.net/forum/search.php?search_id=active_topics" role="menuitem">Active topics</a></li>
+						<li class="separator"></li>
+						<li class="small-icon icon-search"><a href="http://gendev.spritesmind.net/forum/search.php" role="menuitem">Search</a></li>
+					
+											<li class="separator"></li>
+												<li class="small-icon icon-team"><a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=team" role="menuitem">The team</a></li>										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+				<li class="small-icon icon-faq" data-skip-responsive="true"><a href="http://gendev.spritesmind.net/forum/faq.php" rel="help" title="Frequently Asked Questions" role="menuitem">FAQ</a></li>
+						
+		<!-- CUSTOM KANEDAFR -->
+		<li class="small-icon" data-last-responsive="true" style="background-image: url(&#39;./styles/prosilver/theme/images/feed.gif&#39;);"><a href="http://gendev.spritesmind.net/forum/feed.php" role="menuitem">Feed</a></li>		<!-- CUSTOM KANEDAFR -->
+
+
+			<li class="small-icon icon-logout rightside" data-skip-responsive="true"><a href="http://gendev.spritesmind.net/forum/ucp.php?mode=login" title="Login" accesskey="x" role="menuitem">Login</a></li>
+					<li class="small-icon icon-register rightside" data-skip-responsive="true"><a href="http://gendev.spritesmind.net/forum/ucp.php?mode=register" role="menuitem">Register</a></li>
+						</ul>
+
+	<ul id="nav-breadcrumbs" class="linklist navlinks" role="menubar">
+						<li class="small-icon icon-home breadcrumbs" style="max-width: 740px;">
+			<span class="crumb" itemtype="http://data-vocabulary.org/Breadcrumb" itemscope=""><a href="http://gendev.spritesmind.net/" data-navbar-reference="home" itemprop="url" title="SpritesMind"><span itemprop="title">SpritesMind</span></a></span>						<span class="crumb" itemtype="http://data-vocabulary.org/Breadcrumb" itemscope=""><a href="http://gendev.spritesmind.net/forum/index.php" accesskey="h" data-navbar-reference="index" itemprop="url" title="Forum"><span itemprop="title">Forum</span></a></span>
+											<span class="crumb" itemtype="http://data-vocabulary.org/Breadcrumb" itemscope="" data-forum-id="27"><a href="http://gendev.spritesmind.net/forum/viewforum.php?f=27" itemprop="url" title="Genny in depth"><span itemprop="title">Genny in depth</span></a></span>
+															<span class="crumb" itemtype="http://data-vocabulary.org/Breadcrumb" itemscope="" data-forum-id="24"><a href="http://gendev.spritesmind.net/forum/viewforum.php?f=24" itemprop="url" title="Sound"><span itemprop="title">Sound</span></a></span>
+												</li>
+		
+					<li class="rightside responsive-search" style="display: none;"><a href="http://gendev.spritesmind.net/forum/search.php" title="View the advanced search options" role="menuitem">Search</a></li>
+			</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" role="main">
+		
+		
+<h2 class="topic-title"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386&amp;start=105">New Documentation: An authoritative reference on the YM2612</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">For anything related to sound (YM2612, PSG, Z80, PCM...)<br></div>
+<p>
+	<strong>Moderator:</strong> <a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=2" style="color: #AA0000;" class="username-coloured">KanedaFr</a>
+</p>
+
+
+<div class="action-bar top">
+
+	<div class="buttons">
+		
+			<a href="http://gendev.spritesmind.net/forum/posting.php?mode=reply&amp;f=24&amp;t=386" class="button icon-button reply-icon" title="Post a reply">
+			Post Reply		</a>
+	
+			</div>
+
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button icon-button tools-icon dropdown-trigger dropdown-select dropdown-toggle"></span>
+		<div class="dropdown hidden">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																								<li class="small-icon icon-print"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386&amp;start=105&amp;view=print" title="Print view" accesskey="p">Print view</a></li>							</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="http://gendev.spritesmind.net/forum/search.php">
+			<fieldset>
+				<input class="inputbox search tiny" type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…">
+				<button class="button icon-button search-icon" type="submit" title="Search">Search</button>
+				<a href="http://gendev.spritesmind.net/forum/search.php" class="button icon-button search-adv-icon" title="Advanced search">Advanced search</a>
+				<input type="hidden" name="t" value="386">
+<input type="hidden" name="sf" value="msgonly">
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			812 posts
+							<ul>
+	<li class="dropdown-container dropdown-button-control dropdown-page-jump page-jump">
+		<a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" class="dropdown-trigger dropdown-toggle" title="Click to jump to page…" role="button">Page <strong>8</strong> of <strong>55</strong></a>
+		<div class="dropdown hidden">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+				<li>Jump to page:</li>
+				<li class="page-jump-form">
+					<input type="number" name="page-number" min="1" max="999999" title="Enter the page number you wish to go to" class="inputbox tiny" data-per-page="15" data-base-url="./viewtopic.php?f=24&amp;amp;t=386" data-start-name="start">
+					<input class="button2" value="Go" type="button">
+				</li>
+			</ul>
+		</div>
+	</li>
+		<li class="previous"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386&amp;start=90" rel="prev" role="button">Previous</a></li>
+			<li><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386" role="button">1</a></li>
+			<li class="ellipsis" role="separator"><span>…</span></li>
+			<li><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386&amp;start=75" role="button">6</a></li>
+			<li><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386&amp;start=90" role="button">7</a></li>
+			<li class="active"><span>8</span></li>
+			<li><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386&amp;start=120" role="button">9</a></li>
+			<li><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386&amp;start=135" role="button">10</a></li>
+			<li class="ellipsis" role="separator"><span>…</span></li>
+			<li><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386&amp;start=810" role="button">55</a></li>
+			<li class="next"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386&amp;start=120" rel="next" role="button">Next</a></li>
+	</ul>
+					</div>
+		</div>
+
+
+
+
+			<div id="p5711" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5711">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=106" class="username">AamirM</a>							</dt>
+
+						<dd class="profile-rank">Very interested</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="http://gendev.spritesmind.net/forum/search.php?author_id=106&amp;sr=posts">469</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Feb 18, 2008 8:23 am</dd>		
+		
+											
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" class="dropdown-trigger dropdown-toggle"><span class="imageset icon_contact" title="Contact AamirM">Contact AamirM</span></a>
+					<div class="dropdown hidden">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://aamirm.hacking-cult.org/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5711">
+
+						<h3 class="first"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#p5711"></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="http://gendev.spritesmind.net/forum/posting.php?mode=quote&amp;f=24&amp;p=5711" title="Reply with quote" class="button icon-button quote-icon"><span>Quote</span></a>
+						</li>
+														<li class="responsive-menu hidden dropdown-container"><a href="javascript:void(0);" class="responsive-menu-link dropdown-toggle">&nbsp;</a><div class="dropdown hidden"><div class="pointer"><div class="pointer-inner"></div></div><ul class="dropdown-contents"></ul></div></li></ul>
+							
+						<p class="author"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5711#p5711"><span class="imageset icon_post_target" title="Post">Post</span></a><span class="responsive-hide">by <strong><a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=106" class="username">AamirM</a></strong> » </span>Sat Jul 05, 2008 12:39 pm </p>
+			
+			
+			
+			<div class="content">Hi,
+<br>
+<br>I was doing some SSG-EG stuff in Regen and just noted another thing that only Kega emulates. The sound test number 0xA in Asterix will sound different every time you play it. The difference is in the speed and amplitude of it. It seems these two factors depend on something.
+<br>
+<br><blockquote><div><cite>King Of Chaos wrote:</cite>Aamir, if you need a tester with good ears, I'm your man.  <img class="smilies" src="./EG - 1 - SpritesMind.Net_files/icon_wink.gif" alt=":wink:" title="Wink"> </div></blockquote>
+<br>
+<br>Sure, I am still testing a few thing to make sure nothing is broken. I will put it up when I am done.
+<br>
+<br>stay safe,
+<br>
+<br>AamirM</div>
+
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#top" class="top" title="Top">Top</a></div>
+		
+		</div>
+	</div>
+
+	<hr class="divider">
+				<div id="p5716" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5716">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=90" class="avatar"><img class="avatar" src="./EG - 1 - SpritesMind.Net_files/s4.gif" width="74" height="76" alt="User avatar"></a>														</div>
+								<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=90" class="username">Nemesis</a>							</dt>
+
+						<dd class="profile-rank">Very interested</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="http://gendev.spritesmind.net/forum/search.php?author_id=90&amp;sr=posts">670</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Nov 07, 2007 1:09 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Sydney, Australia</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5716">
+
+						<h3><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#p5716"></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="http://gendev.spritesmind.net/forum/posting.php?mode=quote&amp;f=24&amp;p=5716" title="Reply with quote" class="button icon-button quote-icon"><span>Quote</span></a>
+						</li>
+														<li class="responsive-menu hidden dropdown-container"><a href="javascript:void(0);" class="responsive-menu-link dropdown-toggle">&nbsp;</a><div class="dropdown hidden"><div class="pointer"><div class="pointer-inner"></div></div><ul class="dropdown-contents"></ul></div></li></ul>
+							
+						<p class="author"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#p5716"><span class="imageset icon_post_target" title="Post">Post</span></a><span class="responsive-hide">by <strong><a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=90" class="username">Nemesis</a></strong> » </span>Wed Jul 09, 2008 9:15 pm </p>
+			
+			
+			
+			<div class="content">Several things first up:
+<br>
+<br>1. This is going to be a VERY long post
+<br>
+<br>2. All this information relates specifically to tests I have performed on the YM2612. Although I may not always name the YM2612 specifically, it is implied that all this information has only been tested and verified on the YM2612. I'm going to make a number of references to the way things are implemented in MAME along the way, and specifically, some areas where the behaviour of MAME differs to the way the YM2612 behaves. The implementation in MAME is based on tests done on the YM2203 and YM2151. Note that where I point out that MAME emulates something incorrectly, that simply means the emulation in MAME doesn't match the behaviour of the YM2612. Someone with access to the YM2203 or YM2151 hardware would need to cross-check my findings with those chips to determine whether the MAME implementation is incorrect for all these chips, or whether the YM2612 differs from these chips on these points of behaviour.
+<br>
+<br>3. I'm going to make a LOT of assertions in the following article about how the YM2612 carries out certain operations. I'm not always going to explain how I know these assertions to be true, or the tests I carried out to gather this information. In most cases, it is the combined result of a lot of tests, analysis of sampled results, and a lot of math. Providing a full description of all the tests I carried out would detract from the purpose of this article. Suffice to say, if I make an assertion, it is only because I have specifically tested and proven this aspect to be correct to my satisfaction, even if the information is available in the official documentation, or has been implemented a certain way by another emulator. If there is something I haven't tested and verified for myself, I will note it along the way. If you want to query a specific assertion I make, or you want more info about how I obtained certain results, just ask.
+<br>
+<br>4. I'm going to be pointing out flaws in other people's emulators in this document. Please don't take it personally. Existing emulators are a reference for behaviour on the YM2612 as much as a document is, and I think it's important to be clear what is emulated accurately, and what is not.
+<br>
+<br>5. Credit to Jarek Burczynski for his work on the MAME core. His implementation of the update process for the envelope generator in MAME is extremely accurate, and in the end my testing confirmed much of his implementation as being correct.
+<br>
+<br>And now without further ado, here's the result of the last 2 weeks of my life. What you're about to see is a full breakdown of how the YM2612 envelope generator works, including a comprehensive look at the SSG-EG mode. There is not a single emulator in existence at this point in time that implements everything from the following article correctly, so emulator authors should find it informative.
+<br>
+<br>
+<br><span style="font-weight: bold">YM2612: Clock sources</span>
+<br>First of all, an overview of the clock. The YM2612 is fed by an external clock source. The clock governs the speed at which the YM2612 performs all of its operations. In order to correctly emulate the YM2612, all aspects of its emulation must ultimately be tied back to the external clock.
+<br>
+<br>In the PAL Mega Drive, the external clock is 7610000Hz. Documentation tells us that Yamaha FM chips divide the external clock by the FM prescaler, to get the FM clock. In the case of the YM2612, the FM prescaler appears to be fixed at 6. Here's how you calculate the FM clock:
+<br>
+<br>FM Clock = External Clock / FM Prescaler
+<br>FM Clock = External Clock / 6
+<br>FM Clock = 7610000 / 6 = 1268333.33r
+<br>
+<br>The FM Clock ultimately determines the sample rate of the YM2612 output, or in other words, the number of actual changes to the output that occur in a given period of time. Here's how you calculate the output frequency of the YM2612:
+<br>
+<br>Output Frequency = FM Clock / 24
+<br>Output Frequency = 1268333.33r / 24 = 52847.22Hz
+<br>
+<br>Interestingly, that divider of 24 is 6*4, or 6 channels times 4 operators. Maybe that's significant, maybe it isn't. All I've done at this stage is to verify the output frequency.
+<br>
+<br>This is where things get a little more interesting. The Envelope Generator does NOT update once for each sample the YM2612 produces, as you might initially expect it would. More than that, the envelope generator isn't even tied to the FM clock source. Testing has shown that the clock for the envelope generator is independent of the FM clock. Here is the formula for the rate at which the envelope generator updates:
+<br>
+<br>EG Clock = External Clock / 351
+<br>
+<br>This may seem a little odd. I agree. I have tested and re-tested my results however, and the numbers come back the same. The ratio of the frequency output to the envelope generator clock is 1:2.4375. This directly contradicts MAME, which has the output cycle at a ratio of 1:3, or in other words, the envelope generator updates once for every 3 FM clock pulses. Comparing the output from MAME with the output from the YM2612 shows that MAME is incorrect however. Getting this update cycle for the envelope generator correct is important, and SSG-EG mode in particular is very sensitive to this.
+<br>
+<br>
+<br><span style="font-weight: bold">YM2612: Overview of the Envelope Generator</span>
+<br>The only purpose of the envelope generator is to generate a single number for each operator. That number is the attenuation value, or in simple terms, the amount to reduce the volume of an operator by. As an attenuation value, a high number produces a low volume, and a low number produces a high volume. The envelope generator outputs its attenuation value as a 10-bit number, giving a range of 0x000-0x3FF/0-1024. This output number is a simple linear progression from 0db to 96db. Here is the weighting for each bit in the 10-bit output of the envelope generator:
+<br>
+<br><div class="codebox"><p>Code: <a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" onclick="selectCode(this); return false;">Select all</a></p><code>EG attenuation output bit weighting = 96 / 2^10<br>---------------------------------------------------------------------------------<br>|&nbsp; &nbsp;9&nbsp; &nbsp;|&nbsp; &nbsp;8&nbsp; &nbsp;|&nbsp; &nbsp;7&nbsp; &nbsp;|&nbsp; &nbsp;6&nbsp; &nbsp;|&nbsp; &nbsp;5&nbsp; &nbsp;|&nbsp; &nbsp;4&nbsp; &nbsp;|&nbsp; &nbsp;3&nbsp; &nbsp;|&nbsp; &nbsp;2&nbsp; &nbsp;|&nbsp; &nbsp;1&nbsp; &nbsp;|&nbsp; &nbsp;0&nbsp; &nbsp;|<br>|-------------------------------------------------------------------------------|<br>|&nbsp; &nbsp;48&nbsp; |&nbsp; &nbsp;24&nbsp; |&nbsp; &nbsp;12&nbsp; |&nbsp; &nbsp;6&nbsp; &nbsp;|&nbsp; &nbsp;3&nbsp; &nbsp;|&nbsp; 1.5&nbsp; |&nbsp; 0.75 | 0.375 | 0.1875|0.09375|<br>---------------------------------------------------------------------------------</code></div><br>IE, a value of 0x20 is 3db, a value of 0x40 is 6db.<br><br>Ultimately, the value of the envelope generator comes in its ability to automatically adjust this 10-bit attenuation value over time, based on a set of parameters. Under normal operation (no SSG-EG), the envelope generator creates a basic ADSR envelope. For the sake of brevity, I'm going to assume everyone reading this knows the basics of how the ADSR envelope in the YM2612 works, as it's sufficiently explained in the available documentation.<br><br><br><span style="font-weight: bold">YM2612: Decibels to samples</span><br>The 10-bit attenuation output of the envelope generator is a linear scale in decibels. The decibel scale itself is logarithmic. If the envelope generator produces a linear increase in values, IE, incrementing the 10-bit output value by 1 for each clock pulse, the final curve that is produced by the YM2612 would be an exponential curve, not a straight line. This conversion from db to sample values is handled by the DAC for the FM module, not the envelope generator. Don't confuse the FM module DAC with the DAC registers at 0x2A/0x2B in the YM2612, that's a different thing entirely.<br><br>The envelope generator doesn't know what a decibel is, or how it relates to the final samples the YM2612 produces. The only job of the envelope generator is to produce this 10-bit attenuation output. After all calculations have been performed by the envelope generator, and the final attenuation value is handed off to the DAC, it is only then that the conversion from decibels to actual sample values is performed, and it is at this point an otherwise linear progression becomes an exponential progression. This means when you're looking at sampled data and comparing it to the output of the envelope generator, you must always be comparing on the basis of decibels.<br><br>This is probably obvious to anyone who has a bit of a background in audio, but I'm mentioning this because this confused me initially when I started looking at sampled output.<br><br><br><span style="font-weight: bold">YM2612: Inputs and internal data</span><br>The envelope generator receives the following register data:<br><div class="codebox"><p>Code: <a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" onclick="selectCode(this); return false;">Select all</a></p><code>TL&nbsp; &nbsp; &nbsp; Total Level&nbsp; &nbsp; &nbsp;7 bits<br>SL&nbsp; &nbsp; &nbsp; Sustain Level&nbsp; &nbsp;4 bits<br>AR&nbsp; &nbsp; &nbsp; Attack Rate&nbsp; &nbsp; &nbsp;5 bits<br>DR&nbsp; &nbsp; &nbsp; Decay Rate&nbsp; &nbsp; &nbsp; 5 bits<br>SR&nbsp; &nbsp; &nbsp; Sustain Rate&nbsp; &nbsp; 5 bits<br>RR&nbsp; &nbsp; &nbsp; Release Rate&nbsp; &nbsp; 4 bits<br>SSG-EG&nbsp; SSG-EG Mode&nbsp; &nbsp; &nbsp;4 bits</code></div><br><br>In addition, the YM2612 receives the following data for each operator, which will be discussed further later on:<br>-Notification about key-on and key-off events<br>-The current 4-bit key-scale value<br><br>For each operator, the envelope generator stores the following data:<br>-A register indicating the current phase being run in the ADSR envelope (Attack, Decay, Sustain, or Release)<br>-A 6-bit calculated Rate value<br>-The current 10-bit attenuation value<br>-A flag indicating the polarity of the output. When this is set, the attenuation output is inverted.<br><br>The envelope generator also keeps the following global data which is shared by all operators:<br>-A running cycle counter of unknown size (not really important), which has enough storage for at least 14 bits of data.<br><br><br><span style="font-weight: bold">YM2612: Attack and Decay</span><br>The ASDR envelope fundamentally only has two states: Attack and Decay. In the Attack phase, the attenuation value decreases exponentially, until it reaches 0. In the decay phase, the attenuation increases in a linear fashion until the attenuation reaches max, at which time no sound is produced for that channel. Decay, Sustain, and Release are all components of the decay phase, and for calculation purposes, they are all identical. With comparable settings, the same output will be produced from all three phases. When it comes to calculating envelopes, the only thing that makes the Decay, Sustain, and Release phases different from each other is that they calculate their decay rates using values from different registers, so the user can provide a different rate of decay for each state. When they are all set with comparable settings, the final waveform will be the same, regardless of what SL is set to or when key-off occurs.<br><br><br><span style="font-weight: bold">YM2612: Calculating Attenuation Values</span><br>So we know the envelope generator maintains a 10-bit attenuation value for each operator. This is increased in a linear fashion during the decay phase, and decreased in an exponential fashion during the attack phase, but how and when are these adjustments made? This is the core of the envelope generator. The process occurs in several key steps.<br><br>1. The Rate Calculation<br>The rate calculation is the first step in calculating attenuation values. The envelope generator performs the rate calculation once, as the operator enters a new phase of the ADSR envelope. It requires two pieces of data first:<br><br>R:	The rate value supplied in the register for the state currently running (AR,DR,SR,RR)<br>Rks:	The 4-bit Rate Key-Scaling value for the operator. Refer to page 29 in the YM2608 manual.<br><br>With those two pieces of data, you then use the following formula to calculate the 6-bit internal rate number:<br><br>Rate = (2*R) + Rks<br><br>Special cases:<br>-If R = 0, then Rate = 0, regardless of the value of Rks.<br>-Rate is capped at 63. If the calculation result is greater than 63, Rate=63.<br>-Note that the source registers for AR, DR, and SR are 5-bit, but RR is only 4-bit. In order to convert RR into a 5-bit value for use in this calculation, multiply it by 2, and add 1. In other words, you can think of RR as the upper 4 bits of a 5-bit rate value, with the LSB fixed to 1.<br><br>This Rate number doesn't give you anything directly, just another number, but it is used in the following stages to adjust the attenuation.<br><br>2. The Update Cycle<br>And here's the bit that's not documented. The rate calculation gives you a 6-bit rate value, but how is that actually applied to vary the 10-bit attenuation value over time? First of all, I'm going to throw a few tables at you:<br><br><div class="codebox"><p>Code: <a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" onclick="selectCode(this); return false;">Select all</a></p><code>Table 1: Counter shift values<br>11&nbsp; &nbsp;11&nbsp; &nbsp;11&nbsp; &nbsp;11&nbsp; &nbsp; &nbsp;0-3&nbsp; &nbsp; (0x00-0x03)<br>10&nbsp; &nbsp;10&nbsp; &nbsp;10&nbsp; &nbsp;10&nbsp; &nbsp; &nbsp;4-7&nbsp; &nbsp; (0x04-0x07)<br>9&nbsp; &nbsp; 9&nbsp; &nbsp; 9&nbsp; &nbsp; 9&nbsp; &nbsp; &nbsp; 8-11&nbsp; &nbsp;(0x08-0x0B)<br>8&nbsp; &nbsp; 8&nbsp; &nbsp; 8&nbsp; &nbsp; 8&nbsp; &nbsp; &nbsp; 12-15&nbsp; (0x0C-0x0F)<br>7&nbsp; &nbsp; 7&nbsp; &nbsp; 7&nbsp; &nbsp; 7&nbsp; &nbsp; &nbsp; 16-19&nbsp; (0x10-0x13)<br>6&nbsp; &nbsp; 6&nbsp; &nbsp; 6&nbsp; &nbsp; 6&nbsp; &nbsp; &nbsp; 20-23&nbsp; (0x14-0x17)<br>5&nbsp; &nbsp; 5&nbsp; &nbsp; 5&nbsp; &nbsp; 5&nbsp; &nbsp; &nbsp; 24-27&nbsp; (0x18-0x1B)<br>4&nbsp; &nbsp; 4&nbsp; &nbsp; 4&nbsp; &nbsp; 4&nbsp; &nbsp; &nbsp; 28-31&nbsp; (0x1C-0x1F)<br>3&nbsp; &nbsp; 3&nbsp; &nbsp; 3&nbsp; &nbsp; 3&nbsp; &nbsp; &nbsp; 32-35&nbsp; (0x20-0x23)<br>2&nbsp; &nbsp; 2&nbsp; &nbsp; 2&nbsp; &nbsp; 2&nbsp; &nbsp; &nbsp; 36-39&nbsp; (0x24-0x27)<br>1&nbsp; &nbsp; 1&nbsp; &nbsp; 1&nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; 40-43&nbsp; (0x28-0x2B)<br>0&nbsp; &nbsp; 0&nbsp; &nbsp; 0&nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; 44-47&nbsp; (0x2C-0x2F)<br>0&nbsp; &nbsp; 0&nbsp; &nbsp; 0&nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; 48-51&nbsp; (0x30-0x33)<br>0&nbsp; &nbsp; 0&nbsp; &nbsp; 0&nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; 52-55&nbsp; (0x34-0x37)<br>0&nbsp; &nbsp; 0&nbsp; &nbsp; 0&nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; 56-59&nbsp; (0x38-0x3B)<br>0&nbsp; &nbsp; 0&nbsp; &nbsp; 0&nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; 60-63&nbsp; (0x3C-0x3F)</code></div><br><br><div class="codebox"><p>Code: <a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" onclick="selectCode(this); return false;">Select all</a></p><code>Table 2: Attenuation increment values<br>*0,0,0,0,0,0,0,0&nbsp; *0,0,0,0,0,0,0,0&nbsp; *0,1,0,1,0,1,0,1&nbsp; *0,1,0,1,0,1,0,1&nbsp; &nbsp; 0-3&nbsp; &nbsp; (0x00-0x03)<br>&nbsp;0,1,0,1,0,1,0,1&nbsp; *0,1,0,1,0,1,0,1&nbsp; &nbsp;0,1,1,1,0,1,1,1&nbsp; *0,1,1,1,0,1,1,1&nbsp; &nbsp; 4-7&nbsp; &nbsp; (0x04-0x07)<br>&nbsp;0,1,0,1,0,1,0,1&nbsp; &nbsp;0,1,0,1,1,1,0,1&nbsp; &nbsp;0,1,1,1,0,1,1,1&nbsp; &nbsp;0,1,1,1,1,1,1,1&nbsp; &nbsp; 8-11&nbsp; &nbsp;(0x08-0x0B)<br>&nbsp;0,1,0,1,0,1,0,1&nbsp; &nbsp;0,1,0,1,1,1,0,1&nbsp; &nbsp;0,1,1,1,0,1,1,1&nbsp; &nbsp;0,1,1,1,1,1,1,1&nbsp; &nbsp; 12-15&nbsp; (0x0C-0x0F)<br>&nbsp;0,1,0,1,0,1,0,1&nbsp; &nbsp;0,1,0,1,1,1,0,1&nbsp; &nbsp;0,1,1,1,0,1,1,1&nbsp; &nbsp;0,1,1,1,1,1,1,1&nbsp; &nbsp; 16-19&nbsp; (0x10-0x13)<br>&nbsp;0,1,0,1,0,1,0,1&nbsp; &nbsp;0,1,0,1,1,1,0,1&nbsp; &nbsp;0,1,1,1,0,1,1,1&nbsp; &nbsp;0,1,1,1,1,1,1,1&nbsp; &nbsp; 20-23&nbsp; (0x14-0x17)<br>&nbsp;0,1,0,1,0,1,0,1&nbsp; &nbsp;0,1,0,1,1,1,0,1&nbsp; &nbsp;0,1,1,1,0,1,1,1&nbsp; &nbsp;0,1,1,1,1,1,1,1&nbsp; &nbsp; 24-27&nbsp; (0x18-0x1B)<br>&nbsp;0,1,0,1,0,1,0,1&nbsp; &nbsp;0,1,0,1,1,1,0,1&nbsp; &nbsp;0,1,1,1,0,1,1,1&nbsp; &nbsp;0,1,1,1,1,1,1,1&nbsp; &nbsp; 28-31&nbsp; (0x1C-0x1F)<br>&nbsp;0,1,0,1,0,1,0,1&nbsp; &nbsp;0,1,0,1,1,1,0,1&nbsp; &nbsp;0,1,1,1,0,1,1,1&nbsp; &nbsp;0,1,1,1,1,1,1,1&nbsp; &nbsp; 32-35&nbsp; (0x20-0x23)<br>&nbsp;0,1,0,1,0,1,0,1&nbsp; &nbsp;0,1,0,1,1,1,0,1&nbsp; &nbsp;0,1,1,1,0,1,1,1&nbsp; &nbsp;0,1,1,1,1,1,1,1&nbsp; &nbsp; 36-39&nbsp; (0x24-0x27)<br>&nbsp;0,1,0,1,0,1,0,1&nbsp; &nbsp;0,1,0,1,1,1,0,1&nbsp; &nbsp;0,1,1,1,0,1,1,1&nbsp; &nbsp;0,1,1,1,1,1,1,1&nbsp; &nbsp; 40-43&nbsp; (0x28-0x2B)<br>&nbsp;0,1,0,1,0,1,0,1&nbsp; &nbsp;0,1,0,1,1,1,0,1&nbsp; &nbsp;0,1,1,1,0,1,1,1&nbsp; &nbsp;0,1,1,1,1,1,1,1&nbsp; &nbsp; 44-47&nbsp; (0x2C-0x2F)<br>&nbsp;1,1,1,1,1,1,1,1&nbsp; &nbsp;1,1,1,2,1,1,1,2&nbsp; &nbsp;1,2,1,2,1,2,1,2&nbsp; &nbsp;1,2,2,2,1,2,2,2&nbsp; &nbsp; 48-51&nbsp; (0x30-0x33)<br>&nbsp;2,2,2,2,2,2,2,2&nbsp; &nbsp;2,2,2,4,2,2,2,4&nbsp; &nbsp;2,4,2,4,2,4,2,4&nbsp; &nbsp;2,4,4,4,2,4,4,4&nbsp; &nbsp; 52-55&nbsp; (0x34-0x37)<br>&nbsp;4,4,4,4,4,4,4,4&nbsp; &nbsp;4,4,4,8,4,4,4,8&nbsp; &nbsp;4,8,4,8,4,8,4,8&nbsp; &nbsp;4,8,8,8,4,8,8,8&nbsp; &nbsp; 56-59&nbsp; (0x38-0x3B)<br>&nbsp;8,8,8,8,8,8,8,8&nbsp; &nbsp;8,8,8,8,8,8,8,8&nbsp; &nbsp;8,8,8,8,8,8,8,8&nbsp; &nbsp;8,8,8,8,8,8,8,8&nbsp; &nbsp; 60-63&nbsp; (0x3C-0x3F)</code></div><br>Think of this as a multidimentional array of [64][8]. For each of the possible 64 rate values, there are 8 integer values.<br><br>Both these tables are based on information provided in MAME, but I've independently tested most of these values against the YM2612 output. I did find a few inaccuracies in the attenuation increment values provided in MAME. The entries marked with an asterisk differ from the values provided in the MAME core (For the record, yes, rate values of 2 and 3, 4 and 5, 6 and 7 do produce an identical output. That's not an error).<br><br>Ok, so what do these tables do? The following pseudo C-like algorithm describes the basic process the envelope generator carries out each cycle.<br><div class="codebox"><p>Code: <a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" onclick="selectCode(this); return false;">Select all</a></p><code>++globalCycleCounter<br>For each operator<br>&nbsp; &nbsp; //Read the shift value from Table 1<br>&nbsp; &nbsp; counterShiftValue = counterShiftTable[operator.rate]<br>&nbsp; &nbsp; If (globalCycleCounter % (1 &lt;&lt; counterShiftValue)) == 0<br>&nbsp; &nbsp; &nbsp; &nbsp; //Check the current cycle we're up to (0-7)<br>&nbsp; &nbsp; &nbsp; &nbsp; updateCycle = (globalCycleCounter &gt;&gt; counterShiftValue) &amp; 0x07<br><br>&nbsp; &nbsp; &nbsp; &nbsp; //Read the next attenuation increment value from Table 2<br>&nbsp; &nbsp; &nbsp; &nbsp; attenuationIncrement = attenuationIncrementTable[operator.rate][updateCycle]<br><br>&nbsp; &nbsp; &nbsp; &nbsp; //Update the attenuation<br>&nbsp; &nbsp; &nbsp; &nbsp; //The attenuation update process happens here. More on that in the next section.<br>&nbsp; &nbsp; Endif<br>Next operator</code></div><br><br>The use of the global cycle counter makes this seem a little more complex than it really is. Basically, the Rate calculation determines two things:<br><br>1. How many envelope generator cycles will pass between updates<br>Table 1 lists "Counter shift values" for each possible rate. If the value is 0, the attenuation will be updated every cycle of the envelope generator. If the value is 1, the attenuation will be updated every second cycle. If it's 2, updates will occur every 4 cycles, if it's 3, every 8, etc. At the max value of 11, the attenuation will only be updated once every 2048 cycles of the envelope generator. This allows extremely slow attack and decay.<br><br>2. How large the adjustments to the attenuation will be at each update<br>Table 2 gives an 8-cycle loop of adjustment values for the attenuation, for each possible rate. The YM2612 works through these 8 values in a continuous loop. Each time the attenuation value for an envelope is updated, it will use the next sequential value in that loop to adjust the attenuation. In some cases, the value is 0, meaning even though an update cycle is triggered, no adjustments are made to the envelope on that cycle. For the larger rate values, the adjustments are more extreme.<br><br>The way the attenuation update cycle has been setup allows the envelope generator to create envelopes that have an extremely long decay (up to 10223616 samples, or 193.5 seconds on a PAL Mega Drive, for a rate of 2), while still allowing high-resolution updates to envelopes that have an extremely short decay (as low as 312 samples for a rate of 63). The same is of course true of the attack phase.<br><br><br>I think it's important to show how the contents of these two internal tables can be determined by measuring the external output of the YM2612, so allow me to show you a screencap:<br><img src="./EG - 1 - SpritesMind.Net_files/internal tables.png" class="postimage" alt="Image"><br><br>You can clearly see the steps in the attenuation here, including the pattern of cycles where the attenuation is and is not modified. This wave was created in SSG-EG mode, so the changes in amplitude are larger than normal (more on that later), but you can observe the same effect without SSG-EG active. This particular wave was produced with a calculated rate value of 7. Looking at the table above, that gives it an update cycle pattern of 0,1,1,1,0,1,1,1. You can see that pattern coming through in the output. The counter shift values increase the length between the steps.<br><br>This waveform also demonstrates the fact that the update cycle is based on a global clock. You can see at the start of this wave that there is a short period where the wave is held at 0db, before the first drop occurs. This drop does not occur at the same spacing as the rest of the changes that follow it. This demonstrates that each operator doesn't have its own running cycle counter. When you key-on an operator on the real system, it's possible for it to start at any point in the 8-cycle pattern of steps, and regardless of how large the spacing between steps, the first change in attenuation may happen at any time from the moment the note is keyed on, depending on what the global counter was up to when key-on occurred.<br><br><br><span style="font-weight: bold">YM2612: Updating and outputting attenuation values</span><br>In the previous section, some pseudocode was presented showing the update cycle for attenuation values in the envelope generator. The part on actually adjusting the attenuation was left out. The update process is different between attack and decay. The decay phase is simpler, so I'll present that one first.<br><br>The decay phase:<br><div class="codebox"><p>Code: <a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" onclick="selectCode(this); return false;">Select all</a></p><code>operator.attenuation += attenuationIncrement</code></div><br>The decay phase is a simple linear progression. You add the increment value to the attenuation on each update.<br><br>The attack phase:<br><div class="codebox"><p>Code: <a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" onclick="selectCode(this); return false;">Select all</a></p><code>operator.attenuation += attenuationIncrement * (((1024 - operator.attenuation) / 16) + 1)</code></div><br>The attack phase is a little more complex. The attack phase produces an inverted exponential curve in attenuation, from maximum to minimum. This formula was derived after a little experimentation. This formula is only half the implementation however. In an earlier section, I mentioned that the envelope generator stores a flag for each operator indicating whether the output is inverted. During the attack phase, this flag is set. This effectively does a binary not of the attenuation when it is output, so 0x000 becomes 0xFFF, 0x12F becomes 0xED0, etc.<br><br>For the output of attenuation values, here's the basic process:<br>-Take a copy of the current internal 10-bit attenuation number<br>-If the output invert flag is set, perform a binary NOT on the number<br>-Add TL to the number. TL is converted to a 10-bit attenuation value first. A limit is applied to prevent the result from overflowing.<br><br><br><span style="font-weight: bold">YM2612: The ASDR envelope</span><br>This is a quick summary of how the envelope generator manages the ASDR envelope.<br><br>1. Key-on occurs.<br>   -The envelope generator sets the operator to the attack phase<br>   -The rate parameter for the attack phase is calculated<br>   -The current attenuation value is cleared<br>   -The inverted output flag is set<br>2. The attenuation is continually adjusted, until attenuation reaches 0<br>   -The envelope generator switches the operator to the decay phase<br>   -The rate parameter for the decay phase is calculated<br>3. The attenuation is continually adjusted, until the attenuation value reaches SL<br>   -The envelope generator switches the operator to the sustain phase<br>   -The rate parameter for the sustain phase is calculated<br>4. The attenuation is continually adjusted until it hits max<br><br>At any point, key-off may occur. If it does, the following immediately occurs.<br>   -The envelope generator sets the operator to the release phase<br>   -The rate parameter for the release phase is calculated<br>   -The inverted output flag is cleared<br><br><br><span style="font-weight: bold">YM2612: SSG-EG mode</span><br>Ahh yes, now we've reached that part that every emulator gets wrong: SSG-EG mode. Well, right into it. The key feature SSG-EG provides is the ability to repeat the decay and sustain phases of the ASDR envelope over and over again. First of all, here's the SSG-EG register, as it's presented in the YM2608 documentation:<br><img src="./EG - 1 - SpritesMind.Net_files/ssg-eg register.png" class="postimage" alt="Image"><br><br>You'll see there are 8 patterns presented here, but there isn't any real indication given in the documentation of what these patterns mean, or how they affect the output waveform. What these patterns actually represent is a series of repetitions of the decay and sustain phases of the ASDR envelope, like so:<br><img src="./EG - 1 - SpritesMind.Net_files/ssg-eg pass1.png" class="postimage" alt="Image"><br><img src="./EG - 1 - SpritesMind.Net_files/ssg-eg pass2.png" class="postimage" alt="Image"><br><br>When the attenuation for the operator hits max, the envelope switches back to the attack phase. If you've got the attack rate set to 0x1F like the Yamaha documentation says you need to, you can effectively say the attenuation is reset to 0, and the envelope mode switches back to the decay phase. The next section will cover the interaction of SSG-EG with the attack phase.<br><br>Each repetition within these patterns is selected from one of 4 basic modes. These modes affect the way the decay and sustain phases proceed. Each mode shows how the amplitude changes in the decay phase over time. Here are what each of the 4 modes do:<br><br>1. Normal<br><img src="./EG - 1 - SpritesMind.Net_files/ssg-eg mode1.png" class="postimage" alt="Image"><br>This mode represents the normal progression of the decay and sustain phases. The amplitude starts at the maximum level, and proceeds to the minimum level, or in other words, the attenuation increases from 0 to max. This is the way the decay and sustain phases would proceed without SSG-EG mode active.<br><br>2. Inverted<br><img src="./EG - 1 - SpritesMind.Net_files/ssg-eg mode2.png" class="postimage" alt="Image"><br>The inverted output flag is set for the operator during this repetition. The calculation remains the same, but due to the inverted output, the 10-bit attenuation value will proceed from maximum to minimum, or in other words, rather than "decaying", the output will be increasing in volume.<br><br>3. Held<br><img src="./EG - 1 - SpritesMind.Net_files/ssg-eg mode3.png" class="postimage" alt="Image"><br>The output is simply held at maximum attenuation (minimum volume).<br><br>4. Inverted Held<br><img src="./EG - 1 - SpritesMind.Net_files/ssg-eg mode4.png" class="postimage" alt="Image"><br>An inverted version of the above. The output is held at minimum attenuation (maximum volume).<br><br>There's a better description of the 4 bits that set the SSG-EG mode than the one provided in the YM2608 manual.<br><br><div class="codebox"><p>Code: <a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" onclick="selectCode(this); return false;">Select all</a></p><code>SSG-EG: $90-$9E<br>---------------------------------<br>| 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |<br>|---------------|---|---|---|---|<br>| /&nbsp; &nbsp;/&nbsp; &nbsp;/&nbsp; &nbsp;/ | E |ATT|ALT|HLD|<br>---------------------------------</code></div><br>E = Enable. Unless this bit is set, SSG-EG mode is inactive, and none of the other bits have any effect.<br>ATT = Attack. When this bit is set, the inverted output flag is initially set at the start of the first decay phase.<br>ALT = Alternate. The inverted output flag is toggled after each repetition, alternating between 1 and 0.<br>HLD = Hold. After the decay and sustain phases have completed one full pass, the output is held at the final level. Once hold mode begins, it doesn't end until key-off.<br><br>If you look at the 8 patterns shown above, you'll see how these bits combine to create the patterns. Note that when you combine the ALT bit with hold, the inverted output flag is toggled before hold mode begins.<br><br><br>There is a second effect that SSG-EG has on all envelope generator decay phases, including the release phase. When an SSG-EG mode is applied to an operator, each time the attenuation value is being updated, the increase is multiplied by a factor of 6. Note that the envelope generator does not update any quicker in SSG-EG mode. The update cycles remain the same, but the amount that is added to the attenuation value is increased by a factor of 6 in the YM2612.<br><br>So, for the sake of completeness, as per the update formulae for the attack and decay phases given above, the following is the update formula for all decay phases under SSG-EG mode.<br><div class="codebox"><p>Code: <a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" onclick="selectCode(this); return false;">Select all</a></p><code>operator.attenuation += 6 * attenuationIncrement</code></div>
+<br>
+<br>Note that the rate of change for the attack phase is not affected by SSG-EG mode, so the calculation previously given for the attack phase still stands. There are however a lot of other quirks to mention regarding the attack phase and SSG-EG mode. The interaction of the attack phase and SSG-EG is the topic of the next section.
+<br>
+<br>
+<br><span style="font-weight: bold">YM2612: SSG-EG and the Attack Phase</span>
+<br>Officially, Yamaha say the attack rate must be set to 0x1F in order to use SSG-EG mode. You can consider all behaviour of the YM2612 to be officially undefined and unsupported when you combine SSG-EG mode with an attack rate less than 0x1F.
+<br>
+<br>The effect of having an attack value less than 0x1F with SSG-EG enabled is that the attack phase will also be included in each repetition of the envelope. SSG-EG does a loop of the attack, decay, and sustain phases. Although the rate of change in the decay phases are increased by a factor of 6 when SSG-EG is applied, the rate of change for the attack phase is unaffected, and is evaluated in its normal fashion. Each repetition of the envelope triggered by SSG-EG will repeat the attack, decay, and sustain modes.
+<br>
+<br>The reason Yamaha say not to use the attack phase when SSG-EG is enabled, is because it really does mess things up. There are two issues it creates. The first issue relates to the nature of the calculation being performed to create the attack phase. The attack phase is an inverted exponential curve. The attenuation starts at maximum, and advances very quickly at first, but gradually slows as it approaches minimum attenuation. SSG-EG allows the output to be inverted. This doesn't change the actual calculation that is being performed in order to calculate the attack curve however, it literally just inverts the bits being output. This creates an attack curve which makes several extremely large, obvious steps from 0db, which are the most audible changes, while all the slower gradual changes occur at the other end of the scale, where the change in attenuation is much less noticeable. Here's a screenshot of what you get with an inverted attack curve:
+<br><img src="./EG - 1 - SpritesMind.Net_files/inverted attack.png" class="postimage" alt="Image">
+<br>
+<br>The second issue with combining an attack phase with SSG-EG mode is a little more subtle, and a lot more serious. If you look in an earlier section where I present pseudocode for the update process for the attack phase, you'll see that I mention the attack phase uses the output inversion bit to invert the output. Both the decay and attack phases use an incrementing value to represent the attenuation value, but the attack phase uses this output inversion setting to negate the output, which creates a falling attenuation (rising volume), instead of a rising attenuation (falling volume). The problem is, SSG-EG mode uses the output inversion bit too, and they end up interfering with each other. Sometimes the beginning of the attack phase will override the changes made by SSG-EG mode, and sometimes it will be the other way around. The worst thing is, because the update timing of the attack cycle, like all envelope update cycles, is tied to the global cycle count for the envelope generator, the results are inconsistent. If you repeat a key-on for the operator without changing any settings, you might get quite a different result.
+<br>
+<br>With a real attack phase and SSG-EG mode both active, the first two SSG-EG patterns always work correctly, as they don't affect the output inversion bit. Patterns which use the ATT bit to start the output inverted sometimes have their inversion overridden by the attack phase, so they will start non-inverted. Patterns which use the ALT bit are severely affected, as at the start of each repetition, including the first, there's a chance that it could go either way, so each successive repetition may either be inverted or not inverted. There's also often a cross-over period of one update cycle for the envelope phase, where the output inversion bit is set by SSG-EG, then overridden by the attack phase, creating a loud spike between each repetition.
+<br>
+<br>Here's a screenshot showing the messed up stuff you can get with the ALT bit set:
+<br><img src="./EG - 1 - SpritesMind.Net_files/ssg-eg messed up.png" class="postimage" alt="Image">
+<br>
+<br>And here's a screenshot showing the noise spike you get between each cycle even when it behaves:
+<br><img src="./EG - 1 - SpritesMind.Net_files/ssg-eg spike.png" class="postimage" alt="Image">
+<br>
+<br>Emulating all these quirks would require exact knowledge of when these flags are set and cleared. I may do more work in this area at a later date.
+<br>
+<br>
+<br><span style="font-weight: bold">YM2612: Current emulator support for SSG-EG mode</span>
+<br>I haven't checked what emulators do about emulating SSG-EG mode with an attack phase, but here are some notes about current emulator support for SSG-EG mode in the YM2612.
+<br>
+<br>-MAME doesn't clear the inverted output flag on release, so release during an inverted output creates a constant tone. MAME also only multiplies the attenuation increase by a factor of 4 in the decay and sustain phases, not 6. Interestingly, MAME also does not adjust the rate of the release phase, which it should.
+<br>-Kega doesn't do the release phase at all when SSG-EG is active, and messes up held notes. It does get the timing of the decay phase almost perfect however.
+<br>-Gens doesn't clear the inverted output flag on release, so it has a constant tone problem like MAME does. Gens doesn't seem to increase the decay phase increment at all, so each repetition of the decay phase runs 6 times too slow.
+<br>
+<br>
+<br><span style="font-weight: bold">YM2612: SSG-EG Test ROM</span>
+<br>Finally, here's a quick test rom which uses all 8 SSG-EG patterns:
+<br><!-- m --><a class="postlink" href="http://nemesis.hacking-cult.org/MegaDrive/Roms/Test/Mine/YM2612/ym2612ssg-eg.bin">http://nemesis.hacking-cult.org/MegaDri ... ssg-eg.bin</a><!-- m -->
+<br>
+<br>Here's the source:
+<br><!-- m --><a class="postlink" href="http://nemesis.hacking-cult.org/MegaDrive/Roms/Test/Mine/YM2612/ym2612ssg-eg.asm">http://nemesis.hacking-cult.org/MegaDri ... ssg-eg.asm</a><!-- m -->
+<br>
+<br>And here's a sample of the output you get on a PAL MD1600 MegaDrive, recorded at 96KHz:
+<br><!-- m --><a class="postlink" href="http://nemesis.hacking-cult.org/MegaDrive/Samples/ssg-eg%20md1600.rar">http://nemesis.hacking-cult.org/MegaDri ... md1600.rar</a><!-- m -->
+<br>
+<br>
+<br>
+<br>And on that note, I'm going to get some sleep.</div>
+
+			
+													<div class="notice">
+					Last edited by <a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=90" class="username">Nemesis</a> on Thu Jul 10, 2008 11:41 am, edited 1 time in total.
+									</div>
+			
+									
+						</div>
+
+		</div>
+
+				<div class="back2top"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#top" class="top" title="Top">Top</a></div>
+		
+		</div>
+	</div>
+
+	<hr class="divider">
+				<div id="p5717" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5717">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=94" class="avatar"><img class="avatar" src="./EG - 1 - SpritesMind.Net_files/9417821.gif" width="80" height="80" alt="User avatar"></a>														</div>
+								<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=94" class="username">HardWareMan</a>							</dt>
+
+						<dd class="profile-rank">Very interested</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="http://gendev.spritesmind.net/forum/search.php?author_id=94&amp;sr=posts">645</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Dec 15, 2007 7:49 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Kazakhstan, Pavlodar</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5717">
+
+						<h3><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#p5717"></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="http://gendev.spritesmind.net/forum/posting.php?mode=quote&amp;f=24&amp;p=5717" title="Reply with quote" class="button icon-button quote-icon"><span>Quote</span></a>
+						</li>
+														<li class="responsive-menu hidden dropdown-container"><a href="javascript:void(0);" class="responsive-menu-link dropdown-toggle">&nbsp;</a><div class="dropdown hidden"><div class="pointer"><div class="pointer-inner"></div></div><ul class="dropdown-contents"></ul></div></li></ul>
+							
+						<p class="author"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5717#p5717"><span class="imageset icon_post_target" title="Post">Post</span></a><span class="responsive-hide">by <strong><a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=94" class="username">HardWareMan</a></strong> » </span>Thu Jul 10, 2008 3:50 am </p>
+			
+			
+			
+			<div class="content">So, if we return to previous test with oscilloscope:
+<br><img src="./EG - 1 - SpritesMind.Net_files/ym26121mv6.jpg" class="postimage" alt="Image">
+<br>we get that real single channel sample rate is:
+<br><blockquote><div><cite>Nemesis wrote:</cite>Output Frequency = FM Clock / 24<br>Output Frequency = 1268333.33r / 24 = 52847.22Hz</div></blockquote>
+<br>And every channel have silence gap, that is mean 52847,22Hz / 2 = 26423,61Hz. That is close to measured with oscilloscope, but not equival. We need to re-measure that very carefully....</div>
+
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#top" class="top" title="Top">Top</a></div>
+		
+		</div>
+	</div>
+
+	<hr class="divider">
+				<div id="p5718" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5718">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=90" class="avatar"><img class="avatar" src="./EG - 1 - SpritesMind.Net_files/s4.gif" width="74" height="76" alt="User avatar"></a>														</div>
+								<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=90" class="username">Nemesis</a>							</dt>
+
+						<dd class="profile-rank">Very interested</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="http://gendev.spritesmind.net/forum/search.php?author_id=90&amp;sr=posts">670</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Nov 07, 2007 1:09 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Sydney, Australia</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5718">
+
+						<h3><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#p5718"></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="http://gendev.spritesmind.net/forum/posting.php?mode=quote&amp;f=24&amp;p=5718" title="Reply with quote" class="button icon-button quote-icon"><span>Quote</span></a>
+						</li>
+														<li class="responsive-menu hidden dropdown-container"><a href="javascript:void(0);" class="responsive-menu-link dropdown-toggle">&nbsp;</a><div class="dropdown hidden"><div class="pointer"><div class="pointer-inner"></div></div><ul class="dropdown-contents"></ul></div></li></ul>
+							
+						<p class="author"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5718#p5718"><span class="imageset icon_post_target" title="Post">Post</span></a><span class="responsive-hide">by <strong><a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=90" class="username">Nemesis</a></strong> » </span>Thu Jul 10, 2008 4:59 am </p>
+			
+			
+			
+			<div class="content">I don't have access to any equipment right now, but I did my own measurements of the output with an oscilloscope during this process, and the numbers I got back matched this calculation as I recall. I didn't record any of the results though. I'll be able to test this again in a day or two, so I'll measure the output frequency again and snag some results.</div>
+
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#top" class="top" title="Top">Top</a></div>
+		
+		</div>
+	</div>
+
+	<hr class="divider">
+				<div id="p5719" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5719">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=41" class="username">Eke</a>							</dt>
+
+						<dd class="profile-rank">Very interested</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="http://gendev.spritesmind.net/forum/search.php?author_id=41&amp;sr=posts">784</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Feb 28, 2007 2:57 pm</dd>		
+		
+											
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" class="dropdown-trigger dropdown-toggle"><span class="imageset icon_contact" title="Contact Eke">Contact Eke</span></a>
+					<div class="dropdown hidden">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://code.google.com/p/genplus-gx/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5719">
+
+						<h3><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#p5719"></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="http://gendev.spritesmind.net/forum/posting.php?mode=quote&amp;f=24&amp;p=5719" title="Reply with quote" class="button icon-button quote-icon"><span>Quote</span></a>
+						</li>
+														<li class="responsive-menu hidden dropdown-container"><a href="javascript:void(0);" class="responsive-menu-link dropdown-toggle">&nbsp;</a><div class="dropdown hidden"><div class="pointer"><div class="pointer-inner"></div></div><ul class="dropdown-contents"></ul></div></li></ul>
+							
+						<p class="author"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5719#p5719"><span class="imageset icon_post_target" title="Post">Post</span></a><span class="responsive-hide">by <strong><a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=41" class="username">Eke</a></strong> » </span>Thu Jul 10, 2008 10:04 am </p>
+			
+			
+			
+			<div class="content">wow, this is great and definitively the technical doc I was waiting for since long long time  <img class="smilies" src="./EG - 1 - SpritesMind.Net_files/icon_eek.gif" alt=":shock:" title="Shocked"> 
+<br>
+<br>It describes the internal mechanism pretty well ,and also help me a lot to better understand the MAME emulator implementation 
+<br>
+<br>
+<br>just to clarify something, Shiru mentionned this in another thread
+<br><!-- m --><a class="postlink" href="http://www.spritesmind.net/_GenDev/forum/viewtopic.php?t=231">http://www.spritesmind.net/_GenDev/foru ... .php?t=231</a><!-- m -->
+<br>
+<br><blockquote><div><cite>Shiru wrote:</cite>Alone Coder already did some tests on YM2203, which was verified on YM2612 - so we already knew about most of other registers, but not about special mode on/off.<br><br>So, if we change registers after KEY ON but before KEY OFF:<br><br>- TL, MULT, DET changes sound properly and immediately<br>- AR, DR, SR, RR, Feedback changes does not affects on currently playing note, but affects properly after new KEY ON<br><br>I forgot about SL, RS, but generally seems like changing of any registers, which controls amplitude and frequency is affects immediately, and changing of any registers, which controls envelope parameters and algorithm is affects after new KEY ON.<br><br>Alone Coder did used fact about AR/DR/etc in his compiler of TFM music to preload some values by frame before corresponding KEY ON, that allow to reduce number of register writes per frame (by moving some of writes to prev. frames). That works fine both on TFM device and SMD.</div></blockquote>
+<br>
+<br>So, according to you, as the env rates are calculated at the start of each phase, would this mean that register values are also  latched at the same time and not all together on Key ON as mentionned above ?
+<br>
+<br>btw, just a minor suggestion but, in your frequency calculation and approximations, you should use the the exact clock values:53693175/7 for NTSC and   53203424/7 for PAL <img class="smilies" src="./EG - 1 - SpritesMind.Net_files/icon_wink.gif" alt=";)" title="Wink">  this would make 52781.17 Hz for pal</div>
+
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#top" class="top" title="Top">Top</a></div>
+		
+		</div>
+	</div>
+
+	<hr class="divider">
+				<div id="p5720" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5720">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=51" class="username">Shiru</a>							</dt>
+
+						<dd class="profile-rank">Very interested</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="http://gendev.spritesmind.net/forum/search.php?author_id=51&amp;sr=posts">786</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Apr 07, 2007 3:11 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Russia, Moscow</dd>
+												
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" class="dropdown-trigger dropdown-toggle"><span class="imageset icon_contact" title="Contact Shiru">Contact Shiru</span></a>
+					<div class="dropdown hidden">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://shiru.untergrund.net/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5720">
+
+						<h3><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#p5720"></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="http://gendev.spritesmind.net/forum/posting.php?mode=quote&amp;f=24&amp;p=5720" title="Reply with quote" class="button icon-button quote-icon"><span>Quote</span></a>
+						</li>
+														<li class="responsive-menu hidden dropdown-container"><a href="javascript:void(0);" class="responsive-menu-link dropdown-toggle">&nbsp;</a><div class="dropdown hidden"><div class="pointer"><div class="pointer-inner"></div></div><ul class="dropdown-contents"></ul></div></li></ul>
+							
+						<p class="author"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5720#p5720"><span class="imageset icon_post_target" title="Post">Post</span></a><span class="responsive-hide">by <strong><a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=51" class="username">Shiru</a></strong> » </span>Thu Jul 10, 2008 10:33 am </p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>Shiru wrote:</cite>- AR, DR, SR, RR, Feedback changes does not affects on currently playing note, but affects properly after new KEY ON</div></blockquote>
+<br>I was wrong about Feedback, actually it changes sound immediately too.</div>
+
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#top" class="top" title="Top">Top</a></div>
+		
+		</div>
+	</div>
+
+	<hr class="divider">
+				<div id="p5721" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5721">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=90" class="avatar"><img class="avatar" src="./EG - 1 - SpritesMind.Net_files/s4.gif" width="74" height="76" alt="User avatar"></a>														</div>
+								<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=90" class="username">Nemesis</a>							</dt>
+
+						<dd class="profile-rank">Very interested</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="http://gendev.spritesmind.net/forum/search.php?author_id=90&amp;sr=posts">670</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Nov 07, 2007 1:09 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Sydney, Australia</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5721">
+
+						<h3><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#p5721"></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="http://gendev.spritesmind.net/forum/posting.php?mode=quote&amp;f=24&amp;p=5721" title="Reply with quote" class="button icon-button quote-icon"><span>Quote</span></a>
+						</li>
+														<li class="responsive-menu hidden dropdown-container"><a href="javascript:void(0);" class="responsive-menu-link dropdown-toggle">&nbsp;</a><div class="dropdown hidden"><div class="pointer"><div class="pointer-inner"></div></div><ul class="dropdown-contents"></ul></div></li></ul>
+							
+						<p class="author"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5721#p5721"><span class="imageset icon_post_target" title="Post">Post</span></a><span class="responsive-hide">by <strong><a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=90" class="username">Nemesis</a></strong> » </span>Thu Jul 10, 2008 12:04 pm </p>
+			
+			
+			
+			<div class="content"><blockquote class="uncited"><div>So, according to you, as the env rates are calculated at the start of each phase, would this mean that register values are also latched at the same time and not all together on Key ON as mentionned above ?</div></blockquote>
+<br>Hmmm. To be honest, I didn't thoroughly test this particular aspect. I meant to double-check this point before I made this post, but I ran out of time. I was going to be doing far more extensive tests on when various register changes are applied at a later date.
+<br>
+<br>I did get results that indicated rate values could be changed after key-on, but I can't recall if this was combined with CSM or SSG-EG mode at the time, which could potentially have affected the result. Consider this suspect until I can re-test.</div>
+
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#top" class="top" title="Top">Top</a></div>
+		
+		</div>
+	</div>
+
+	<hr class="divider">
+				<div id="p5722" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5722">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=41" class="username">Eke</a>							</dt>
+
+						<dd class="profile-rank">Very interested</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="http://gendev.spritesmind.net/forum/search.php?author_id=41&amp;sr=posts">784</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Feb 28, 2007 2:57 pm</dd>		
+		
+											
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" class="dropdown-trigger dropdown-toggle"><span class="imageset icon_contact" title="Contact Eke">Contact Eke</span></a>
+					<div class="dropdown hidden">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://code.google.com/p/genplus-gx/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5722">
+
+						<h3><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#p5722"></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="http://gendev.spritesmind.net/forum/posting.php?mode=quote&amp;f=24&amp;p=5722" title="Reply with quote" class="button icon-button quote-icon"><span>Quote</span></a>
+						</li>
+														<li class="responsive-menu hidden dropdown-container"><a href="javascript:void(0);" class="responsive-menu-link dropdown-toggle">&nbsp;</a><div class="dropdown hidden"><div class="pointer"><div class="pointer-inner"></div></div><ul class="dropdown-contents"></ul></div></li></ul>
+							
+						<p class="author"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5722#p5722"><span class="imageset icon_post_target" title="Post">Post</span></a><span class="responsive-hide">by <strong><a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=41" class="username">Eke</a></strong> » </span>Thu Jul 10, 2008 12:58 pm </p>
+			
+			
+			
+			<div class="content">For the record, the MAME core resets the shift &amp; increment values immediately after that:
+<br>
+<br>1) the register values for the according rates (AR,DR,SR,RR) are modified
+<br>
+<br>2)Rks is modified (either KSR register is modified or frequency/block is modified)
+<br>
+<br>I think the introduction of Batman&amp;Robin is pretty sensitive to that: I needed to modify the <span style="font-style: italic">set_ar_ksr</span> function to make it sound correctly
+<br>
+<br>
+<br>PS: some other differences I notice between MAME core and your tests around enveloppe shift &amp; increments:
+<br>
+<br>1/ the MAME implementation use a dedicated enveloppe increment value when calculated Attack Rate is 62 or 63: it uses +16 instead of +8 in this special case.
+<br>
+<br>2/ shift values are wrong when R = 0 (in the formula Rate = 2xR +Rks, Rate should be 0 when R=0), shift value of 0 is usead instead of 11.
+<br>
+<br>3/ in the case of RR, Rate is not forced to 0 if RR = 0
+<br>
+<br>4/ the current attenuation value is NOT cleared at KEY ON</div>
+
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#top" class="top" title="Top">Top</a></div>
+		
+		</div>
+	</div>
+
+	<hr class="divider">
+				<div id="p5723" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5723">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=13" class="avatar"><img class="avatar" src="./EG - 1 - SpritesMind.Net_files/TAVATAR.JPG" width="80" height="51" alt="User avatar"></a>														</div>
+								<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=13" class="username">TmEE co.(TM)</a>							</dt>
+
+						<dd class="profile-rank">Very interested</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="http://gendev.spritesmind.net/forum/search.php?author_id=13&amp;sr=posts">2231</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Dec 05, 2006 1:37 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Estonia, Rapla City</dd>
+												
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" class="dropdown-trigger dropdown-toggle"><span class="imageset icon_contact" title="Contact TmEE co.(TM)">Contact TmEE co.(TM)</span></a>
+					<div class="dropdown hidden">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://www.tmeeco.eu/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5723">
+
+						<h3><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#p5723"></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="http://gendev.spritesmind.net/forum/posting.php?mode=quote&amp;f=24&amp;p=5723" title="Reply with quote" class="button icon-button quote-icon"><span>Quote</span></a>
+						</li>
+														<li class="responsive-menu hidden dropdown-container"><a href="javascript:void(0);" class="responsive-menu-link dropdown-toggle">&nbsp;</a><div class="dropdown hidden"><div class="pointer"><div class="pointer-inner"></div></div><ul class="dropdown-contents"></ul></div></li></ul>
+							
+						<p class="author"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5723#p5723"><span class="imageset icon_post_target" title="Post">Post</span></a><span class="responsive-hide">by <strong><a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=13" class="username">TmEE co.(TM)</a></strong> » </span>Thu Jul 10, 2008 3:18 pm </p>
+			
+			
+			
+			<div class="content"><!-- m --><a class="postlink" href="http://www.fileden.com/files/2008/4/21/1876835/Sega_ASIC_315-5660_SSG-EG.rar">http://www.fileden.com/files/2008/4/21/ ... SSG-EG.rar</a><!-- m -->
+<br>
+<br>This is the recording of the SSG-EG test ROM from my MD2. I cut out the silence to get smaller file... it seems to work exactly like real YM2612 (but cleaner signal).</div>
+
+			
+									
+									<div id="sig5723" class="signature">Mida sa loed ? Nagunii aru ei saa <img class="smilies" src="./EG - 1 - SpritesMind.Net_files/icon_wink.gif" alt=";)" title="Wink">
+<br><!-- m --><a class="postlink" href="http://www.tmeeco.eu/">http://www.tmeeco.eu</a><!-- m -->
+<br>Files of all broken links and images of mine are found here : <!-- m --><a class="postlink" href="http://www.tmeeco.eu/FileDen">http://www.tmeeco.eu/FileDen</a><!-- m --></div>
+						</div>
+
+		</div>
+
+				<div class="back2top"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#top" class="top" title="Top">Top</a></div>
+		
+		</div>
+	</div>
+
+	<hr class="divider">
+				<div id="p5724" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5724">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=90" class="avatar"><img class="avatar" src="./EG - 1 - SpritesMind.Net_files/s4.gif" width="74" height="76" alt="User avatar"></a>														</div>
+								<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=90" class="username">Nemesis</a>							</dt>
+
+						<dd class="profile-rank">Very interested</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="http://gendev.spritesmind.net/forum/search.php?author_id=90&amp;sr=posts">670</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Nov 07, 2007 1:09 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Sydney, Australia</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5724">
+
+						<h3><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#p5724"></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="http://gendev.spritesmind.net/forum/posting.php?mode=quote&amp;f=24&amp;p=5724" title="Reply with quote" class="button icon-button quote-icon"><span>Quote</span></a>
+						</li>
+														<li class="responsive-menu hidden dropdown-container"><a href="javascript:void(0);" class="responsive-menu-link dropdown-toggle">&nbsp;</a><div class="dropdown hidden"><div class="pointer"><div class="pointer-inner"></div></div><ul class="dropdown-contents"></ul></div></li></ul>
+							
+						<p class="author"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5724#p5724"><span class="imageset icon_post_target" title="Post">Post</span></a><span class="responsive-hide">by <strong><a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=90" class="username">Nemesis</a></strong> » </span>Fri Jul 11, 2008 12:14 am </p>
+			
+			
+			
+			<div class="content"><blockquote class="uncited"><div>For the record, the MAME core resets the shift &amp; increment values immediately after that:<br><br>1) the register values for the according rates (AR,DR,SR,RR) are modified<br><br>2)Rks is modified (either KSR register is modified or frequency/block is modified)<br><br>I think the introduction of Batman&amp;Robin is pretty sensitive to that: I needed to modify the set_ar_ksr function to make it sound correctly</div></blockquote><br>So that means rate changes are applied immediately in MAME? That could be correct. I'll run some tests on this ASAP.<br><br><br><blockquote class="uncited"><div>1/ the MAME implementation use a dedicated enveloppe increment value when calculated Attack Rate is 62 or 63: it uses +16 instead of +8 in this special case.</div></blockquote><br>That's their way of eliminating the attack phase. When Rate = 62 or 63 during attack, the attack phase is skipped. MAME use this calculation to immediately force the result to TL, but based on the behaviour I've observed with CSM and SSG-EG, I think it far more likely that the YM2612 doesn't even enter the attack phase, and skips straight to decay when the calculated attack rate is greater than 61. I probably should have written that in as a special case.<br><br><blockquote class="uncited"><div>2/ shift values are wrong when R = 0 (in the formula Rate = 2xR +Rks, Rate should be 0 when R=0), shift value of 0 is usead instead of 11.</div></blockquote><br>There's actually no way to know what the shift value is set to when Rate = 0, and it doesn't make a difference in the end, since no updates are made even when the counter does expire. I've got the shift value set to 11 in this case as it fits with the pattern, but it wouldn't make any difference if they set the shift counter to 0. Likewise, there's no way to know what increment values are used for a Rate of 1, since there's no way for this case to arise.<br><br><blockquote class="uncited"><div>3/ in the case of RR, Rate is not forced to 0 if RR = 0 </div></blockquote><br>That's because RR is a 4-bit value. For the rate calculation, RR is treated as a 5-bit value with the LSB set to 1, and it's after this conversion that the check is made, so Rate can never equal 0 in the release phase.<br><br><blockquote class="uncited"><div>4/ the current attenuation value is NOT cleared at KEY ON</div></blockquote>
+<br>Yeah, I think they might be right about that actually. That calls into question my assertion that the YM2612 uses an output invert bit for the attack phase. Some behaviour in SSG-EG mode suggests it does, but this suggests it doesn't. Well, rather than resetting the contents of the attenuation register, they could be doing a binary NOT at the start of the attack phase, to adjust the attenuation into a compatible number. That sounds most likely to me at this stage.</div>
+
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#top" class="top" title="Top">Top</a></div>
+		
+		</div>
+	</div>
+
+	<hr class="divider">
+				<div id="p5728" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5728">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=12" class="avatar"><img class="avatar" src="./EG - 1 - SpritesMind.Net_files/a0cb178ba38cf383e1a236b6c37f91e0.jpg" width="80" height="80" alt="User avatar"></a>														</div>
+								<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=12" class="username">Stef</a>							</dt>
+
+						<dd class="profile-rank">Very interested</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="http://gendev.spritesmind.net/forum/search.php?author_id=12&amp;sr=posts">2502</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Nov 30, 2006 9:46 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> France - Sevres</dd>
+												
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" class="dropdown-trigger dropdown-toggle"><span class="imageset icon_contact" title="Contact Stef">Contact Stef</span></a>
+					<div class="dropdown hidden">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://stephane-d.github.io/SGDK/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5728">
+
+						<h3><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#p5728"></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="http://gendev.spritesmind.net/forum/posting.php?mode=quote&amp;f=24&amp;p=5728" title="Reply with quote" class="button icon-button quote-icon"><span>Quote</span></a>
+						</li>
+														<li class="responsive-menu hidden dropdown-container"><a href="javascript:void(0);" class="responsive-menu-link dropdown-toggle">&nbsp;</a><div class="dropdown hidden"><div class="pointer"><div class="pointer-inner"></div></div><ul class="dropdown-contents"></ul></div></li></ul>
+							
+						<p class="author"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5728#p5728"><span class="imageset icon_post_target" title="Post">Post</span></a><span class="responsive-hide">by <strong><a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=12" class="username">Stef</a></strong> » </span>Fri Jul 11, 2008 10:53 am </p>
+			
+			
+			
+			<div class="content">Very interesting technicals informations !
+<br>Thanks for spending that much time in testing then writing your founds.
+<br>It's exactly that type of informations we need for accurate emulation, i'm really motived to rewrite a new YM2612 core now :p</div>
+
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#top" class="top" title="Top">Top</a></div>
+		
+		</div>
+	</div>
+
+	<hr class="divider">
+				<div id="p5729" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5729">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=13" class="avatar"><img class="avatar" src="./EG - 1 - SpritesMind.Net_files/TAVATAR.JPG" width="80" height="51" alt="User avatar"></a>														</div>
+								<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=13" class="username">TmEE co.(TM)</a>							</dt>
+
+						<dd class="profile-rank">Very interested</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="http://gendev.spritesmind.net/forum/search.php?author_id=13&amp;sr=posts">2231</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Dec 05, 2006 1:37 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Estonia, Rapla City</dd>
+												
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" class="dropdown-trigger dropdown-toggle"><span class="imageset icon_contact" title="Contact TmEE co.(TM)">Contact TmEE co.(TM)</span></a>
+					<div class="dropdown hidden">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://www.tmeeco.eu/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5729">
+
+						<h3><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#p5729"></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="http://gendev.spritesmind.net/forum/posting.php?mode=quote&amp;f=24&amp;p=5729" title="Reply with quote" class="button icon-button quote-icon"><span>Quote</span></a>
+						</li>
+														<li class="responsive-menu hidden dropdown-container"><a href="javascript:void(0);" class="responsive-menu-link dropdown-toggle">&nbsp;</a><div class="dropdown hidden"><div class="pointer"><div class="pointer-inner"></div></div><ul class="dropdown-contents"></ul></div></li></ul>
+							
+						<p class="author"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5729#p5729"><span class="imageset icon_post_target" title="Post">Post</span></a><span class="responsive-hide">by <strong><a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=13" class="username">TmEE co.(TM)</a></strong> » </span>Fri Jul 11, 2008 11:48 am </p>
+			
+			
+			
+			<div class="content">Go Stef !!! I like Gens, and it desperately needs better sound (with good DAC support so my sound engine would sound NICE) <img class="smilies" src="./EG - 1 - SpritesMind.Net_files/icon_smile.gif" alt=":)" title="Smile">
+<br>
+<br>Now that I know how SSG-EG works, I could have some cool instruments <img class="smilies" src="./EG - 1 - SpritesMind.Net_files/icon_smile.gif" alt=":)" title="Smile"></div>
+
+			
+									
+									<div id="sig5729" class="signature">Mida sa loed ? Nagunii aru ei saa <img class="smilies" src="./EG - 1 - SpritesMind.Net_files/icon_wink.gif" alt=";)" title="Wink"><br><br><!-- m --><a class="postlink" href="http://www.tmeeco.eu/">http://www.tmeeco.eu</a><!-- m --><br><br>Files of all broken links and images of mine are found here : <!-- m --><a class="postlink" href="http://www.tmeeco.eu/FileDen">http://www.tmeeco.eu/FileDen</a><!-- m --></div>
+						</div>
+
+		</div>
+
+				<div class="back2top"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#top" class="top" title="Top">Top</a></div>
+		
+		</div>
+	</div>
+
+	<hr class="divider">
+				<div id="p5730" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5730">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=41" class="username">Eke</a>							</dt>
+
+						<dd class="profile-rank">Very interested</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="http://gendev.spritesmind.net/forum/search.php?author_id=41&amp;sr=posts">784</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Feb 28, 2007 2:57 pm</dd>		
+		
+											
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" class="dropdown-trigger dropdown-toggle"><span class="imageset icon_contact" title="Contact Eke">Contact Eke</span></a>
+					<div class="dropdown hidden">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://code.google.com/p/genplus-gx/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5730">
+
+						<h3><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#p5730"></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="http://gendev.spritesmind.net/forum/posting.php?mode=quote&amp;f=24&amp;p=5730" title="Reply with quote" class="button icon-button quote-icon"><span>Quote</span></a>
+						</li>
+														<li class="responsive-menu hidden dropdown-container"><a href="javascript:void(0);" class="responsive-menu-link dropdown-toggle">&nbsp;</a><div class="dropdown hidden"><div class="pointer"><div class="pointer-inner"></div></div><ul class="dropdown-contents"></ul></div></li></ul>
+							
+						<p class="author"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5730#p5730"><span class="imageset icon_post_target" title="Post">Post</span></a><span class="responsive-hide">by <strong><a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=41" class="username">Eke</a></strong> » </span>Fri Jul 11, 2008 6:14 pm </p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>notaz wrote:</cite><blockquote><div><cite>Eke wrote:</cite>what did you do exactly to fix the MAME core ?</div></blockquote><br><br>I changed the start of refresh_fc_eg_slot() to this:<br><div class="codebox"><p>Code: <a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" onclick="selectCode(this); return false;">Select all</a></p><code>INLINE void refresh_fc_eg_slot(FM_SLOT *SLOT, int fc, int kc)<br>{<br>&nbsp; &nbsp; &nbsp; &nbsp; int ksr, fdt;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; /* (frequency) phase increment counter */<br>&nbsp; &nbsp; &nbsp; &nbsp; fdt = fc+SLOT-&gt;DT[kc];<br>&nbsp; &nbsp; &nbsp; &nbsp; /* detect overflow */<br>&nbsp; &nbsp; &nbsp; &nbsp; if (fdt &lt; 0) fdt += fn_table[0x7ff*2] &gt;&gt; 2;<br>&nbsp; &nbsp; &nbsp; &nbsp; SLOT-&gt;Incr = fdt*SLOT-&gt;mul &gt;&gt; 1;<br><br>...<br></code></div><br><br>Note that this only works when sampling @ 44.1hHz, so it's probably wrong. Multiplier may have something to do with all this too.</div></blockquote><br><br>side note: this requires the YM2612 to be emulated at the original frequency (i.e HQ YM2612 mode) to work properly <br><br>I implemented the Gens interpolation method (anyone know about other resampling algorithm ?) in MAME to get it working but doing this:<br><blockquote class="uncited"><div> <br>  fc += SLOT-&gt;DT[kc];<br>if (fc &lt; 0) fc = (UINT32)((double)ym2612.OPN.fn_table[0x7ff*2] / ym2612.OPN.ST.freqbase) + SLOT-&gt;DT[kc];</div></blockquote>
+<br>
+<br>apparently make it work is both case (tested @48kHz)</div>
+
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#top" class="top" title="Top">Top</a></div>
+		
+		</div>
+	</div>
+
+	<hr class="divider">
+				<div id="p5765" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5765">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=106" class="username">AamirM</a>							</dt>
+
+						<dd class="profile-rank">Very interested</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="http://gendev.spritesmind.net/forum/search.php?author_id=106&amp;sr=posts">469</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Feb 18, 2008 8:23 am</dd>		
+		
+											
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" class="dropdown-trigger dropdown-toggle"><span class="imageset icon_contact" title="Contact AamirM">Contact AamirM</span></a>
+					<div class="dropdown hidden">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://aamirm.hacking-cult.org/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5765">
+
+						<h3><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#p5765"></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="http://gendev.spritesmind.net/forum/posting.php?mode=quote&amp;f=24&amp;p=5765" title="Reply with quote" class="button icon-button quote-icon"><span>Quote</span></a>
+						</li>
+														<li class="responsive-menu hidden dropdown-container"><a href="javascript:void(0);" class="responsive-menu-link dropdown-toggle">&nbsp;</a><div class="dropdown hidden"><div class="pointer"><div class="pointer-inner"></div></div><ul class="dropdown-contents"></ul></div></li></ul>
+							
+						<p class="author"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5765#p5765"><span class="imageset icon_post_target" title="Post">Post</span></a><span class="responsive-hide">by <strong><a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=106" class="username">AamirM</a></strong> » </span>Fri Jul 18, 2008 2:14 pm </p>
+			
+			
+			
+			<div class="content">Hi,
+<br>
+<br>Great work once again Nemesis! Thanks for all the work your doing. 
+<br>
+<br>stay safe,
+<br>
+<br>AamirM</div>
+
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#top" class="top" title="Top">Top</a></div>
+		
+		</div>
+	</div>
+
+	<hr class="divider">
+				<div id="p5870" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5870">
+			<dt class="has-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=150" class="username">Arbee</a>							</dt>
+
+						<dd class="profile-rank">Interested</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="http://gendev.spritesmind.net/forum/search.php?author_id=150&amp;sr=posts">16</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Aug 02, 2008 5:35 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> USA</dd>
+												
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" class="dropdown-trigger dropdown-toggle"><span class="imageset icon_contact" title="Contact Arbee">Contact Arbee</span></a>
+					<div class="dropdown hidden">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://rbelmont.mameworld.info/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5870">
+
+						<h3><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#p5870"></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="http://gendev.spritesmind.net/forum/posting.php?mode=quote&amp;f=24&amp;p=5870" title="Reply with quote" class="button icon-button quote-icon"><span>Quote</span></a>
+						</li>
+														<li class="responsive-menu hidden dropdown-container"><a href="javascript:void(0);" class="responsive-menu-link dropdown-toggle">&nbsp;</a><div class="dropdown hidden"><div class="pointer"><div class="pointer-inner"></div></div><ul class="dropdown-contents"></ul></div></li></ul>
+							
+						<p class="author"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5870#p5870"><span class="imageset icon_post_target" title="Post">Post</span></a><span class="responsive-hide">by <strong><a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=viewprofile&amp;u=150" class="username">Arbee</a></strong> » </span>Sat Aug 02, 2008 5:40 pm </p>
+			
+			
+			
+			<div class="content">Hi.  I'm looking to fold all of these fixes into official MAME.  I see TFM/MM has a modified MAME core with some fixes and the Flashback fix was posted here.  If anyone else has been tinkering with a MAME-derived FM core based on these findings or other tests against real h/w I'd love to see your changes.  Please PM me if you'd rather not post them inline.
+<br>
+<br>Thanks in advance!</div>
+
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#top" class="top" title="Top">Top</a></div>
+		
+		</div>
+	</div>
+
+	<hr class="divider">
+	
+
+	<form id="viewtopic" method="post" action="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386&amp;start=105">
+	<fieldset class="display-options" style="margin-top: 0; ">
+				<label>Display posts from previous: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+		<label>Sort by <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label> <label><select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+		<input type="submit" name="sort" value="Go" class="button2">
+			</fieldset>
+	</form>
+	<hr>
+
+<div class="action-bar bottom">
+	<div class="buttons">
+		
+			<a href="http://gendev.spritesmind.net/forum/posting.php?mode=reply&amp;f=24&amp;t=386" class="button icon-button reply-icon" title="Post a reply">
+			Post Reply		</a>
+	
+			</div>
+
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button icon-button tools-icon dropdown-trigger dropdown-select dropdown-toggle"></span>
+		<div class="dropdown hidden">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																								<li class="small-icon icon-print"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386&amp;start=105&amp;view=print" title="Print view" accesskey="p">Print view</a></li>							</ul>
+		</div>
+	</div>
+
+		
+	
+			<div class="pagination">
+			812 posts
+							<ul>
+	<li class="dropdown-container dropdown-button-control dropdown-page-jump page-jump">
+		<a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" class="dropdown-trigger dropdown-toggle" title="Click to jump to page…" role="button">Page <strong>8</strong> of <strong>55</strong></a>
+		<div class="dropdown hidden">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+				<li>Jump to page:</li>
+				<li class="page-jump-form">
+					<input type="number" name="page-number" min="1" max="999999" title="Enter the page number you wish to go to" class="inputbox tiny" data-per-page="15" data-base-url="./viewtopic.php?f=24&amp;amp;t=386" data-start-name="start">
+					<input class="button2" value="Go" type="button">
+				</li>
+			</ul>
+		</div>
+	</li>
+		<li class="previous"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386&amp;start=90" rel="prev" role="button">Previous</a></li>
+			<li><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386" role="button">1</a></li>
+			<li class="ellipsis" role="separator"><span>…</span></li>
+			<li><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386&amp;start=75" role="button">6</a></li>
+			<li><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386&amp;start=90" role="button">7</a></li>
+			<li class="active"><span>8</span></li>
+			<li><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386&amp;start=120" role="button">9</a></li>
+			<li><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386&amp;start=135" role="button">10</a></li>
+			<li class="ellipsis" role="separator"><span>…</span></li>
+			<li><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386&amp;start=810" role="button">55</a></li>
+			<li class="next"><a href="http://gendev.spritesmind.net/forum/viewtopic.php?f=24&amp;t=386&amp;start=120" rel="next" role="button">Next</a></li>
+	</ul>
+					</div>
+		<div class="clear"></div>
+</div>
+
+
+	<p class="jumpbox-return"><a href="http://gendev.spritesmind.net/forum/viewforum.php?f=24" class="left-box arrow-left" accesskey="r">Return to “Sound”</a></p>
+
+
+	<div class="dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+		<span title="Jump to" class="dropdown-trigger button dropdown-select dropdown-toggle">
+			Jump to		</span>
+		<div class="dropdown hidden">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																			<li><a href="http://gendev.spritesmind.net/forum/viewforum.php?f=26">Main Category</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=1">Announcement</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=2">Megadrive/Genesis</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=16">Pico</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=5">Mega/SegaCD</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=4">Super 32X</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=17">MegaLD</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=13">Hardware</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=14">Blabla</a></li>
+																<li><a href="http://gendev.spritesmind.net/forum/viewforum.php?f=27">Genny in depth</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=22">Video Display Processor</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=23">Controls</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=24">Sound</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=25">Cartridge</a></li>
+																<li><a href="http://gendev.spritesmind.net/forum/viewforum.php?f=28">Releases</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=8">Demos</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=7">Tools</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=19">SGDK</a></li>
+																<li><a href="http://gendev.spritesmind.net/forum/viewforum.php?f=29">Projects</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=21">Collaboration</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=15">Regen</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=18">Exodus</a></li>
+																<li>&nbsp; &nbsp;<a href="http://gendev.spritesmind.net/forum/viewforum.php?f=20">UMDK</a></li>
+										</ul>
+		</div>
+	</div>
+
+
+	<div class="stat-block online-list">
+		<h3>Who is online</h3>
+		<p>Users browsing this forum: No registered users and 0 guests</p>
+	</div>
+
+			</div>
+
+
+<div id="page-footer" role="contentinfo">
+	<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="linklist bulletin" role="menubar">
+		<li class="small-icon icon-home breadcrumbs">
+			<span class="crumb"><a href="http://gendev.spritesmind.net/" data-navbar-reference="home" title="SpritesMind">SpritesMind</a></span>						<span class="crumb"><a href="http://gendev.spritesmind.net/forum/index.php" data-navbar-reference="index" title="Forum">Forum</a></span>
+					</li>
+		
+				<li class="responsive-menu hidden rightside dropdown-container"><a href="javascript:void(0);" class="responsive-menu-link dropdown-toggle">&nbsp;</a><div class="dropdown hidden"><div class="pointer"><div class="pointer-inner"></div></div><ul class="dropdown-contents"></ul></div></li><li class="rightside">All times are <abbr title="UTC">UTC</abbr></li>
+							<li class="small-icon icon-delete-cookies rightside"><a href="http://gendev.spritesmind.net/forum/ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">Delete all board cookies</a></li>
+									<li class="small-icon icon-team rightside" data-last-responsive="true"><a href="http://gendev.spritesmind.net/forum/memberlist.php?mode=team" role="menuitem">The team</a></li>					</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+				Powered by <a href="https://www.phpbb.com/">phpBB</a>® Forum Software © phpBB Limited
+									</div>
+
+	<div id="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" class="alert_close"></a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="http://gendev.spritesmind.net/forum/viewtopic.php?p=5716#" class="alert_close"></a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script type="text/javascript" src="./EG - 1 - SpritesMind.Net_files/jquery.min.js"></script>
+<script type="text/javascript" src="./EG - 1 - SpritesMind.Net_files/core.js"></script>
+
+
+<script type="text/javascript" src="./EG - 1 - SpritesMind.Net_files/forum_fn.js"></script>
+
+<script type="text/javascript" src="./EG - 1 - SpritesMind.Net_files/ajax.js"></script>
+
+
+
+
+
+
+</body></html>

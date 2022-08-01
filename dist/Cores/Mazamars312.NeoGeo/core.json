@@ -1,0 +1,34 @@
+{
+    "core": {
+        "magic": "APF_VER_1",
+        "metadata": {
+            "platform_ids": ["ng"],
+            "shortname": "NeoGeo",
+            "description": "Neogeo cart based core",
+            "author": "Mazamars312",
+            "url": "https://github.com/Mazamars312/Analogue_Pocket_Neogeo",
+            "version": "Alpha 0.5.0",
+            "date_release": "2022-08-01"
+        },
+        "framework": {
+            "target_product": "Analogue Pocket",
+            "version_required": "1.1",
+            "sleep_supported": false,
+            "dock": {
+                "supported": true,
+                "analog_output": false
+            },
+            "hardware": {
+                "link_port": false,
+                "cartridge_adapter": -1
+            }
+        },
+        "cores": [
+            {
+                "name": "default",
+                "id": 0,
+                "filename": "Core.rbf_r"
+            }
+        ]
+    }
+}

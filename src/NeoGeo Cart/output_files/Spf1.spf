@@ -1,0 +1,111 @@
+<session jtag_chain="USB-Blaster [USB-0]" jtag_device="@1: 5CE(BA4|FA4) (0x02B050DD)">
+  <display_attributes is_max_probe_read_interval="1" is_write_immediate="1" probe_read_interval="1" probe_read_interval_units="s"/>
+  <instance enable_logging="true" entity_name="VMUX" is_auto_node="true" name="VMUX">
+    <node_ip_info instance_id="0" mfg_id="110" node_id="9" version="0"/>
+    <sources>
+      <source name="source[0]" value="true"/>
+      <source name="source[1]" value="false"/>
+      <source name="source[2]" value="true"/>
+      <source name="source[3]" value="false"/>
+      <source name="source[4]" value="true"/>
+      <source name="source[5]" value="false"/>
+      <source name="source[6]" value="false"/>
+      <source name="source[7]" value="false"/>
+      <source name="source[8]" value="false"/>
+      <source name="source[9]" value="false"/>
+      <source name="source[10]" value="false"/>
+      <source name="source[11]" value="false"/>
+      <source name="source[12]" value="false"/>
+      <source name="source[13]" value="false"/>
+      <source name="source[14]" value="false"/>
+      <source name="source[15]" value="false"/>
+      <source name="source[16]" value="false"/>
+      <source name="source[17]" value="false"/>
+      <source name="source[18]" value="false"/>
+      <source name="source[19]" value="false"/>
+      <source name="source[20]" value="false"/>
+      <source name="source[21]" value="false"/>
+      <source name="source[22]" value="false"/>
+      <source name="source[23]" value="false"/>
+      <source name="source[24]" value="false"/>
+      <source name="source[25]" value="false"/>
+      <source name="source[26]" value="false"/>
+      <source name="source[27]" value="false"/>
+      <source name="source[28]" value="false"/>
+      <source name="source[29]" value="false"/>
+      <source name="source[30]" value="false"/>
+      <source name="source[31]" value="false"/>
+    </sources>
+    <probes>
+      <probe name="probe[0]"/>
+      <probe name="probe[1]"/>
+      <probe name="probe[2]"/>
+      <probe name="probe[3]"/>
+      <probe name="probe[4]"/>
+      <probe name="probe[5]"/>
+      <probe name="probe[6]"/>
+      <probe name="probe[7]"/>
+      <probe name="probe[8]"/>
+      <probe name="probe[9]"/>
+      <probe name="probe[10]"/>
+      <probe name="probe[11]"/>
+      <probe name="probe[12]"/>
+      <probe name="probe[13]"/>
+      <probe name="probe[14]"/>
+      <probe name="probe[15]"/>
+    </probes>
+    <view>
+      <view_node expanded="false" group_name="probe[15..0]" index="0" lsb_to_msb="false" node_type="probe" view_type="group_header"/>
+      <view_node expanded="true" index="15" node_type="probe" view_type="group_member"/>
+      <view_node expanded="true" index="14" node_type="probe" view_type="group_member"/>
+      <view_node expanded="true" index="13" node_type="probe" view_type="group_member"/>
+      <view_node expanded="true" index="12" node_type="probe" view_type="group_member"/>
+      <view_node expanded="true" index="11" node_type="probe" view_type="group_member"/>
+      <view_node expanded="true" index="10" node_type="probe" view_type="group_member"/>
+      <view_node expanded="true" index="9" node_type="probe" view_type="group_member"/>
+      <view_node expanded="true" index="8" node_type="probe" view_type="group_member"/>
+      <view_node expanded="true" index="7" node_type="probe" view_type="group_member"/>
+      <view_node expanded="true" index="6" node_type="probe" view_type="group_member"/>
+      <view_node expanded="true" index="5" node_type="probe" view_type="group_member"/>
+      <view_node expanded="true" index="4" node_type="probe" view_type="group_member"/>
+      <view_node expanded="true" index="3" node_type="probe" view_type="group_member"/>
+      <view_node expanded="true" index="2" node_type="probe" view_type="group_member"/>
+      <view_node expanded="true" index="1" node_type="probe" view_type="group_member"/>
+      <view_node expanded="true" index="0" node_type="probe" view_type="group_member"/>
+      <view_node expanded="true" group_name="source[31..0]" index="0" lsb_to_msb="false" node_type="source" view_type="group_header"/>
+      <view_node expanded="true" index="31" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="30" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="29" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="28" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="27" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="26" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="25" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="24" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="23" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="22" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="21" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="20" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="19" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="18" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="17" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="16" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="15" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="14" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="13" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="12" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="11" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="10" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="9" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="8" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="7" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="6" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="5" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="4" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="3" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="2" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="1" node_type="source" view_type="group_member"/>
+      <view_node expanded="true" index="0" node_type="source" view_type="group_member"/>
+    </view>
+    <log data="000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" max_size="8" size="8" time="24DD1E260000000024DD1E260000000024DD1E260000000034DD1E260000000034DD1E260000000034DD1E260000000034DD1E260000000034DD1E2600000000" width="48"/>
+  </instance>
+</session>

@@ -1,0 +1,7 @@
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) jt49.v ]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) jt49_bus.v ]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) jt49_div.v ]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) jt49_cen.v ]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) jt49_eg.v ]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) jt49_exp.v ]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) jt49_noise.v ]

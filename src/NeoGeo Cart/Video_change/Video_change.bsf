@@ -1,0 +1,71 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2020  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 0 0 208 184)
+	(text "Video_change" (rect 62 -1 119 11)(font "Arial" (font_size 10)))
+	(text "inst" (rect 8 168 20 180)(font "Arial" ))
+	(port
+		(pt 0 72)
+		(input)
+		(text "probe[15..0]" (rect 0 0 46 12)(font "Arial" (font_size 8)))
+		(text "probe[15..0]" (rect 4 61 76 72)(font "Arial" (font_size 8)))
+		(line (pt 0 72)(pt 80 72)(line_width 3))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "source_clk" (rect 0 0 43 12)(font "Arial" (font_size 8)))
+		(text "source_clk" (rect 4 101 64 112)(font "Arial" (font_size 8)))
+		(line (pt 0 112)(pt 80 112)(line_width 1))
+	)
+	(port
+		(pt 0 152)
+		(output)
+		(text "source[31..0]" (rect 0 0 50 12)(font "Arial" (font_size 8)))
+		(text "source[31..0]" (rect 4 141 82 152)(font "Arial" (font_size 8)))
+		(line (pt 0 152)(pt 80 152)(line_width 3))
+	)
+	(drawing
+		(text "probes" (rect 41 43 118 99)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "probe" (rect 85 67 200 144)(font "Arial" (color 0 0 0)))
+		(text "source_clk" (rect 18 83 96 179)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 85 107 188 224)(font "Arial" (color 0 0 0)))
+		(text "sources" (rect 35 123 112 259)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "source" (rect 85 147 206 304)(font "Arial" (color 0 0 0)))
+		(text " Video_change " (rect 144 168 372 346)(font "Arial" ))
+		(line (pt 80 32)(pt 128 32)(line_width 1))
+		(line (pt 128 32)(pt 128 168)(line_width 1))
+		(line (pt 80 168)(pt 128 168)(line_width 1))
+		(line (pt 80 32)(pt 80 168)(line_width 1))
+		(line (pt 81 52)(pt 81 76)(line_width 1))
+		(line (pt 82 52)(pt 82 76)(line_width 1))
+		(line (pt 81 92)(pt 81 116)(line_width 1))
+		(line (pt 82 92)(pt 82 116)(line_width 1))
+		(line (pt 81 132)(pt 81 156)(line_width 1))
+		(line (pt 82 132)(pt 82 156)(line_width 1))
+		(line (pt 0 0)(pt 208 0)(line_width 1))
+		(line (pt 208 0)(pt 208 184)(line_width 1))
+		(line (pt 0 184)(pt 208 184)(line_width 1))
+		(line (pt 0 0)(pt 0 184)(line_width 1))
+	)
+)

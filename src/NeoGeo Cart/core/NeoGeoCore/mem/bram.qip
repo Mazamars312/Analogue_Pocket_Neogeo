@@ -1,0 +1,3 @@
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) memcard.v ]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) backup.v ]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) dpram.v ]

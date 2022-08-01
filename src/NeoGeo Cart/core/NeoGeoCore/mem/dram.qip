@@ -1,0 +1,4 @@
+set_global_assignment -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) cram_8bit.v ]
+set_global_assignment -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) cram_16bit.v ]
+set_global_assignment -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) Graphics_MUX.sv ]
+set_global_assignment -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) sdram.sv ]

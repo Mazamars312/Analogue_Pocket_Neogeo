@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pinplan
+ variation_name="in_system_sources_probes_0"
+ megafunction_name="ALTERA_IN_SYSTEM_SOURCES_PROBES"
+ intended_family="Cyclone V"
+ specifies="all_ports">
+ <global>
+  <pin name="source[31..0]" direction="output" scope="external" />
+  <pin name="source_clk" direction="input" scope="external" />
+  <pin name="probe[15..0]" direction="input" scope="external" />
+ </global>
+</pinplan>

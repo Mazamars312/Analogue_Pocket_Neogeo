@@ -1,0 +1,126 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2020  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 0 0 400 264)
+	(text "pll" (rect 194 -1 201 11)(font "Arial" (font_size 10)))
+	(text "inst" (rect 8 248 20 260)(font "Arial" ))
+	(port
+		(pt 0 72)
+		(input)
+		(text "refclk" (rect 0 0 22 12)(font "Arial" (font_size 8)))
+		(text "refclk" (rect 4 61 40 72)(font "Arial" (font_size 8)))
+		(line (pt 0 72)(pt 112 72)(line_width 1))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "rst" (rect 0 0 10 12)(font "Arial" (font_size 8)))
+		(text "rst" (rect 4 101 22 112)(font "Arial" (font_size 8)))
+		(line (pt 0 112)(pt 112 112)(line_width 1))
+	)
+	(port
+		(pt 0 152)
+		(input)
+		(text "reconfig_to_pll[63..0]" (rect 0 0 82 12)(font "Arial" (font_size 8)))
+		(text "reconfig_to_pll[63..0]" (rect 4 141 136 152)(font "Arial" (font_size 8)))
+		(line (pt 0 152)(pt 112 152)(line_width 3))
+	)
+	(port
+		(pt 400 72)
+		(output)
+		(text "outclk_0" (rect 0 0 33 12)(font "Arial" (font_size 8)))
+		(text "outclk_0" (rect 357 61 405 72)(font "Arial" (font_size 8)))
+		(line (pt 400 72)(pt 272 72)(line_width 1))
+	)
+	(port
+		(pt 400 112)
+		(output)
+		(text "outclk_1" (rect 0 0 31 12)(font "Arial" (font_size 8)))
+		(text "outclk_1" (rect 359 101 407 112)(font "Arial" (font_size 8)))
+		(line (pt 400 112)(pt 272 112)(line_width 1))
+	)
+	(port
+		(pt 400 152)
+		(output)
+		(text "outclk_2" (rect 0 0 33 12)(font "Arial" (font_size 8)))
+		(text "outclk_2" (rect 357 141 405 152)(font "Arial" (font_size 8)))
+		(line (pt 400 152)(pt 272 152)(line_width 1))
+	)
+	(port
+		(pt 400 192)
+		(output)
+		(text "locked" (rect 0 0 24 12)(font "Arial" (font_size 8)))
+		(text "locked" (rect 367 181 403 192)(font "Arial" (font_size 8)))
+		(line (pt 400 192)(pt 272 192)(line_width 1))
+	)
+	(port
+		(pt 400 232)
+		(output)
+		(text "reconfig_from_pll[63..0]" (rect 0 0 95 12)(font "Arial" (font_size 8)))
+		(text "reconfig_from_pll[63..0]" (rect 280 221 424 232)(font "Arial" (font_size 8)))
+		(line (pt 400 232)(pt 272 232)(line_width 3))
+	)
+	(drawing
+		(text "refclk" (rect 80 43 196 99)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 117 67 252 144)(font "Arial" (color 0 0 0)))
+		(text "reset" (rect 83 83 196 179)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "reset" (rect 117 107 264 224)(font "Arial" (color 0 0 0)))
+		(text "outclk0" (rect 273 43 588 99)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 257 67 532 144)(font "Arial" (color 0 0 0)))
+		(text "outclk1" (rect 273 83 588 179)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 257 107 532 224)(font "Arial" (color 0 0 0)))
+		(text "outclk2" (rect 273 123 588 259)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 257 147 532 304)(font "Arial" (color 0 0 0)))
+		(text "locked" (rect 273 163 582 339)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "export" (rect 242 187 520 384)(font "Arial" (color 0 0 0)))
+		(text "reconfig_to_pll" (rect 26 123 142 259)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "reconfig_to_pll" (rect 117 147 324 304)(font "Arial" (color 0 0 0)))
+		(text "reconfig_from_pll" (rect 273 203 648 419)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "reconfig_from_pll" (rect 192 227 486 464)(font "Arial" (color 0 0 0)))
+		(text " altera_pll " (rect 358 248 788 506)(font "Arial" ))
+		(line (pt 112 32)(pt 272 32)(line_width 1))
+		(line (pt 272 32)(pt 272 248)(line_width 1))
+		(line (pt 112 248)(pt 272 248)(line_width 1))
+		(line (pt 112 32)(pt 112 248)(line_width 1))
+		(line (pt 113 52)(pt 113 76)(line_width 1))
+		(line (pt 114 52)(pt 114 76)(line_width 1))
+		(line (pt 113 92)(pt 113 116)(line_width 1))
+		(line (pt 114 92)(pt 114 116)(line_width 1))
+		(line (pt 271 52)(pt 271 76)(line_width 1))
+		(line (pt 270 52)(pt 270 76)(line_width 1))
+		(line (pt 271 92)(pt 271 116)(line_width 1))
+		(line (pt 270 92)(pt 270 116)(line_width 1))
+		(line (pt 271 132)(pt 271 156)(line_width 1))
+		(line (pt 270 132)(pt 270 156)(line_width 1))
+		(line (pt 271 172)(pt 271 196)(line_width 1))
+		(line (pt 270 172)(pt 270 196)(line_width 1))
+		(line (pt 113 132)(pt 113 156)(line_width 1))
+		(line (pt 114 132)(pt 114 156)(line_width 1))
+		(line (pt 271 212)(pt 271 236)(line_width 1))
+		(line (pt 270 212)(pt 270 236)(line_width 1))
+		(line (pt 0 0)(pt 400 0)(line_width 1))
+		(line (pt 400 0)(pt 400 264)(line_width 1))
+		(line (pt 0 264)(pt 400 264)(line_width 1))
+		(line (pt 0 0)(pt 0 264)(line_width 1))
+	)
+)

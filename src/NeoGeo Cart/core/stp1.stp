@@ -1,0 +1,806 @@
+<session jtag_chain="USB-Blaster [USB-0]" jtag_device="@1: 5CE(BA4|FA4) (0x02B050DD)" sof_file="../output_files/ap_core.sof">
+  <display_tree gui_logging_enabled="0">
+    <display_branch instance="auto_signaltap_0" log="USE_GLOBAL_TEMP" signal_set="USE_GLOBAL_TEMP" trigger="USE_GLOBAL_TEMP"/>
+  </display_tree>
+  <mnemonics>
+    <table name="rx_latch_idx_table" width="8">
+      <symbol name="0000" value="00000001"/>
+      <symbol name="0001" value="00000010"/>
+      <symbol name="0010" value="00000100"/>
+      <symbol name="0011" value="00001000"/>
+      <symbol name="0100" value="00010000"/>
+      <symbol name="0101" value="00100000"/>
+      <symbol name="0110" value="01000000"/>
+      <symbol name="0111" value="10000000"/>
+    </table>
+    <table name="rx_latch_idx_table (1)" width="4">
+      <symbol name="000" value="0001"/>
+      <symbol name="001" value="0010"/>
+      <symbol name="010" value="0100"/>
+      <symbol name="011" value="1000"/>
+    </table>
+    <table name="state_table" width="5">
+      <symbol name="ST_ADDR_0" value="00001"/>
+      <symbol name="ST_READ_0" value="00010"/>
+      <symbol name="ST_RESET" value="00100"/>
+      <symbol name="ST_WRITE_0" value="01000"/>
+      <symbol name="ST_WRITE_1" value="10000"/>
+    </table>
+    <table name="state_table (1)" width="4">
+      <symbol name="ST_IDLE" value="0001"/>
+      <symbol name="ST_RESET" value="0010"/>
+      <symbol name="ST_WRITE32_0" value="0100"/>
+      <symbol name="ST_WRITE32_1" value="1000"/>
+    </table>
+    <table name="state_table (2)" width="6">
+      <symbol name="0000" value="000001"/>
+      <symbol name="0001" value="000010"/>
+      <symbol name="0010" value="000100"/>
+      <symbol name="0011" value="001000"/>
+      <symbol name="0100" value="010000"/>
+      <symbol name="0101" value="100000"/>
+    </table>
+    <table name="tr_state_table" width="3">
+      <symbol name="0000" value="001"/>
+      <symbol name="0001" value="010"/>
+      <symbol name="0010" value="100"/>
+    </table>
+    <table name="state_table (4)" width="4">
+      <symbol name="0000" value="0001"/>
+      <symbol name="0001" value="0010"/>
+      <symbol name="0010" value="0100"/>
+      <symbol name="0011" value="1000"/>
+    </table>
+    <table name="tr_state_table (1)" width="6">
+      <symbol name="0000" value="000001"/>
+      <symbol name="0001" value="000010"/>
+      <symbol name="0010" value="000100"/>
+      <symbol name="0011" value="001000"/>
+      <symbol name="0100" value="010000"/>
+      <symbol name="0101" value="100000"/>
+    </table>
+    <table name="state_table (5)" width="6">
+      <symbol name="0000" value="000001"/>
+      <symbol name="0001" value="000010"/>
+      <symbol name="0010" value="000100"/>
+      <symbol name="0011" value="001000"/>
+      <symbol name="0100" value="010000"/>
+      <symbol name="0101" value="100000"/>
+    </table>
+    <table name="rr_state_table" width="3">
+      <symbol name="RR_STATE_0" value="001"/>
+      <symbol name="RR_STATE_1" value="010"/>
+      <symbol name="RR_STATE_2" value="100"/>
+    </table>
+    <table name="state_table (7)" width="32">
+      <symbol name="ST_BOOT_0" value="00000000000000000000000000000001"/>
+      <symbol name="ST_BOOT_1" value="00000000000000000000000000000010"/>
+      <symbol name="ST_BOOT_2" value="00000000000000000000000000000100"/>
+      <symbol name="ST_BOOT_3" value="00000000000000000000000000001000"/>
+      <symbol name="ST_BOOT_4" value="00000000000000000000000000010000"/>
+      <symbol name="ST_BOOT_5" value="00000000000000000000000000100000"/>
+      <symbol name="ST_BURSTWR_0" value="00000000000000000000000001000000"/>
+      <symbol name="ST_BURSTWR_1" value="00000000000000000000000010000000"/>
+      <symbol name="ST_BURSTWR_2" value="00000000000000000000000100000000"/>
+      <symbol name="ST_BURSTWR_3" value="00000000000000000000001000000000"/>
+      <symbol name="ST_BURSTWR_4" value="00000000000000000000010000000000"/>
+      <symbol name="ST_BURSTWR_5" value="00000000000000000000100000000000"/>
+      <symbol name="ST_BURSTWR_6" value="00000000000000000001000000000000"/>
+      <symbol name="ST_BURSTWR_7" value="00000000000000000010000000000000"/>
+      <symbol name="ST_IDLE" value="00000000000000000100000000000000"/>
+      <symbol name="ST_READ_0" value="00000000000000001000000000000000"/>
+      <symbol name="ST_READ_1" value="00000000000000010000000000000000"/>
+      <symbol name="ST_READ_2" value="00000000000000100000000000000000"/>
+      <symbol name="ST_READ_5" value="00000000000001000000000000000000"/>
+      <symbol name="ST_READ_6" value="00000000000010000000000000000000"/>
+      <symbol name="ST_READ_7" value="00000000000100000000000000000000"/>
+      <symbol name="ST_READ_8" value="00000000001000000000000000000000"/>
+      <symbol name="ST_READ_9" value="00000000010000000000000000000000"/>
+      <symbol name="ST_REFRESH_0" value="00000000100000000000000000000000"/>
+      <symbol name="ST_REFRESH_1" value="00000001000000000000000000000000"/>
+      <symbol name="ST_RESET" value="00000010000000000000000000000000"/>
+      <symbol name="ST_WRITE_0" value="00000100000000000000000000000000"/>
+      <symbol name="ST_WRITE_1" value="00001000000000000000000000000000"/>
+      <symbol name="ST_WRITE_2" value="00010000000000000000000000000000"/>
+      <symbol name="ST_WRITE_3" value="00100000000000000000000000000000"/>
+      <symbol name="ST_WRITE_4" value="01000000000000000000000000000000"/>
+      <symbol name="ST_WRITE_5" value="10000000000000000000000000000000"/>
+    </table>
+    <table name="state_table (6)" width="6">
+      <symbol name="ST_END_TX" value="000001"/>
+      <symbol name="ST_IDLE" value="000010"/>
+      <symbol name="ST_RESET" value="000100"/>
+      <symbol name="ST_RX_BUTTON_1" value="001000"/>
+      <symbol name="ST_RX_BUTTON_2" value="010000"/>
+      <symbol name="ST_TX_SCALER" value="100000"/>
+    </table>
+    <table name="tr_state_table (2)" width="7">
+      <symbol name="TR_IDLE" value="0000001"/>
+      <symbol name="TR_RX_DONE" value="0000010"/>
+      <symbol name="TR_RX_START" value="0000100"/>
+      <symbol name="TR_RX_WAITEDGE" value="0001000"/>
+      <symbol name="TR_TX_CONTINUE" value="0010000"/>
+      <symbol name="TR_TX_DONE" value="0100000"/>
+      <symbol name="TR_TX_START" value="1000000"/>
+    </table>
+    <table name="hstate_table" width="6">
+      <symbol name="ST_DONE_CODE" value="000001"/>
+      <symbol name="ST_DONE_ERR" value="000010"/>
+      <symbol name="ST_DONE_OK" value="000100"/>
+      <symbol name="ST_IDLE" value="001000"/>
+      <symbol name="ST_PARSE" value="010000"/>
+      <symbol name="ST_WORK" value="100000"/>
+    </table>
+    <table name="tstate_table" width="3">
+      <symbol name="TARG_ST_IDLE" value="001"/>
+      <symbol name="TARG_ST_READYTORUN" value="010"/>
+      <symbol name="TARG_ST_WAITRESULT" value="100"/>
+    </table>
+    <table name="RAM_STATE_table (6)" width="3">
+      <symbol name="00" value="001"/>
+      <symbol name="request" value="010"/>
+      <symbol name="wait_read" value="100"/>
+    </table>
+    <table name="RAM_STATE_table (7)" width="3">
+      <symbol name="0000" value="001"/>
+      <symbol name="request" value="010"/>
+      <symbol name="wait_read" value="100"/>
+    </table>
+    <table name="sdram_state_table" width="3">
+      <symbol name="sdram_idle" value="001"/>
+      <symbol name="sdram_read_1" value="010"/>
+      <symbol name="sdram_read_2" value="100"/>
+    </table>
+    <table name="sram_state_table" width="13">
+      <symbol name="sram_idle" value="0000000000001"/>
+      <symbol name="sram_read_1" value="0000000000010"/>
+      <symbol name="sram_read_2" value="0000000000100"/>
+      <symbol name="sram_read_3" value="0000000001000"/>
+      <symbol name="sram_read_4" value="0000000010000"/>
+      <symbol name="sram_read_5" value="0000000100000"/>
+      <symbol name="sram_read_6" value="0000001000000"/>
+      <symbol name="sram_write_1" value="0000010000000"/>
+      <symbol name="sram_write_2" value="0000100000000"/>
+      <symbol name="sram_write_3" value="0001000000000"/>
+      <symbol name="sram_write_4" value="0010000000000"/>
+      <symbol name="sram_write_5" value="0100000000000"/>
+      <symbol name="sram_write_6" value="1000000000000"/>
+    </table>
+    <table name="sram_state_table (1)" width="3">
+      <symbol name="sram_idle" value="001"/>
+      <symbol name="sram_read" value="010"/>
+      <symbol name="sram_write" value="100"/>
+    </table>
+    <table name="state_table (3)" width="4">
+      <symbol name="idle" value="0001"/>
+      <symbol name="init_reset" value="0010"/>
+      <symbol name="read_single" value="0100"/>
+      <symbol name="write_burst" value="1000"/>
+    </table>
+    <table name="state_table (8)" width="11">
+      <symbol name="cram_wait_state" value="00000000001"/>
+      <symbol name="idle" value="00000000010"/>
+      <symbol name="init_address_ce0" value="00000000100"/>
+      <symbol name="init_address_ce0_wait_hig" value="00000001000"/>
+      <symbol name="init_address_ce0_wait_low" value="00000010000"/>
+      <symbol name="init_address_ce1" value="00000100000"/>
+      <symbol name="init_address_ce1_wait_hig" value="00001000000"/>
+      <symbol name="init_address_ce1_wait_low" value="00010000000"/>
+      <symbol name="init_reset" value="00100000000"/>
+      <symbol name="read_single" value="01000000000"/>
+      <symbol name="write_burst" value="10000000000"/>
+    </table>
+    <table name="channel_table" width="3">
+      <symbol name="00" value="001"/>
+      <symbol name="01" value="010"/>
+      <symbol name="10" value="100"/>
+    </table>
+    <table name="ram_state_table" width="4">
+      <symbol name="idle" value="0001"/>
+      <symbol name="init_reset" value="0010"/>
+      <symbol name="read_single" value="0100"/>
+      <symbol name="write_single" value="1000"/>
+    </table>
+    <table name="state_table (12)" width="11">
+      <symbol name="idle" value="00000000001"/>
+      <symbol name="rd_ack" value="00000000010"/>
+      <symbol name="rd_done" value="00000000100"/>
+      <symbol name="rd_msb" value="00000001000"/>
+      <symbol name="rd_wait_ready" value="00000010000"/>
+      <symbol name="start_wait_ready" value="00000100000"/>
+      <symbol name="start_write_pulse" value="00001000000"/>
+      <symbol name="start_write_wait" value="00010000000"/>
+      <symbol name="startup" value="00100000000"/>
+      <symbol name="wr_msb" value="01000000000"/>
+      <symbol name="wr_wait_ready" value="10000000000"/>
+    </table>
+    <table name="cram_status_table" width="11">
+      <symbol name="idle" value="00000000001"/>
+      <symbol name="rd_ack" value="00000000010"/>
+      <symbol name="rd_done" value="00000000100"/>
+      <symbol name="rd_msb" value="00000001000"/>
+      <symbol name="rd_wait_ready" value="00000010000"/>
+      <symbol name="start_wait_ready" value="00000100000"/>
+      <symbol name="start_write_pulse" value="00001000000"/>
+      <symbol name="start_write_wait" value="00010000000"/>
+      <symbol name="startup" value="00100000000"/>
+      <symbol name="wr_msb" value="01000000000"/>
+      <symbol name="wr_wait_ready" value="10000000000"/>
+    </table>
+    <table name="tState_table" width="5">
+      <symbol name="T0" value="00001"/>
+      <symbol name="T1" value="00010"/>
+      <symbol name="T2" value="00100"/>
+      <symbol name="T3" value="01000"/>
+      <symbol name="T4" value="10000"/>
+    </table>
+    <table name="dmaPhase_table" width="8">
+      <symbol name="D1" value="00000001"/>
+      <symbol name="D2" value="00000010"/>
+      <symbol name="D3" value="00000100"/>
+      <symbol name="DIDLE" value="00001000"/>
+      <symbol name="DRESET" value="00010000"/>
+      <symbol name="D_BA" value="00100000"/>
+      <symbol name="D_BR" value="01000000"/>
+      <symbol name="D_BRA" value="10000000"/>
+    </table>
+    <table name="busPhase_table" width="7">
+      <symbol name="S0" value="0000001"/>
+      <symbol name="S2" value="0000010"/>
+      <symbol name="S4" value="0000100"/>
+      <symbol name="S6" value="0001000"/>
+      <symbol name="SIDLE" value="0010000"/>
+      <symbol name="SRESET" value="0100000"/>
+      <symbol name="SRMC_RES" value="1000000"/>
+    </table>
+    <table name="ram_state_table (1)" width="4">
+      <symbol name="idle" value="0001"/>
+      <symbol name="init_reset" value="0010"/>
+      <symbol name="read_single" value="0100"/>
+      <symbol name="write_single" value="1000"/>
+    </table>
+    <table name="cram_status_table (1)" width="11">
+      <symbol name="idle" value="00000000001"/>
+      <symbol name="rd_ack" value="00000000010"/>
+      <symbol name="rd_done" value="00000000100"/>
+      <symbol name="rd_msb" value="00000001000"/>
+      <symbol name="rd_wait_ready" value="00000010000"/>
+      <symbol name="start_wait_ready" value="00000100000"/>
+      <symbol name="start_write_pulse" value="00001000000"/>
+      <symbol name="start_write_wait" value="00010000000"/>
+      <symbol name="startup" value="00100000000"/>
+      <symbol name="wr_msb" value="01000000000"/>
+      <symbol name="wr_wait_ready" value="10000000000"/>
+    </table>
+    <table name="channel_table (1)" width="3">
+      <symbol name="00" value="001"/>
+      <symbol name="01" value="010"/>
+      <symbol name="10" value="100"/>
+    </table>
+    <table name="ram_state_table (2)" width="4">
+      <symbol name="idle" value="0001"/>
+      <symbol name="init_reset" value="0010"/>
+      <symbol name="read_single" value="0100"/>
+      <symbol name="write_single" value="1000"/>
+    </table>
+    <table name="cram_status_table (2)" width="12">
+      <symbol name="idle" value="000000000001"/>
+      <symbol name="rd_ack" value="000000000010"/>
+      <symbol name="rd_done" value="000000000100"/>
+      <symbol name="rd_msb" value="000000001000"/>
+      <symbol name="rd_wait_ready" value="000000010000"/>
+      <symbol name="start_wait_ready" value="000000100000"/>
+      <symbol name="start_write_pulse" value="000001000000"/>
+      <symbol name="start_write_wait" value="000010000000"/>
+      <symbol name="startup" value="000100000000"/>
+      <symbol name="wr_msb" value="001000000000"/>
+      <symbol name="wr_wait_clock" value="010000000000"/>
+      <symbol name="wr_wait_ready" value="100000000000"/>
+    </table>
+    <table name="cram_status_table (3)" width="13">
+      <symbol name="idle" value="0000000000001"/>
+      <symbol name="rd_complete_s_lsb" value="0000000000010"/>
+      <symbol name="rd_read_s_lsb" value="0000000000100"/>
+      <symbol name="rd_wait_s_lsb" value="0000000001000"/>
+      <symbol name="wr_address_lsb" value="0000000010000"/>
+      <symbol name="wr_complete_lsb" value="0000000100000"/>
+      <symbol name="wr_complete_msb" value="0000001000000"/>
+      <symbol name="wr_wait_lsb" value="0000010000000"/>
+      <symbol name="wr_wait_msb" value="0000100000000"/>
+      <symbol name="wr_write_d_lsb" value="0001000000000"/>
+      <symbol name="wr_write_d_msb" value="0010000000000"/>
+      <symbol name="wr_write_s_lsb" value="0100000000000"/>
+      <symbol name="wr_write_s_msb" value="1000000000000"/>
+    </table>
+    <table name="channel_table (2)" width="4">
+      <symbol name="000" value="0001"/>
+      <symbol name="001" value="0010"/>
+      <symbol name="010" value="0100"/>
+      <symbol name="011" value="1000"/>
+    </table>
+    <table name="ram_state_table (3)" width="6">
+      <symbol name="idle" value="000001"/>
+      <symbol name="init_reset" value="000010"/>
+      <symbol name="read_16bit" value="000100"/>
+      <symbol name="read_32bit" value="001000"/>
+      <symbol name="write_16bit" value="010000"/>
+      <symbol name="write_32bit" value="100000"/>
+    </table>
+    <table name="cram_status_table (4)" width="13">
+      <symbol name="idle" value="0000000000001"/>
+      <symbol name="rd_complete_s_lsb" value="0000000000010"/>
+      <symbol name="rd_read_s_lsb" value="0000000000100"/>
+      <symbol name="rd_wait_s_lsb" value="0000000001000"/>
+      <symbol name="wr_address_lsb" value="0000000010000"/>
+      <symbol name="wr_complete_lsb" value="0000000100000"/>
+      <symbol name="wr_complete_msb" value="0000001000000"/>
+      <symbol name="wr_wait_lsb" value="0000010000000"/>
+      <symbol name="wr_wait_msb" value="0000100000000"/>
+      <symbol name="wr_write_d_lsb" value="0001000000000"/>
+      <symbol name="wr_write_d_msb" value="0010000000000"/>
+      <symbol name="wr_write_s_lsb" value="0100000000000"/>
+      <symbol name="wr_write_s_msb" value="1000000000000"/>
+    </table>
+    <table name="RAM_STATE_table" width="5">
+      <symbol name="000" value="00001"/>
+      <symbol name="request" value="00010"/>
+      <symbol name="wait_read_1" value="00100"/>
+      <symbol name="wait_read_2" value="01000"/>
+      <symbol name="wait_write_2" value="10000"/>
+    </table>
+    <table name="RAM_STATE_table (1)" width="3">
+      <symbol name="00" value="001"/>
+      <symbol name="request" value="010"/>
+      <symbol name="wait_read" value="100"/>
+    </table>
+    <table name="RAM_STATE_table (2)" width="3">
+      <symbol name="00" value="001"/>
+      <symbol name="request" value="010"/>
+      <symbol name="wait_read" value="100"/>
+    </table>
+    <table name="RAM_STATE_table (3)" width="3">
+      <symbol name="00" value="001"/>
+      <symbol name="request" value="010"/>
+      <symbol name="wait_read" value="100"/>
+    </table>
+    <table name="RAM_STATE_table (4)" width="3">
+      <symbol name="00" value="001"/>
+      <symbol name="request" value="010"/>
+      <symbol name="wait_read" value="100"/>
+    </table>
+    <table name="RAM_STATE_table (5)" width="5">
+      <symbol name="000" value="00001"/>
+      <symbol name="request" value="00010"/>
+      <symbol name="wait_read_1" value="00100"/>
+      <symbol name="wait_read_2" value="01000"/>
+      <symbol name="wait_write_2" value="10000"/>
+    </table>
+    <table name="cram_status_table (5)" width="13">
+      <symbol name="idle" value="0000000000001"/>
+      <symbol name="rd_complete_s_lsb" value="0000000000010"/>
+      <symbol name="rd_read_s_lsb" value="0000000000100"/>
+      <symbol name="rd_wait_s_lsb" value="0000000001000"/>
+      <symbol name="wr_address_lsb" value="0000000010000"/>
+      <symbol name="wr_complete_lsb" value="0000000100000"/>
+      <symbol name="wr_complete_msb" value="0000001000000"/>
+      <symbol name="wr_wait_lsb" value="0000010000000"/>
+      <symbol name="wr_wait_msb" value="0000100000000"/>
+      <symbol name="wr_write_d_lsb" value="0001000000000"/>
+      <symbol name="wr_write_d_msb" value="0010000000000"/>
+      <symbol name="wr_write_s_lsb" value="0100000000000"/>
+      <symbol name="wr_write_s_msb" value="1000000000000"/>
+    </table>
+    <table name="cram_status_table (6)" width="13">
+      <symbol name="idle" value="0000000000001"/>
+      <symbol name="rd_complete_s_lsb" value="0000000000010"/>
+      <symbol name="rd_read_s_lsb" value="0000000000100"/>
+      <symbol name="rd_wait_s_lsb" value="0000000001000"/>
+      <symbol name="wr_address_lsb" value="0000000010000"/>
+      <symbol name="wr_complete_lsb" value="0000000100000"/>
+      <symbol name="wr_complete_msb" value="0000001000000"/>
+      <symbol name="wr_wait_lsb" value="0000010000000"/>
+      <symbol name="wr_wait_msb" value="0000100000000"/>
+      <symbol name="wr_write_d_lsb" value="0001000000000"/>
+      <symbol name="wr_write_d_msb" value="0010000000000"/>
+      <symbol name="wr_write_s_lsb" value="0100000000000"/>
+      <symbol name="wr_write_s_msb" value="1000000000000"/>
+    </table>
+    <table name="channel_read_table" width="5">
+      <symbol name="000" value="00001"/>
+      <symbol name="001" value="00010"/>
+      <symbol name="010" value="00100"/>
+      <symbol name="011" value="01000"/>
+      <symbol name="100" value="10000"/>
+    </table>
+    <table name="ram_state_table (4)" width="6">
+      <symbol name="idle" value="000001"/>
+      <symbol name="init_reset" value="000010"/>
+      <symbol name="read_16bit" value="000100"/>
+      <symbol name="read_32bit" value="001000"/>
+      <symbol name="write_16bit" value="010000"/>
+      <symbol name="write_32bit" value="100000"/>
+    </table>
+    <table name="channel_read_table (1)" width="5">
+      <symbol name="000" value="00001"/>
+      <symbol name="001" value="00010"/>
+      <symbol name="010" value="00100"/>
+      <symbol name="011" value="01000"/>
+      <symbol name="100" value="10000"/>
+    </table>
+    <table name="ram_state_table (5)" width="6">
+      <symbol name="idle" value="000001"/>
+      <symbol name="init_reset" value="000010"/>
+      <symbol name="read_16bit" value="000100"/>
+      <symbol name="read_32bit" value="001000"/>
+      <symbol name="write_16bit" value="010000"/>
+      <symbol name="write_32bit" value="100000"/>
+    </table>
+  </mnemonics>
+  <static_plugin_mnemonics/>
+  <instance enabled="true" entity_name="sld_signaltap" is_auto_node="yes" is_expanded="true" name="auto_signaltap_0" source_file="sld_signaltap.vhd">
+    <node_ip_info instance_id="0" mfg_id="110" node_id="0" version="6"/>
+    <signal_set global_temp="1" is_expanded="true" name="signal_set: 2022/08/01 04:12:44  #0">
+      <clock name="core_top:ic|emu:Neogeo|pll:pll_sys|outclk_0" polarity="posedge" tap_mode="classic"/>
+      <config pipeline_level="0" ram_type="AUTO" reserved_data_nodes="0" reserved_storage_qualifier_nodes="0" reserved_trigger_nodes="0" sample_depth="128" trigger_in_enable="no" trigger_out_enable="no"/>
+      <top_entity/>
+      <signal_vec>
+        <trigger_input_vec>
+          <wire name="core_top:ic|emu:Neogeo|CLK_VIDEO" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|CLK_VIDEO_90" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|CLK_24M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|CLK_24MB" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_12M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_1_5M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_3M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_4M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_6M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_8M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_CO" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[0]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[1]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[2]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[3]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|nRESETP" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc_timer:TIMER|BNKB" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|nRESET" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_12M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_1HB" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_24M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_68KCLK" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_68KCLKB" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_6MB" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[0]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[1]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[2]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[3]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[4]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[5]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[6]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[7]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[8]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[9]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[0]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[1]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[2]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[3]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[4]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[5]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[6]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[7]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[8]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[9]" tap_mode="classic"/>
+        </trigger_input_vec>
+        <data_input_vec>
+          <wire name="core_top:ic|emu:Neogeo|CLK_VIDEO" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|CLK_VIDEO_90" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|CLK_24M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|CLK_24MB" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_12M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_1_5M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_3M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_4M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_6M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_8M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_CO" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[0]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[1]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[2]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[3]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|nRESETP" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc_timer:TIMER|BNKB" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|nRESET" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_12M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_1HB" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_24M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_68KCLK" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_68KCLKB" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_6MB" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[0]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[1]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[2]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[3]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[4]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[5]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[6]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[7]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[8]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[9]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[0]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[1]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[2]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[3]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[4]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[5]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[6]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[7]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[8]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[9]" tap_mode="classic"/>
+        </data_input_vec>
+        <storage_qualifier_input_vec>
+          <wire name="core_top:ic|emu:Neogeo|CLK_VIDEO" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|CLK_VIDEO_90" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|CLK_24M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|CLK_24MB" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_12M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_1_5M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_3M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_4M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_6M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_8M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_CO" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[0]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[1]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[2]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[3]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|nRESETP" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc_timer:TIMER|BNKB" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|nRESET" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_12M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_1HB" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_24M" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_68KCLK" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_68KCLKB" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_6MB" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[0]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[1]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[2]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[3]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[4]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[5]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[6]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[7]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[8]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|x_count[9]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[0]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[1]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[2]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[3]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[4]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[5]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[6]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[7]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[8]" tap_mode="classic"/>
+          <wire name="core_top:ic|emu:Neogeo|y_count[9]" tap_mode="classic"/>
+        </storage_qualifier_input_vec>
+      </signal_vec>
+      <presentation>
+        <unified_setup_data_view>
+          <node data_index="19" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_1HB" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="19" tap_mode="classic" trigger_index="19" type="unknown"/>
+          <node data_index="18" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_12M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="18" tap_mode="classic" trigger_index="18" type="unknown"/>
+          <node data_index="20" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_24M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="20" tap_mode="classic" trigger_index="20" type="unknown"/>
+          <node data_index="21" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_68KCLK" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="21" tap_mode="classic" trigger_index="21" type="unknown"/>
+          <node data_index="22" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_68KCLKB" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="22" tap_mode="classic" trigger_index="22" type="unknown"/>
+          <node data_index="3" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|CLK_24MB" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="3" tap_mode="classic" trigger_index="3" type="unknown"/>
+          <node data_index="5" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_1_5M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="5" tap_mode="classic" trigger_index="5" type="unknown"/>
+          <node data_index="6" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_3M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="6" tap_mode="classic" trigger_index="6" type="unknown"/>
+          <node data_index="2" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|CLK_24M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="2" tap_mode="classic" trigger_index="2" type="unknown"/>
+          <node data_index="23" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_6MB" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="23" tap_mode="classic" trigger_index="23" type="unknown"/>
+          <node data_index="8" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_6M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="8" tap_mode="classic" trigger_index="8" type="unknown"/>
+          <node data_index="9" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_8M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="9" tap_mode="classic" trigger_index="9" type="unknown"/>
+          <node data_index="7" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_4M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="7" tap_mode="classic" trigger_index="7" type="unknown"/>
+          <node data_index="4" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_12M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="4" tap_mode="classic" trigger_index="4" type="unknown"/>
+          <node data_index="10" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_CO" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="10" tap_mode="classic" trigger_index="10" type="unknown"/>
+          <node is_selected="false" level-0="alt_or" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[3..0]" order="msb_to_lsb" storage-0="alt_or" storage-1="alt_or" storage-2="alt_or" type="register">
+            <node data_index="14" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[3]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="14" tap_mode="classic" trigger_index="14" type="unknown"/>
+            <node data_index="13" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[2]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="13" tap_mode="classic" trigger_index="13" type="unknown"/>
+            <node data_index="12" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[1]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="12" tap_mode="classic" trigger_index="12" type="unknown"/>
+            <node data_index="11" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[0]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="11" tap_mode="classic" trigger_index="11" type="unknown"/>
+          </node>
+          <node data_index="15" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|nRESETP" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="15" tap_mode="classic" trigger_index="15" type="unknown"/>
+          <node data_index="17" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|nRESET" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="17" tap_mode="classic" trigger_index="17" type="unknown"/>
+          <node data_index="0" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|CLK_VIDEO" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="0" tap_mode="classic" trigger_index="0" type="unknown"/>
+          <node data_index="1" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|CLK_VIDEO_90" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="1" tap_mode="classic" trigger_index="1" type="unknown"/>
+          <node data_index="16" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="rising edge" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc_timer:TIMER|BNKB" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="16" tap_mode="classic" trigger_index="16" type="unknown"/>
+          <node is_selected="false" level-0="alt_or" name="core_top:ic|emu:Neogeo|x_count[9..0]" order="msb_to_lsb" radix="unsigned_dec" storage-0="alt_or" storage-1="alt_or" storage-2="alt_or" type="register">
+            <node data_index="33" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[9]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="33" tap_mode="classic" trigger_index="33" type="unknown"/>
+            <node data_index="32" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[8]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="32" tap_mode="classic" trigger_index="32" type="unknown"/>
+            <node data_index="31" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[7]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="31" tap_mode="classic" trigger_index="31" type="unknown"/>
+            <node data_index="30" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[6]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="30" tap_mode="classic" trigger_index="30" type="unknown"/>
+            <node data_index="29" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[5]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="29" tap_mode="classic" trigger_index="29" type="unknown"/>
+            <node data_index="28" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[4]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="28" tap_mode="classic" trigger_index="28" type="unknown"/>
+            <node data_index="27" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[3]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="27" tap_mode="classic" trigger_index="27" type="unknown"/>
+            <node data_index="26" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[2]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="26" tap_mode="classic" trigger_index="26" type="unknown"/>
+            <node data_index="25" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[1]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="25" tap_mode="classic" trigger_index="25" type="unknown"/>
+            <node data_index="24" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[0]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="24" tap_mode="classic" trigger_index="24" type="unknown"/>
+          </node>
+          <node is_selected="true" level-0="alt_or" name="core_top:ic|emu:Neogeo|y_count[9..0]" order="msb_to_lsb" storage-0="alt_or" storage-1="alt_or" storage-2="alt_or" type="register">
+            <node data_index="43" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[9]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="43" tap_mode="classic" trigger_index="43" type="unknown"/>
+            <node data_index="42" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[8]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="42" tap_mode="classic" trigger_index="42" type="unknown"/>
+            <node data_index="41" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[7]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="41" tap_mode="classic" trigger_index="41" type="unknown"/>
+            <node data_index="40" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[6]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="40" tap_mode="classic" trigger_index="40" type="unknown"/>
+            <node data_index="39" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[5]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="39" tap_mode="classic" trigger_index="39" type="unknown"/>
+            <node data_index="38" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[4]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="38" tap_mode="classic" trigger_index="38" type="unknown"/>
+            <node data_index="37" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[3]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="37" tap_mode="classic" trigger_index="37" type="unknown"/>
+            <node data_index="36" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[2]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="36" tap_mode="classic" trigger_index="36" type="unknown"/>
+            <node data_index="35" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[1]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="35" tap_mode="classic" trigger_index="35" type="unknown"/>
+            <node data_index="34" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[0]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="34" tap_mode="classic" trigger_index="34" type="unknown"/>
+          </node>
+        </unified_setup_data_view>
+        <data_view>
+          <net data_index="19" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_1HB" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="19" tap_mode="classic" trigger_index="19" type="unknown"/>
+          <net data_index="18" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_12M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="18" tap_mode="classic" trigger_index="18" type="unknown"/>
+          <net data_index="20" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_24M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="20" tap_mode="classic" trigger_index="20" type="unknown"/>
+          <net data_index="21" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_68KCLK" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="21" tap_mode="classic" trigger_index="21" type="unknown"/>
+          <net data_index="22" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_68KCLKB" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="22" tap_mode="classic" trigger_index="22" type="unknown"/>
+          <net data_index="3" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|CLK_24MB" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="3" tap_mode="classic" trigger_index="3" type="unknown"/>
+          <net data_index="5" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_1_5M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="5" tap_mode="classic" trigger_index="5" type="unknown"/>
+          <net data_index="6" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_3M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="6" tap_mode="classic" trigger_index="6" type="unknown"/>
+          <net data_index="2" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|CLK_24M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="2" tap_mode="classic" trigger_index="2" type="unknown"/>
+          <net data_index="23" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_6MB" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="23" tap_mode="classic" trigger_index="23" type="unknown"/>
+          <net data_index="8" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_6M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="8" tap_mode="classic" trigger_index="8" type="unknown"/>
+          <net data_index="9" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_8M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="9" tap_mode="classic" trigger_index="9" type="unknown"/>
+          <net data_index="7" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_4M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="7" tap_mode="classic" trigger_index="7" type="unknown"/>
+          <net data_index="4" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_12M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="4" tap_mode="classic" trigger_index="4" type="unknown"/>
+          <net data_index="10" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_CO" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="10" tap_mode="classic" trigger_index="10" type="unknown"/>
+          <bus is_selected="false" level-0="alt_or" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[3..0]" order="msb_to_lsb" storage-0="alt_or" storage-1="alt_or" storage-2="alt_or" type="register">
+            <net data_index="14" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[3]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="14" tap_mode="classic" trigger_index="14" type="unknown"/>
+            <net data_index="13" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[2]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="13" tap_mode="classic" trigger_index="13" type="unknown"/>
+            <net data_index="12" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[1]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="12" tap_mode="classic" trigger_index="12" type="unknown"/>
+            <net data_index="11" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[0]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="11" tap_mode="classic" trigger_index="11" type="unknown"/>
+          </bus>
+          <net data_index="15" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|nRESETP" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="15" tap_mode="classic" trigger_index="15" type="unknown"/>
+          <net data_index="17" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|nRESET" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="17" tap_mode="classic" trigger_index="17" type="unknown"/>
+          <net data_index="0" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|CLK_VIDEO" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="0" tap_mode="classic" trigger_index="0" type="unknown"/>
+          <net data_index="1" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|CLK_VIDEO_90" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="1" tap_mode="classic" trigger_index="1" type="unknown"/>
+          <net data_index="16" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="rising edge" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc_timer:TIMER|BNKB" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="16" tap_mode="classic" trigger_index="16" type="unknown"/>
+          <bus is_selected="false" level-0="alt_or" name="core_top:ic|emu:Neogeo|x_count[9..0]" order="msb_to_lsb" radix="unsigned_dec" storage-0="alt_or" storage-1="alt_or" storage-2="alt_or" type="register">
+            <net data_index="33" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[9]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="33" tap_mode="classic" trigger_index="33" type="unknown"/>
+            <net data_index="32" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[8]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="32" tap_mode="classic" trigger_index="32" type="unknown"/>
+            <net data_index="31" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[7]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="31" tap_mode="classic" trigger_index="31" type="unknown"/>
+            <net data_index="30" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[6]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="30" tap_mode="classic" trigger_index="30" type="unknown"/>
+            <net data_index="29" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[5]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="29" tap_mode="classic" trigger_index="29" type="unknown"/>
+            <net data_index="28" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[4]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="28" tap_mode="classic" trigger_index="28" type="unknown"/>
+            <net data_index="27" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[3]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="27" tap_mode="classic" trigger_index="27" type="unknown"/>
+            <net data_index="26" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[2]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="26" tap_mode="classic" trigger_index="26" type="unknown"/>
+            <net data_index="25" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[1]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="25" tap_mode="classic" trigger_index="25" type="unknown"/>
+            <net data_index="24" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[0]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="24" tap_mode="classic" trigger_index="24" type="unknown"/>
+          </bus>
+          <bus is_selected="true" level-0="alt_or" name="core_top:ic|emu:Neogeo|y_count[9..0]" order="msb_to_lsb" storage-0="alt_or" storage-1="alt_or" storage-2="alt_or" type="register">
+            <net data_index="43" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[9]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="43" tap_mode="classic" trigger_index="43" type="unknown"/>
+            <net data_index="42" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[8]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="42" tap_mode="classic" trigger_index="42" type="unknown"/>
+            <net data_index="41" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[7]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="41" tap_mode="classic" trigger_index="41" type="unknown"/>
+            <net data_index="40" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[6]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="40" tap_mode="classic" trigger_index="40" type="unknown"/>
+            <net data_index="39" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[5]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="39" tap_mode="classic" trigger_index="39" type="unknown"/>
+            <net data_index="38" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[4]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="38" tap_mode="classic" trigger_index="38" type="unknown"/>
+            <net data_index="37" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[3]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="37" tap_mode="classic" trigger_index="37" type="unknown"/>
+            <net data_index="36" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[2]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="36" tap_mode="classic" trigger_index="36" type="unknown"/>
+            <net data_index="35" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[1]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="35" tap_mode="classic" trigger_index="35" type="unknown"/>
+            <net data_index="34" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[0]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="34" tap_mode="classic" trigger_index="34" type="unknown"/>
+          </bus>
+        </data_view>
+        <setup_view>
+          <net data_index="19" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_1HB" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="19" tap_mode="classic" trigger_index="19" type="unknown"/>
+          <net data_index="18" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_12M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="18" tap_mode="classic" trigger_index="18" type="unknown"/>
+          <net data_index="20" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_24M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="20" tap_mode="classic" trigger_index="20" type="unknown"/>
+          <net data_index="21" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_68KCLK" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="21" tap_mode="classic" trigger_index="21" type="unknown"/>
+          <net data_index="22" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_68KCLKB" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="22" tap_mode="classic" trigger_index="22" type="unknown"/>
+          <net data_index="3" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|CLK_24MB" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="3" tap_mode="classic" trigger_index="3" type="unknown"/>
+          <net data_index="5" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_1_5M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="5" tap_mode="classic" trigger_index="5" type="unknown"/>
+          <net data_index="6" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_3M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="6" tap_mode="classic" trigger_index="6" type="unknown"/>
+          <net data_index="2" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|CLK_24M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="2" tap_mode="classic" trigger_index="2" type="unknown"/>
+          <net data_index="23" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|neo_d0:D0|CLK_6MB" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="23" tap_mode="classic" trigger_index="23" type="unknown"/>
+          <net data_index="8" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_6M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="8" tap_mode="classic" trigger_index="8" type="unknown"/>
+          <net data_index="9" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_8M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="9" tap_mode="classic" trigger_index="9" type="unknown"/>
+          <net data_index="7" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_4M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="7" tap_mode="classic" trigger_index="7" type="unknown"/>
+          <net data_index="4" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|LSPC_12M" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="4" tap_mode="classic" trigger_index="4" type="unknown"/>
+          <net data_index="10" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_CO" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="10" tap_mode="classic" trigger_index="10" type="unknown"/>
+          <bus is_selected="false" level-0="alt_or" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[3..0]" order="msb_to_lsb" storage-0="alt_or" storage-1="alt_or" storage-2="alt_or" type="register">
+            <net data_index="14" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[3]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="14" tap_mode="classic" trigger_index="14" type="unknown"/>
+            <net data_index="13" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[2]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="13" tap_mode="classic" trigger_index="13" type="unknown"/>
+            <net data_index="12" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[1]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="12" tap_mode="classic" trigger_index="12" type="unknown"/>
+            <net data_index="11" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|Q53_Q[0]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="11" tap_mode="classic" trigger_index="11" type="unknown"/>
+          </bus>
+          <net data_index="15" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc2_clk:LSPCCLK|nRESETP" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="15" tap_mode="classic" trigger_index="15" type="unknown"/>
+          <net data_index="17" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|nRESET" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="17" tap_mode="classic" trigger_index="17" type="unknown"/>
+          <net data_index="0" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|CLK_VIDEO" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="0" tap_mode="classic" trigger_index="0" type="unknown"/>
+          <net data_index="1" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|CLK_VIDEO_90" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="1" tap_mode="classic" trigger_index="1" type="unknown"/>
+          <net data_index="16" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="rising edge" name="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc_timer:TIMER|BNKB" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="16" tap_mode="classic" trigger_index="16" type="unknown"/>
+          <bus is_selected="false" level-0="alt_or" name="core_top:ic|emu:Neogeo|x_count[9..0]" order="msb_to_lsb" radix="unsigned_dec" storage-0="alt_or" storage-1="alt_or" storage-2="alt_or" type="register">
+            <net data_index="33" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[9]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="33" tap_mode="classic" trigger_index="33" type="unknown"/>
+            <net data_index="32" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[8]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="32" tap_mode="classic" trigger_index="32" type="unknown"/>
+            <net data_index="31" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[7]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="31" tap_mode="classic" trigger_index="31" type="unknown"/>
+            <net data_index="30" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[6]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="30" tap_mode="classic" trigger_index="30" type="unknown"/>
+            <net data_index="29" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[5]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="29" tap_mode="classic" trigger_index="29" type="unknown"/>
+            <net data_index="28" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[4]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="28" tap_mode="classic" trigger_index="28" type="unknown"/>
+            <net data_index="27" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[3]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="27" tap_mode="classic" trigger_index="27" type="unknown"/>
+            <net data_index="26" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[2]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="26" tap_mode="classic" trigger_index="26" type="unknown"/>
+            <net data_index="25" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[1]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="25" tap_mode="classic" trigger_index="25" type="unknown"/>
+            <net data_index="24" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|x_count[0]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="24" tap_mode="classic" trigger_index="24" type="unknown"/>
+          </bus>
+          <bus is_selected="true" level-0="alt_or" name="core_top:ic|emu:Neogeo|y_count[9..0]" order="msb_to_lsb" storage-0="alt_or" storage-1="alt_or" storage-2="alt_or" type="register">
+            <net data_index="43" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[9]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="43" tap_mode="classic" trigger_index="43" type="unknown"/>
+            <net data_index="42" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[8]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="42" tap_mode="classic" trigger_index="42" type="unknown"/>
+            <net data_index="41" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[7]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="41" tap_mode="classic" trigger_index="41" type="unknown"/>
+            <net data_index="40" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[6]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="40" tap_mode="classic" trigger_index="40" type="unknown"/>
+            <net data_index="39" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[5]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="39" tap_mode="classic" trigger_index="39" type="unknown"/>
+            <net data_index="38" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[4]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="38" tap_mode="classic" trigger_index="38" type="unknown"/>
+            <net data_index="37" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[3]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="37" tap_mode="classic" trigger_index="37" type="unknown"/>
+            <net data_index="36" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[2]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="36" tap_mode="classic" trigger_index="36" type="unknown"/>
+            <net data_index="35" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[1]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="35" tap_mode="classic" trigger_index="35" type="unknown"/>
+            <net data_index="34" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="core_top:ic|emu:Neogeo|y_count[0]" pwr_level-0="dont_care" pwr_storage-0="dont_care" pwr_storage-1="dont_care" pwr_storage-2="dont_care" storage-0="dont_care" storage-1="dont_care" storage-2="dont_care" storage_index="34" tap_mode="classic" trigger_index="34" type="unknown"/>
+          </bus>
+        </setup_view>
+        <trigger_in_editor/>
+        <trigger_out_editor/>
+      </presentation>
+      <trigger CRC="9B9337A0" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2022/08/01 04:20:25  #0" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="1" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="false" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
+        <power_up_trigger position="pre" storage_qualifier_disabled="no"/>
+        <events use_custom_flow_control="no">
+          <level enabled="yes" name="condition1" type="basic">'core_top:ic|emu:Neogeo|lspc2_a2:LSPC|lspc_timer:TIMER|BNKB' == rising edge
+            <power_up enabled="yes">
+            </power_up><op_node/>
+          </level>
+        </events>
+        <storage_qualifier_events>
+          <transitional>11111111111111111111111111111111111111111111
+            <pwr_up_transitional>11111111111111111111111111111111111111111111</pwr_up_transitional>
+          </transitional>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+        </storage_qualifier_events>
+        <log>
+          <data global_temp="1" name="log: Trig @ 2022/08/01 07:53:24 (0:0:0.2 elapsed)" power_up_mode="false" sample_depth="127" trigger_position="16">0101011001000111010000100011000000000010000001010110010001110100001000110000000000100000011001110000011101001100001100000000001000000110011100000111010011000011000000000010000000011111000101110110010000110000000000100000000111110001011101100100001100000000001000000010111100010111011010100011000000000010000000101111000101110110101000110000000000100000100101111100111101000011101100000000001000001001011111001111010000111011000000000010000010100111110011110100110110110000000000100000101001111100111101001101101100000000001000001101111111111111011101011011000000000010000011011111111111110111010110110000000000100000111011101011111101111011101100000000001000001110111010111111011110111011000000000010000001010000000000011101001010110000000000100000010100000000000111010010101100000000001000000110000000000001110111001011000000000010000001100000000000011101110010110000000000100000000110000101000111110100101100000000001000000001100001010001111101001011000000000010000000101000010100011111101010110000000000100000001010000101000111111010101100000000001000001001000011001001110100110111000000000010000010010000110010011101001101110000000000100000101000011000100111011101011100000000001000001010000110001001110111010111000000000010000011011001100110011110010101110000000000100000110110011001100111100101011100000000001000001110100110011001111010110111000000000010000011101001100110011110101101110000000000100000010100110100010111000010011100000000001000000101001101000101110000100111000000000010000001100011010001011100110001110000000000100000011000110100010111001100011100000000001000000001101101010101111001000111000000000010000000011011010101011110010001110000000000100000001010100001010111101010011100000000001000000010101000010101111010100111000000000010000010010010100011011100001111110000000000100000100100101000110111000011111100000000001000001010001010001101110011011111000000000010000010100010100011011100110111110000000000100000110110101101110111110101111100000000001000001101101011011101111101011111000000000010000011101010110111011111101111110000000000100000111010101101110111111011111100000000001000000101010001000011110100101111000000000010000001010100010000111101001011110000000000100000011001010000001111011100111100000000001000000110010100000011110111001111000000000010000000011101000100111111010011110000000000100000000111010001001111110100111100000000001000000010110100010011111110101111000000000010000000101101000100111111101011110000000000100000100101011100101111010011000010000000001000001001010111001011110100110000100000000010000010100101110010111101110100001000000000100000101001011100101111011101000010000000001000001101110111011011111001010000100000000010000011011101110110111110010100001000000000100000111011001001101111101011000010000000001000001110110010011011111010110000100000000010000001010110000001111100001000001000000000100000010101100000011111000010000010000000001000000110011000000111110011000000100000000010000001100110000001111100110000001000000000100000000111100101011111100100000010000000001000000001111001010111111001000000100000000010000000101110010101111110101000001000000000100000001011100101011111101010000010000000001000001001011011001111110000111000100000000010000010010110110011111100001110001000000000100000101001111000111111001101100010000000001000001010011110001111110011011000100000000010000011011111101111111111010110001000000000100000110111111011111111110101100010000000001000001110111110111111111110111000100000000010000011101111101111111111101110001000000000100000010100010100000111010010100010000000001000000101000101000001110100101000100000000010000001100001010000011101110010001000000000100000011000010100000111011100100010000000001000000001100101010001111101001000100000000010000000011001010100011111010010001000000000100000001010000001000111111010100010000000001000000010100000010001111110101000100000000010000010010000100010011101001101001000000000100000100100001000100111010011010010000000001000001010000010001001110111010100100000000010000010100000100010011101110101001000000000100000110110001101100111100101010010000000001000001101100011011001111001010100100000000010000011101000110110011110101101001000000000100000111010001101100111101011010010000000001000000101001001000101110000100100100000000010000001010010010001011100001001001000000000100000011000110000010111001100010010000000001000000110001100000101110011000100100000000010000000011011000101011110010001001000000000100000000110110001010111100100010010000000001000000010101100010101111010100100100000000010000000101011000101011110101001001000000000100000100100111100110111000011110010000000001000001001001111001101110000111100100000000010000010100011110011011100110111001000000000100000101000111100110111001101110010000000001000001101101111011101111101011100100000000010000011011011110111011111010111001000000000100000111010101001110111111011110010000000001000001110101010011101111110111100100000000010000001010100000000111101001011001000000000100000010101000000001111010010110010000000001000000110010000000011110111001100100000000010000001100100000000111101110011001000000000100000000111000101001111110100110010000000001000000001110001010011111101001100100000000010000000101100010100111111101011001000000000100000001011000101001111111010110010000000001000001001010011001011110100110010100000000010000010010100110010111101001100101000000000100000101001011000101111011101001010000000001000001010010110001011110111010010100000000010000011011101100110111110010100101000000000100000110111011001101111100101001010000000001000001110110110011011111010110010100000000010000011101101100110111110101100101000000000100000</data>
+          <extradata>1111111111111111T111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</extradata>
+        </log>
+      </trigger>
+    </signal_set>
+    <position_info>
+      <single attribute="active tab" value="0"/>
+      <single attribute="data horizontal scroll position" value="0"/>
+      <single attribute="data vertical scroll position" value="5"/>
+      <single attribute="setup horizontal scroll position" value="0"/>
+      <single attribute="setup vertical scroll position" value="6"/>
+      <single attribute="zoom level denominator" value="1"/>
+      <single attribute="zoom level numerator" value="1"/>
+      <single attribute="zoom offset denominator" value="1"/>
+      <single attribute="zoom offset numerator" value="130944"/>
+    </position_info>
+  </instance>
+  <global_info>
+    <single attribute="active instance" value="0"/>
+    <single attribute="config widget visible" value="1"/>
+    <single attribute="data log widget visible" value="1"/>
+    <single attribute="hierarchy widget height" value="96"/>
+    <single attribute="hierarchy widget visible" value="1"/>
+    <single attribute="instance widget visible" value="1"/>
+    <single attribute="jtag widget visible" value="1"/>
+    <single attribute="lock mode" value="0"/>
+    <single attribute="sof manager visible" value="1"/>
+    <multi attribute="column width" size="23" value="34,34,335,74,68,78,95,96,98,98,88,88,110,101,101,101,101,101,101,101,101,107,114"/>
+    <multi attribute="frame size" size="2" value="1920,1017"/>
+    <multi attribute="jtag widget size" size="2" value="348,204"/>
+  </global_info>
+</session>

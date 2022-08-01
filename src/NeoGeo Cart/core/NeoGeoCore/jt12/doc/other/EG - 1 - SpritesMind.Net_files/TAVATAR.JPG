@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kodulehekülg on suletud!</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/404css/styles.css">
+</head>
+<body>
+<hr class="separator separator--medium separator--invisible">
+<div class="container">
+  <div class="card">
+    <div class="card__content text ">
+      <div class="card__text text ">
+        <p class="h3 text-center">Kodulehekülg on suletud!</p>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

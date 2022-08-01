@@ -1,0 +1,109 @@
+{
+    "data": {
+        "magic": "APF_VER_1",
+			"data_slots": [
+				
+				{
+					"name": "BIOS",
+					"id": 1,
+					"required": true,
+					"parameters": 1,
+					"filename" : "uni-bios_1_0.rom",
+					"extensions": [
+						"rom", "sp1", "bin"
+					],
+					"size_exact": 0,
+					"size_maximum": 131072,
+					"address": "0x10A00000"
+				},
+				{
+					"name": "LO",
+					"id": 2,
+					"required": true,
+					"parameters": 1,
+					"filename" : "000-lo.lo",
+					"extensions": [
+						"lo"
+					],
+					"size_exact": 0,
+					"size_maximum": 131072,
+					"address": "0x50000000"
+				},
+				
+				{
+					"name": "SFIX",
+					"id": 3,
+					"required": true,
+					"parameters": 1,
+					"extensions": [
+						"sbin", "srom"
+					],
+					"size_exact": 0,
+					"size_maximum": 131072,
+					"address": "0x30000000"
+				},
+				{
+					"name": "PROG",
+					"id": 4,
+					"required": true,
+					"parameters": 1,
+					"extensions": [
+						"bin", "pbin", "prom"
+					],
+					"size_exact": 0,
+					"size_maximum": 8388609,
+					"address": "0x10000000"
+				},
+				
+				{
+					"name": "CROM",
+					"id": 5,
+					"required": true,
+					"parameters": 1,
+					"extensions": [
+						"cbin", "crom0"
+					],
+					"size_exact": 0,
+					"size_maximum": 67108865,
+					"address": "0x40000000"
+				},
+				{
+					"name": "MROM",
+					"id": 6,
+					"required": true,
+					"parameters": 1,
+					"extensions": [
+						"mbin", "m1rom"
+					],
+					"size_exact": 0,
+					"size_maximum": 524288,
+					"address": "0x10F80000"
+				},
+				{
+					"name": "VROM",
+					"id": 7,
+					"required": true,
+					"parameters": 1,
+					"extensions": [
+						"vbin", "vroma0"
+					],
+					"size_exact": 0,
+					"size_maximum": 16777216,
+					"address": "0x20000000"
+				},
+				{
+					"name": "FPGA Setup",
+					"id": 8,
+					"required": true,
+					"filename" : "mgs.fpga",
+					"parameters": 1,
+					"extensions": [
+						"fpga"
+					],
+					"size_exact": 0,
+					"size_maximum": 128,
+					"address": "0xf0000000"
+				}
+			]
+    }
+}

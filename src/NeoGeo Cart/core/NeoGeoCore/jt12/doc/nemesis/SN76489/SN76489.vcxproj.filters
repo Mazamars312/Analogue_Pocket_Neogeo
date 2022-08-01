@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ISN76489">
+      <UniqueIdentifier>{d58ad5e3-f320-47d3-adaa-cab7bb4ff49d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SN76489">
+      <UniqueIdentifier>{70acb6a5-3d65-423d-b08d-476ad0453f7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{2519318e-991e-4077-a222-f4d866aedcba}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ISN76489.h">
+      <Filter>ISN76489</Filter>
+    </ClInclude>
+    <ClInclude Include="SN76489.h">
+      <Filter>SN76489</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="interface.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ISN76489.inl">
+      <Filter>ISN76489</Filter>
+    </None>
+    <None Include="SN76489.inl">
+      <Filter>SN76489</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SN76489.cpp">
+      <Filter>SN76489</Filter>
+    </ClCompile>
+    <ClCompile Include="interface.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SN76489.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
