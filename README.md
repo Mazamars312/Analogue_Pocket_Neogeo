@@ -64,6 +64,7 @@ I would like to ask that you support the people like [Furrtek](https://www.patre
 
 ## Credits
 * [Furrtek](https://www.patreon.com/furrtek/posts) - Please support Furrtek as much as you can as they have done a lot with the community and I enjoy seeing the de-cap processes they do.
+* [Jotego](https://www.patreon.com/topapate) - For his cycle accurate [JT12](https://github.com/jotego/jt12) and [JT49](https://github.com/jotego/jt49) implementation that is used in this core. 
 * Please advise if there are others in this core as I do want to thank them and make sure they are supported on this.
 
 ## Special Thanks
