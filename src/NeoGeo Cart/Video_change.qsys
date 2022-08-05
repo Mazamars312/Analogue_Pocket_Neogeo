@@ -72,7 +72,7 @@
   <parameter name="instance_id" value="VMUX" />
   <parameter name="probe_width" value="16" />
   <parameter name="sld_instance_index" value="0" />
-  <parameter name="source_initial_value" value="0" />
+  <parameter name="source_initial_value" value="15" />
   <parameter name="source_width" value="32" />
  </module>
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />

@@ -2,7 +2,15 @@
     "data": {
         "magic": "APF_VER_1",
 			"data_slots": [
-				
+				{
+					"name": "Game JSON Setup",
+					"id": 0,
+					"required": true,
+					"parameters": "0x12",
+					"extensions": [
+						"json"
+					]
+				},
 				{
 					"name": "BIOS",
 					"id": 1,
@@ -103,6 +111,19 @@
 					"size_exact": 0,
 					"size_maximum": 128,
 					"address": "0xf0000000"
+				},
+				{
+					"name": "Memory Card",
+					"id": "0x101",
+					"required": false,
+					"parameters": 36,
+					"nonvolatile": true,
+					"extensions": [
+						"mem"
+					],
+					"size_exact": null,
+					"size_maximum": 16384,
+					"address": "0x60000000"
 				}
 			]
     }

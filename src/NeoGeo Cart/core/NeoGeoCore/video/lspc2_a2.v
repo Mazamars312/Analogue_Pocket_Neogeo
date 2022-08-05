@@ -20,8 +20,16 @@
 
 // All pins listed ok. REF, DIVI and DIVO only used on AES for video PLL hack
 
+// Version 0.6.0 Alpha
+// Mazamars312 : Added the 6mhz clock to this so we can sync the LSCP to the PLL Also using the clk_sys to help in this
+// Moved all the clocks to the 
+
 module lspc2_a2(
 	input CLK_24M,
+	input clk_sys,
+	input CLK_12M,  
+	input CLK_6MB,
+	input CLK_1HB,
 	input RESET,
 	output [15:0] PBUS_OUT,
 	inout [23:16] PBUS_IO,
@@ -173,7 +181,9 @@ module lspc2_a2(
 	wire U72_OUT = ONE_PIXEL ^ nEVEN_ODD;
 	wire U57B_OUT = nPARITY_INIT & U72_OUT;
 	wire U56A_OUT = ~|{S58A_OUT, U57B_OUT};
-	wire CLK_24MB, LSPC_12M, CK_HSHRINK_REG, U68A_nQ, EVEN_nODD, nEVEN_ODD;
+	wire CLK_24MB, LSPC_12M;
+	
+	wire CK_HSHRINK_REG, U68A_nQ, EVEN_nODD, nEVEN_ODD;
 	FD2 U68A(CLK_24MB, ~LSPC_12M, CK_HSHRINK_REG, U68A_nQ);
 	FD2 U74A(~U68A_nQ, U56A_OUT, EVEN_nODD, nEVEN_ODD);
 
@@ -363,6 +373,9 @@ module lspc2_a2(
 	
 	
 	wire LSPC_3M;
+	
+	
+	
 	// Buffer shift-out clocks, alternates between odd/even
 	wire T50B_OUT = LSPC_3M & LSPC_6M;
 	wire T48A_OUT = ~LSPC_3M & LSPC_6M;
@@ -578,11 +591,13 @@ module lspc2_a2(
 					REG_VRAMMOD, REG_VRAMRW, REG_LSPCMODE, CPU_DATA_OUT, AA_SPEED,	TIMER_MODE,	TIMER_IRQ_EN,
 					AA_DISABLE, TIMER_STOP, nVRAM_WRITE_REQ, D112B_OUT);
 	
-	wire LSPC_6M, D46A_OUT;
+	wire LSPC_6M; 
+	
+	wire D46A_OUT;
 	lspc_timer TIMER(LSPC_6M, nRESETP, M68K_DATA, WR_TIMER_HIGH, WR_TIMER_LOW, VMODE, TIMER_MODE, TIMER_STOP,
 						RASTERC, TIMER_IRQ_EN, R74_nQ, BNKB, D46A_OUT);
 	
-	resetp RSTP(CLK_24MB, RESET, nRESETP);
+	resetp RSTP(CLK_24MB, RESET, nRESETP, CLK_6MB, CLK_1HB, clk_sys);
 	
 	wire BNK;
 	irq IRQ(WR_IRQ_ACK, M68K_DATA[2:0], RESET, D46A_OUT, BNK, LSPC_6M, IPL0, IPL1);
@@ -591,8 +606,17 @@ module lspc2_a2(
 	videosync VS(CLK_24MB, LSPC_3M, LSPC_1_5M, Q53_CO, nRESETP, VMODE, PIXELC, RASTERC, HSYNC, VSYNC, BNK,
 						BNKB, CHBL, R15_QD, FLIP, nFLIP, P50_CO);
 
-	lspc2_clk LSPCCLK(CLK_24M, nRESETP, CLK_24MB, LSPC_12M, LSPC_8M, LSPC_6M, LSPC_4M, LSPC_3M, LSPC_1_5M,
-							Q53_CO);
+	lspc2_clk LSPCCLK(
+	.CLK_24M		(CLK_24M), 
+	.nRESETP		(nRESETP), 
+	.CLK_24MB	(CLK_24MB), 
+	.LSPC_12M	(LSPC_12M), 
+	.LSPC_8M		(LSPC_8M), 
+	.LSPC_6M		(LSPC_6M), 
+	.LSPC_4M		(LSPC_4M), 
+	.LSPC_3M		(LSPC_3M), 
+	.LSPC_1_5M	(LSPC_1_5M),
+	.Q53_CO		(Q53_CO));
 	
 	wire SPR_TILE_VFLIP, SPR_TILE_HFLIP, SPR_AA_3, SPR_AA_2, nCPU_WR_LOW, R91_nQ, CLK_CPU_READ_LOW, T160A_OUT, T160B_OUT, CLK_ACTIVE_RD;
 	wire ACTIVE_RD_PRE8;

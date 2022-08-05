@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(5CEBA4F23) Path("F:/Analogue/NeoGeo/src/NeoGeo Cart/output_files/") File("ap_core.sof") MfrSpec(OpMask(1));
+		Device PartName(5CEBA4F23) Path("F:/Analogue/Analogue_Pocket_Neogeo/src/NeoGeo Cart/output_files/") File("ap_core.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

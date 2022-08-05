@@ -21,6 +21,11 @@
 
 *****************************************************************************************/
 
+//// Version 0.6.0 Alpha
+//
+// Addeda new controller layout for the json setup. This will be later handled by the APF framework once the interact.json happens
+
+
 module apf_io
 (
 	input					clk_74a, 
@@ -41,12 +46,12 @@ module apf_io
 	input					locked_2,
 
 	// buttons up to 32
-	output [31:0] 		joystick_0,
-	output [31:0] 		joystick_1,
-	output [31:0] 		joystick_2,
-	output [31:0] 		joystick_3,
-	output [31:0] 		joystick_4,
-	output [31:0] 		joystick_5,
+	output reg [31:0] 		joystick_0,
+	output reg [31:0] 		joystick_1,
+	output reg [31:0] 		joystick_2,
+	output reg [31:0] 		joystick_3,
+	output reg [31:0] 		joystick_4,
+	output reg [31:0] 		joystick_5,
 	
 	// analog -127..+127, Y: [15:8], X: [7:0]
 	output [15:0] 		joystick_l_analog_0,
@@ -257,8 +262,23 @@ io_pad_controller ipm (
 //   [ 7: 0] ltrig
 //   [15: 8] rtrig
 //
-	assign joystick_0 = {cont1_key[14], cont1_key[15], cont1_key[7:4], cont1_key[0], cont1_key[1], cont1_key[2], cont1_key[3]};
-	assign joystick_1 = {cont2_key[14], cont2_key[15], cont2_key[7:4], cont2_key[0], cont2_key[1], cont2_key[2], cont2_key[3]};
+
+reg [3:0] controller_map_1, controller_map_2;
+
+	case (controller_map_1)												//		D					C				B					A
+		4'h1	  : joystick_0 <= {cont1_key[14], cont1_key[15], cont1_key[4], cont1_key[6], cont1_key[5], cont1_key[7], cont1_key[0], cont1_key[1], cont1_key[2], cont1_key[3]}; // Neogeo outlay
+		4'h2	  : joystick_0 <= {cont1_key[14], cont1_key[15], cont1_key[6], cont1_key[7], cont1_key[4], cont1_key[5], cont1_key[0], cont1_key[1], cont1_key[2], cont1_key[3]}; // Neogeo CD outlay
+		default : joystick_0 <= {cont1_key[14], cont1_key[15], cont1_key[7:4], cont1_key[0], cont1_key[1], cont1_key[2], cont1_key[3]}; // Xbox Controller/Snes controller
+	endcase
+	case (controller_map_2)												//		D					C				B					A
+		4'h1	  : joystick_1 <= {cont2_key[14], cont2_key[15], cont2_key[4], cont2_key[6], cont2_key[5], cont2_key[7], cont2_key[0], cont2_key[1], cont2_key[2], cont2_key[3]}; // Neogeo outlay
+		4'h2	  : joystick_1 <= {cont2_key[14], cont2_key[15], cont2_key[6], cont2_key[7], cont2_key[4], cont2_key[5], cont2_key[0], cont2_key[1], cont2_key[2], cont2_key[3]}; // Neogeo CD outlay
+		default : joystick_1 <= {cont2_key[14], cont2_key[15], cont2_key[7:4], cont2_key[0], cont2_key[1], cont2_key[2], cont2_key[3]}; // Xbox Controller/Snes controller
+	endcase
+end
+
+//	assign joystick_0 = {cont1_key[14], cont1_key[15], cont1_key[7:4], cont1_key[0], cont1_key[1], cont1_key[2], cont1_key[3]};
+//	assign joystick_1 = {cont2_key[14], cont2_key[15], cont2_key[7:4], cont2_key[0], cont2_key[1], cont2_key[2], cont2_key[3]};
 	
 // virtual pmp bridge
 	wire				bridge_endian_little = 0; //
@@ -270,24 +290,19 @@ io_pad_controller ipm (
 	wire 	[31:0]	cmd_bridge_rd_data;
 	
 io_bridge_peripheral ibs (
-
 	.clk						( clk_74a ),
 	.reset_n					( reset_l_main ),
-	
 	.endian_little			( bridge_endian_little ),
-	
 	.pmp_addr				( bridge_addr ),
 	.pmp_addr_valid		( bridge_address_valid ),
 	.pmp_rd					( bridge_rd ),
 	.pmp_rd_data			( bridge_rd_data ),
 	.pmp_wr					( bridge_wr ),
 	.pmp_wr_data			( bridge_wr_data ),
-
 	.phy_spimosi			( bridge_spimosi ),
 	.phy_spimiso			( bridge_spimiso ),
 	.phy_spiclk				( bridge_spiclk ),
 	.phy_spiss				( bridge_spiss )
-
 );
 
 
@@ -487,6 +502,7 @@ always @(posedge clk_sys) begin
 			32'h40xxxxxx: begin
 				CROM_MASK 	<= test_24_bits;
 			end
+			// these will monitor the masking side of the roms
 			32'b0001_0000_0xxx_xxxx_xxxx_xxxx_xxxx_xxxx: begin
 				P2ROM_MASK 	<= {1'b0,test_23_bits[22:1]};
 			end
@@ -499,8 +515,9 @@ always @(posedge clk_sys) begin
 			32'b0010_0000_1xxx_xxxx_xxxx_xxxx_xxxx_xxxx: begin
 				V2ROM_MASK 	<= test_23_bits;
 			end
-			32'hF0000000 : RTC[63:32]				<= bridge_wr_data;
-			32'hF0000004 : RTC[31: 0]				<= bridge_wr_data;
+			// here is the config sid of things of the core. Moved the RTC so that this can be configured by the APF directly
+			32'hF0000000 : controller_map_1		<= bridge_wr_data[3:0];
+			32'hF0000004 : controller_map_2		<= bridge_wr_data[3:0];
 			32'hF0000008 : DIPSW 					<= bridge_wr_data;
 			32'hF000000c : SYSTEM_TYPE 			<= bridge_wr_data;
 			32'hF0000010 : memory_card_enable 	<= bridge_wr_data;
@@ -512,8 +529,9 @@ always @(posedge clk_sys) begin
 			32'hF0000028 : use_pcm					<= bridge_wr_data;
 			32'hF000002C : cart_chip				<= bridge_wr_data;
 			32'hF0000030 : cmc_chip					<= bridge_wr_data;
-			32'hF0000034 : pixel_mux_change		<= bridge_wr_data[15:0];
-			
+			32'hF1000000 : RTC[63:32]				<= bridge_wr_data;
+			32'hF1000004 : RTC[31: 0]				<= bridge_wr_data;
+
 		endcase
 	
 	end

@@ -206,7 +206,7 @@ parameter		idle					=	'd1,
 					end
 					rd_wait_s_lsb : begin
 						PSRAM_Mem_OEN			<= LOW;
-						cnt						<= 8'h6;
+						cnt						<= 8'h3;
 						PSRAM_Mem_DQ_OE 		<= LOW;
 						cram_status				<= rd_complete_s_lsb;
 					end

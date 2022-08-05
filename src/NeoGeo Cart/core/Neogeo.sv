@@ -22,9 +22,9 @@
 // Pocket Moved over 27/06/2022:
 // Ported by Mazamars312
 // Big credit goes to Furrtek for his work on this and all I did was build around it 
-
-// Version 0.5Alpha
-
+//
+// Version 0.5.0 Alpha
+//
 // Process done
 // Created the CRAM cores
 // SDRAM 100% used for the CROM
@@ -33,11 +33,16 @@
 // CRAM1 for Voice/PCM/Music files
 // Moved the Work Ram for the 68K to the CRAM0
 // Moved the Backup Ram to the CRAM0. This helps saves as much resources as we can for the core - Waiting for saves for each game as well
+//	 
+// Version 0.6.0 Alpha
+//
+//	Created a PLL with most of the major Clocks to sync the video (LSPC2 and the B2 cores) - The compile times are higher as now quartus knows about these clocks
 // 
+//
 // ToDo:
-// Create a work ram clear system for boot. (Do this in the 74mhz clock)
+// Create a work ram clear system for boot. This will help in the bios reload issue (Do this in the 74mhz clock)
 // Make access to the memory carts for saves
-// Create a better 6mhz clock/6mhz 90 degree
+// Create a better 6mhz clock/6mhz 90 degree - Done in Alpha 0.6.0
 
 module emu
 (
@@ -58,7 +63,7 @@ module emu
 	inout	wire			bridge_1wire,
 
 	output     			CLK_VIDEO,
-	output reg			CLK_VIDEO_90,
+	output   			CLK_VIDEO_90,
 
 	//Multiple resolutions are supported using different CE_PIXEL rates.
 	//Must be based on CLK_VIDEO
@@ -162,7 +167,7 @@ wire FIX_EN = 1; // This is for the cart system
 wire				sdram_word_rd;
 wire				sdram_word_wr;
 wire	[25:0]	sdram_word_addr;
-wire	[15:0]	sdram_word_data;
+wire	[31:0]	sdram_word_data;
 wire	[31:0]	sdram_word_q;
 wire				sdram_word_busy;
 
@@ -208,7 +213,7 @@ wire				sdram_burstwr_strobe;
 wire [15:0]		sdram_burstwr_data;
 wire				sdram_burstwr_done;
 
-wire [4:0]		pixel_mux_change;
+wire [31:0]		pixel_mux_change;
 
 
 ////////////////////   CLOCKS   ///////////////////
@@ -216,26 +221,40 @@ wire [4:0]		pixel_mux_change;
 wire locked_1;
 wire locked_2;
 wire clk_sys;
-wire CLK_24M = counter_p[1];
+wire CLK_24M;
 wire sdram_int_clk;
+wire sdram_int_clk_pll;
 
 pll_sdram pll_sdram(
 	.refclk(clk_74a),
 	.rst(0),
-	.outclk_0(sdram_int_clk),
+	.outclk_0(sdram_int_clk_pll),
 	.locked(locked_2)
 );
+
+assign sdram_int_clk = sdram_int_clk_pll;
+
+// Clocks
+wire CLK_12M, CLK_68KCLK, CLK_68KCLKB, CLK_8M, CLK_6MB, CLK_4M, CLK_4MB, CLK_1HB;
 
 pll pll_sys(
 	.refclk(clk_74a),
 	.rst(0),
 	.outclk_0(clk_sys),
-//	.outclk_1(CLK_8M),
-//	.outclk_2(CLK_4M),
+	.outclk_1(CLK_24M),
+	.outclk_2(CLK_68KCLK),
+	.outclk_3(CLK_8M),
+	.outclk_4(CLK_6MB),
+	.outclk_5(CLK_VIDEO_90),
+	.outclk_6(CLK_4M),
+	.outclk_7(CLK_1HB),
+	.outclk_8(CLK_12M),
 	.reconfig_to_pll(reconfig_to_pll),
 	.reconfig_from_pll(reconfig_from_pll),
 	.locked(locked_1)
 );
+
+//assign CLK_12M = CLK_68KCLK;
 
 //assign clk_sys = clk_74a;
 
@@ -356,6 +375,8 @@ wire [18:0] MROM_MASK;
 
 wire 			start_system;
 
+
+// was used for testing
 Video_change Video_change (
 	.probe		(),
 	.source_clk	(clk_sys),
@@ -480,8 +501,6 @@ wire [15:0] snd_left;
 wire nRESETP, nSYSTEM, CARD_WE, SHADOW, nVEC, nREGEN, nSRAMWEN, PALBNK;
 wire CD_nRESET_Z80;
 
-// Clocks
-wire CLK_12M, CLK_68KCLK, CLK_68KCLKB, CLK_8M, CLK_6MB, CLK_4M, CLK_4MB, CLK_1HB;
 
 // 68k stuff
 wire [15:0] M68K_DATA;
@@ -777,11 +796,11 @@ neo_d0 D0(
 	.CLK_24M				(CLK_24M),
 	.nRESET				(nRESET), 
 	.nRESETP				(nRESETP),
-	.CLK_12M				(CLK_12M), 
-	.CLK_68KCLK			(CLK_68KCLK), 
-	.CLK_68KCLKB		(CLK_68KCLKB), 
-	.CLK_6MB				(CLK_6MB), 
-	.CLK_1HB				(CLK_1HB),
+//	.CLK_12M				(CLK_12M),   // we are using the PLL to gen the clock signals now
+//	.CLK_68KCLK			(CLK_68KCLK), 
+//	.CLK_68KCLKB		(CLK_68KCLKB), 
+//	.CLK_6MB				(CLK_6MB), 
+//	.CLK_1HB				(CLK_1HB),
 	.M68K_ADDR_A4		(M68K_ADDR[4]),
 	.M68K_DATA			(M68K_DATA[5:0]),
 	.nBITWD0				(nBITWD0),
@@ -1183,6 +1202,7 @@ always @(posedge CLK_24M) begin
 	if (~LOAD_SR & LOAD) CA4_REG <= CA4;
 end
 
+// Had to change this for how assets are stored in the SDRAM
 wire [31:0] CR = CA4_REG ? {CR_DOUBLE[47:32], CR_DOUBLE[15:0] } : {CR_DOUBLE[63:48], CR_DOUBLE[31:16]};
 
 neo_zmc2 ZMC2(
@@ -1321,8 +1341,8 @@ reg [23:0] ADPCMA_ADDR_LATCH;	// 16MB
 reg [23:0] ADPCMB_ADDR_LATCH;	// 16MB
 reg [7:0] ADPCMA_ACK_COUNTER;
 reg [10:0] ADPCMB_ACK_COUNTER;
-wire ADPCMA_DATA_READY = ~((ADPCMA_READ_REQ ^ ADPCMA_READ_ACK) & (ADPCMA_ACK_COUNTER == 8'd0));
-wire ADPCMB_DATA_READY = ~((ADPCMB_READ_REQ ^ ADPCMB_READ_ACK) & (ADPCMB_ACK_COUNTER == 11'd0));
+reg ADPCMA_DATA_READY; // = ~((ADPCMA_READ_REQ ^ ADPCMA_READ_ACK) & (ADPCMA_ACK_COUNTER == 8'd0));
+reg ADPCMB_DATA_READY; // = ~((ADPCMB_READ_REQ ^ ADPCMB_READ_ACK) & (ADPCMB_ACK_COUNTER == 11'd0));
 reg [1:0] ADPCMA_OE_SR;
 reg [1:0] ADPCMB_OE_SR;
 always @(posedge clk_sys or negedge nRESET) begin
@@ -1335,11 +1355,17 @@ always @(posedge clk_sys or negedge nRESET) begin
 		ADPCMB_ADDR_LATCH <= 'b0;
 		ADPCMA_ACK_COUNTER <= 8'd128; 
 		ADPCMB_ACK_COUNTER <= 11'd1580; 
+		ADPCMA_DATA_READY	<= 1'b1;
+		ADPCMB_DATA_READY	<= 1'b1;
 	end
 	else begin
 		ADPCMA_OE_SR <= {ADPCMA_OE_SR[0], nSDROE};
 		ADPCMA_ACK_COUNTER <= ADPCMA_ACK_COUNTER == 8'd0 ? 8'd0 : ADPCMA_ACK_COUNTER - 8'd1;
 		ADPCMB_ACK_COUNTER <= ADPCMB_ACK_COUNTER == 11'd0 ? 11'd0 : ADPCMB_ACK_COUNTER - 11'd1;
+		
+		ADPCMA_DATA_READY = ~((ADPCMA_READ_REQ ^ ADPCMA_READ_ACK) & (ADPCMA_ACK_COUNTER == 8'd0));
+		ADPCMB_DATA_READY = ~((ADPCMB_READ_REQ ^ ADPCMB_READ_ACK) & (ADPCMB_ACK_COUNTER == 11'd0));
+		
 		// Trigger ADPCM A data read on nSDROE falling edge
 		if (ADPCMA_OE_SR == 2'b10) begin
 			ADPCMA_READ_REQ <= ~ADPCMA_READ_REQ;
@@ -1382,8 +1408,8 @@ jt10 YM2610(
 	.adpcmb_data		(ADPCMB_DATA),	// CD has no ADPCM-B
 	.snd_right			(snd_right), 
 	.snd_left			(snd_left), 
-	.snd_enable			(4'hff), 
-	.ch_enable			(6'b111_111)
+	.snd_enable			(snd_enable), 
+	.ch_enable			(ch_enable)
 );
 
 wire DOTA_GATED = DOTA;
@@ -1392,10 +1418,14 @@ wire HSync,VSync;
 
 lspc2_a2	LSPC(
 	.CLK_24M				(CLK_24M),
+	.clk_sys				(clk_sys),
+	.CLK_12M				(CLK_12M),
+	.CLK_6MB				(CLK_6MB),
+	.CLK_1HB				(CLK_1HB),
 	.RESET				(nRESET),
 	.nRESETP				(nRESETP),
-	.LSPC_8M				(CLK_8M), 
-	.LSPC_4M				(CLK_4M),
+//	.LSPC_8M				(CLK_8M), 
+//	.LSPC_4M				(CLK_4M),
 	.M68K_ADDR			(M68K_ADDR[3:1]), 
 	.M68K_DATA			(M68K_DATA),
 	.IPL0					(IPL0), 
@@ -1446,6 +1476,7 @@ neo_b1 B1(
 	.CLK				(CLK_24M),	
 	.CLK_6MB			(CLK_6MB), 
 	.CLK_1HB			(CLK_1HB),
+	.nRESETP			(nRESETP),
 	.S1H1				(S1H1),
 	.A23I				(A23Z), 
 	.A22I				(A22Z),
@@ -1460,7 +1491,6 @@ neo_b1 B1(
 	.PCK2				(PCK2),
 	.CHBL				(CHBL), 
 	.BNKB				(nBNKB),
-	.pixel_mux_change (pixel_mux_change),
 	.GAD				(GAD), 
 	.GBD				(GBD),
 	.WE				(WE), 
@@ -1473,7 +1503,8 @@ neo_b1 B1(
 	.PA				(PAL_RAM_ADDR),
 	.EN_FIX			(FIX_EN),
 	.nRST				(nRESET),
-	.nRESET			(nRESET_WD)
+	.nRESET			(nRESET_WD),
+	.pixel_mux_change	(pixel_mux_change)
 );
 
 spram #(13,16) PALRAM(
@@ -1520,9 +1551,9 @@ wire [7:0] VGA_B_wire = B6[6] ? 8'd0 : {B6[5:0],  B6[4:3]};
 	reg [9:0] x_count, y_count;
 	reg HSync_reg;
 	reg VSync_reg;
-	reg CLK_VIDEO_90_1;
-	reg CLK_VIDEO_90_2;
-	reg CLK_VIDEO_90_3;
+//	reg CLK_VIDEO_90_1;
+//	reg CLK_VIDEO_90_2;
+//	reg CLK_VIDEO_90_3;
 	
 assign CLK_VIDEO = CLK_6MB;
 
@@ -1530,12 +1561,12 @@ assign CLK_VIDEO = CLK_6MB;
 // It is always better to get a PLL to do this, but the Neogeo sync is very importent so the constraints need to insure 
 // that this is keeped
 
-always @(posedge clk_sys) begin
-	CLK_VIDEO_90_1 <= CLK_VIDEO;
-	CLK_VIDEO_90_2 <= CLK_VIDEO_90_1;
-	CLK_VIDEO_90_3 <= CLK_VIDEO_90_2;
-	CLK_VIDEO_90 	<= CLK_VIDEO_90_3;
-end
+//always @(posedge clk_sys) begin
+//	CLK_VIDEO_90_1 <= CLK_VIDEO;
+//	CLK_VIDEO_90_2 <= CLK_VIDEO_90_1;
+//	CLK_VIDEO_90_3 <= CLK_VIDEO_90_2;
+//	CLK_VIDEO_90 	<= CLK_VIDEO_90_3;
+//end
 	
 reg [7:0]	VGA_R_reg;
 reg [7:0]	VGA_G_reg;

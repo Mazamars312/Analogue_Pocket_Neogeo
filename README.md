@@ -15,10 +15,18 @@ The current Darksoft paks will work with this with the following file names:
 * Copy the folders in the Github (dist) or the release .zip into the root of your SD card
 * Place your game files grouped by game into its own directory in the "\assets\ng\common" folder. Folder names are included
 
+## How to use differnt BIOS for the core 
+the really simple way if you want more BIOS to access is to go into the "/Cores/Mazamars312.NeoGeo/data.json" file. Then you have two options:
+* Change the filename to the firmware name you want to autoload 
+* Remove the filename line completely to then be able to select in the Pocket Menu.
+
 ## Controllers 
 
 * First and second player work with the Analogue Dock.
 * While in Pre-release the left trigger on the Pocket or on the first player controller is set to the system reset.
+* Currently it is setup for Xbox controller layout. However soon Analogue will allow you to change the layout in the input.json.
+ 
+
 
 ## Are Memories Supported?
 No at this moment, there are a lot of moving parts in the Neogeo, but once the compatibility is up to a good point then I can get this part done. 
@@ -64,8 +72,19 @@ I would like to ask that you support the people like [Furrtek](https://www.patre
 
 ## Credits
 * [Furrtek](https://www.patreon.com/furrtek/posts) - Please support Furrtek as much as you can as they have done a lot with the community and I enjoy seeing the de-cap processes they do.
+* [Jotego](https://www.patreon.com/topapate) - For his cycle accurate [JT12](https://github.com/jotego/jt12) and [JT49](https://github.com/jotego/jt49) implementation that is used in this core.
+* [Jorge Cwik] (fx68k@fxatari.com) The FX68K M68000 cycle accurate, fully synchronous CPU 
 * Please advise if there are others in this core as I do want to thank them and make sure they are supported on this.
 
 ## Special Thanks
 * Electron Ash - Mate thanks for the laughs and the advise on things
+* retrocaster and thehughhefner for advising me on more names of people for the credits how put work into this core
+* terminator2k2 - advising on how some of the keymapping are on some controllers (Im still a fan of the Xbox button layout tho LOL) 
 
+## Fun Facts
+Everyone keeps on calling me Australian because my Github was created when I first moved to Auzzie about 12 years ago. Im in fact from the New Zealand (Also know as Kiwis). So Im not going to let the Auzzies claim me like they try to with the band Crowded House and the cake known as Pavlova. Thats ours!!!! 
+You Auzzies can keep Russel Crow tho HAHAHA. 
+
+* Every time a Kiwi moves to Australia - The average IQ of both countries increases.
+* Fosters Beer is an Australian beer that is not made in Australia. Talk about marketing there!!!
+* After all the jokes we Kiwi's and Aussie say to each other, we will always come together for a beer and party with lots of laughs.

@@ -16,6 +16,8 @@
 
 *****************************************************************************************/
 
+// Version 0.6.0 Alpha
+// Added the read side to follow the Big and little enden coding.
 
 module ram_16_bit_state_controller (
 	input 						clk_74a,
@@ -118,7 +120,10 @@ always @(posedge clk_sys or negedge reset_l) begin
 					RAM_STATE 					<= wait_read_2;
 					word_rd 						<= 'b1;
 					bridge_completed 			<= 'b1;
-					bridge_rd_data[31:16]	<= word_q;
+					case (bigendin)
+						1'b1 		: bridge_rd_data[31:16]	<= word_q;
+						default 	: bridge_rd_data[31:16]	<= {word_q[7:0], word_q[15:8]};
+					endcase
 					bridge_processing			<= 'b0;
 				end
 			end
@@ -126,7 +131,10 @@ always @(posedge clk_sys or negedge reset_l) begin
 				if (~word_busy) begin
 					RAM_STATE 					<= idle;
 					bridge_completed 			<= 'b1;
-					bridge_rd_data[15: 0]	<= word_q;
+					case (bigendin)
+						1'b1 		: bridge_rd_data[15: 0]	<= word_q;
+						default 	: bridge_rd_data[15: 0]	<= {word_q[7:0], word_q[15:8]};
+					endcase
 					bridge_processing			<= 'b0;
 				end
 			end

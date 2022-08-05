@@ -15,7 +15,7 @@ module Video_change (
 		.instance_id             ("VMUX"),
 		.probe_width             (16),
 		.source_width            (32),
-		.source_initial_value    ("0"),
+		.source_initial_value    ("15"),
 		.enable_metastability    ("YES")
 	) in_system_sources_probes_0 (
 		.source     (source),     //    sources.source

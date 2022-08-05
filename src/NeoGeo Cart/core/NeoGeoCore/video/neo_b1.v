@@ -16,10 +16,28 @@
 
 // The funny 4-letter names correspond to those on the NEO-B1 die shot trace
 
+/********************************************************* 
+
+Mazamars312 changes: 
+
+version 0.5.0 Aplha
+
+Made the FIX_PAL_REG hold for on more 3mhz cycle to keep the SROM in the same pixel area
+
+Version 0.6.0 Alpha
+
+Made the ResetP signal come in to know if we are to keep to the High or Low of the CLK_1HB signal for the data muxing 
+This helps keep these chips in sync with the PLL
+
+
+***********************************************************/
+
+
 module neo_b1(
 	input CLK,					// For linebuffers RAM
 	input CLK_6MB,				// Pixel clock
 	input CLK_1HB,				// 3MHz 2px Even/odd pixel selection
+	input nRESETP,
 	
 	input [23:0] PBUS,		// Used to retrieve LB addresses loads, SPR palette # and FIX palette # from LSPC
 	input [7:0] FIXD,			// 2 fix pixels
@@ -76,7 +94,17 @@ module neo_b1(
 	
 	// Switch between odd/even fix pixel
 	// BEVU AWEQ...
-	assign FIX_COLOR = S1H1 ? FIXD_REG[7:4] : FIXD_REG[3:0];
+	
+	
+	// We want to see where the CLK_1HB from the PLL is. If the CLK_1HB on the rise of the resetp then 
+	// S1H1 is equal to nRESETP_state. this is the opersite if the CLK_1HB is on the fall on resetp
+	reg nRESETP_state;
+	
+	always @(posedge nRESETP)
+	nRESETP_state <= CLK_1HB;
+	
+	
+	assign FIX_COLOR = S1H1 == nRESETP_state ? FIXD_REG[7:4] : FIXD_REG[3:0];
 
 	// IDUF
 	// EN_FIX gate for Neo CD only
@@ -87,11 +115,16 @@ module neo_b1(
 	always @(posedge PCK1)
 		FIX_PAL_REG_PCK <= PBUS[19:16];
 		
+
+		
+	// Placed the FIX_PAL_REG_PCK in the delay for color correction on the SROM core in the CLK_1HB
 	always @(posedge CLK_1HB) FIX_PAL_REG <= FIX_PAL_REG_PCK;
 
 	assign SPR_PAL = PBUS[23:16];
 	
 	reg [3:0] GAD_MUX, GBD_MUX;
+	
+	// Test rig on the location of the bits during testing. Was able to figger out where each bit was for the CROM
 	
 	always @* begin
 		{GBD_MUX, GAD_MUX} <= {GBD[0], GBD[2], GBD[1], GBD[3], GAD[0], GAD[2], GAD[1], GAD[3]};
