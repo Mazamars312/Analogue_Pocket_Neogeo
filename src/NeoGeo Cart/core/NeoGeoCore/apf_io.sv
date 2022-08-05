@@ -265,6 +265,7 @@ io_pad_controller ipm (
 
 reg [3:0] controller_map_1, controller_map_2;
 
+always @(posedge clk_sys) begin
 	case (controller_map_1)												//		D					C				B					A
 		4'h1	  : joystick_0 <= {cont1_key[14], cont1_key[15], cont1_key[4], cont1_key[6], cont1_key[5], cont1_key[7], cont1_key[0], cont1_key[1], cont1_key[2], cont1_key[3]}; // Neogeo outlay
 		4'h2	  : joystick_0 <= {cont1_key[14], cont1_key[15], cont1_key[6], cont1_key[7], cont1_key[4], cont1_key[5], cont1_key[0], cont1_key[1], cont1_key[2], cont1_key[3]}; // Neogeo CD outlay
