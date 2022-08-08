@@ -179,11 +179,11 @@ always @(posedge clk_sys or negedge reset_l) begin
 				end
 			end
 			default : begin
-				if (bridge_addr_s[31:24] != 8'hf8 && (bridge_rd_r || bridge_wr_r)) begin
+				if (bridge_addr_s[31:24] != 8'hf8 && (bridge_rd_f || bridge_wr_f)) begin
 					RAM_STATE 					<= request;
 					word_addr 					<= bridge_addr_s[31:0]; // We have to make sure that we are doing a 32bit word process here to a 16bit word
 					word_data 					<= bridge_wr_data_s;
-				   requested_read 			<= bridge_rd_r;
+				   requested_read 			<= bridge_rd_f;
 					word_data_reg				<= bridge_wr_data_s;
 					bridge_processing			<= 'b1;
 				end

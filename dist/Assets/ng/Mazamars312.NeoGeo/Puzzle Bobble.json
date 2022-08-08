@@ -5,26 +5,27 @@
 				"id" : 777,
 				"select" : false
 			},
+			"data_path": "pbobblen",
 		    "data_slots": [
 					{
 		        "id": 3,
-						"filename": "mslug/srom"
+						"filename": "srom"
 		      },
 					{
 		        "id": 4,
-						"filename": "mslug/prom"
+						"filename": "prom"
 		      },
 					{
 		        "id": 5,
-						"filename": "mslug/crom0"
+						"filename": "crom0"
 		      },
 					{
 		        "id": 6,
-						"filename": "mslug/m1rom"
+						"filename": "m1rom"
 		      },
 					{
 		        "id": 7,
-						"filename": "mslug/vroma0"
+						"filename": "vroma0"
 		      }
 		    ],
 			"memory_writes": [
@@ -62,6 +63,22 @@
 				},
 				{
 						"address": "0xf0000020",
+						"data": "0x000000FF"
+				},
+				{
+						"address": "0xf0000024",
+						"data": "0x00000000"
+				},
+				{
+						"address": "0xf0000028",
+						"data": "0x00000000"
+				},
+				{
+						"address": "0xf000002C",
+						"data": "0x000000FF"
+				},
+				{
+						"address": "0xf0000030",
 						"data": "0x000000FF"
 				},
 				{

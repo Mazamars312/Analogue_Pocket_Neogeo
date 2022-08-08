@@ -18,11 +18,16 @@
 
 *****************************************************************************************/
 
+// Alpha 0.6.0
+// Added a FIFO to make the transferes more reliable between clocks. 74.5mhz to 133mhz
+
+
 module io_sdram (
 
 input	wire					controller_clk,
 input	wire					chip_clk,
 input	wire					clk_90,
+input wire					clk_74a,
 input	wire					reset_n,
 
 output	reg				phy_cke,
@@ -95,6 +100,7 @@ assign {phy_ras, phy_cas, phy_we} = cmd;
 	localparam		ST_BOOT_4			= 'd5;
 	localparam		ST_BOOT_5			= 'd6;
 	localparam		ST_IDLE				= 'd7;
+	localparam		ST_ADDRESS			= 'd8;
 	
 	localparam		ST_WRITE_0			= 'd20;
 	localparam		ST_WRITE_1			= 'd21;
@@ -135,21 +141,27 @@ assign {phy_ras, phy_cas, phy_we} = cmd;
 	
 	wire reset_n_s;
 synch_3 s1(reset_n, reset_n_s, controller_clk);	
-
-	reg word_rd_queue;
-	reg word_wr_queue;
-	wire word_rd_s, word_rd_r;
-	wire word_wr_s, word_wr_r;
-synch_3 s2(word_rd, word_rd_s, controller_clk, word_rd_r);	
-synch_3 s3(word_wr, word_wr_s, controller_clk, word_wr_r);	
-
 	wire	[25:0]	word_addr_s;
-synch_3 #(.WIDTH(26)) s4(word_addr, word_addr_s, controller_clk);
+	wire	[15:0]	word_data_s;
+	reg word_rd_queue;
 
-	wire	[31:0]	word_data_s;
-synch_3 #(.WIDTH(16)) s5(word_data, word_data_s, controller_clk);
-	
-	
+wire 			fifo_empty;
+reg			fifo_rdreq;
+reg [15:0] 	word_data_reg;
+
+// We are making a FIFO controller for this to make sure all data is sent correctly and in the correct clock domain. I love Fifos
+
+SDRAM_FIFO SDRAM_FIFO (
+	.aclr		(~reset_n),
+	.rdclk	(controller_clk),
+	.rdreq	(fifo_rdreq),
+	.q			({word_addr_s, word_data_s}),
+	.rdempty	(fifo_empty),
+	.wrclk	(clk_74a),
+	.wrreq	(word_wr),
+	.data		({word_addr, word_data})
+	);
+
 	wire [24:0] word_addr_neogeo = word_addr_s[25:1];
 	
 	reg burst_rd_queue;
@@ -157,10 +169,10 @@ synch_3 #(.WIDTH(16)) s5(word_data, word_data_s, controller_clk);
 	
 	reg				word_op;
 	reg				bram_op;
-	reg		[24:0]	addr;
-	wire	[9:0]	addr_col9_next_1 = addr[9:0] + 'h1;
+	reg	[24:0]	addr;
+	wire	[9:0]		addr_col9_next_1 = addr[9:0] + 'h1;
 	
-	reg		[10:0]	length;
+	reg	[10:0]	length;
 	wire	[10:0]	length_next = length - 'h1;
 	reg				enable_dq_read, enable_dq_read_1, enable_dq_read_2, enable_dq_read_3, enable_dq_read_4, enable_dq_read_5;
 	reg				enable_dq_read_toggle;
@@ -189,6 +201,8 @@ always @(posedge controller_clk) begin
 	phy_dq_oe <= 0;
 	cmd <= CMD_NOP;
 	dc <= dc + 1'b1;
+	
+	fifo_rdreq <= 1'b0;
 	
 	burst_data_valid <= 0;
 	burstwr_ready <= 0;
@@ -323,21 +337,11 @@ always @(posedge controller_clk) begin
 		if(issue_autorefresh) begin
 			state <= ST_REFRESH_0;
 		end else
-		if(word_rd_queue) begin
-			word_rd_queue <= 0;
+		if(~fifo_empty) begin
 			word_op <= 1;
-			addr <= {word_addr_neogeo[24:6], word_addr_neogeo[4], word_addr_neogeo[3:0], word_addr_neogeo[5]};
-			length <= 2;
-			state <= ST_READ_0;
 			word_busy <= 1;
-		end else 
-		if(word_wr_queue) begin
-			word_wr_queue <= 0;
-			word_op <= 1;
-			
-			addr <= {word_addr_neogeo[24:6], word_addr_neogeo[4], word_addr_neogeo[3:0], word_addr_neogeo[5]};
-			word_busy <= 1;
-			state <= ST_WRITE_0;
+			state <= ST_ADDRESS;
+			fifo_rdreq <= 1'b1;
 		end else 
 		if(burst_rd_queue) begin
 			burst_rd_queue <= 0;
@@ -354,6 +358,11 @@ always @(posedge controller_clk) begin
 	
 	end
 	
+	ST_ADDRESS : begin
+		addr <= {word_addr_neogeo[24:6], word_addr_neogeo[4], word_addr_neogeo[3:0], word_addr_neogeo[5]};
+		word_data_reg <= word_data_s;
+		state <= ST_WRITE_0;
+	end
 	
 	
 	ST_WRITE_0: begin
@@ -379,7 +388,7 @@ always @(posedge controller_clk) begin
 		phy_a <= addr[9:0]; // A0-A9 row address
 		cmd <= CMD_WRITE;
 		phy_dq_oe <= 1;
-		phy_dq_out <= word_data_s[15:0];//addr[15:0];//
+		phy_dq_out <= word_data_reg;//addr[15:0];//
 		state <= ST_WRITE_3;	
 		word_busy <= 1;
 	end
@@ -397,6 +406,7 @@ always @(posedge controller_clk) begin
 			state <= ST_IDLE;
 		end	
 		word_busy <= 0;
+		
 	end
 	
 	
@@ -544,12 +554,6 @@ always @(posedge controller_clk) begin
 	
 	
 	// catch incoming events if fsm is busy
-	if(word_rd_s) begin
-		word_rd_queue <= 1;
-	end
-	if(word_wr_s) begin
-		word_wr_queue <= 1;
-	end
 	if(burst_rd) begin
 		burst_rd_queue <= 1;
 	end

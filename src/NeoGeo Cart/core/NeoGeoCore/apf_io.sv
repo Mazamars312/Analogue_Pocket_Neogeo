@@ -422,9 +422,10 @@ initial begin
 end
 
 reg [31:0] bridge_addr_reg;
+reg [25:0] crom_addr_reg;
+reg [7:0] CROM_MASK_STAGE_1;
 
 // this writes the masking directly to the regs while watching the writes to the ram locations
-
 wire [18:0] test_19_bits = {bridge_addr_reg[18],
 									|bridge_addr_reg[18:17],
 									|bridge_addr_reg[18:16],
@@ -444,7 +445,7 @@ wire [18:0] test_19_bits = {bridge_addr_reg[18],
 									|bridge_addr_reg[18:2],
 									|bridge_addr_reg[18:1],
 									|bridge_addr_reg[18:0]};
-
+									
 wire [22:0] test_23_bits = {bridge_addr_reg[22],
 									|bridge_addr_reg[22:21],
 									|bridge_addr_reg[22:20],
@@ -468,7 +469,7 @@ wire [22:0] test_23_bits = {bridge_addr_reg[22],
 									|bridge_addr_reg[22:2],
 									|bridge_addr_reg[22:1],
 									|bridge_addr_reg[22:0]};
-									
+
 wire [23:0] test_24_bits = {bridge_addr_reg[23],
 									|bridge_addr_reg[23:22],
 									|bridge_addr_reg[23:21],
@@ -494,14 +495,28 @@ wire [23:0] test_24_bits = {bridge_addr_reg[23],
 									|bridge_addr_reg[23:1],
 									|bridge_addr_reg[23:0]};
 
+wire [7:0] test_crom_bits = { // this is a trick Im doing to check if anything is above a range. Compination LUT are a pain...
+									crom_addr_reg > 'h200_0000, // Greater then 32mbyte [22]
+									crom_addr_reg > 'h100_0000, // Greater then 16mbyte [21]
+									crom_addr_reg > 'h80_0000, // Greater then 8mbyte [20]
+									crom_addr_reg > 'h40_0000, // Greater then 4mbyte [19]
+									crom_addr_reg > 'h20_0000, // Greater then 2mbyte [18]
+									crom_addr_reg > 'h10_0000, // Greater then 1mbyte [17]
+									crom_addr_reg > 'h8_0000, // Greater then .5mbyte [16]
+									crom_addr_reg > 'h4_0000}; // Greater then .25mbyte [15]
+									
+
 									
 // APF write access over the 32bit address system and setup of the core
 always @(posedge clk_sys) begin
-	bridge_addr_reg <= bridge_addr;
+	bridge_addr_reg <= bridge_addr[25:0];
+	
+	CROM_MASK_STAGE_1 <= {test_crom_bits};
+	CROM_MASK 	<= {CROM_MASK_STAGE_1, {16{|CROM_MASK_STAGE_1}}};
 	if (bridge_wr) begin
 		casex(bridge_addr)
-			32'h40xxxxxx: begin
-				CROM_MASK 	<= test_24_bits;
+			32'h4xxxxxxx: begin
+				crom_addr_reg <= bridge_addr[25:0];
 			end
 			// these will monitor the masking side of the roms
 			32'b0001_0000_0xxx_xxxx_xxxx_xxxx_xxxx_xxxx: begin
@@ -510,12 +525,12 @@ always @(posedge clk_sys) begin
 			32'b0001_0000_1111_1xxx_xxxx_xxxx_xxxx_xxxx: begin
 				MROM_MASK 	<= test_19_bits;
 			end
-			32'b0010_0000_0xxx_xxxx_xxxx_xxxx_xxxx_xxxx: begin
-				V1ROM_MASK 	<= test_23_bits;
+			32'b0010_0000_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx: begin
+				V1ROM_MASK 	<= test_24_bits;
 			end
-			32'b0010_0000_1xxx_xxxx_xxxx_xxxx_xxxx_xxxx: begin
-				V2ROM_MASK 	<= test_23_bits;
-			end
+//			32'b0010_0000_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx: begin
+//				V2ROM_MASK 	<= test_23_bits;
+//			end
 			// here is the config sid of things of the core. Moved the RTC so that this can be configured by the APF directly
 			32'hF0000000 : controller_map_1		<= bridge_wr_data[3:0];
 			32'hF0000004 : controller_map_2		<= bridge_wr_data[3:0];
@@ -704,7 +719,7 @@ ram_32_bit_state_controller ram_SROM_controller(
 
 ram_16_bit_wait_state_controller ram_SDRAM_controller(
 	.clk_74a							(clk_74a),
-	.clk_sys							(clk_sys),
+	.clk_sys							(clk_74a),
 	.reset_l							(reset_l_main),
 	.bigendin						(bridge_endian_little),
 

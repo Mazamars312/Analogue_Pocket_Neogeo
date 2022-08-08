@@ -5,16 +5,16 @@
             {
                 "width": 300,
                 "height": 224,
-                "aspect_w": 75,
-                "aspect_h": 56,
+                "aspect_w": 4,
+                "aspect_h": 3,
                 "rotation": 0,
                 "mirror": 0
             },
 			{
                 "width": 300,
                 "height": 256,
-                "aspect_w": 5,
-                "aspect_h": 4,
+                "aspect_w": 4,
+                "aspect_h": 3,
                 "rotation": 0,
                 "mirror": 0
             }

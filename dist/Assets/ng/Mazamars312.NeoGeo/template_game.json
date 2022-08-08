@@ -5,6 +5,7 @@
 				"id" : 777,
 				"select" : false
 			},
+			"data_path": "GameFolder/",
 		    "data_slots": [
 					{
 		        "id": 3,
@@ -62,6 +63,22 @@
 				},
 				{
 						"address": "0xf0000020",
+						"data": "0x000000FF"
+				},
+				{
+						"address": "0xf0000024",
+						"data": "0x00000000"
+				},
+				{
+						"address": "0xf0000028",
+						"data": "0x00000000"
+				},
+				{
+						"address": "0xf000002C",
+						"data": "0x000000FF"
+				},
+				{
+						"address": "0xf0000030",
 						"data": "0x000000FF"
 				},
 				{

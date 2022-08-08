@@ -757,6 +757,7 @@ io_sdram io_sdram (
 	.controller_clk 	(sdram_int_clk),
 	.chip_clk			(sdram_int_clk),
 	.clk_90				(sdram_int_clk),
+	.clk_74a				(clk_74a),
 	.reset_n				(reset_l_main && locked_1), // We want this to run once the PLL is running
 	
 	.phy_cke				(SDRAM_CKE ),
@@ -1341,8 +1342,10 @@ reg [23:0] ADPCMA_ADDR_LATCH;	// 16MB
 reg [23:0] ADPCMB_ADDR_LATCH;	// 16MB
 reg [7:0] ADPCMA_ACK_COUNTER;
 reg [10:0] ADPCMB_ACK_COUNTER;
-reg ADPCMA_DATA_READY; // = ~((ADPCMA_READ_REQ ^ ADPCMA_READ_ACK) & (ADPCMA_ACK_COUNTER == 8'd0));
-reg ADPCMB_DATA_READY; // = ~((ADPCMB_READ_REQ ^ ADPCMB_READ_ACK) & (ADPCMB_ACK_COUNTER == 11'd0));
+reg 			ADPCMA_COUNTER_ZERO;
+reg 			ADPCMB_COUNTER_ZERO;
+wire ADPCMA_DATA_READY = ~((ADPCMA_READ_REQ ^ ADPCMA_READ_ACK) & ADPCMA_COUNTER_ZERO);
+wire ADPCMB_DATA_READY = ~((ADPCMB_READ_REQ ^ ADPCMB_READ_ACK) & ADPCMB_COUNTER_ZERO);
 reg [1:0] ADPCMA_OE_SR;
 reg [1:0] ADPCMB_OE_SR;
 always @(posedge clk_sys or negedge nRESET) begin
@@ -1353,34 +1356,37 @@ always @(posedge clk_sys or negedge nRESET) begin
 		ADPCMB_READ_REQ <= 'b0;
 		ADPCMA_ADDR_LATCH <= 'b0;
 		ADPCMB_ADDR_LATCH <= 'b0;
-		ADPCMA_ACK_COUNTER <= 8'd128; 
-		ADPCMB_ACK_COUNTER <= 11'd1580; 
-		ADPCMA_DATA_READY	<= 1'b1;
-		ADPCMB_DATA_READY	<= 1'b1;
+		ADPCMA_ACK_COUNTER <= 8'd127; 
+		ADPCMB_ACK_COUNTER <= 11'd1579; 
+		ADPCMA_COUNTER_ZERO	<= 'd1;
+		ADPCMB_COUNTER_ZERO	<= 'd1;
 	end
 	else begin
 		ADPCMA_OE_SR <= {ADPCMA_OE_SR[0], nSDROE};
 		ADPCMA_ACK_COUNTER <= ADPCMA_ACK_COUNTER == 8'd0 ? 8'd0 : ADPCMA_ACK_COUNTER - 8'd1;
 		ADPCMB_ACK_COUNTER <= ADPCMB_ACK_COUNTER == 11'd0 ? 11'd0 : ADPCMB_ACK_COUNTER - 11'd1;
-		
-		ADPCMA_DATA_READY = ~((ADPCMA_READ_REQ ^ ADPCMA_READ_ACK) & (ADPCMA_ACK_COUNTER == 8'd0));
-		ADPCMB_DATA_READY = ~((ADPCMB_READ_REQ ^ ADPCMB_READ_ACK) & (ADPCMB_ACK_COUNTER == 11'd0));
+		//
+		ADPCMA_COUNTER_ZERO = (ADPCMA_ACK_COUNTER == 8'd0);
+		ADPCMB_COUNTER_ZERO = (ADPCMB_ACK_COUNTER == 11'd0);
 		
 		// Trigger ADPCM A data read on nSDROE falling edge
 		if (ADPCMA_OE_SR == 2'b10) begin
 			ADPCMA_READ_REQ <= ~ADPCMA_READ_REQ;
 			ADPCMA_ADDR_LATCH <= {ADPCMA_BANK[3:0], ADPCMA_ADDR} & V1ROM_MASK[23:0];
 			// Data is needed on one previous 8MHz clk before next 666KHz clock->(96MHz/666KHz = 144)-12-4=128
-			ADPCMA_ACK_COUNTER <= 8'd128;
+			ADPCMA_ACK_COUNTER <= 8'd127;
+//			ADPCMA_DATA_READY	<= 1'b0;
 		end
 		
 		// Trigger ADPCM A data read on nSDPOE falling edge
 		ADPCMB_OE_SR <= {ADPCMB_OE_SR[0], nSDPOE};
 		if (ADPCMB_OE_SR == 2'b10) begin
 			ADPCMB_READ_REQ <= ~ADPCMB_READ_REQ;
-			ADPCMB_ADDR_LATCH <= use_pcm ? {1'b1, ADPCMB_ADDR[22:0] & V1ROM_MASK[22:0]} : ADPCMB_ADDR[23:0] & V2ROM_MASK[23:0];
+//			ADPCMB_ADDR_LATCH <= use_pcm ? {1'b1, ADPCMB_ADDR[22:0] & V1ROM_MASK[22:0]} : ADPCMB_ADDR[23:0] & V1ROM_MASK[23:0];
+			ADPCMB_ADDR_LATCH <= ADPCMB_ADDR[23:0] & V1ROM_MASK[23:0];
 			// Data is needed on one previous 8MHz clk before next 55KHz clock->(96MHz/55KHz = 1728)-144-4=1580
-			ADPCMB_ACK_COUNTER <= 11'd1580;
+			ADPCMB_ACK_COUNTER <= 11'd1579;
+//			ADPCMB_DATA_READY	<= 1'b0;
 		end
 	end
 end

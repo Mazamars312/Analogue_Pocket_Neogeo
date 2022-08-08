@@ -18,6 +18,7 @@
 
 // Version 0.6.0 Alpha
 // Added the read side to follow the Big and little enden coding.
+// Made the core read on the fall of the read and writes.
 
 
 module ram_32_bit_state_controller (
@@ -97,6 +98,7 @@ always @(posedge clk_sys or negedge reset_l) begin
 				word_rd 							<= 'b0;
 				bridge_processing		<= 'b1;
 				if (~word_busy) begin // we need to wait for access
+					word_addr 					<= bridge_addr_s[25:0]; // We have to make sure that we are doing a 32bit word process here
 					if (requested_read) 	begin
 						RAM_STATE 				<= wait_read;
 						word_rd 					<= 'b1;
@@ -105,6 +107,8 @@ always @(posedge clk_sys or negedge reset_l) begin
 						RAM_STATE 				<= idle;
 						word_wr 					<= 'b1;
 						bridge_processing		<= 'b0;
+						word_data 					<= bigendin ? bridge_wr_data_s : 
+														{bridge_wr_data_s[23:16], bridge_wr_data_s[31:24], bridge_wr_data_s[7:0], bridge_wr_data_s[15:8]};
 					end
 				end
 			end
@@ -120,12 +124,9 @@ always @(posedge clk_sys or negedge reset_l) begin
 				end
 			end
 			default : begin
-				if (bridge_rd_r || bridge_wr_r) begin
+				if (bridge_rd_f || bridge_wr_f) begin
 					RAM_STATE 					<= request;
-					word_addr 					<= bridge_addr_s[25:0]; // We have to make sure that we are doing a 32bit word process here
-					word_data 					<= bigendin ? bridge_wr_data_s : 
-														{bridge_wr_data_s[23:16], bridge_wr_data_s[31:24], bridge_wr_data_s[7:0], bridge_wr_data_s[15:8]};
-				   requested_read 			<= bridge_rd_r;
+				   requested_read 			<= bridge_rd_f;
 					bridge_processing			<= 'b1;
 				end
 				else begin
