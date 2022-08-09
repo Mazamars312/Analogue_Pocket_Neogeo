@@ -1,7 +1,124 @@
 {
     "interact": {
         "magic": "APF_VER_1",
-        "variables": [],
+        "variables": [
+			{
+                "name": "Screen X Position",
+                "id": 1,
+                "type": "slider_u32",
+                "enabled": true,
+				"writepersist": true,
+                "address": "0xF0000034",
+                "mask": "0x00000000",
+                "graphical": {
+                    "default": "0",
+                    "signed": true,
+                    "min": -40,
+                    "max": 40,
+                    "adjust_small": 1,
+                    "adjust_large": 1
+                }
+            },
+			{
+                "name": "Screen Y Position",
+                "id": 2,
+                "type": "slider_u32",
+                "enabled": true,
+				"writepersist": true,
+                "address": "0xF0000038",
+                "mask": "0xFFFFFF00",
+                "graphical": {
+                    "default": "0",
+                    "signed": true,
+                    "min": -16,
+                    "max": 16,
+                    "adjust_small": 1,
+                    "adjust_large": 3
+                }
+            },
+            {
+                "name": "Player Type 1",
+                "id": 3,
+                "type": "slider_u32",
+                "enabled": true,
+				"writepersist": true,
+                "address": "0xF0000000",
+                "mask": "0xFFFFFFFC",
+                "graphical": {
+                    "default": "0",
+                    "signed": true,
+                    "min": 0,
+                    "max": 2,
+                    "adjust_small": 1,
+                    "adjust_large": 1
+                }
+            },
+			{
+                "name": "Player Type 2",
+                "id": 4,
+                "type": "slider_u32",
+                "enabled": true,
+				"writepersist": true,
+                "address": "0xF0000004",
+                "mask": "0xFFFFFFFC",
+                "graphical": {
+                    "default": "0",
+                    "signed": false,
+                    "min": 0,
+                    "max": 2,
+                    "adjust_small": 1,
+                    "adjust_large": 1
+                }
+            },
+			{
+                "name": "System Type MVS",
+                "id": 5,
+                "type": "radio",
+                "enabled": true,
+				"group": 100,
+				"writepersist": true,
+                "address": "0xF000000c",
+				"value": "0x1",
+                "mask": "0xFFFFFFFE"
+                
+            },
+			{
+                "name": "System Type AES",
+                "id": 6,
+                "type": "radio",
+                "enabled": true,
+				"group": 100,
+				"writepersist": true,
+                "address": "0xF000000c",
+				"value": "0x0",
+                "mask": "0xFFFFFFFE"
+                
+            },
+			{
+                "name": "PAL Output",
+                "id": 7,
+                "type": "radio",
+                "enabled": true,
+				"group": 101,
+				"writepersist": true,
+                "address": "0xF0000018",
+				"value": "0x1",
+                "mask": "0xFFFFFFFE"
+                
+            },
+			{
+                "name": "NTSC Output",
+                "id": 8,
+                "type": "radio",
+                "enabled": true,
+				"group": 101,
+				"writepersist": true,
+                "address": "0xF0000018",
+				"value": "0x0",
+                "mask": "0xFFFFFFFE"
+                
+            }
+		],
         "messages": []
     }
 }

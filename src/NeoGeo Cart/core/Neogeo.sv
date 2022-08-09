@@ -37,7 +37,7 @@
 // Version 0.6.0 Alpha
 //
 //	Created a PLL with most of the major Clocks to sync the video (LSPC2 and the B2 cores) - The compile times are higher as now quartus knows about these clocks
-// 
+// Made the masking better with the APF framework so both V and C roms work correctly
 //
 // ToDo:
 // Create a work ram clear system for boot. This will help in the bios reload issue (Do this in the 74mhz clock)
@@ -265,19 +265,19 @@ reg         cfg_write;
 reg   [5:0] cfg_address;
 reg  [31:0] cfg_data;
 
-//pll_cfg pll_cfg
-//(
-//	.mgmt_clk(clk_74a),
-//	.mgmt_reset(0),
-//	.mgmt_waitrequest(cfg_waitrequest),
-//	.mgmt_read(0),
-//	.mgmt_readdata(),
-//	.mgmt_write(cfg_write),
-//	.mgmt_address(cfg_address),
-//	.mgmt_writedata(cfg_data),
-//	.reconfig_to_pll(reconfig_to_pll),
-//	.reconfig_from_pll(reconfig_from_pll)
-//);
+pll_cfg pll_cfg
+(
+	.mgmt_clk(clk_74a),
+	.mgmt_reset(0),
+	.mgmt_waitrequest(cfg_waitrequest),
+	.mgmt_read(0),
+	.mgmt_readdata(),
+	.mgmt_write(cfg_write),
+	.mgmt_address(cfg_address),
+	.mgmt_writedata(cfg_data),
+	.reconfig_to_pll(reconfig_to_pll),
+	.reconfig_from_pll(reconfig_from_pll)
+);
 
 always @(posedge clk_74a) begin
 	reg sys_mvs = 0, sys_mvs2 = 0;
@@ -326,10 +326,6 @@ always @(posedge CLK_24M) begin
 		end
 end
 
-reg [1:0] counter_p = 0;
-always @(posedge clk_sys) counter_p <= counter_p + 1'd1;
-
-
 
 //////////////////   Pocket I/O Controller  ///////////////////
 
@@ -370,10 +366,12 @@ wire SYSTEM_CDx = 1'b0;
 wire [23:0] P2ROM_MASK; 
 wire [25:0] CROM_MASK;
 wire [23:0] V1ROM_MASK; 
-wire [23:0] V2ROM_MASK; 
 wire [18:0] MROM_MASK;
 
 wire 			start_system;
+
+wire [7:0]	screen_x_pos;
+wire [7:0]	screen_y_pos;
 
 
 // was used for testing
@@ -429,7 +427,6 @@ apf_io apf_io
 	.P2ROM_MASK					(P2ROM_MASK), 
 	.CROM_MASK					(CROM_MASK), 
 	.V1ROM_MASK					(V1ROM_MASK), 
-	.V2ROM_MASK					(V2ROM_MASK), 
 	.MROM_MASK					(MROM_MASK),
 	
 	.sdram_word_rd				(sdram_word_rd),
@@ -468,7 +465,10 @@ apf_io apf_io
 	.neogeo_memcard_addr		(neogeo_memcard_addr),
 	.neogeo_memcard_wr		(neogeo_memcard_wr),
 	.neogeo_memcard_dout		(neogeo_memcard_dout),
-	.neogeo_memcard_din		(neogeo_memcard_din)
+	.neogeo_memcard_din		(neogeo_memcard_din),
+	
+	.screen_x_pos				(screen_x_pos),
+	.screen_y_pos				(screen_y_pos)
 
 );
 
@@ -1373,7 +1373,8 @@ always @(posedge clk_sys or negedge nRESET) begin
 		if (ADPCMA_OE_SR == 2'b10) begin
 			ADPCMA_READ_REQ <= ~ADPCMA_READ_REQ;
 			ADPCMA_ADDR_LATCH <= {ADPCMA_BANK[3:0], ADPCMA_ADDR} & V1ROM_MASK[23:0];
-			// Data is needed on one previous 8MHz clk before next 666KHz clock->(96MHz/666KHz = 144)-12-4=128
+// Data is needed on one previous 8MHz clk before next 666KHz clock->(96MHz/666KHz = 144)-12-4=128
+// We do not require these for the Darksoft roms once we get the chip32 this will move things correcly
 			ADPCMA_ACK_COUNTER <= 8'd127;
 //			ADPCMA_DATA_READY	<= 1'b0;
 		end
@@ -1383,6 +1384,7 @@ always @(posedge clk_sys or negedge nRESET) begin
 		if (ADPCMB_OE_SR == 2'b10) begin
 			ADPCMB_READ_REQ <= ~ADPCMB_READ_REQ;
 //			ADPCMB_ADDR_LATCH <= use_pcm ? {1'b1, ADPCMB_ADDR[22:0] & V1ROM_MASK[22:0]} : ADPCMB_ADDR[23:0] & V1ROM_MASK[23:0];
+// We do not require these for the Darksoft roms once we get the chip32 this will move things correcly
 			ADPCMB_ADDR_LATCH <= ADPCMB_ADDR[23:0] & V1ROM_MASK[23:0];
 			// Data is needed on one previous 8MHz clk before next 55KHz clock->(96MHz/55KHz = 1728)-144-4=1580
 			ADPCMB_ACK_COUNTER <= 11'd1579;
@@ -1552,7 +1554,8 @@ wire [7:0] VGA_B_wire = B6[6] ? 8'd0 : {B6[5:0],  B6[4:3]};
 	localparam		VID_H_ACTIVE = 'd300;
    localparam		VID_V_ACTIVE_NTSC = 'd224;
    localparam		VID_V_ACTIVE_PAL = 'd224;
-	localparam		VID_V_BPORCH = 'd16;
+	localparam		VID_V_BPORCH_NTSC = 'd16;
+	localparam		VID_V_BPORCH_PAL = 'd20;
 	
 	reg [9:0] x_count, y_count;
 	reg HSync_reg;
@@ -1582,7 +1585,7 @@ always @(posedge CLK_6MB) begin
 	VGA_DE <= 0;
 	VGA_R <= 8'h0;
 	VGA_G <= 8'h0;
-	VGA_B <= 8'h0;//video_mode ? 8'h1 : 8'h0; // This is where we change the scaler between both pal to ntsc Will work on this shortly
+	VGA_B <= video_mode ? 8'h1 : 8'h0; // This is where we change the scaler between both pal to ntsc Will work on this shortly
 	HSync_reg <= HSync;
 	VSync_reg <= VSync;
 	VGA_HS <= HSync && ~HSync_reg;
@@ -1599,9 +1602,9 @@ always @(posedge CLK_6MB) begin
 	VGA_R_reg <= ~SHADOW ? VGA_R_wire : {1'b0, VGA_R_wire[7:1]};
 	VGA_G_reg <= ~SHADOW ? VGA_G_wire : {1'b0, VGA_G_wire[7:1]};
 	VGA_B_reg <= ~SHADOW ? VGA_B_wire : {1'b0, VGA_B_wire[7:1]};
-
-		if(x_count >= VID_H_BPORCH && x_count < VID_H_ACTIVE+VID_H_BPORCH) begin
-			if((y_count >= VID_V_BPORCH) && (y_count < (VID_V_ACTIVE_NTSC+VID_V_BPORCH))) begin
+	if (~video_mode) begin
+		if(x_count >= VID_H_BPORCH - screen_x_pos && x_count < VID_H_ACTIVE+VID_H_BPORCH - screen_x_pos) begin
+			if((y_count >= VID_V_BPORCH_NTSC - screen_y_pos) && (y_count < (VID_V_ACTIVE_NTSC+VID_V_BPORCH_NTSC - screen_y_pos))) begin
 				// data enable. this is the active region of the line
 				VGA_R <= VGA_R_reg;
 				VGA_G <= VGA_G_reg;
@@ -1609,12 +1612,31 @@ always @(posedge CLK_6MB) begin
 			end 
 		end
 
-		if(x_count >= VID_H_BPORCH && x_count < VID_H_ACTIVE+VID_H_BPORCH) begin
-			if((y_count >= VID_V_BPORCH) && (y_count < (VID_V_ACTIVE_NTSC+VID_V_BPORCH))) begin
+		if(x_count >= VID_H_BPORCH - screen_x_pos && x_count < VID_H_ACTIVE+VID_H_BPORCH - screen_x_pos) begin
+			if((y_count >= VID_V_BPORCH_NTSC - screen_y_pos) && (y_count < (VID_V_ACTIVE_NTSC+VID_V_BPORCH_NTSC - screen_y_pos))) begin
 				// data enable. this is the active region of the line
 				VGA_DE <= 1'b1;
 			end 
 		end
+	end
+	else begin
+		if(x_count >= VID_H_BPORCH - screen_x_pos && x_count < VID_H_ACTIVE+VID_H_BPORCH - screen_x_pos) begin
+			if((y_count >= VID_V_BPORCH_PAL - screen_y_pos) && (y_count < (VID_V_ACTIVE_NTSC+VID_V_BPORCH_PAL - screen_y_pos))) begin
+				// data enable. this is the active region of the line
+				VGA_R <= VGA_R_reg;
+				VGA_G <= VGA_G_reg;
+				VGA_B <= VGA_B_reg;
+			end 
+		end
+
+		if(x_count >= VID_H_BPORCH - screen_x_pos && x_count < VID_H_ACTIVE+VID_H_BPORCH - screen_x_pos) begin
+			if((y_count >= VID_V_BPORCH_PAL - screen_y_pos) && (y_count < (VID_V_ACTIVE_NTSC+VID_V_BPORCH_PAL - screen_y_pos))) begin
+				// data enable. this is the active region of the line
+				VGA_DE <= 1'b1;
+			end 
+		end
+	
+	end
 	
 end
 

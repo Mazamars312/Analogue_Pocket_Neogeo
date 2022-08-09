@@ -71,7 +71,7 @@
 				},
 				{
 						"address": "0xf0000028",
-						"data": "0x00000000"
+						"data": "0xFFFFFFFF"
 				},
 				{
 						"address": "0xf000002C",

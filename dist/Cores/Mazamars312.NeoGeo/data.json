@@ -12,6 +12,19 @@
 					]
 				},
 				{
+					"name": "Memory Card",
+					"id": "0x101",
+					"required": false,
+					"parameters": 36,
+					"nonvolatile": true,
+					"extensions": [
+						"sav"
+					],
+					"size_exact": null,
+					"size_maximum": 16384,
+					"address": "0x60000000"
+				},
+				{
 					"name": "BIOS",
 					"id": 1,
 					"required": true,
@@ -111,20 +124,8 @@
 					"size_exact": 0,
 					"size_maximum": 128,
 					"address": "0xf0000000"
-				},
-				{
-					"name": "Memory Card",
-					"id": "0x101",
-					"required": false,
-					"parameters": 36,
-					"nonvolatile": true,
-					"extensions": [
-						"mem"
-					],
-					"size_exact": null,
-					"size_maximum": 16384,
-					"address": "0x60000000"
 				}
+				
 			]
     }
 }

@@ -171,7 +171,6 @@ module apf_io
 	output reg [23:0] P2ROM_MASK, 
 	output reg [25:0] CROM_MASK, 
 	output reg [23:0] V1ROM_MASK, 
-	output reg [23:0] V2ROM_MASK, 
 	output reg [18:0] MROM_MASK,
 	
 
@@ -181,7 +180,10 @@ module apf_io
 	output [11:0]		neogeo_memcard_addr,
 	output 				neogeo_memcard_wr,
 	output [15:0]		neogeo_memcard_dout,
-	input  [15:0]		neogeo_memcard_din
+	input  [15:0]		neogeo_memcard_din,
+	
+	output reg [7:0] 	screen_x_pos,
+	output reg [7:0] 	screen_y_pos
 );
 
 wire reset_n;
@@ -416,7 +418,6 @@ initial begin
 	P2ROM_MASK		<= 32'h00000000;
 	CROM_MASK		<= 32'h00000000;
 	V1ROM_MASK		<= 32'h00000000;
-	V2ROM_MASK		<= 32'h00000000;
 	MROM_MASK		<= 32'h00000000;
 	pixel_mux_change <= 16'h0000;
 end
@@ -510,7 +511,6 @@ wire [7:0] test_crom_bits = { // this is a trick Im doing to check if anything i
 // APF write access over the 32bit address system and setup of the core
 always @(posedge clk_sys) begin
 	bridge_addr_reg <= bridge_addr[25:0];
-	
 	CROM_MASK_STAGE_1 <= {test_crom_bits};
 	CROM_MASK 	<= {CROM_MASK_STAGE_1, {16{|CROM_MASK_STAGE_1}}};
 	if (bridge_wr) begin
@@ -545,6 +545,8 @@ always @(posedge clk_sys) begin
 			32'hF0000028 : use_pcm					<= bridge_wr_data;
 			32'hF000002C : cart_chip				<= bridge_wr_data;
 			32'hF0000030 : cmc_chip					<= bridge_wr_data;
+			32'hF0000034 : screen_x_pos			<= bridge_wr_data;
+			32'hF0000038 : screen_y_pos			<= bridge_wr_data;
 			32'hF1000000 : RTC[63:32]				<= bridge_wr_data;
 			32'hF1000004 : RTC[31: 0]				<= bridge_wr_data;
 
@@ -555,6 +557,8 @@ always @(posedge clk_sys) begin
 end
 
 // APF Read loactions will add a delay for the cores when reading data.	
+
+reg [31:0] Neogeo_status;
 
 always @(*) begin
 	
@@ -580,6 +584,9 @@ always @(*) begin
 	32'h6xxxxxxx: begin
 		bridge_rd_data <= neogeo_memorycard_controller_rd_data;
 	end
+	32'hF0xxxxxx: begin
+		bridge_rd_data 	<= Neogeo_status;
+	end
 	32'hF8xxxxxx: begin
 		bridge_rd_data 	<= cmd_bridge_rd_data;
 	end
@@ -588,6 +595,32 @@ always @(*) begin
 	end
 	endcase
 end
+
+always @(posedge clk_74a) begin
+	if (bridge_rd) begin
+		case (bridge_addr[15:0])
+			16'h0000 : Neogeo_status <= controller_map_1;
+			16'h0004 : Neogeo_status <= controller_map_2;
+			16'h0008 : Neogeo_status <= DIPSW;
+			16'h000c : Neogeo_status <= SYSTEM_TYPE;
+			16'h0010 : Neogeo_status <= memory_card_enable;
+			16'h0014 : Neogeo_status <= use_mouse_reg;
+			16'h0018 : Neogeo_status <= video_mode;
+			16'h001c : Neogeo_status <= ch_enable;
+			16'h0020 : Neogeo_status <= snd_enable;
+			16'h0024 : Neogeo_status <= cart_pchip;
+			16'h0028 : Neogeo_status <= use_pcm;
+			16'h002C : Neogeo_status <= cart_chip;
+			16'h0030 : Neogeo_status <= cmc_chip;
+			16'h0034 : Neogeo_status <= {{24{screen_x_pos[7]}}, screen_x_pos};
+			16'h0038 : Neogeo_status <= {{24{screen_y_pos[7]}}, screen_y_pos};
+			16'h0000 : Neogeo_status <= RTC[63:32];
+			16'h0004 : Neogeo_status <= RTC[31: 0];
+			default  : Neogeo_status <= controller_map_1;
+		endcase
+	end
+end
+
 
 /*********************************************************
 
