@@ -33,6 +33,7 @@ Known working games:
 * King of fighters 1994, 1995
 * Viewpoint
 * Montest
+* Neo Turf Masters
 * NeoDrift
 * Overthetop
 * Pulstar
