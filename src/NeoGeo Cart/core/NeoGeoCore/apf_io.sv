@@ -172,6 +172,7 @@ module apf_io
 	output reg [25:0] CROM_MASK, 
 	output reg [23:0] V1ROM_MASK, 
 	output reg [18:0] MROM_MASK,
+	output reg [23:0] V2_offset,
 	
 
 	// Seconds since 1970-01-01 00:00:00
@@ -414,13 +415,7 @@ core_bridge_cmd icb (
 	
 **********************************************************/
 
-initial begin
-	P2ROM_MASK		<= 32'h00000000;
-	CROM_MASK		<= 32'h00000000;
-	V1ROM_MASK		<= 32'h00000000;
-	MROM_MASK		<= 32'h00000000;
-	pixel_mux_change <= 16'h0000;
-end
+
 
 reg [31:0] bridge_addr_reg;
 reg [25:0] crom_addr_reg;
@@ -506,10 +501,34 @@ wire [7:0] test_crom_bits = { // this is a trick Im doing to check if anything i
 									crom_addr_reg > 'h8_0000, // Greater then .5mbyte [16]
 									crom_addr_reg > 'h4_0000}; // Greater then .25mbyte [15]
 									
-
-									
+reg 			cart_pchip_main;
+reg [2:0] 	cart_pchip_sub;							
 // APF write access over the 32bit address system and setup of the core
-always @(posedge clk_sys) begin
+always @(posedge clk_sys or negedge reset_l_main) begin
+	if (~reset_l_main) begin
+		P2ROM_MASK				<= 32'h00000000;
+		CROM_MASK				<= 32'h00000000;
+		V1ROM_MASK				<= 32'h00000000;
+		MROM_MASK				<= 32'h00000000;
+		controller_map_1	 	<= 32'h00000000;
+		controller_map_2	 	<= 32'h00000000;
+		DIPSW 				 	<= 32'h000000FF;
+		SYSTEM_TYPE 		 	<= 32'h00000001;
+		memory_card_enable 	<= 32'h00000010;
+		use_mouse_reg 		 	<= 32'h00000000;
+		video_mode 			 	<= 32'h00000000;
+		ch_enable			 	<= 32'h000000ff;
+		snd_enable			 	<= 32'h000000ff;
+		cart_pchip_main	 	<= 32'h00000000;
+		use_pcm				 	<= 32'h00000000;
+		cart_pchip_sub		 	<= 32'h00000000;
+		cmc_chip				 	<= 32'h00000000;
+		screen_x_pos		 	<= 32'h00000000;
+		screen_y_pos		 	<= 32'h00000000;
+		V2_offset			 	<= 32'h00000000;
+		cart_chip				<= 32'h00000000;
+	end
+	else begin
 	bridge_addr_reg <= bridge_addr[25:0];
 	CROM_MASK_STAGE_1 <= {test_crom_bits};
 	CROM_MASK 	<= {CROM_MASK_STAGE_1, {16{|CROM_MASK_STAGE_1}}};
@@ -520,7 +539,7 @@ always @(posedge clk_sys) begin
 			end
 			// these will monitor the masking side of the roms
 			32'b0001_0000_0xxx_xxxx_xxxx_xxxx_xxxx_xxxx: begin
-				P2ROM_MASK 	<= {1'b0,test_23_bits[22:1]};
+				P2ROM_MASK 	<= test_23_bits;
 			end
 			32'b0001_0000_1111_1xxx_xxxx_xxxx_xxxx_xxxx: begin
 				MROM_MASK 	<= test_19_bits;
@@ -541,12 +560,14 @@ always @(posedge clk_sys) begin
 			32'hF0000018 : video_mode 				<= bridge_wr_data;
 			32'hF000001c : ch_enable				<= bridge_wr_data;
 			32'hF0000020 : snd_enable				<= bridge_wr_data;
-			32'hF0000024 : cart_pchip				<= bridge_wr_data;
+			32'hF0000024 : cart_pchip_main		<= bridge_wr_data;
 			32'hF0000028 : use_pcm					<= bridge_wr_data;
-			32'hF000002C : cart_chip				<= bridge_wr_data;
+			32'hF000002C : cart_pchip_sub			<= bridge_wr_data;
 			32'hF0000030 : cmc_chip					<= bridge_wr_data;
 			32'hF0000034 : screen_x_pos			<= bridge_wr_data;
 			32'hF0000038 : screen_y_pos			<= bridge_wr_data;
+			32'hF000003C : V2_offset				<= bridge_wr_data;
+			32'hF0000040 : cart_chip				<= bridge_wr_data;
 			32'hF1000000 : RTC[63:32]				<= bridge_wr_data;
 			32'hF1000004 : RTC[31: 0]				<= bridge_wr_data;
 
@@ -554,9 +575,28 @@ always @(posedge clk_sys) begin
 	
 	end
 	start_system <= (&{dataslot_allcomplete, reset_n, ~cont1_key[8]}); // I just made a reset system.... with a button.. Should I debounce this......... 
+
+	end
+end
+// APF Read loactions will add a delay for the cores when reading data.	
+
+always @(posedge clk_sys or negedge reset_l_main) begin
+	if (~reset_l_main) begin
+		cart_pchip <= 1'b0;
+	end
+	else begin
+		casez ({cart_pchip_main, cart_pchip_sub})
+			4'b1zzz	: cart_pchip <= 3'd2;
+			4'b0001	: cart_pchip <= 3'd3;
+			4'b0010	: cart_pchip <= 3'd4;
+			4'b0011	: cart_pchip <= 3'd5;
+			4'b0100	: cart_pchip <= 3'd6;
+			4'b0101	: cart_pchip <= 3'd7;
+			default  : cart_pchip <= 3'd0;
+		endcase
+	end
 end
 
-// APF Read loactions will add a delay for the cores when reading data.	
 
 reg [31:0] Neogeo_status;
 
@@ -608,12 +648,14 @@ always @(posedge clk_74a) begin
 			16'h0018 : Neogeo_status <= video_mode;
 			16'h001c : Neogeo_status <= ch_enable;
 			16'h0020 : Neogeo_status <= snd_enable;
-			16'h0024 : Neogeo_status <= cart_pchip;
+			16'h0024 : Neogeo_status <= cart_pchip_main;
 			16'h0028 : Neogeo_status <= use_pcm;
-			16'h002C : Neogeo_status <= cart_chip;
+			16'h002C : Neogeo_status <= cart_pchip_sub;
 			16'h0030 : Neogeo_status <= cmc_chip;
 			16'h0034 : Neogeo_status <= {{24{screen_x_pos[7]}}, screen_x_pos};
 			16'h0038 : Neogeo_status <= {{24{screen_y_pos[7]}}, screen_y_pos};
+			16'h003C : Neogeo_status <= V2_offset;
+			16'h0040 : Neogeo_status <= cart_chip;
 			16'h0000 : Neogeo_status <= RTC[63:32];
 			16'h0004 : Neogeo_status <= RTC[31: 0];
 			default  : Neogeo_status <= controller_map_1;

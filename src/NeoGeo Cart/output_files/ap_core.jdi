@@ -101,7 +101,7 @@
   <sld_infos>
     <sld_info hpath="core_top:ic|emu:Neogeo|Video_change:Video_change" name="Video_change">
       <assignment_values>
-        <assignment_value text="QSYS_NAME Video_change HAS_SOPCINFO 1 GENERATION_ID 1660022893"/>
+        <assignment_value text="QSYS_NAME Video_change HAS_SOPCINFO 1 GENERATION_ID 1660174688"/>
       </assignment_values>
       <parameters/>
     </sld_info>

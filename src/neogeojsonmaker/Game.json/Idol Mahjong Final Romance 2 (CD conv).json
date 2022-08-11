@@ -1,0 +1,35 @@
+{
+    "instance": {
+        "magic": "APF_VER_1",
+			"variant_select" : {
+				"id" : 777,
+				"select" : false
+			},
+			"data_path": "froman2b",
+		    "data_slots": [
+					{
+		        "id": 3,
+						"filename": "srom"
+		      },
+					{
+		        "id": 4,
+						"filename": "prom"
+		      },
+					{
+		        "id": 5,
+						"filename": "crom0"
+		      },
+					{
+		        "id": 6,
+						"filename": "m1rom"
+		      },
+					{
+		        "id": 7,
+						"filename": "vroma0"
+		      }
+		    ],
+			"memory_writes": [
+				
+			]
+    }
+}

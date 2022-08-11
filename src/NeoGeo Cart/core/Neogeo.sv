@@ -367,6 +367,7 @@ wire [23:0] P2ROM_MASK;
 wire [25:0] CROM_MASK;
 wire [23:0] V1ROM_MASK; 
 wire [18:0] MROM_MASK;
+wire [23:0]	V2_offset;
 
 wire 			start_system;
 
@@ -428,6 +429,7 @@ apf_io apf_io
 	.CROM_MASK					(CROM_MASK), 
 	.V1ROM_MASK					(V1ROM_MASK), 
 	.MROM_MASK					(MROM_MASK),
+	.V2_offset					(V2_offset),
 	
 	.sdram_word_rd				(sdram_word_rd),
 	.sdram_word_wr				(sdram_word_wr),
@@ -1385,7 +1387,7 @@ always @(posedge clk_sys or negedge nRESET) begin
 			ADPCMB_READ_REQ <= ~ADPCMB_READ_REQ;
 //			ADPCMB_ADDR_LATCH <= use_pcm ? {1'b1, ADPCMB_ADDR[22:0] & V1ROM_MASK[22:0]} : ADPCMB_ADDR[23:0] & V1ROM_MASK[23:0];
 // We do not require these for the Darksoft roms once we get the chip32 this will move things correcly
-			ADPCMB_ADDR_LATCH <= ADPCMB_ADDR[23:0] & V1ROM_MASK[23:0];
+			ADPCMB_ADDR_LATCH <= use_pcm ? (ADPCMB_ADDR[23:0] + V2_offset) & V1ROM_MASK[23:0] : ADPCMB_ADDR[23:0]  & V1ROM_MASK[23:0];
 			// Data is needed on one previous 8MHz clk before next 55KHz clock->(96MHz/55KHz = 1728)-144-4=1580
 			ADPCMB_ACK_COUNTER <= 11'd1579;
 //			ADPCMB_DATA_READY	<= 1'b0;
@@ -1555,7 +1557,7 @@ wire [7:0] VGA_B_wire = B6[6] ? 8'd0 : {B6[5:0],  B6[4:3]};
    localparam		VID_V_ACTIVE_NTSC = 'd224;
    localparam		VID_V_ACTIVE_PAL = 'd224;
 	localparam		VID_V_BPORCH_NTSC = 'd16;
-	localparam		VID_V_BPORCH_PAL = 'd20;
+	localparam		VID_V_BPORCH_PAL = 'd13;
 	
 	reg [9:0] x_count, y_count;
 	reg HSync_reg;
