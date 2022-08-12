@@ -38,11 +38,14 @@
 //
 //	Created a PLL with most of the major Clocks to sync the video (LSPC2 and the B2 cores) - The compile times are higher as now quartus knows about these clocks
 // Made the masking better with the APF framework so both V and C roms work correctly
+// Also made a new Offset setup for the VROM so it is not required for double mirroring.
+// All special chips are now activated in the 
 //
 // ToDo:
 // Create a work ram clear system for boot. This will help in the bios reload issue (Do this in the 74mhz clock)
 // Make access to the memory carts for saves
 // Create a better 6mhz clock/6mhz 90 degree - Done in Alpha 0.6.0
+// Checks on the 3mhz clock in the B1 core need to be 100% as sometimes the reset sync does not get correct at boot.
 
 module emu
 (
@@ -371,8 +374,8 @@ wire [23:0]	V2_offset;
 
 wire 			start_system;
 
-wire [7:0]	screen_x_pos;
-wire [7:0]	screen_y_pos;
+wire [31:0]	screen_x_pos;
+wire [31:0]	screen_y_pos;
 
 
 // was used for testing
@@ -935,7 +938,7 @@ memcard MEMCARD(
 	.CDD						(CDD),
 	.CARD_WE					(CARD_WE),
 	.M68K_DATA				(M68K_DATA[7:0]),
-	.clk_sys					(clk_sys),
+	.clk_sys					(clk_74a),
 	.memcard_addr			(neogeo_memcard_addr[12:1]),
 	.memcard_wr				(neogeo_memcard_wr),
 	.sd_buff_dout			(neogeo_memcard_dout),
@@ -1552,32 +1555,22 @@ wire [7:0] VGA_B_wire = B6[6] ? 8'd0 : {B6[5:0],  B6[4:3]};
 
 *******************************************************************/
 
-	localparam		VID_H_BPORCH = 'd40;
-	localparam		VID_H_ACTIVE = 'd300;
-   localparam		VID_V_ACTIVE_NTSC = 'd224;
-   localparam		VID_V_ACTIVE_PAL = 'd224;
-	localparam		VID_V_BPORCH_NTSC = 'd16;
-	localparam		VID_V_BPORCH_PAL = 'd13;
+	localparam		VID_H_BPORCH = 10'd40;
+	localparam		VID_H_ACTIVE = 10'd300;
+   localparam		VID_V_ACTIVE_NTSC = 10'd224;
+   localparam		VID_V_ACTIVE_PAL = 10'd224;
+	localparam		VID_V_BPORCH_NTSC = 10'd16;
+	localparam		VID_V_BPORCH_PAL = 10'd45;
 	
 	reg [9:0] x_count, y_count;
 	reg HSync_reg;
 	reg VSync_reg;
-//	reg CLK_VIDEO_90_1;
-//	reg CLK_VIDEO_90_2;
-//	reg CLK_VIDEO_90_3;
 	
 assign CLK_VIDEO = CLK_6MB;
 
 // have to do a 90 degree 6mhz clock for the DDR Video interface - using a 96mhz this is 4 clock delays on the 6mhz clock
 // It is always better to get a PLL to do this, but the Neogeo sync is very importent so the constraints need to insure 
 // that this is keeped
-
-//always @(posedge clk_sys) begin
-//	CLK_VIDEO_90_1 <= CLK_VIDEO;
-//	CLK_VIDEO_90_2 <= CLK_VIDEO_90_1;
-//	CLK_VIDEO_90_3 <= CLK_VIDEO_90_2;
-//	CLK_VIDEO_90 	<= CLK_VIDEO_90_3;
-//end
 	
 reg [7:0]	VGA_R_reg;
 reg [7:0]	VGA_G_reg;
@@ -1605,8 +1598,8 @@ always @(posedge CLK_6MB) begin
 	VGA_G_reg <= ~SHADOW ? VGA_G_wire : {1'b0, VGA_G_wire[7:1]};
 	VGA_B_reg <= ~SHADOW ? VGA_B_wire : {1'b0, VGA_B_wire[7:1]};
 	if (~video_mode) begin
-		if(x_count >= VID_H_BPORCH - screen_x_pos && x_count < VID_H_ACTIVE+VID_H_BPORCH - screen_x_pos) begin
-			if((y_count >= VID_V_BPORCH_NTSC - screen_y_pos) && (y_count < (VID_V_ACTIVE_NTSC+VID_V_BPORCH_NTSC - screen_y_pos))) begin
+		if(x_count >= VID_H_BPORCH - screen_x_pos[9:0] && x_count < VID_H_ACTIVE+VID_H_BPORCH - screen_x_pos[9:0]) begin
+			if((y_count >= VID_V_BPORCH_NTSC - screen_y_pos[9:0]) && (y_count < (VID_V_ACTIVE_NTSC+VID_V_BPORCH_NTSC - screen_y_pos[9:0]))) begin
 				// data enable. this is the active region of the line
 				VGA_R <= VGA_R_reg;
 				VGA_G <= VGA_G_reg;
@@ -1615,15 +1608,15 @@ always @(posedge CLK_6MB) begin
 		end
 
 		if(x_count >= VID_H_BPORCH - screen_x_pos && x_count < VID_H_ACTIVE+VID_H_BPORCH - screen_x_pos) begin
-			if((y_count >= VID_V_BPORCH_NTSC - screen_y_pos) && (y_count < (VID_V_ACTIVE_NTSC+VID_V_BPORCH_NTSC - screen_y_pos))) begin
+			if((y_count >= VID_V_BPORCH_NTSC - screen_y_pos) && (y_count < (VID_V_ACTIVE_NTSC+VID_V_BPORCH_NTSC - screen_y_pos[9:0]))) begin
 				// data enable. this is the active region of the line
 				VGA_DE <= 1'b1;
 			end 
 		end
 	end
 	else begin
-		if(x_count >= VID_H_BPORCH - screen_x_pos && x_count < VID_H_ACTIVE+VID_H_BPORCH - screen_x_pos) begin
-			if((y_count >= VID_V_BPORCH_PAL - screen_y_pos) && (y_count < (VID_V_ACTIVE_NTSC+VID_V_BPORCH_PAL - screen_y_pos))) begin
+		if(x_count >= VID_H_BPORCH - screen_x_pos[9:0] && x_count < VID_H_ACTIVE+VID_H_BPORCH - screen_x_pos[9:0]) begin
+			if((y_count >= VID_V_BPORCH_PAL - screen_y_pos[9:0]) && (y_count < (VID_V_ACTIVE_PAL+VID_V_BPORCH_PAL - screen_y_pos[9:0]))) begin
 				// data enable. this is the active region of the line
 				VGA_R <= VGA_R_reg;
 				VGA_G <= VGA_G_reg;
@@ -1632,7 +1625,7 @@ always @(posedge CLK_6MB) begin
 		end
 
 		if(x_count >= VID_H_BPORCH - screen_x_pos && x_count < VID_H_ACTIVE+VID_H_BPORCH - screen_x_pos) begin
-			if((y_count >= VID_V_BPORCH_PAL - screen_y_pos) && (y_count < (VID_V_ACTIVE_NTSC+VID_V_BPORCH_PAL - screen_y_pos))) begin
+			if((y_count >= VID_V_BPORCH_PAL - screen_y_pos) && (y_count < (VID_V_ACTIVE_PAL+VID_V_BPORCH_PAL - screen_y_pos))) begin
 				// data enable. this is the active region of the line
 				VGA_DE <= 1'b1;
 			end 

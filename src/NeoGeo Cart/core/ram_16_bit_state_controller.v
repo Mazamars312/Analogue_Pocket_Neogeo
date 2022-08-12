@@ -75,11 +75,14 @@ reg [2:0] 	RAM_STATE;
 reg 			requested_read;
 reg [31:0]	word_data_reg;
 
+reg [31:0]	bridge_rd_data_reg;
+
 parameter	idle				=	'd0;
 parameter	request			=	'd1;
 parameter	wait_read_1 	=	'd2;
 parameter	wait_read_2		=	'd3;
-parameter	wait_write_2	=	'd4; // We have already does the first write
+parameter	wait_read_3		=	'd4;
+parameter	wait_write_2	=	'd5; // We have already does the first write
 
 always @(posedge clk_sys or negedge reset_l) begin
 	if (~reset_l) begin
@@ -89,7 +92,7 @@ always @(posedge clk_sys or negedge reset_l) begin
 		word_wr									<= 'd0;
 		word_addr								<= 'd0;
 		word_data								<= 'd0;
-		bridge_rd_data							<= 'd0;
+		bridge_rd_data_reg					<= 'd0;
 		bridge_completed						<= 'b0;
 		bridge_processing						<= 'b0;
 	end
@@ -119,24 +122,29 @@ always @(posedge clk_sys or negedge reset_l) begin
 					word_addr 					<= word_addr + 2;
 					RAM_STATE 					<= wait_read_2;
 					word_rd 						<= 'b1;
-					bridge_completed 			<= 'b1;
+					bridge_completed 			<= 'b0;
 					case (bigendin)
-						1'b1 		: bridge_rd_data[31:16]	<= word_q;
-						default 	: bridge_rd_data[31:16]	<= {word_q[7:0], word_q[15:8]};
+						1'b1 		: bridge_rd_data_reg[31:16]	<= word_q;
+						default 	: bridge_rd_data_reg[31:16]	<= {word_q[7:0], word_q[15:8]};
 					endcase
-					bridge_processing			<= 'b0;
+					bridge_processing			<= 'b1;
 				end
 			end
 			wait_read_2 : begin
 				if (~word_busy) begin
-					RAM_STATE 					<= idle;
-					bridge_completed 			<= 'b1;
-					case (bigendin)
-						1'b1 		: bridge_rd_data[15: 0]	<= word_q;
-						default 	: bridge_rd_data[15: 0]	<= {word_q[7:0], word_q[15:8]};
-					endcase
-					bridge_processing			<= 'b0;
+					RAM_STATE 					<= wait_read_3;
+					bridge_completed 			<= 'b0;
+					bridge_processing			<= 'b1;
 				end
+			end
+			wait_read_3 : begin
+				RAM_STATE 					<= idle;
+				bridge_completed 			<= 'b1;
+				case (bigendin)
+					1'b1 		: bridge_rd_data_reg[15: 0]	<= word_q;
+					default 	: bridge_rd_data_reg[15: 0]	<= {word_q[7:0], word_q[15:8]};
+				endcase
+				bridge_processing			<= 'b0;
 			end
 			wait_write_2 : begin
 				if (~word_busy) begin
@@ -148,7 +156,7 @@ always @(posedge clk_sys or negedge reset_l) begin
 				end
 			end
 			default : begin
-				if (bridge_addr_s[31:24] != 8'hf8 && (bridge_rd_f || bridge_wr_f)) begin
+				if (bridge_rd_f || bridge_wr_f) begin
 					RAM_STATE 					<= request;
 					word_addr 					<= bridge_addr_s[31:0]; // We have to make sure that we are doing a 32bit word process here to a 16bit word
 					word_data 					<= bigendin ? bridge_wr_data_s : 
@@ -169,5 +177,9 @@ always @(posedge clk_sys or negedge reset_l) begin
 	end
 end
 
+always @(posedge clk_74a or negedge reset_l) begin
+	if (~reset_l) bridge_rd_data <= 'b0;
+	else bridge_rd_data <= bridge_rd_data_reg;
+end
 
 endmodule

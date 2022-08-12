@@ -14,17 +14,18 @@
 	-Controller access to the core.
 	-Core managerment for things like reset and core monitoring
 	
+	
 	ToDo: 
 	-Tidy up some of the core for reading to the APF Managerment - (This will help with save states and save games) 
-	-move the SDRAM controller to a 133mhz clock with a fifo to help with transfers (Some times it goes too fast that data is missed)
 	-RTC for the core
 
 *****************************************************************************************/
 
 //// Version 0.6.0 Alpha
 //
-// Addeda new controller layout for the json setup. This will be later handled by the APF framework once the interact.json happens
-
+// Added new controller layout for the json setup. This will be later handled by the APF framework once the interact.json happens
+// New masking system for the asset uploads - tested all working
+// Special chip selections are done here
 
 module apf_io
 (
@@ -183,8 +184,8 @@ module apf_io
 	output [15:0]		neogeo_memcard_dout,
 	input  [15:0]		neogeo_memcard_din,
 	
-	output reg [7:0] 	screen_x_pos,
-	output reg [7:0] 	screen_y_pos
+	output reg [31:0] 	screen_x_pos,
+	output reg [31:0] 	screen_y_pos
 );
 
 wire reset_n;
@@ -349,9 +350,9 @@ io_bridge_peripheral ibs (
 // synchronous to clk_74a
 // bridge data slot access
 
-	wire	[9:0]		datatable_addr;
-	wire				datatable_wren;
-	wire	[31:0]	datatable_data;
+	reg	[9:0]		datatable_addr;
+	reg				datatable_wren;
+	reg	[31:0]	datatable_data;
 	wire	[31:0]	datatable_q;
 
 assign debug_led = dataslot_requestwrite;
@@ -407,6 +408,34 @@ core_bridge_cmd icb (
 	.datatable_q					( datatable_q ),
 
 );
+
+
+reg [1:0] save_loop_update;
+
+always @(posedge clk_74a or negedge reset_l_main) begin
+	if (~reset_l_main) begin
+		save_loop_update <= 'd0;
+		datatable_data		<= 'd0;
+		datatable_wren		<= 'd0;
+		datatable_addr 	<= 'd0;
+	end
+	else begin
+		case (save_loop_update)
+			'd1 		: begin
+				save_loop_update  <=   0;
+				datatable_data		<= 'd0;
+				datatable_wren		<= 'd0;
+				datatable_addr 	<= 'd0;
+			end			
+			default : begin
+				save_loop_update 	<= 1;
+				datatable_data		<= 'd16384; // this will force the dataslot for the memory card to know there is 16K
+				datatable_wren		<= 'd1;
+				datatable_addr 	<= 'd3;
+			end
+		endcase
+	end
+end
 
 
 /*********************************************************
@@ -504,7 +533,7 @@ wire [7:0] test_crom_bits = { // this is a trick Im doing to check if anything i
 reg 			cart_pchip_main;
 reg [2:0] 	cart_pchip_sub;							
 // APF write access over the 32bit address system and setup of the core
-always @(posedge clk_sys or negedge reset_l_main) begin
+always @(posedge clk_74a or negedge reset_l_main) begin
 	if (~reset_l_main) begin
 		P2ROM_MASK				<= 32'h00000000;
 		CROM_MASK				<= 32'h00000000;
@@ -580,7 +609,7 @@ always @(posedge clk_sys or negedge reset_l_main) begin
 end
 // APF Read loactions will add a delay for the cores when reading data.	
 
-always @(posedge clk_sys or negedge reset_l_main) begin
+always @(posedge clk_74a or negedge reset_l_main) begin
 	if (~reset_l_main) begin
 		cart_pchip <= 1'b0;
 	end
@@ -652,8 +681,8 @@ always @(posedge clk_74a) begin
 			16'h0028 : Neogeo_status <= use_pcm;
 			16'h002C : Neogeo_status <= cart_pchip_sub;
 			16'h0030 : Neogeo_status <= cmc_chip;
-			16'h0034 : Neogeo_status <= {{24{screen_x_pos[7]}}, screen_x_pos};
-			16'h0038 : Neogeo_status <= {{24{screen_y_pos[7]}}, screen_y_pos};
+			16'h0034 : Neogeo_status <= screen_x_pos;
+			16'h0038 : Neogeo_status <= screen_y_pos;
 			16'h003C : Neogeo_status <= V2_offset;
 			16'h0040 : Neogeo_status <= cart_chip;
 			16'h0000 : Neogeo_status <= RTC[63:32];
@@ -827,7 +856,7 @@ ram_16_bit_wait_state_controller ram_SDRAM_controller(
 
 ram_16_bit_state_controller neogeo_memorycard_controller(
 	.clk_74a							(clk_74a),
-	.clk_sys							(clk_sys),
+	.clk_sys							(clk_74a),
 	.reset_l							(reset_l_main),
 	.bigendin						(bridge_endian_little),
 	

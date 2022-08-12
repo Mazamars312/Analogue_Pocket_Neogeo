@@ -41,7 +41,7 @@
 					"name": "LO",
 					"id": 2,
 					"required": true,
-					"parameters": 1,
+					"parameters": 0,
 					"filename" : "000-lo.lo",
 					"extensions": [
 						"lo"
@@ -55,7 +55,7 @@
 					"name": "SFIX",
 					"id": 3,
 					"required": true,
-					"parameters": 1,
+					"parameters": 0,
 					"extensions": [
 						"sbin", "srom"
 					],
@@ -67,7 +67,7 @@
 					"name": "PROG",
 					"id": 4,
 					"required": true,
-					"parameters": 1,
+					"parameters": 0,
 					"extensions": [
 						"bin", "pbin", "prom"
 					],
@@ -80,7 +80,7 @@
 					"name": "CROM",
 					"id": 5,
 					"required": true,
-					"parameters": 1,
+					"parameters": 0,
 					"extensions": [
 						"cbin", "crom0"
 					],
@@ -92,7 +92,7 @@
 					"name": "MROM",
 					"id": 6,
 					"required": true,
-					"parameters": 1,
+					"parameters": 0,
 					"extensions": [
 						"mbin", "m1rom"
 					],
@@ -104,7 +104,7 @@
 					"name": "VROM",
 					"id": 7,
 					"required": true,
-					"parameters": 1,
+					"parameters": 0,
 					"extensions": [
 						"vbin", "vroma0"
 					],
