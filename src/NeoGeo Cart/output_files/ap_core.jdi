@@ -1,11 +1,11 @@
 <sld_project_info>
   <project>
-    <hash md5_digest_80b="f8e4ee4b15301bd8ae44"/>
+    <hash md5_digest_80b="6b9f117df5962d2e2e99"/>
   </project>
   <file_info>
     <file device="5CEBA4F23C8" path="ap_core.sof" usercode="0xFFFFFFFF"/>
   </file_info>
-  <hub_info hub_ir_width="10" ir_width="10" node_addr_width="3" node_count="4"/>
+  <hub_info hub_ir_width="10" ir_width="10" node_addr_width="2" node_count="2"/>
   <node_info>
     <node hpath="core_top:ic|emu:Neogeo|Video_change:Video_change|altsource_probe_top:in_system_sources_probes_0|altsource_probe:issp_impl" instance_id="0" mfg_id="110" node_id="9" sld_node_info="0x486E00" version="0">
       <parameters>
@@ -97,187 +97,6 @@
         <port name="jtag.bp.ic_Neogeo_Video_change_in_system_sources_probes_0_issp_impl_tdo"/>
       </outputs>
     </node>
-    <node hpath="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_bram:test_bram|altsyncram:altsyncram_component|altsyncram_lgo1:auto_generated|sld_mod_ram_rom:mgl_prim2" instance_id="0" mfg_id="110" node_id="3" sld_node_info="0x10186E00" version="2">
-      <parameters>
-        <parameter name="SLD_NODE_INFO" type="dec" value="270036480"/>
-        <parameter name="SLD_AUTO_INSTANCE_INDEX" type="string" value="yes"/>
-        <parameter name="SLD_IP_VERSION" type="dec" value="1"/>
-        <parameter name="SLD_IP_MINOR_VERSION" type="dec" value="3"/>
-        <parameter name="SLD_COMMON_IP_VERSION" type="dec" value="0"/>
-        <parameter name="width_word" type="unknown" value="16"/>
-        <parameter name="numwords" type="unknown" value="8192"/>
-        <parameter name="widthad" type="unknown" value="13"/>
-        <parameter name="shift_count_bits" type="unknown" value="5"/>
-        <parameter name="cvalue" type="unknown" value="0000000000000000"/>
-        <parameter name="is_data_in_ram" type="unknown" value="1"/>
-        <parameter name="is_readable" type="unknown" value="1"/>
-        <parameter name="BACKPRESSURE_ENABLED" type="dec" value="0"/>
-        <parameter name="FIFO_SIZE" type="dec" value="16"/>
-        <parameter name="FIFO_SIZE_WIDTH" type="dec" value="5"/>
-        <parameter name="node_name" type="unknown" value="1112686925"/>
-      </parameters>
-      <inputs>
-        <port name="data_read[0]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_bram:test_bram|altsyncram:altsyncram_component|altsyncram_lgo1:auto_generated|altsyncram_3re2:altsyncram1|q_b[0]"/>
-        <port name="data_read[1]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_bram:test_bram|altsyncram:altsyncram_component|altsyncram_lgo1:auto_generated|altsyncram_3re2:altsyncram1|q_b[1]"/>
-        <port name="data_read[2]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_bram:test_bram|altsyncram:altsyncram_component|altsyncram_lgo1:auto_generated|altsyncram_3re2:altsyncram1|q_b[2]"/>
-        <port name="data_read[3]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_bram:test_bram|altsyncram:altsyncram_component|altsyncram_lgo1:auto_generated|altsyncram_3re2:altsyncram1|q_b[3]"/>
-        <port name="data_read[4]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_bram:test_bram|altsyncram:altsyncram_component|altsyncram_lgo1:auto_generated|altsyncram_3re2:altsyncram1|q_b[4]"/>
-        <port name="data_read[5]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_bram:test_bram|altsyncram:altsyncram_component|altsyncram_lgo1:auto_generated|altsyncram_3re2:altsyncram1|q_b[5]"/>
-        <port name="data_read[6]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_bram:test_bram|altsyncram:altsyncram_component|altsyncram_lgo1:auto_generated|altsyncram_3re2:altsyncram1|q_b[6]"/>
-        <port name="data_read[7]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_bram:test_bram|altsyncram:altsyncram_component|altsyncram_lgo1:auto_generated|altsyncram_3re2:altsyncram1|q_b[7]"/>
-        <port name="data_read[8]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_bram:test_bram|altsyncram:altsyncram_component|altsyncram_lgo1:auto_generated|altsyncram_3re2:altsyncram1|q_b[8]"/>
-        <port name="data_read[9]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_bram:test_bram|altsyncram:altsyncram_component|altsyncram_lgo1:auto_generated|altsyncram_3re2:altsyncram1|q_b[9]"/>
-        <port name="data_read[10]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_bram:test_bram|altsyncram:altsyncram_component|altsyncram_lgo1:auto_generated|altsyncram_3re2:altsyncram1|q_b[10]"/>
-        <port name="data_read[11]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_bram:test_bram|altsyncram:altsyncram_component|altsyncram_lgo1:auto_generated|altsyncram_3re2:altsyncram1|q_b[11]"/>
-        <port name="data_read[12]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_bram:test_bram|altsyncram:altsyncram_component|altsyncram_lgo1:auto_generated|altsyncram_3re2:altsyncram1|q_b[12]"/>
-        <port name="data_read[13]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_bram:test_bram|altsyncram:altsyncram_component|altsyncram_lgo1:auto_generated|altsyncram_3re2:altsyncram1|q_b[13]"/>
-        <port name="data_read[14]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_bram:test_bram|altsyncram:altsyncram_component|altsyncram_lgo1:auto_generated|altsyncram_3re2:altsyncram1|q_b[14]"/>
-        <port name="data_read[15]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_bram:test_bram|altsyncram:altsyncram_component|altsyncram_lgo1:auto_generated|altsyncram_3re2:altsyncram1|q_b[15]"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_raw_tck" source="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_raw_tck"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_tdi" source="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_tdi"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_usr1" source="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_usr1"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_jtag_state_cdr" source="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_jtag_state_cdr"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_jtag_state_sdr" source="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_jtag_state_sdr"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_jtag_state_e1dr" source="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_jtag_state_e1dr"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_jtag_state_udr" source="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_jtag_state_udr"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_jtag_state_uir" source="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_jtag_state_uir"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_clr" source="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_clr"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ena" source="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ena"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_in_0_" source="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_in_0_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_in_1_" source="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_in_1_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_in_2_" source="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_in_2_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_in_3_" source="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_in_3_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_in_4_" source="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_in_4_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_in_5_" source="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_in_5_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_in_6_" source="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_in_6_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_in_7_" source="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_in_7_"/>
-      </inputs>
-      <outputs>
-        <port name="tck_usr"/>
-        <port name="address[0]"/>
-        <port name="address[1]"/>
-        <port name="address[2]"/>
-        <port name="address[3]"/>
-        <port name="address[4]"/>
-        <port name="address[5]"/>
-        <port name="address[6]"/>
-        <port name="address[7]"/>
-        <port name="address[8]"/>
-        <port name="address[9]"/>
-        <port name="address[10]"/>
-        <port name="address[11]"/>
-        <port name="address[12]"/>
-        <port name="enable_write"/>
-        <port name="data_write[0]"/>
-        <port name="data_write[1]"/>
-        <port name="data_write[2]"/>
-        <port name="data_write[3]"/>
-        <port name="data_write[4]"/>
-        <port name="data_write[5]"/>
-        <port name="data_write[6]"/>
-        <port name="data_write[7]"/>
-        <port name="data_write[8]"/>
-        <port name="data_write[9]"/>
-        <port name="data_write[10]"/>
-        <port name="data_write[11]"/>
-        <port name="data_write[12]"/>
-        <port name="data_write[13]"/>
-        <port name="data_write[14]"/>
-        <port name="data_write[15]"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_out_0_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_out_1_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_out_2_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_out_3_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_out_4_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_out_5_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_out_6_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_ir_out_7_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_bram_altsyncram_component_auto_generated_mgl_prim2_tdo"/>
-      </outputs>
-    </node>
-    <node hpath="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_ram_8bit:test_ram_8bit|altsyncram:altsyncram_component|altsyncram_eln1:auto_generated|sld_mod_ram_rom:mgl_prim2" instance_id="1" mfg_id="110" node_id="3" sld_node_info="0x10186E01" version="2">
-      <parameters>
-        <parameter name="SLD_NODE_INFO" type="dec" value="270036480"/>
-        <parameter name="SLD_AUTO_INSTANCE_INDEX" type="string" value="yes"/>
-        <parameter name="SLD_IP_VERSION" type="dec" value="1"/>
-        <parameter name="SLD_IP_MINOR_VERSION" type="dec" value="3"/>
-        <parameter name="SLD_COMMON_IP_VERSION" type="dec" value="0"/>
-        <parameter name="width_word" type="unknown" value="8"/>
-        <parameter name="numwords" type="unknown" value="16384"/>
-        <parameter name="widthad" type="unknown" value="14"/>
-        <parameter name="shift_count_bits" type="unknown" value="4"/>
-        <parameter name="cvalue" type="unknown" value="00000000"/>
-        <parameter name="is_data_in_ram" type="unknown" value="1"/>
-        <parameter name="is_readable" type="unknown" value="1"/>
-        <parameter name="BACKPRESSURE_ENABLED" type="dec" value="0"/>
-        <parameter name="FIFO_SIZE" type="dec" value="16"/>
-        <parameter name="FIFO_SIZE_WIDTH" type="dec" value="5"/>
-        <parameter name="node_name" type="unknown" value="1112684544"/>
-      </parameters>
-      <inputs>
-        <port name="data_read[0]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_ram_8bit:test_ram_8bit|altsyncram:altsyncram_component|altsyncram_eln1:auto_generated|altsyncram_m4e2:altsyncram1|q_b[0]"/>
-        <port name="data_read[1]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_ram_8bit:test_ram_8bit|altsyncram:altsyncram_component|altsyncram_eln1:auto_generated|altsyncram_m4e2:altsyncram1|q_b[1]"/>
-        <port name="data_read[2]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_ram_8bit:test_ram_8bit|altsyncram:altsyncram_component|altsyncram_eln1:auto_generated|altsyncram_m4e2:altsyncram1|q_b[2]"/>
-        <port name="data_read[3]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_ram_8bit:test_ram_8bit|altsyncram:altsyncram_component|altsyncram_eln1:auto_generated|altsyncram_m4e2:altsyncram1|q_b[3]"/>
-        <port name="data_read[4]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_ram_8bit:test_ram_8bit|altsyncram:altsyncram_component|altsyncram_eln1:auto_generated|altsyncram_m4e2:altsyncram1|q_b[4]"/>
-        <port name="data_read[5]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_ram_8bit:test_ram_8bit|altsyncram:altsyncram_component|altsyncram_eln1:auto_generated|altsyncram_m4e2:altsyncram1|q_b[5]"/>
-        <port name="data_read[6]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_ram_8bit:test_ram_8bit|altsyncram:altsyncram_component|altsyncram_eln1:auto_generated|altsyncram_m4e2:altsyncram1|q_b[6]"/>
-        <port name="data_read[7]" source="core_top:ic|emu:Neogeo|memcard:MEMCARD|test_ram_8bit:test_ram_8bit|altsyncram:altsyncram_component|altsyncram_eln1:auto_generated|altsyncram_m4e2:altsyncram1|q_b[7]"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_raw_tck" source="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_raw_tck"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_tdi" source="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_tdi"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_usr1" source="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_usr1"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_jtag_state_cdr" source="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_jtag_state_cdr"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_jtag_state_sdr" source="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_jtag_state_sdr"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_jtag_state_e1dr" source="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_jtag_state_e1dr"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_jtag_state_udr" source="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_jtag_state_udr"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_jtag_state_uir" source="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_jtag_state_uir"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_clr" source="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_clr"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ena" source="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ena"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_in_0_" source="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_in_0_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_in_1_" source="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_in_1_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_in_2_" source="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_in_2_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_in_3_" source="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_in_3_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_in_4_" source="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_in_4_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_in_5_" source="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_in_5_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_in_6_" source="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_in_6_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_in_7_" source="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_in_7_"/>
-      </inputs>
-      <outputs>
-        <port name="tck_usr"/>
-        <port name="address[0]"/>
-        <port name="address[1]"/>
-        <port name="address[2]"/>
-        <port name="address[3]"/>
-        <port name="address[4]"/>
-        <port name="address[5]"/>
-        <port name="address[6]"/>
-        <port name="address[7]"/>
-        <port name="address[8]"/>
-        <port name="address[9]"/>
-        <port name="address[10]"/>
-        <port name="address[11]"/>
-        <port name="address[12]"/>
-        <port name="address[13]"/>
-        <port name="enable_write"/>
-        <port name="data_write[0]"/>
-        <port name="data_write[1]"/>
-        <port name="data_write[2]"/>
-        <port name="data_write[3]"/>
-        <port name="data_write[4]"/>
-        <port name="data_write[5]"/>
-        <port name="data_write[6]"/>
-        <port name="data_write[7]"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_out_0_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_out_1_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_out_2_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_out_3_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_out_4_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_out_5_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_out_6_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_ir_out_7_"/>
-        <port name="jtag.bp.ic_Neogeo_MEMCARD_test_ram_8bit_altsyncram_component_auto_generated_mgl_prim2_tdo"/>
-      </outputs>
-    </node>
     <node hpath="sld_signaltap:auto_signaltap_0" instance_id="0" mfg_id="110" node_id="0" sld_node_info="0x30006E00" version="6">
       <parameters>
         <parameter name="lpm_type" type="string" value="sld_signaltap"/>
@@ -286,8 +105,8 @@
         <parameter name="SLD_IP_VERSION" type="dec" value="6"/>
         <parameter name="SLD_IP_MINOR_VERSION" type="dec" value="0"/>
         <parameter name="SLD_COMMON_IP_VERSION" type="dec" value="0"/>
-        <parameter name="sld_data_bits" type="unknown" value="46"/>
-        <parameter name="sld_trigger_bits" type="unknown" value="46"/>
+        <parameter name="sld_data_bits" type="unknown" value="17"/>
+        <parameter name="sld_trigger_bits" type="unknown" value="17"/>
         <parameter name="SLD_NODE_CRC_BITS" type="dec" value="32"/>
         <parameter name="SLD_NODE_CRC_HIWORD" type="dec" value="41394"/>
         <parameter name="SLD_NODE_CRC_LOWORD" type="dec" value="50132"/>
@@ -321,14 +140,14 @@
         <parameter name="SLD_ADVANCED_TRIGGER_8" type="string" value="NONE"/>
         <parameter name="SLD_ADVANCED_TRIGGER_9" type="string" value="NONE"/>
         <parameter name="SLD_ADVANCED_TRIGGER_10" type="string" value="NONE"/>
-        <parameter name="sld_inversion_mask_length" type="unknown" value="159"/>
-        <parameter name="sld_inversion_mask" type="unknown" value="000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"/>
+        <parameter name="sld_inversion_mask_length" type="unknown" value="72"/>
+        <parameter name="sld_inversion_mask" type="unknown" value="000000000000000000000000000000000000000000000000000000000000000000000000"/>
         <parameter name="sld_power_up_trigger" type="unknown" value="0"/>
         <parameter name="SLD_STATE_FLOW_MGR_ENTITY" type="string" value="state_flow_mgr_entity.vhd"/>
         <parameter name="sld_state_flow_use_generated" type="unknown" value="0"/>
         <parameter name="sld_current_resource_width" type="unknown" value="1"/>
         <parameter name="sld_attribute_mem_mode" type="unknown" value="OFF"/>
-        <parameter name="sld_storage_qualifier_bits" type="unknown" value="46"/>
+        <parameter name="sld_storage_qualifier_bits" type="unknown" value="17"/>
         <parameter name="SLD_STORAGE_QUALIFIER_GAP_RECORD" type="dec" value="0"/>
         <parameter name="SLD_STORAGE_QUALIFIER_MODE" type="string" value="OFF"/>
         <parameter name="SLD_STORAGE_QUALIFIER_ENABLE_ADVANCED_CONDITION" type="dec" value="0"/>
@@ -345,7 +164,7 @@
   <sld_infos>
     <sld_info hpath="core_top:ic|emu:Neogeo|Video_change:Video_change" name="Video_change">
       <assignment_values>
-        <assignment_value text="QSYS_NAME Video_change HAS_SOPCINFO 1 GENERATION_ID 1660267446"/>
+        <assignment_value text="QSYS_NAME Video_change HAS_SOPCINFO 1 GENERATION_ID 1660304077"/>
       </assignment_values>
       <parameters/>
     </sld_info>

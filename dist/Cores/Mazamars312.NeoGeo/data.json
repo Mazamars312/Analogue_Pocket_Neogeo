@@ -25,6 +25,20 @@
 					"address": "0x60000000"
 				},
 				{
+					"name": "Backup Ram",
+					"id": "0x102",
+					"required": true,
+					"parameters": 34,
+					"nonvolatile": true,
+					"filename" : "backupram.bak",
+					"extensions": [
+						"bak"
+					],
+					"size_exact": null,
+					"size_maximum": 65536,
+					"address": "0x70000000"
+				},
+				{
 					"name": "BIOS",
 					"id": 1,
 					"required": true,

@@ -184,6 +184,11 @@ module apf_io
 	output [15:0]		neogeo_memcard_dout,
 	input  [15:0]		neogeo_memcard_din,
 	
+	output [15:0]		backup_ram_addr,
+	output [15:0]		backup_ram_dout,
+	output 				backup_ram_wr,
+	input  [15:0]		backup_ram_din,
+	
 	output reg [31:0] 	screen_x_pos,
 	output reg [31:0] 	screen_y_pos
 );
@@ -424,8 +429,9 @@ always @(posedge clk_74a or negedge reset_l_main) begin
 			'd1 		: begin
 				save_loop_update  <=   0;
 				datatable_data		<= 'd0;
-				datatable_wren		<= 'd0;
-				datatable_addr 	<= 'd0;
+				datatable_data		<= 'd65536;
+				datatable_wren		<= 'd1;
+				datatable_addr 	<= 'd05;
 			end			
 			default : begin
 				save_loop_update 	<= 1;
@@ -632,9 +638,7 @@ reg [31:0] Neogeo_status;
 always @(*) begin
 	
 	casex(bridge_addr)
-	32'h0xxxxxxx: begin
-		bridge_rd_data <= ram_lo_rom_controller_rd_data;
-	end
+	
 	32'h1xxxxxxx: begin
 		bridge_rd_data <= ram_CRAM0_controller_rd_data;
 	end
@@ -648,6 +652,9 @@ always @(*) begin
 		bridge_rd_data <= ram_SDRAM_controller_rd_data;
 	end
 	32'h5xxxxxxx: begin
+		bridge_rd_data <= ram_lo_rom_controller_rd_data;
+	end
+	32'h7xxxxxxx: begin
 		bridge_rd_data <= neogeo_sram_controller_rd_data;
 	end
 	32'h6xxxxxxx: begin
@@ -693,35 +700,7 @@ always @(posedge clk_74a) begin
 end
 
 
-/*********************************************************
 
-	lo-rom controller
-
-*********************************************************/
-
-ram_8_bit_state_controller ram_lo_rom_controller(
-	.clk_74a							(clk_74a),
-	.clk_sys							(clk_sys),
-	.reset_l							(reset_l_main),
-	.bigendin						(~bridge_endian_little),
-	
-	// Ram Controller
-	.word_rd							(),
-	.word_wr							(LO_RAM_word_wr),
-	.word_addr						(LO_RAM_word_addr),
-	.word_data						(LO_RAM_word_data),
-	.word_q							(LO_RAM_word_q),
-	.word_busy						(1'b0),
-	
-	// SPI interface
-	.bridge_addr					(bridge_addr),
-	.bridge_rd						(bridge_rd && (bridge_addr[31:28] == 4'h5)), //APF address 0x5XXX_XXXX
-	.bridge_rd_data				(ram_lo_rom_controller_rd_data),
-	.bridge_wr						(bridge_wr && (bridge_addr[31:28] == 4'h5)),
-	.bridge_wr_data				(bridge_wr_data),
-	.bridge_processing			(),
-	.bridge_completed				()
-);
 
 /*********************************************************
 
@@ -846,6 +825,36 @@ ram_16_bit_wait_state_controller ram_SDRAM_controller(
 	.bridge_completed				()
 );
 
+/*********************************************************
+
+	lo-rom controller
+
+*********************************************************/
+
+ram_8_bit_state_controller ram_lo_rom_controller(
+	.clk_74a							(clk_74a),
+	.clk_sys							(clk_sys),
+	.reset_l							(reset_l_main),
+	.bigendin						(~bridge_endian_little),
+	
+	// Ram Controller
+	.word_rd							(),
+	.word_wr							(LO_RAM_word_wr),
+	.word_addr						(LO_RAM_word_addr),
+	.word_data						(LO_RAM_word_data),
+	.word_q							(LO_RAM_word_q),
+	.word_busy						(1'b0),
+	
+	// SPI interface
+	.bridge_addr					(bridge_addr),
+	.bridge_rd						(bridge_rd && (bridge_addr[31:28] == 4'h5)), //APF address 0x5XXX_XXXX
+	.bridge_rd_data				(ram_lo_rom_controller_rd_data),
+	.bridge_wr						(bridge_wr && (bridge_addr[31:28] == 4'h5)),
+	.bridge_wr_data				(bridge_wr_data),
+	.bridge_processing			(),
+	.bridge_completed				()
+);
+
 
 /*********************************************************
 
@@ -873,6 +882,38 @@ ram_16_bit_state_controller neogeo_memorycard_controller(
 	.bridge_rd						(bridge_rd && (bridge_addr[31:28] == 4'h6)), //APF address 0x6XXX_XXXX
 	.bridge_rd_data				(neogeo_memorycard_controller_rd_data),
 	.bridge_wr						(bridge_wr && (bridge_addr[31:28] == 4'h6)),
+	.bridge_wr_data				(bridge_wr_data),
+	.bridge_processing			(),
+	.bridge_completed				()
+);
+
+
+/*********************************************************
+
+	Backup Ram controller
+
+*********************************************************/
+
+
+ram_16_bit_state_controller backup_ram_controller(
+	.clk_74a							(clk_74a),
+	.clk_sys							(clk_74a),
+	.reset_l							(reset_l_main),
+	.bigendin						(~bridge_endian_little),
+	
+	// Ram Controller
+	.word_rd							(),
+	.word_wr							(backup_ram_wr),
+	.word_addr						(backup_ram_addr),
+	.word_data						(backup_ram_dout),
+	.word_q							(backup_ram_din),
+	.word_busy						(1'b0),
+	
+	// SPI interface
+	.bridge_addr					(bridge_addr),
+	.bridge_rd						(bridge_rd && (bridge_addr[31:28] == 4'h7)), //APF address 0x6XXX_XXXX
+	.bridge_rd_data				(neogeo_sram_controller_rd_data),
+	.bridge_wr						(bridge_wr && (bridge_addr[31:28] == 4'h7)),
 	.bridge_wr_data				(bridge_wr_data),
 	.bridge_processing			(),
 	.bridge_completed				()

@@ -363,6 +363,11 @@ wire [16:0]	LO_RAM_word_addr;
 wire [7:0]	LO_RAM_word_data;
 wire [7:0]	LO_RAM_word_q;
 
+wire [15:0]		backup_ram_addr;
+wire [15:0]		backup_ram_dout;
+wire 				backup_ram_wr;
+wire [15:0]		backup_ram_din;
+
 wire SYSTEM_MVS = (SYSTEM_TYPE == 2'd1);
 wire SYSTEM_CDx = 1'b0;
 
@@ -471,6 +476,10 @@ apf_io apf_io
 	.neogeo_memcard_wr		(neogeo_memcard_wr),
 	.neogeo_memcard_dout		(neogeo_memcard_dout),
 	.neogeo_memcard_din		(neogeo_memcard_din),
+	.backup_ram_addr			(backup_ram_addr),
+	.backup_ram_dout			(backup_ram_dout),
+	.backup_ram_wr				(backup_ram_wr),
+	.backup_ram_din			(backup_ram_din),
 	
 	.screen_x_pos				(screen_x_pos),
 	.screen_y_pos				(screen_y_pos)
@@ -635,7 +644,7 @@ wire [15:0] WORK_RAM;
 wire nBWL = nSRAMWEL | nSRAMWEN_G;
 wire nBWU = nSRAMWEU | nSRAMWEN_G;
 
-// Backup RAM is only for MVS in the CRAM
+
 assign M68K_DATA[7:0] = (nSRAMOEL | ~SYSTEM_MVS) ? 8'bzzzzzzzz : SRAM_OUT[7:0];
 assign M68K_DATA[15:8] = (nSRAMOEU | ~SYSTEM_MVS) ? 8'bzzzzzzzz : SRAM_OUT[15:8];
 
@@ -652,6 +661,19 @@ wire cram_nWWU = nWWU;
 
 wire [15:0]	M68K_DATA_RAM = M68K_DATA;
 wire [20:1] M68K_ADDR_RAM = M68K_ADDR;
+
+backup BACKUP(
+	.CLK_24M(CLK_24M),
+	.M68K_ADDR(M68K_ADDR[15:1]),
+	.M68K_DATA(M68K_DATA),
+	.nBWL(nBWL), .nBWU(nBWU),
+	.SRAM_OUT(SRAM_OUT),
+	.clk_sys(clk_74a),
+	.sram_addr(backup_ram_addr[15:1]),
+	.sram_wr(backup_ram_wr),
+	.sd_buff_dout(backup_ram_dout),
+	.sd_buff_din_sram(backup_ram_din)
+);
 
 cram_16bit CPU68K_z80_RAM_CONTROLLER(
 	.reset_l_main		(reset_l_main),
@@ -682,7 +704,7 @@ cram_16bit CPU68K_z80_RAM_CONTROLLER(
 	.nBWL					(nBWL), 
 	.nBWU					(nBWU),
 	.nSRAMOE				(&{nSRAMOEL, nSRAMOEU}),
-	.SRAM_DATA			(SRAM_OUT),
+//	.SRAM_DATA			(SRAM_OUT),
 	
 	.nWWL					(cram_nWWL),
 	.nWWU					(cram_nWWU),

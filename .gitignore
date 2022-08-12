@@ -15,7 +15,6 @@ db/
 *.sof
 *.sopc_builder
 *.summary
-*.tcl
 *.txt
 *.bak
 *.cmp
@@ -23,3 +22,11 @@ db/
 *.xml
 *.bat
 
+src/NeoGeo Cart/pll_cfg_sim/aldec/rivierapro_setup.tcl
+src/NeoGeo Cart/pll_cfg_sim/mentor/msim_setup.tcl
+src/NeoGeo Cart/pll_cram_sim/aldec/rivierapro_setup.tcl
+src/NeoGeo Cart/pll_cram_sim/mentor/msim_setup.tcl
+src/NeoGeo Cart/pll_sdram_sim/aldec/rivierapro_setup.tcl
+src/NeoGeo Cart/pll_sdram_sim/mentor/msim_setup.tcl
+src/NeoGeo Cart/pll_video_sim/aldec/rivierapro_setup.tcl
+src/NeoGeo Cart/pll_video_sim/mentor/msim_setup.tcl
