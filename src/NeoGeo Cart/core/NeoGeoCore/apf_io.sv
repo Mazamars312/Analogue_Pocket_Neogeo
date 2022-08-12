@@ -427,8 +427,7 @@ always @(posedge clk_74a or negedge reset_l_main) begin
 	else begin
 		case (save_loop_update)
 			'd1 		: begin
-				save_loop_update  <=   0;
-				datatable_data		<= 'd0;
+				save_loop_update  <= 0;
 				datatable_data		<= 'd65536;
 				datatable_wren		<= 'd1;
 				datatable_addr 	<= 'd05;
