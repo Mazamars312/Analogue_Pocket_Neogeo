@@ -27,10 +27,10 @@
 				{
 					"name": "Backup Ram",
 					"id": "0x102",
-					"required": true,
+					"required": false,
 					"parameters": 34,
 					"nonvolatile": true,
-					"filename" : "backupram.bak",
+					"filename" : "backup.bak",
 					"extensions": [
 						"bak"
 					],
