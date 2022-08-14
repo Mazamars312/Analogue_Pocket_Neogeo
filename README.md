@@ -43,7 +43,7 @@ The next build I want to get both the SFIX and prom1 roms sorted so every darkso
 I hope to move the SFIX asset shortly so this will allow all games to run, right now I have this in the SRAM which is 256Kbyte in size. Also the prom1 file needs to be done, which Im doing on the next build.
 
 ## Do I have to build JSON files for each game
-No terminator2k2 has build every game that is in the ROMset that also configures the core for special chips as well.
+No not evey game, terminator2k2 has build every game that is in the ROMset that also configures the core for special chips as well. So big thanks to him on this. His code via python is in the folders as well
 
 ## [Pocket APF](https://www.analogue.co/developer/docs/overview) Modules
 I've made the following modules which are free to use without any license and full permission from me to create with them :-)
