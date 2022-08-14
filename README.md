@@ -36,8 +36,7 @@ No at this moment, there are a lot of moving parts in the Neogeo, but once the c
 
 ## Does everything work?
 This build has fixed a lot of the issues in both the Graphics and Sound where most of the games I have tested work correctly. Also there is a group of people who have helped me test many games and advise me the issues they have.  
-Also Memory cards are fully working and are made for each game at 16Kbytes each. Backup memory is in the core, but this is not saved yet as we need to move the SFIX from to resolve this.
-
+Also Memory cards are fully working and are made for each game at 16Kbytes each. Backup memory is in the core and was tested working
 ## Will you get King of Fighters 2003 and any game with larger SFIX roms to work???
 I hope to move the SFIX asset shortly so this will allow all games to run, right now I have this in the SRAM which is 256Kbyte in size. Also the prom1 file needs to be done, which Im doing on the next build.
 
