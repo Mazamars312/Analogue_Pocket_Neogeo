@@ -84,7 +84,7 @@ I would like to ask that you support the people like [Furrtek](https://www.patre
 * Bitmap Bureau - Loved playing Xeno Crisis and it was a good test rom for finding the audio masking that was happening
 
 ## Fun Facts
-Everyone keeps on calling me Australian because my Github was created when I first moved to Auzzie about 12 years ago. Im in fact from New Zealand (Also know as Kiwis). So Im not going to let the Auzzies claim me like they try to with the band Crowded House and the cake known as Pavlova. Thats ours!!!! 
+Everyone keeps on calling me Australian because my Github was created when I first moved to Auzzie about 12 years ago. Im in fact from New Zealand (Also known as Kiwis). So Im not going to let the Auzzies claim me like they try to with the band Crowded House and the cake known as Pavlova. Thats ours!!!! 
 You Auzzies can keep Russel Crow tho HAHAHA. 
 
 * Every time a Kiwi moves to Australia - The average IQ of both countries increases.
