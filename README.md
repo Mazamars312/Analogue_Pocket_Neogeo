@@ -21,9 +21,9 @@ The current Darksoft paks will work with this with the following file names:
 The Autoloading JSON's provided by terminator2k2 all work with the games using the Dark Soft directory names in the "/assets/ng/common' folder
 
 ## How to use differnt BIOS for the core 
-If you want more BIOS to access, First open the "/Cores/Mazamars312.NeoGeo/data.json" file. Then you have two options:
-* Change the filename to the firmware name you want to autoload in the /assets/ng/comman folder 
-* Remove the filename line completely to then be able to select in the Pocket Menu.
+If you want more BIOS to access, First open the "/Cores/Mazamars312.NeoGeo/data.json" file. Then goto the BIOS selections Then you have two options:
+* Change the filename to the firmware name you want to autoload in the /assets/ng/comman folder (Line 46 in the data.json)
+* Remove the filename line completely to then be able to select in the Pocket Menu. (Line 46 in the data.json)
 
 ## Controllers 
 
@@ -33,14 +33,14 @@ If you want more BIOS to access, First open the "/Cores/Mazamars312.NeoGeo/data.
 
 I have added in the interact.json file to switch between the SNES, Normal Neogeo controller and the Neogeo CD controller layouts for instant changes. Press the home button then goto "/Settings/Cores/Player Type 1" and selectet between the 3 types
 * Option 1 - SNES Controller layout 
-* Option 2 - NeoGeo normal controller 
+* Option 2 - NeoGeo Normal controller 
 * Option 3 - NeoGeo CDrom Controller 
 
 ## Are Memories Supported?
 No at this moment, there are a lot of moving parts in the Neogeo, but once the compatibility is up to a good point then I can get this part done. 
 
 ## Does everything work?
-This build has fixed a lot of the issues in both the Graphics and Sound where most of the games I have tested work correctly.  
+This build has fixed a lot of the issues in both the Graphics and Sound where most of the games I and many others have tested work correctly.  
 Also there is a group of people who have helped me test many games and advise me the issues they have.   
 Also Memory cards are fully working and are made for each game at 16Kbytes each. Backup memory is in the core and was tested working  
 The next build I want to get both the SFIX and prom1 roms sorted so every darksoft romset works. There is pleanty of room there for this, it is just me having to build this up.
