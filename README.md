@@ -1,4 +1,4 @@
-# Neogeo for Pocket (Alpha 0.5)
+# Neogeo for Pocket (Alpha 0.6.0)
 
 This is the port of the Neogeo Core made by [Furrtek](https://www.patreon.com/furrtek/posts) to the Analogue Pocket using the APF framework and some of my own code.
 
