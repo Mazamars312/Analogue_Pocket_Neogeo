@@ -4,7 +4,7 @@ This is the port of the Neogeo Core made by [Furrtek](https://www.patreon.com/fu
 
 ## Installation and Usage 
 
-If you have version 0.5.0 installed, please remove it and re-install the 4 main folders
+If you have version 0.5.0 installed, please remove it and re-install with the new release
 
 The current Darksoft paks will work with this with the following file names:
 *(Working on the *.Neo files soon)
