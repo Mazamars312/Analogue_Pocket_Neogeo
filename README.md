@@ -13,7 +13,7 @@ The current Darksoft paks will work with this with the following file names:
 * Bios: "uni-bios_1_0.rom" - This needs to be in the "/assets/ng/common"
 * Lo Bios: "000-lo.lo" - This needs to be in the "/assets/ng/common"
 * Copy the folders in the Github (dist) or the release .zip into the root of your SD card
-* Place your game files grouped by game into its own directory in the "\assets\ng\common" folder. Folder names are included
+* Place your game files grouped by game into its own directory in the "\assets\ng\common" folder.
 
 ## How to use differnt BIOS for the core 
 If you want more BIOS to access, First open the "/Cores/Mazamars312.NeoGeo/data.json" file. Then you have two options:

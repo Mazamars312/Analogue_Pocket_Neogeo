@@ -16,7 +16,7 @@
                     "min": -40,
                     "max": 40,
                     "adjust_small": 1,
-                    "adjust_large": 1
+                    "adjust_large": 2
                 }
             },
 			{
@@ -26,14 +26,14 @@
                 "enabled": true,
 				"writepersist": true,
                 "address": "0xF0000038",
-                "mask": "0xFFFFFF00",
+                "mask": "0x00000000",
                 "graphical": {
                     "default": "0",
                     "signed": true,
                     "min": -16,
                     "max": 16,
                     "adjust_small": 1,
-                    "adjust_large": 3
+                    "adjust_large": 1
                 }
             },
             {
@@ -46,7 +46,7 @@
                 "mask": "0xFFFFFFFC",
                 "graphical": {
                     "default": "0",
-                    "signed": true,
+                    "signed": false,
                     "min": 0,
                     "max": 2,
                     "adjust_small": 1,
@@ -70,33 +70,10 @@
                     "adjust_large": 1
                 }
             },
-			{
-                "name": "System Type MVS",
-                "id": 5,
-                "type": "radio",
-                "enabled": true,
-				"group": 100,
-				"writepersist": true,
-                "address": "0xF000000c",
-				"value": "0x1",
-                "mask": "0xFFFFFFFE"
-                
-            },
-			{
-                "name": "System Type AES",
-                "id": 6,
-                "type": "radio",
-                "enabled": true,
-				"group": 100,
-				"writepersist": true,
-                "address": "0xF000000c",
-				"value": "0x0",
-                "mask": "0xFFFFFFFE"
-                
-            },
+				
 			{
                 "name": "PAL Output",
-                "id": 7,
+                "id": 5,
                 "type": "radio",
                 "enabled": true,
 				"group": 101,
@@ -108,7 +85,7 @@
             },
 			{
                 "name": "NTSC Output",
-                "id": 8,
+                "id": 6,
                 "type": "radio",
                 "enabled": true,
 				"group": 101,
@@ -117,6 +94,51 @@
 				"value": "0x0",
                 "mask": "0xFFFFFFFE"
                 
+            },
+			{
+                "name": "Dipswitch 0",
+                "id": 7,
+                "type": "check",
+                "enabled": true,
+                "address": "0xf0000008",
+                "value": 128,
+                "mask": "0xFFFFFF7F"
+            },
+			{
+                "name": "Dipswitch 1",
+                "id": 8,
+                "type": "check",
+                "enabled": true,
+                "address": "0xf0000008",
+                "value": 64,
+                "mask": "0xFFFFFFBF"
+            },
+			{
+                "name": "Dipswitch 2",
+                "id": 9,
+                "type": "check",
+                "enabled": true,
+                "address": "0xf0000008",
+                "value": 32,
+                "mask": "0xFFFFFFDF"
+            },
+			{
+                "name": "Dipswitch 3",
+                "id": 10,
+                "type": "check",
+                "enabled": true,
+                "address": "0xf0000008",
+                "value": 16,
+                "mask": "0xFFFFFFEF"
+            },
+			{
+                "name": "Dipswitch 4",
+                "id": 11,
+                "type": "check",
+                "enabled": true,
+                "address": "0xf0000008",
+                "value": 8,
+                "mask": "0xFFFFFFF7"
             }
 		],
         "messages": []

@@ -382,14 +382,6 @@ wire 			start_system;
 wire [31:0]	screen_x_pos;
 wire [31:0]	screen_y_pos;
 
-
-// was used for testing
-Video_change Video_change (
-	.probe		(),
-	.source_clk	(clk_sys),
-	.source		(pixel_mux_change));
-
-
 apf_io apf_io
 (
 	.clk_74a						(clk_74a),

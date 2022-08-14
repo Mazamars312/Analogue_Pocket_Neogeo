@@ -653,11 +653,11 @@ always @(*) begin
 	32'h5xxxxxxx: begin
 		bridge_rd_data <= ram_lo_rom_controller_rd_data;
 	end
-	32'h7xxxxxxx: begin
-		bridge_rd_data <= neogeo_sram_controller_rd_data;
-	end
 	32'h6xxxxxxx: begin
 		bridge_rd_data <= neogeo_memorycard_controller_rd_data;
+	end
+	32'h7xxxxxxx: begin
+		bridge_rd_data <= neogeo_sram_controller_rd_data;
 	end
 	32'hF0xxxxxx: begin
 		bridge_rd_data 	<= Neogeo_status;
