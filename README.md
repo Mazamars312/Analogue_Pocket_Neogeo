@@ -3,6 +3,9 @@
 This is the port of the Neogeo Core made by [Furrtek](https://www.patreon.com/furrtek/posts) to the Analogue Pocket using the APF framework and some of my own code.
 
 ## Installation and Usage 
+
+If you have version 0.5.0 installed, please remove it and re-install the 4 main folders
+
 The current Darksoft paks will work with this with the following file names:
 *(Working on the *.Neo files soon)
 * 68K Asset: prom
@@ -14,6 +17,8 @@ The current Darksoft paks will work with this with the following file names:
 * Lo Bios: "000-lo.lo" - This needs to be in the "/assets/ng/common"
 * Copy the folders in the Github (dist) or the release .zip into the root of your SD card
 * Place your game files grouped by game into its own directory in the "\assets\ng\common" folder.
+
+The Autoloading JSON's provided by terminator2k2 all work with the games using the Dark Soft directory names in the "/assets/ng/common' folder
 
 ## How to use differnt BIOS for the core 
 If you want more BIOS to access, First open the "/Cores/Mazamars312.NeoGeo/data.json" file. Then you have two options:
