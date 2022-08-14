@@ -72,7 +72,7 @@ I would like to ask that you support the people like [Furrtek](https://www.patre
 * [Furrtek](https://www.patreon.com/furrtek/posts) - Please support Furrtek as much as you can as they have done a lot with the community and I enjoy seeing the de-cap processes they do.
 * [Jotego](https://www.patreon.com/topapate) - For his cycle accurate [JT12](https://github.com/jotego/jt12) and [JT49](https://github.com/jotego/jt49) implementation that is used in this core.
 * [Jorge Cwik] (fx68k@fxatari.com) The FX68K M68000 cycle accurate, fully synchronous CPU 
-* [sorg - Alexey Melnikov] (https://github.com/sorgelig) Has created many of the special chips in the core and operates the Mister Distrabution 
+* [sorg - Alexey Melnikov] (https://github.com/sorgelig) Has created many of the special chips in the core and operates the Mister distribution 
 * [Mister team](https://github.com/MiSTer-devel) Everyone that is in this to build great cores
 * Please advise if there are others in this core as I do want to thank them and make sure they are supported on this.
 
@@ -80,7 +80,7 @@ I would like to ask that you support the people like [Furrtek](https://www.patre
 * Electron Ash - Mate thanks for the laughs and the advise on things
 * retrocaster and thehughhefner for advising me on more names of people for the credits how put work into this core
 * terminator2k2 - advising on how some of the keymapping are on some controllers (Im still a fan of the SNES button layout tho LOL) And also building up the instanst.json file for this
-* alaxcom - knows a lot of the NeoGeo games and was testin games while I was building the core.
+* alexcom - knows a lot of the NeoGeo games and was testin games while I was building the core.
 * Bitmap Bureau - Loved playing Xeno Crisis and it was a good test rom for finding the audio masking that was happening
 
 ## Fun Facts
