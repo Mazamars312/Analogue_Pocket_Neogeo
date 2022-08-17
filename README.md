@@ -16,7 +16,7 @@ The current Darksoft paks will work with this with the following file names:
 * Bios: "uni-bios_1_0.rom" - This needs to be in the "/assets/ng/common"
 * Lo Bios: "000-lo.lo" - This needs to be in the "/assets/ng/common"
 * Copy the folders in the Github (dist) or the release .zip into the root of your SD card
-* Place your game files grouped by game into its own directory in the "\assets\ng\common" folder.
+* Place your game files grouped by game into its own directory in the "/assets/ng/common" folder.
 
 The Autoloading JSON's provided by terminator2k2 all work with the games using the Dark Soft directory names in the "/assets/ng/common' folder
 
