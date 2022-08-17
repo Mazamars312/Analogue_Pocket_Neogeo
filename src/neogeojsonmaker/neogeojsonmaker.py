@@ -3161,12 +3161,30 @@ for line in fileinput.input("./Game.json/Metal Slug 3 (AES).json", inplace=True)
     # This will replace string "GameFolder/" with "mslug3h" in each line
     line = line.replace("GameFolder/", "mslug3h")
     line = line.replace("0xPVC-Cart", "0x00000000")
-    line = line.replace("0xSMA-Cart", "0x00000004")
+    line = line.replace("0xSMA-Cart", "0x00000000")
     line = line.replace("0xCMC-Chip", "0x00000001")
     # write() method of sys module redirects the .stdout is redirected to the file
     sys.stdout.write(line)    
     
     
+    
+     # open both files
+with open('template.json','r') as firstfile, open ('./Game.json/Metal Slug 3 (Set 3).json','w') as secondfile:
+      
+    # read content from first file
+    for line in firstfile:
+               
+             # write content to second file
+             secondfile.write(line)
+
+# This for loop scans and searches each line in the file
+# By using the input() method of fileinput module
+for line in fileinput.input("./Game.json/Metal Slug 3 (Set 3).json", inplace=True):
+    
+    # This will replace string "GameFolder/" with "mslug3h" in each line
+    line = line.replace("GameFolder/", "mslug3c")
+    # write() method of sys module redirects the .stdout is redirected to the file
+    sys.stdout.write(line)        
     
     
     
@@ -3290,6 +3308,25 @@ for line in fileinput.input("./Game.json/Metal Slug 5 (AES).json", inplace=True)
     # write() method of sys module redirects the .stdout is redirected to the file
     sys.stdout.write(line)   
     
+    
+         # open both files
+with open('template.json','r') as firstfile, open ('./Game.json/Metal Slug 5 Plus.json','w') as secondfile:
+      
+    # read content from first file
+    for line in firstfile:
+               
+             # write content to second file
+             secondfile.write(line)
+
+# This for loop scans and searches each line in the file
+# By using the input() method of fileinput module
+for line in fileinput.input("./Game.json/Metal Slug 5 Plus.json", inplace=True):
+    
+    # This will replace string "GameFolder/" with "mslug5h" in each line
+    line = line.replace("GameFolder/", "ms5plus")
+    
+    # write() method of sys module redirects the .stdout is redirected to the file
+    sys.stdout.write(line)  
     
     
 
