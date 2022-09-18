@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="Video_change" kind="system" version="20.1" fabric="QSYS">
  <!-- Format version 20.1 720 (Future versions may contain additional information.) -->
- <!-- 2022.08.05.17:36:28 -->
+ <!-- 2022.08.22.13:50:59 -->
  <!-- A collection of modules and connections -->
  <parameter name="clockCrossingAdapter">
   <type>com.altera.sopcmodel.ensemble.EClockAdapter</type>
@@ -53,7 +53,7 @@
  </parameter>
  <parameter name="generationId">
   <type>int</type>
-  <value>1659684988</value>
+  <value>1661140259</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>true</visible>
@@ -209,7 +209,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="probe_width">
    <type>int</type>
-   <value>16</value>
+   <value>32</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -225,7 +225,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="source_initial_value">
    <type>java.lang.String</type>
-   <value>15</value>
+   <value>13</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -402,7 +402,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>probe</name>
     <direction>Input</direction>
-    <width>16</width>
+    <width>32</width>
     <role>probe</role>
    </port>
   </interface>
@@ -432,5 +432,5 @@ parameters are a RESULT of the module parameters. -->
   <version>20.1</version>
  </plugin>
  <reportVersion>20.1 720</reportVersion>
- <uniqueIdentifier>F02F7418D3E1000001826CEF275A</uniqueIdentifier>
+ <uniqueIdentifier>F02F7418D3E100000182C3ACD3E4</uniqueIdentifier>
 </EnsembleReport>

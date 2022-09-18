@@ -104,7 +104,7 @@ module neo_b1(
 	nRESETP_state <= CLK_1HB;
 	
 	
-	assign FIX_COLOR = S1H1 == nRESETP_state ? FIXD_REG[7:4] : FIXD_REG[3:0];
+	assign FIX_COLOR = S1H1 ? FIXD_REG[7:4] : FIXD_REG[3:0];
 
 	// IDUF
 	// EN_FIX gate for Neo CD only
@@ -113,56 +113,25 @@ module neo_b1(
 	reg [3:0] FIX_PAL_REG_PCK;
 	// GETU FUCA...
 	always @(posedge PCK1)
-		FIX_PAL_REG_PCK <= PBUS[19:16];
+		FIX_PAL_REG <= PBUS[19:16];
 		
 
 		
 	// Placed the FIX_PAL_REG_PCK in the delay for color correction on the SROM core in the CLK_1HB
-	always @(posedge CLK_1HB) FIX_PAL_REG <= FIX_PAL_REG_PCK;
+//	always @(posedge CLK_1HB) FIX_PAL_REG <= FIX_PAL_REG_PCK;
 
 	assign SPR_PAL = PBUS[23:16];
 	
-	reg [3:0] GAD_MUX, GBD_MUX;
+	wire [3:0] GAD_MUX, GBD_MUX;
 	
 	// Test rig on the location of the bits during testing. Was able to figger out where each bit was for the CROM
 	
-	always @* begin
-		{GBD_MUX, GAD_MUX} <= {GBD[0], GBD[2], GBD[1], GBD[3], GAD[0], GAD[2], GAD[1], GAD[3]};
-//		case (pixel_mux_change)
-//			'h01 	  : {GBD_MUX, GAD_MUX} <= {GBD[3], GBD[2], GBD[0], GBD[1], GAD[3], GAD[2], GAD[0], GAD[1]};
-//			'h02 	  : {GBD_MUX, GAD_MUX} <= {GBD[3], GBD[1], GBD[2], GBD[0], GAD[3], GAD[1], GAD[2], GAD[0]};
-//			'h03 	  : {GBD_MUX, GAD_MUX} <= {GBD[3], GBD[1], GBD[0], GBD[2], GAD[3], GAD[1], GAD[0], GAD[2]};
-//			'h04 	  : {GBD_MUX, GAD_MUX} <= {GBD[3], GBD[0], GBD[2], GBD[1], GAD[3], GAD[0], GAD[2], GAD[1]};
-//			'h05 	  : {GBD_MUX, GAD_MUX} <= {GBD[3], GBD[0], GBD[1], GBD[2], GAD[3], GAD[0], GAD[1], GAD[2]};
-//			
-//			'h06 	  : {GBD_MUX, GAD_MUX} <= {GBD[2], GBD[3], GBD[1], GBD[0], GAD[2], GAD[3], GAD[1], GAD[0]};
-//			'h07 	  : {GBD_MUX, GAD_MUX} <= {GBD[2], GBD[3], GBD[0], GBD[1], GAD[2], GAD[3], GAD[0], GAD[1]};
-//			'h08 	  : {GBD_MUX, GAD_MUX} <= {GBD[2], GBD[1], GBD[3], GBD[0], GAD[2], GAD[1], GAD[3], GAD[0]};
-//			'h09 	  : {GBD_MUX, GAD_MUX} <= {GBD[2], GBD[1], GBD[0], GBD[3], GAD[2], GAD[1], GAD[0], GAD[3]};
-//			'h0A 	  : {GBD_MUX, GAD_MUX} <= {GBD[2], GBD[0], GBD[3], GBD[1], GAD[2], GAD[0], GAD[3], GAD[1]};
-//			'h0B	  : {GBD_MUX, GAD_MUX} <= {GBD[2], GBD[0], GBD[1], GBD[3], GAD[2], GAD[0], GAD[1], GAD[3]};
-//			
-//			'h0C 	  : {GBD_MUX, GAD_MUX} <= {GBD[1], GBD[3], GBD[2], GBD[0], GAD[1], GAD[3], GAD[2], GAD[0]};
-//			'h0D 	  : {GBD_MUX, GAD_MUX} <= {GBD[1], GBD[3], GBD[0], GBD[2], GAD[1], GAD[3], GAD[0], GAD[2]};
-//			'h0E 	  : {GBD_MUX, GAD_MUX} <= {GBD[1], GBD[2], GBD[0], GBD[3], GAD[1], GAD[2], GAD[0], GAD[3]};
-//			'h0F 	  : {GBD_MUX, GAD_MUX} <= {GBD[1], GBD[2], GBD[3], GBD[0], GAD[1], GAD[2], GAD[3], GAD[0]};
-//			'h10 	  : {GBD_MUX, GAD_MUX} <= {GBD[1], GBD[0], GBD[3], GBD[2], GAD[1], GAD[0], GAD[3], GAD[2]};
-//			'h11 	  : {GBD_MUX, GAD_MUX} <= {GBD[1], GBD[0], GBD[2], GBD[3], GAD[1], GAD[0], GAD[2], GAD[3]};
-//			
-//			'h12 	  : {GBD_MUX, GAD_MUX} <= {GBD[0], GBD[3], GBD[2], GBD[1], GAD[0], GAD[3], GAD[2], GAD[1]};
-//			'h13 	  : {GBD_MUX, GAD_MUX} <= {GBD[0], GBD[3], GBD[1], GBD[2], GAD[0], GAD[3], GAD[1], GAD[2]};
-//			'h14 	  : {GBD_MUX, GAD_MUX} <= {GBD[0], GBD[2], GBD[3], GBD[1], GAD[0], GAD[2], GAD[3], GAD[1]};
-//			'h15 	  : {GBD_MUX, GAD_MUX} <= {GBD[0], GBD[2], GBD[1], GBD[3], GAD[0], GAD[2], GAD[1], GAD[3]};
-//			'h16 	  : {GBD_MUX, GAD_MUX} <= {GBD[0], GBD[1], GBD[2], GBD[3], GAD[0], GAD[1], GAD[2], GAD[3]};
-//			'h17 	  : {GBD_MUX, GAD_MUX} <= {GBD[0], GBD[1], GBD[3], GBD[2], GAD[0], GAD[1], GAD[3], GAD[2]};
-//			default : {GBD_MUX, GAD_MUX} <= {GBD, GAD};
-//		endcase
-	end
+	assign {GBD_MUX, GAD_MUX} = {GBD[0], GBD[2], GBD[1], GBD[3], GAD[0], GAD[2], GAD[1], GAD[3]};
 	
 	
-	linebuffer RAMBR(CLK, CK[0], WE[0], LD1, SS1, GAD_MUX, PCK2, SPR_PAL, PBUS[7:0], RAMBR_OUT);
+	linebuffer RAMBR(CLK, CK[0], WE[0], LD1, SS1, GAD_MUX, PCK2, SPR_PAL, PBUS[7:0],  RAMBR_OUT);
 	linebuffer RAMBL(CLK, CK[1], WE[1], LD1, SS1, GBD_MUX, PCK2, SPR_PAL, PBUS[15:8], RAMBL_OUT);
-	linebuffer RAMTR(CLK, CK[2], WE[2], LD2, SS2, GAD_MUX, PCK2, SPR_PAL, PBUS[7:0], RAMTR_OUT);
+	linebuffer RAMTR(CLK, CK[2], WE[2], LD2, SS2, GAD_MUX, PCK2, SPR_PAL, PBUS[7:0],  RAMTR_OUT);
 	linebuffer RAMTL(CLK, CK[3], WE[3], LD2, SS2, GBD_MUX, PCK2, SPR_PAL, PBUS[15:8], RAMTL_OUT);
 	
 	assign MUX_BA = {TMS0, S1H1};

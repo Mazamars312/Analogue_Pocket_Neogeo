@@ -1,37 +1,44 @@
-# Neogeo for Pocket (Alpha 0.6.0)
+# Neogeo for Pocket (Alpha 0.7.5)
 
 This is the port of the Neogeo Core made by [Furrtek](https://www.patreon.com/furrtek/posts) to the Analogue Pocket using the APF framework and some of my own code.
 
+This version fixes all the memory controllers and locations for every OG Neogeo game to atleast run on the pocket.
+
 ## Installation and Usage 
 
-If you have version 0.5.0 installed, please remove it and re-install with the new release
+If you have version 0.7.0 or below installed, it is recommended that you remove it and re-install with the new release
+
+* There is a added file sfix.sfix required for this installation as well. please see below
 
 The current Darksoft paks will work with this with the following file names:
 *(Working on the *.Neo files soon)
-* 68K Asset: prom
+* 68K PROG Asset: prom
+* 68K PROG1 Asset: prom1 for the 7 games the require it.
 * Z80 Asset: m1rom
 * CROM Asset: crom0
 * SFIX Asset: srom
 * Voice Asset: vroma0
 * Bios: "uni-bios_1_0.rom" - This needs to be in the "/assets/ng/common"
 * Lo Bios: "000-lo.lo" - This needs to be in the "/assets/ng/common"
+* Sfix : "sfix.sfix" - This needs to be in the "/assets/ng/common" - Please make sure you have this files now!!!
 * Copy the folders in the Github (dist) or the release .zip into the root of your SD card
 * Place your game files grouped by game into its own directory in the "\assets\ng\common" folder.
 
 The Autoloading JSON's provided by terminator2k2 all work with the games using the Dark Soft directory names in the "/assets/ng/common' folder
 
 ## How to use differnt BIOS for the core 
-If you want more BIOS to access, First open the "/Cores/Mazamars312.NeoGeo/data.json" file. Then goto the BIOS selections Then you have two options:
+If you want more BIOS to access, First open the "/Cores/Mazamars312.NeoGeo/data.json" file. Then goto the BIOS selections Then you have 3 options:
 * Change the filename to the firmware name you want to autoload in the /assets/ng/comman folder (Line 46 in the data.json)
 * Remove the filename line completely to then be able to select in the Pocket Menu. (Line 46 in the data.json)
+* While in the game, press the home button and /Core Settings/Load Bios and select the other bioses
 
 ## Controllers 
 
 * First and second player work with the Analogue Dock.
-* While in Alpha 0.6.0 the left trigger on the Pocket or on the first player controller is set to the system reset.
+* While in Alpha 0.7.5 the left trigger on the Pocket or on the first player controller is set to the system reset.
 * Currently it is setup for SNES controller layout. Analogue will allow you to change the layout in the input.json for your own enjoyment. 
 
-I have added in the interact.json file to switch between the SNES, Normal Neogeo controller and the Neogeo CD controller layouts for instant changes. Press the home button then goto "/Settings/Cores/Player Type 1" and selectet between the 3 types
+I have added in the interact.json file to switch between the SNES, Normal Neogeo controller and the Neogeo CD controller layouts for instant changes. Press the home button then goto "/Core Settings/Player Type 1" and selectet between the 3 types
 * Option 1 - SNES Controller layout 
 * Option 2 - NeoGeo Normal controller 
 * Option 3 - NeoGeo CDrom Controller 
@@ -40,13 +47,11 @@ I have added in the interact.json file to switch between the SNES, Normal Neogeo
 No at this moment, there are a lot of moving parts in the Neogeo, but once the compatibility is up to a good point then I can get this part done. 
 
 ## Does everything work?
-This build has fixed a lot of the issues in both the Graphics and Sound where most of the games I and many others have tested work correctly.  
-Also there is a group of people who have helped me test many games and advise me the issues they have.   
-Also Memory cards are fully working and are made for each game at 16Kbytes each. Backup memory is in the core and was tested working  
-The next build I want to get both the SFIX and prom1 roms sorted so every darksoft romset works. There is pleanty of room there for this, it is just me having to build this up.
+This build has fixed a lot with the memory units where all of the larger orginal Neogeo game will load now. So to my knowledge every OG Neogeo game will run. so please advise if you find one that does not :-)  
+There are graphic fixes that need to be addressed on games like KOF2003 with the timer and a few others. This will be looked at in later versions.
 
-## Will you get King of Fighters 2003 and any game with larger SFIX roms to work???
-I hope to move the SFIX asset shortly so this will allow all games to run, right now I have this in the SRAM which is 256Kbyte in size. Also the prom1 file needs to be done, which Im doing on the next build.
+## Will you get NEO files working?
+Soon I want to do this in later versions at this moment. I dont fully understand how these files fully at this moment. So this is a limit on my side for this moment.
 
 ## Do I have to build JSON files for each game
 No not evey game, terminator2k2 has build every game that is in the ROMset that also configures the core for special chips as well. So big thanks to him on this. His code via python is in the folders as well. He has also added Xeno Crisis JSON as well, So please support [Bitmap Bureau](https://bitmapbureau.com/) and get their fantastic game.
@@ -59,7 +64,19 @@ I've made the following modules which are free to use without any license and fu
 * I2S Audio Bus
 
 ## Can I play in PAL mode
-Yes. Once in the game, press the Anaolgue Pocket's Home button then direct yourself to the /Settings/Cores menu. In there you can select between NTSC and PAL on the fly. You can even move the screen around, but this is very limited at this moment.
+Yes. Once in the game, press the Anaolgue Pocket's Home button then direct yourself to the /Core Settings/Cores menu. In there you can select between NTSC and PAL on the fly. You can even move the screen around, but this is very limited at this moment.
+
+## Why is the refresh different then to the Mister core?
+First off the core runs in MSV mode (so a straight 24mhz) So I bet that is one of the two issues.
+
+Secondly, I am using a PLL and not counters for dividing the clocks internally on the Neogeo, My theory is that the counters ran a bit faster on the set and hold stage of the regs then the PLL.
+
+## Some games are cut off on the sides of the image
+
+It looks like some games like to use about 304 pixel output and others like 320 pixels. The next build will have this option to select between these two options.
+
+## Why where you late with this release?
+I have been both moving house and renovating at the same time. So I didnt want dust on and in my computer and Pocket. 20sq meters of ripping up tiles is a fun task but very dusty job.
 
 ## License
 * All the code I have built is free and open to everyone to help on building cores. 

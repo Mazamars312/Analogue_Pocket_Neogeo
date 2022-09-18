@@ -1,6 +1,6 @@
 	component Video_change is
 		port (
-			probe      : in  std_logic_vector(15 downto 0) := (others => 'X'); -- probe
+			probe      : in  std_logic_vector(31 downto 0) := (others => 'X'); -- probe
 			source_clk : in  std_logic                     := 'X';             -- clk
 			source     : out std_logic_vector(31 downto 0)                     -- source
 		);

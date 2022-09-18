@@ -26,6 +26,10 @@
 					{
 		        "id": 7,
 						"filename": "vroma0"
+		      },
+					{
+		        "id": 8,
+						"filename": "prom1"
 		      }
 		    ],
 			"memory_writes": [

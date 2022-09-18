@@ -43,6 +43,7 @@ module cram_16bit
 
 	input						word_rd,
 	input						word_wr,
+	input						word_32bit,
 	input	 		[23:0]	word_addr,
 	input	 		[31:0]	word_data,
 	output reg  [31:0]	word_q,
@@ -63,19 +64,15 @@ module cram_16bit
 	output reg [15:0] 	PROM_DATA,
 	output reg        	PROM_DATA_READY,
 	
-		// Backup SRAM controls
+		// SROM access control
 	
-	input 					nBWL, 
-	input 					nBWU,
-	input 					nSRAMOE,
-	output [15:0]			SRAM_DATA,
-	
-		// Work RAM controls
-	
-	input 					nWWL,
-	input 					nWWU,
-	input 					nWORKRAM,
-	output [15:0]			WORK_RAM,
+	input             	nSYSTEM_G,
+	input      [15:0] 	PBUS,
+	input       [1:0] 	FIX_BANK,
+	input 					PCK2,
+	input 					S2H1,
+	output reg [7:0]  	SROM_DATA,	// 4 pixels
+
 
 		// Z80 controls
 	
@@ -99,10 +96,7 @@ module cram_16bit
 	
 	reg [7:0]				dout;
 	
-//	always @(posedge sys_clk) begin
-//		z80dout <= dout;
-//		rd_ack  <= z80_rd_ack;
-//	end
+
 
 	/*********************************************************************************
 	// Address Decoder for the CRAM for the Downloading having full access
@@ -120,8 +114,7 @@ module cram_16bit
 		32'h1000_0000 - 107F-FFFF (8Mbytes for Program 2 rom)
 		32'h1080_0000 - 109F-FFFF (2Mbytes for Program rom)
 		32'h10A0_0000 - 10A1-FFFF (128Kbyte for Bios)
-		32'h10A2_0000 - 10A2-FFFF (64Kbyte for Work Ram)
-		32'h10A3_0000 - 10A3-FFFF (64Kbyte for Backup Ram)
+		
 		32'h10F8_0000 - 10FF-FFFF (512Kbyte for the Z80 RAM)
 	
 	
@@ -142,7 +135,7 @@ module cram_16bit
 	parameter	read_16bit						=	'd2;
 	parameter	read_32bit						=	'd3;
 	parameter	write_32bit						=	'd4;
-	parameter	write_16bit						=	'd5;
+	parameter	write_8bit						=	'd5;
 	
 	reg [2:0] 	ram_state;
 	reg [31:0]	RAM_DATA_WRITE;
@@ -175,20 +168,27 @@ module cram_16bit
 	reg [24:1] 	P2ROM_ADDR_REG;
 	reg			REQ_Z80_RD_SIG_REG;
 	
-	wire REQ_M68K_RD_SIG = ~&{nROMOE, nPORTOE, nSROMOE, nSRAMOE, nWORKRAM};
+	wire REQ_M68K_RD_SIG = ~&{nROMOE, nPORTOE, nSROMOE};
 	wire REQ_M68K_RD 		= (~REQ_M68K_RD_SIG_REG & REQ_M68K_RD_SIG);
-	
-	wire REQ_M68K_WD_SIG = ~&{nBWU, nBWL, nWWL, nWWU};
-	wire REQ_M68K_WD 		= (~REQ_M68K_WD_SIG_REG & REQ_M68K_WD_SIG);
-	
+		
 	wire REQ_Z80_RD_SIG 	= &{~z80_nSDROM, ~z80_nSDMRD};
 	wire REQ_Z80_RD 		=  (~REQ_Z80_RD_SIG_REG & REQ_Z80_RD_SIG);
+	
+	wire REQ_SROM_RD = ~PCK2_reg & PCK2; // We do a double check here.
 	
 	reg [7:0] REQ_Z80_RD_counter;
 	reg REQ_Z80_REQ;
 	reg M68K_RD_REQ_1;
 	reg old_clk;
 	reg z80_ready_reg;
+	
+	reg [15:0] 	SROM_DATA_reg, SROM_DATA_reg1;
+	reg 			REQ_SROM_REQ;
+	reg 			S_LATCH12reg;
+	reg 			PCK2_reg;
+	reg [15:0]	PBUS_REG;
+	
+	reg [6:0]	Ram_wait;
 	
 	always @(posedge sys_clk or negedge reset_l_main) begin
 		if (~reset_l_main) begin
@@ -205,10 +205,8 @@ module cram_16bit
 			z80clk_reg				<= 0;
 			OPB_32Bit				<= 1'b1;
 			M68K_WD_REQ				<= 1'b0;
-			SRAM_DATA				<= 16'b0;
 			M68K_DATA_SAVE			<= 16'h0;
 			address_write_reg		<= 25'h0;
-			WORK_RAM					<= 16'h0;
 			M68K_ADDR_REG			<= 'b0;
 			P2ROM_ADDR_REG			<= 'b0;
 			REQ_Z80_RD_SIG_REG	<= 'b0;
@@ -218,19 +216,21 @@ module cram_16bit
 			old_clk					<= 1'b0;
 			z80_ready				<= 1'b1;
 			REQ_Z80_RD_counter 	<= 1'b0;
+			REQ_SROM_REQ			<= 1'b0;
+			S_LATCH12reg			<= 1'b0;
+			PCK2_reg					<= 1'b0;
 		end
 		else begin
 			
 			Sln_xferAck_reg 		<= Sln_xferAck;
 			
 			z80clk_reg				<= z80_clk;
-			
+			S_LATCH12reg 			<= PBUS_REG[12];
+			PCK2_reg				<= PCK2;
 			M68K_RD_REQ_1			<= M68K_RD_REQ; // We need another delay for the core
-			
 			// This is for the 68K core Access
 			if (nRESET) begin
 				REQ_M68K_RD_SIG_REG 							<= REQ_M68K_RD_SIG;
-				REQ_M68K_WD_SIG_REG							<= REQ_M68K_WD_SIG;
 				REQ_Z80_RD_SIG_REG							<= REQ_Z80_RD_SIG;
 				nAS_PREV 										<= nAS;
 				
@@ -245,29 +245,18 @@ module cram_16bit
 					z80_ready									<= 1'b0;
 				end
 				
+				if (REQ_SROM_RD) 	begin	
+					REQ_SROM_REQ 								<= 1'b1;
+					PBUS_REG										<= PBUS;
+				end
+				
 				if (~nAS_PREV & nAS) begin
 					PROM_DATA_READY 							<= 1'b0;
 					P2ROM_ADDR_REG								<= P2ROM_ADDR;
 					M68K_ADDR_REG								<= M68K_ADDR;
 				end
-				
-				if (REQ_M68K_WD) begin
-					M68K_WD_REQ 								<= 1'b1;
-					M68K_DATA_SAVE 							<= M68K_DATA;
-		
-					casez({ &{nBWU, nBWL} , &{nWWL,nWWU}})
-						// 32'h10A3_0000 - 10A3-FFFF (64Kbyte for Backup Ram)
-						2'b0z : begin
-							address_write_reg <= {8'b1010_0011, M68K_ADDR[15:1],1'b0};
-							masking_write_reg <= {2{~nBWU,~nBWL}};
-						end
-						// 32'h10A2_0000 - 10A2-FFFF (64Kbyte for Work Ram)
-						default : begin
-							address_write_reg <= {8'b1010_0010, M68K_ADDR[15:1],1'b0};
-							masking_write_reg <= {2{~nWWU,~nWWL}};
-						end
-					endcase
-				end
+				if (~PCK2_reg & PCK2) Ram_wait <= 1'd0;
+				else Ram_wait <= Ram_wait + 1;
 				
 			end
 			else begin // Reset cores
@@ -279,6 +268,7 @@ module cram_16bit
 				REQ_Z80_RD_SIG_REG							<= 0;
 				z80clk_reg										<= 0;
 				z80_ready_reg									<= 1'b1;
+				Ram_wait											<= 0;
 			end
 			
 			// Z80 Rise and fall signal to the controller.
@@ -290,16 +280,49 @@ module cram_16bit
 					if (|{word_rd, word_wr}) begin
 						RAM_READ 			<= word_rd;
 						RAM_Access 			<= 1'b1;
-						ram_state 			<= (word_rd ? read_32bit : write_32bit);
-						word_busy 			<= 1'b1;
-						OPB_BE 				<= 4'hF;
+						case ({word_rd, word_32bit})
+							2'b11		: ram_state <= read_32bit;
+							2'b10		: ram_state <= read_16bit;
+							2'b01		: ram_state <= write_32bit;
+							default 	: ram_state <= write_8bit;
+						endcase
+						word_busy 			<= 1'b1; 
+						OPB_BE 				<= word_32bit ? 4'hF : {2{~word_addr[0], word_addr[0]}};
 						RAM_DATA_WRITE		<= word_data;
 						channel_read		<= 3'd0;
 						RAM_ADDR 			<= word_addr; // Add the address MUX in the waiter
-						OPB_32Bit			<= 1'b1;
+						OPB_32Bit			<= word_32bit;
+					end					
+					
+					else if(REQ_SROM_REQ) begin
+						RAM_READ 		<= 1'b1;
+						RAM_Access 		<= 1'b1;
+						word_busy 		<= 1'b1;
+						ram_state 		<= read_16bit;
+						channel_read	<= 3'd3;
+//						if (REQ_SROM_REQ) begin
+//						RAM_ADDR 		<= nSYSTEM_G ? {4'b1100, 1'b0, FIX_BANK[1:0], PBUS[11:0], PBUS[14:12], PBUS[15], 1'b0}: 
+//																{4'b1101, 1'b0, 2'b00,         PBUS[11:0], PBUS[14:12], PBUS[15], 1'b0};
+//						end
+//						else begin
+						RAM_ADDR 		<= nSYSTEM_G ? {4'b1100, 1'b0, FIX_BANK[1:0], PBUS_REG[11:0], PBUS_REG[14:12], PBUS_REG[15], 1'b0}: 
+																{4'b1101, 1'b0, 2'b00,         PBUS_REG[11:0], PBUS_REG[14:12], PBUS_REG[15], 1'b0};
+//						end
+						
+						OPB_BE 			<= 4'hF;
 					end
 					
-					else if(M68K_RD_REQ) begin
+					else if(REQ_Z80_REQ && Ram_wait <= 'd53) begin
+						RAM_READ 		<= 1'b1;
+						RAM_Access 		<= 1'b1;
+						word_busy 		<= 1'b1;
+						ram_state 		<= read_16bit;
+						channel_read	<= 3'd2;
+						RAM_ADDR 		<= {5'b1111_1, z80_rdaddr};
+						OPB_BE 			<= 4'hF;
+					end
+					
+					else if(M68K_RD_REQ && Ram_wait <= 'd53) begin
 						RAM_READ 			<= 1'b1;
 						RAM_Access 			<= 1'b1;
 						word_busy 			<= 1'b1;
@@ -308,57 +331,24 @@ module cram_16bit
 						RAM_DATA_WRITE		<= {2{M68K_DATA}};
 						channel_read		<= 3'd1;
 						OPB_BE 				<= 4'hF;
-						casez ({nWORKRAM, nSRAMOE, nROMOE, nPORTOE})
-							// Work Ram 32'h0102_0000 - 0102_FFFF
-							4'b0zzz: begin
-								RAM_ADDR 		<= {8'b1010_0010, M68K_ADDR[15:1],1'b0};
-								channel_read	<= 3'd4;
-							end
-							// backup Ram 32'h0103_0000 - 0103_FFFF
-							4'b10zz: begin
-								RAM_ADDR 		<= {8'b1010_0011, M68K_ADDR[15:1],1'b0};
-								channel_read	<= 3'd1;
-							end
+						casez ({nROMOE, nPORTOE})
+							
 							// P1 ROM 32'h1000_0000 - 100F_FFFF
-							4'b110z: begin
+							2'b0z: begin
 								RAM_ADDR 		<= {4'b0000, M68K_ADDR[19:1],1'b0};
-								channel_read	<= 3'd3;
 							end
 							// P2 ROM (cart) 32'h108f_ffff - 0000_0000 - We give this a full 8Mbytes
-							4'b1110: begin
-								RAM_ADDR 		<= {1'b0, P2ROM_ADDR[22:1],1'b0} + P2ROM_OFFSET;
-								channel_read	<= 3'd3;
+							2'b10: begin
+								RAM_ADDR 		<= {P2ROM_ADDR[23:1],1'b0} + P2ROM_OFFSET;
 							end
 							// System ROM (cart)	32'h0100_0000 - 010F_FFFF We can allow the full 128kb size
 							default : begin
 								RAM_ADDR 		<= {7'b1010_000, M68K_ADDR[16:1],1'b0} ;
-								channel_read	<= 3'd3;
 							end
 						endcase
 					end
 					
-					else if(M68K_WD_REQ) begin
-						RAM_READ 			<= 1'b0;
-						RAM_Access 			<= 1'b1;
-						ram_state 			<= write_16bit;
-						word_busy 			<= 1'b1;
-						RAM_DATA_WRITE		<= {2{M68K_DATA}};
-						channel_read		<= 3'd4;
-						RAM_ADDR 			<= address_write_reg; // Add the address MUX in the waiter
-						OPB_32Bit			<= 1'b0;
-						OPB_BE 				<= masking_write_reg;
-					end
 					
-					
-					else if(REQ_Z80_REQ) begin
-						RAM_READ 		<= 1'b1;
-						RAM_Access 		<= 1'b1;
-						word_busy 		<= 1'b1;
-						ram_state 		<= read_16bit;
-						channel_read	<= 3'd2;
-						RAM_ADDR 		<= {5'b1111_1, z80_rdaddr}; // bloody weird sizes
-						OPB_BE 			<= 4'hF;
-					end
 				end
 				read_32bit, // need to work on this next
 				read_16bit : begin
@@ -370,11 +360,7 @@ module cram_16bit
 							3'd0 : begin
 								word_q <= Sln_DBus;
 							end
-							3'd1 : begin
-								SRAM_DATA 			<= Sln_DBus[15:0];
-								M68K_RD_REQ		 	<= 1'b0;
-								PROM_DATA_READY 	<= 1'b1;
-							end
+							
 							3'd2 : begin
 								case (RAM_ADDR[0])
 									1'b1 		: z80_dout <= Sln_DBus[15: 8];
@@ -383,11 +369,12 @@ module cram_16bit
 								z80_ready_reg		<= 1'b1;
 								REQ_Z80_REQ			<= 1'b0;
 							end
-							3'd4 : begin
-								WORK_RAM				<= Sln_DBus[15:0];
-								M68K_RD_REQ		 	<= 1'b0;
-								PROM_DATA_READY 	<= 1'b1;
+							
+							3'd3 : begin
+								SROM_DATA_reg <= Sln_DBus;
+								REQ_SROM_REQ	<= 1'b0;
 							end
+							
 							default : begin
 								PROM_DATA 			<= Sln_DBus[15:0]; 
 								M68K_RD_REQ		 	<= 1'b0;
@@ -399,7 +386,7 @@ module cram_16bit
 						word_busy <= 'b1;
 					end
 				end
-				write_16bit,
+				write_8bit,
 				write_32bit : begin
 					if (Sln_xferAck && ~Sln_xferAck_reg) begin
 						ram_state 	<= idle;
@@ -413,9 +400,16 @@ module cram_16bit
 					ram_state <= idle;
 				end
 			endcase
+			SROM_DATA_reg1 <= SROM_DATA_reg;
 		end
 	end
-	
+
+	always @* begin
+		case(S2H1)
+			1'b0 		: SROM_DATA <= SROM_DATA_reg[15:8];
+			default 	: SROM_DATA <= SROM_DATA_reg[ 7:0];
+		endcase
+	end
 	
 	// CRAM Controller
 	

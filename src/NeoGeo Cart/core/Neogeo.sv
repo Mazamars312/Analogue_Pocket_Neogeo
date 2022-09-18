@@ -183,6 +183,7 @@ wire				sram_word_busy;
 
 wire				cram0_word_rd;
 wire				cram0_word_wr;
+wire				cram0_word_32bit;
 wire	[24:0]	cram0_word_addr;
 wire	[31:0]	cram0_word_data;
 wire	[31:0]	cram0_word_q;
@@ -447,6 +448,7 @@ apf_io apf_io
 	
 	.cram0_word_rd				(cram0_word_rd),
 	.cram0_word_wr				(cram0_word_wr),
+	.cram0_word_32bit			(cram0_word_32bit),
 	.cram0_word_addr			(cram0_word_addr),
 	.cram0_word_data			(cram0_word_data),
 	.cram0_word_q				(cram0_word_q),
@@ -636,17 +638,25 @@ wire [15:0] WORK_RAM;
 wire nBWL = nSRAMWEL | nSRAMWEN_G;
 wire nBWU = nSRAMWEU | nSRAMWEN_G;
 
+assign sram_a = M68K_ADDR_RAM[15:1];
+assign sram_dq[7:0]  = cram_nWWL ? 8'bzz : M68K_DATA_RAM[7:0];
+assign sram_dq[15:8] = cram_nWWU ? 8'bzz : M68K_DATA_RAM[15:8];
+assign sram_oe_n = &{nWRL, nWRU};
+assign sram_we_n = &{cram_nWWL, cram_nWWU};
+assign sram_ub_n = &{cram_nWWU, nWRU};
+assign sram_lb_n = &{cram_nWWL, nWRL};
+
 
 assign M68K_DATA[7:0] = (nSRAMOEL | ~SYSTEM_MVS) ? 8'bzzzzzzzz : SRAM_OUT[7:0];
 assign M68K_DATA[15:8] = (nSRAMOEU | ~SYSTEM_MVS) ? 8'bzzzzzzzz : SRAM_OUT[15:8];
 
 // Work RAM or CD extended RAM read
-assign M68K_DATA[7:0]  = nWRL ? 8'bzzzzzzzz : WORK_RAM[7:0];
-assign M68K_DATA[15:8] = nWRU ? 8'bzzzzzzzz : WORK_RAM[15:8];
+assign M68K_DATA[7:0]  = nWRL ? 8'bzzzzzzzz : sram_dq[7:0];
+assign M68K_DATA[15:8] = nWRU ? 8'bzzzzzzzz : sram_dq[15:8];
 
 // Because of the SDRAM latency, nDTACK is handled differently for ROM zones
 // If the address is in a ROM zone, PROM_DATA_READY is used to extend the normal nDTACK output by NEO-C1
-wire nDTACK_ADJ = ~&{nWRU, nWRL, nSRAMOEL, nSRAMOEU, nSROMOE, nROMOE, nPORTOE} ? ~PROM_DATA_READY | nDTACK : nDTACK;
+wire nDTACK_ADJ = ~&{nSROMOE, nROMOE, nPORTOE} ? ~PROM_DATA_READY | nDTACK : nDTACK;
 
 wire cram_nWWL = nWWL;
 wire cram_nWWU = nWWU;
@@ -688,21 +698,18 @@ cram_16bit CPU68K_z80_RAM_CONTROLLER(
 	
 	.word_rd				(cram0_word_rd),
 	.word_wr				(cram0_word_wr),
+	.word_32bit			(cram0_word_32bit),
 	.word_addr			(cram0_word_addr),
 	.word_data			(cram0_word_data),
 	.word_q				(cram0_word_q),
 	.word_busy			(cram0_word_busy),
 	
-	.nBWL					(nBWL), 
-	.nBWU					(nBWU),
-	.nSRAMOE				(&{nSRAMOEL, nSRAMOEU}),
-//	.SRAM_DATA			(SRAM_OUT),
-	
-	.nWWL					(cram_nWWL),
-	.nWWU					(cram_nWWU),
-	.nWORKRAM			(&{nWRL, nWRU}),
-	.WORK_RAM			(WORK_RAM),
-	
+	.nSYSTEM_G			(nSYSTEM_G),
+	.PBUS					(PBUS[15:0]),
+	.PCK2					(PCK2),
+	.S2H1					(S2H1),
+	.FIX_BANK			(FIX_BANK),
+	.SROM_DATA			(SROM_DATA),	
 	
 	.M68K_ADDR			(M68K_ADDR_RAM),
 	.M68K_DATA			(M68K_DATA_RAM),
@@ -735,19 +742,11 @@ Graphics_MUX Graphics_MUX(
 	.CLK					(clk_sys),
 	.sdram_clk			(sdram_int_clk),
 	.nRESET				(nRESET),
-	.nSYSTEM_G			(nSYSTEM_G),
 
 	.PCK1					(PCK1),
 	.CROM_ADDR			(CROM_ADDR),
 	.CROM_MASK			(CROM_MASK),
 	.CR_DOUBLE			(CR_DOUBLE),
-
-	.PCK2					(S2H1),
-	.S_LATCH				(S_LATCH),
-	.S2H1					(S2H1),
-	.FIX_BANK			(FIX_BANK),
-	.SROM_DATA			(SROM_DATA),
-	.FIX_EN				(FIX_EN),
 
 	.burst_rd			(sdram_burst_rd ),
 	.burst_addr			(sdram_burst_addr ),
@@ -755,21 +754,8 @@ Graphics_MUX Graphics_MUX(
 	.burst_32bit		(sdram_burst_32bit ),
 	.burst_data			(sdram_burst_data ),
 	.burst_data_valid	(sdram_burst_data_valid ),
-	.burst_data_done	(sdram_burst_data_done ),
+	.burst_data_done	(sdram_burst_data_done )
 	
-	.sram_word_rd		(sram_word_rd),
-	.sram_word_wr		(sram_word_wr),
-	.sram_word_addr	(sram_word_addr),
-	.sram_word_data	(sram_word_data),
-	.sram_word_q		(sram_word_q),
-	.sram_word_busy	(sram_word_busy),
-	
-	.sram_a				(sram_a),
-	.sram_dq				(sram_dq),
-	.sram_oe_n			(sram_oe_n),
-	.sram_we_n			(sram_we_n),
-	.sram_ub_n			(sram_ub_n),
-	.sram_lb_n			(sram_lb_n)
 );
 
 io_sdram io_sdram (

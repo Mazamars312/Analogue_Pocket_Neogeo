@@ -7,11 +7,11 @@
                 "id": 1,
                 "type": "slider_u32",
                 "enabled": true,
-				"writepersist": true,
+				"persist": true,
                 "address": "0xF0000034",
                 "mask": "0x00000000",
                 "graphical": {
-                    "default": "0",
+                    "defaultval": "0",
                     "signed": true,
                     "min": -40,
                     "max": 40,
@@ -24,11 +24,11 @@
                 "id": 2,
                 "type": "slider_u32",
                 "enabled": true,
-				"writepersist": true,
+				"persist": true,
                 "address": "0xF0000038",
                 "mask": "0x00000000",
                 "graphical": {
-                    "default": "0",
+                    "defaultval": "0",
                     "signed": true,
                     "min": -16,
                     "max": 16,
@@ -41,11 +41,11 @@
                 "id": 3,
                 "type": "slider_u32",
                 "enabled": true,
-				"writepersist": true,
+				"persist": true,
                 "address": "0xF0000000",
                 "mask": "0xFFFFFFFC",
                 "graphical": {
-                    "default": "0",
+                    "defaultval": "0",
                     "signed": false,
                     "min": 0,
                     "max": 2,
@@ -58,11 +58,11 @@
                 "id": 4,
                 "type": "slider_u32",
                 "enabled": true,
-				"writepersist": true,
+				"persist": true,
                 "address": "0xF0000004",
                 "mask": "0xFFFFFFFC",
                 "graphical": {
-                    "default": "0",
+                    "defaultval": "0",
                     "signed": false,
                     "min": 0,
                     "max": 2,
@@ -70,14 +70,13 @@
                     "adjust_large": 1
                 }
             },
-				
 			{
                 "name": "PAL Output",
                 "id": 5,
                 "type": "radio",
                 "enabled": true,
 				"group": 101,
-				"writepersist": true,
+				"persist": true,
                 "address": "0xF0000018",
 				"value": "0x1",
                 "mask": "0xFFFFFFFE"
@@ -89,56 +88,11 @@
                 "type": "radio",
                 "enabled": true,
 				"group": 101,
-				"writepersist": true,
+				"persist": true,
                 "address": "0xF0000018",
 				"value": "0x0",
                 "mask": "0xFFFFFFFE"
                 
-            },
-			{
-                "name": "Dipswitch 0",
-                "id": 7,
-                "type": "check",
-                "enabled": true,
-                "address": "0xf0000008",
-                "value": 128,
-                "mask": "0xFFFFFF7F"
-            },
-			{
-                "name": "Dipswitch 1",
-                "id": 8,
-                "type": "check",
-                "enabled": true,
-                "address": "0xf0000008",
-                "value": 64,
-                "mask": "0xFFFFFFBF"
-            },
-			{
-                "name": "Dipswitch 2",
-                "id": 9,
-                "type": "check",
-                "enabled": true,
-                "address": "0xf0000008",
-                "value": 32,
-                "mask": "0xFFFFFFDF"
-            },
-			{
-                "name": "Dipswitch 3",
-                "id": 10,
-                "type": "check",
-                "enabled": true,
-                "address": "0xf0000008",
-                "value": 16,
-                "mask": "0xFFFFFFEF"
-            },
-			{
-                "name": "Dipswitch 4",
-                "id": 11,
-                "type": "check",
-                "enabled": true,
-                "address": "0xf0000008",
-                "value": 8,
-                "mask": "0xFFFFFFF7"
             }
 		],
         "messages": []

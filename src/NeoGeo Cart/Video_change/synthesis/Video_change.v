@@ -4,7 +4,7 @@
 
 `timescale 1 ps / 1 ps
 module Video_change (
-		input  wire [15:0] probe,      //     probes.probe
+		input  wire [31:0] probe,      //     probes.probe
 		input  wire        source_clk, // source_clk.clk
 		output wire [31:0] source      //    sources.source
 	);
@@ -13,9 +13,9 @@ module Video_change (
 		.sld_auto_instance_index ("YES"),
 		.sld_instance_index      (0),
 		.instance_id             ("VMUX"),
-		.probe_width             (16),
+		.probe_width             (32),
 		.source_width            (32),
-		.source_initial_value    ("15"),
+		.source_initial_value    ("13"),
 		.enable_metastability    ("YES")
 	) in_system_sources_probes_0 (
 		.source     (source),     //    sources.source

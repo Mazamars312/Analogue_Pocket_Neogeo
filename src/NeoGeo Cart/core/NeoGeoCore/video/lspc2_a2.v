@@ -597,7 +597,13 @@ module lspc2_a2(
 	lspc_timer TIMER(LSPC_6M, nRESETP, M68K_DATA, WR_TIMER_HIGH, WR_TIMER_LOW, VMODE, TIMER_MODE, TIMER_STOP,
 						RASTERC, TIMER_IRQ_EN, R74_nQ, BNKB, D46A_OUT);
 	
-	resetp RSTP(CLK_24MB, RESET, nRESETP, CLK_6MB, CLK_1HB, clk_sys);
+	resetp RSTP(
+	.clk_sys		(clk_sys),
+	.CLK_6MB		(CLK_6MB),
+	.CLK_1HB		(CLK_1HB),
+	.nRESET		(RESET),
+	.nRESETP		(nRESETP)
+	);
 	
 	wire BNK;
 	irq IRQ(WR_IRQ_ACK, M68K_DATA[2:0], RESET, D46A_OUT, BNK, LSPC_6M, IPL0, IPL1);

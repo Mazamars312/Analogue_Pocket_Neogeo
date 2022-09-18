@@ -70,9 +70,9 @@
   <parameter name="device_family" value="Cyclone V" />
   <parameter name="gui_use_auto_index" value="true" />
   <parameter name="instance_id" value="VMUX" />
-  <parameter name="probe_width" value="16" />
+  <parameter name="probe_width" value="32" />
   <parameter name="sld_instance_index" value="0" />
-  <parameter name="source_initial_value" value="15" />
+  <parameter name="source_initial_value" value="13" />
   <parameter name="source_width" value="32" />
  </module>
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />

@@ -27,8 +27,8 @@ https://fpgasoftware.intel.com/eula.
 	(port
 		(pt 0 72)
 		(input)
-		(text "probe[15..0]" (rect 0 0 46 12)(font "Arial" (font_size 8)))
-		(text "probe[15..0]" (rect 4 61 76 72)(font "Arial" (font_size 8)))
+		(text "probe[31..0]" (rect 0 0 46 12)(font "Arial" (font_size 8)))
+		(text "probe[31..0]" (rect 4 61 76 72)(font "Arial" (font_size 8)))
 		(line (pt 0 72)(pt 80 72)(line_width 3))
 	)
 	(port

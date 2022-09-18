@@ -132,6 +132,7 @@ module apf_io
 	
 	output 				cram0_word_rd,
 	output  				cram0_word_wr,
+	output				cram0_word_32bit,
 	output  	[23:0]	cram0_word_addr,
 	output  	[31:0]	cram0_word_data,
 	input 	  [31:0]	cram0_word_q,
@@ -536,7 +537,8 @@ wire [7:0] test_crom_bits = { // this is a trick Im doing to check if anything i
 									crom_addr_reg > 'h4_0000}; // Greater then .25mbyte [15]
 									
 reg 			cart_pchip_main;
-reg [2:0] 	cart_pchip_sub;							
+reg [2:0] 	cart_pchip_sub;
+reg			PROM1_access;							
 // APF write access over the 32bit address system and setup of the core
 always @(posedge clk_74a or negedge reset_l_main) begin
 	if (~reset_l_main) begin
@@ -561,19 +563,25 @@ always @(posedge clk_74a or negedge reset_l_main) begin
 		screen_y_pos		 	<= 32'h00000000;
 		V2_offset			 	<= 32'h00000000;
 		cart_chip				<= 32'h00000000;
+		PROM1_access			<= 1'b0;
 	end
 	else begin
 	bridge_addr_reg <= bridge_addr[25:0];
 	CROM_MASK_STAGE_1 <= {test_crom_bits};
 	CROM_MASK 	<= {CROM_MASK_STAGE_1, {16{|CROM_MASK_STAGE_1}}};
+	
 	if (bridge_wr) begin
+		if (bridge_addr[31:24] == 8'h10) begin
+			if (bridge_addr[23:20] == 4'h8) PROM1_access <= 1'b1;
+			else if (bridge_addr[23] == 1'b0)PROM1_access <= 1'b0;
+		end
 		casex(bridge_addr)
 			32'h4xxxxxxx: begin
 				crom_addr_reg <= bridge_addr[25:0];
 			end
 			// these will monitor the masking side of the roms
 			32'b0001_0000_0xxx_xxxx_xxxx_xxxx_xxxx_xxxx: begin
-				P2ROM_MASK 	<= test_23_bits;
+				P2ROM_MASK 	<= {PROM1_access, test_23_bits};
 			end
 			32'b0001_0000_1111_1xxx_xxxx_xxxx_xxxx_xxxx: begin
 				MROM_MASK 	<= test_19_bits;
@@ -707,7 +715,7 @@ end
 
 *********************************************************/
 
-ram_32_bit_state_controller ram_CRAM0_controller(
+ram_32_bit_sfix_state_controller ram_CRAM0_controller(
 	.clk_74a							(clk_74a),
 	.clk_sys							(clk_sys),
 	.reset_l							(reset_l_main),
@@ -717,6 +725,7 @@ ram_32_bit_state_controller ram_CRAM0_controller(
 	// Ram Controller
 	.word_rd							(cram0_word_rd),
 	.word_wr							(cram0_word_wr),
+	.word_32bit						(cram0_word_32bit),
 	.word_addr						(cram0_word_addr),
 	.word_data						(cram0_word_data),
 	.word_q							(cram0_word_q),

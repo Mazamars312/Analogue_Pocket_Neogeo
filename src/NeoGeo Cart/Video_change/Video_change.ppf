@@ -7,6 +7,6 @@
  <global>
   <pin name="source[31..0]" direction="output" scope="external" />
   <pin name="source_clk" direction="input" scope="external" />
-  <pin name="probe[15..0]" direction="input" scope="external" />
+  <pin name="probe[31..0]" direction="input" scope="external" />
  </global>
 </pinplan>
