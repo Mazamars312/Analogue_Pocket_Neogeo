@@ -71,6 +71,8 @@ First off the core runs in MSV mode (so a straight 24mhz) So I bet that is one o
 
 Secondly, I am using a PLL and not counters for dividing the clocks internally on the Neogeo, My theory is that the counters ran a bit faster on the set and hold stage of the regs then the PLL.
 
+Will be making a PLL Configuration tool soon to correct this.
+
 ## Some games are cut off on the sides of the image
 
 It looks like some games like to use about 304 pixel output and others like 320 pixels. The next build will have this option to select between these two options.
