@@ -293,10 +293,9 @@
     "code": "janshin"
   },
   {
-    "templateFile": "template2.json",
     "name": "Puzzled",
     "code": "joyjoy",
-    "replacements": {
+    "memory_writes": {
       "PCM": "0xFFFFFFFF",
       "OFFSET": "0x00200000"
     }
