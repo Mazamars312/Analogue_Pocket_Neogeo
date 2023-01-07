@@ -27,27 +27,38 @@ except:
     exit(1)
 
 
-defaultTemplateFile = "./template.json"
+templateFilePath = "./template.json"
+
+memoryMap = {
+    "PVC-Cart": "0xf0000024",
+    "PCM":      "0xf0000028",
+    "SMA-Cart": "0xf000002C",
+    "CMC-Chip": "0xf0000030",
+    "OFFSET":   "0xf000003C",
+    "CTOLINK":  "0xf0000040",
+}
+
 
 for game in games:
-    templateFilePath = game["templateFile"] if "templateFile" in game else defaultTemplateFile
     gameFilePath = './Game.json/{}.json'.format(game["name"])
 
     print("Processing {} ({})".format(game["code"], game["name"]))
 
     # open both files
     with open(templateFilePath, 'r') as template, open(gameFilePath, 'w') as gameJsonFile:
-        content = template.read()
+        content = json.load(template)
 
-        content = content.replace("GameFolder/", game["code"])
+        content["instance"]["data_path"] = game["code"]
 
-        # perform all replacements if necesary
-        if "replacements" in game:
-            for placeholder, value in game["replacements"].items():
-                content = content.replace(placeholder, value)
+        if ("memory_writes" in game):
+            for memId, data in game["memory_writes"].items():
+                content["instance"]["memory_writes"].append({
+                    "address": memoryMap[memId],
+                    "data": data
+                })
 
         # write to game file
-        gameJsonFile.write(content)
+        gameJsonFile.write(json.dumps(content, indent=2))
 
 
 print("{} json game files generated successfully".format(len(games)))

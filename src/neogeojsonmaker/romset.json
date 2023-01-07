@@ -62,10 +62,9 @@
   {
     "name": "Blue's Journey",
     "code": "bjourney",
-    "templateFile": "template2.json",
-    "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00200000"
+    "memory_writes": {
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00200000"
     }
   },
   {
@@ -83,19 +82,17 @@
   {
     "name": "Baseball Stars Professional",
     "code": "bstars",
-    "templateFile": "template2.json",
-    "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00200000"
+    "memory_writes": {
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00200000"
     }
   },
   {
     "name": "Baseball Stars Professional (AES)",
     "code": "bstarsh",
-    "templateFile": "template2.json",
-    "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00200000"
+    "memory_writes": {
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00200000"
     }
   },
   {
@@ -137,10 +134,9 @@
   {
     "name": "Cyber-Lip",
     "code": "cyberlip",
-    "templateFile": "template2.json",
-    "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00200000"
+    "memory_writes": {
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00200000"
     }
   },
   {
@@ -174,9 +170,8 @@
   {
     "name": "Fatal Fury 2",
     "code": "fatfury2",
-    "templateFile": "template3.json",
-    "replacements": {
-      "0xCTOLINK": "0x00000001"
+    "memory_writes": {
+      "CTOLINK": "0x00000001"
     }
   },
   {
@@ -226,21 +221,19 @@
   {
     "name": "Garou - Mark of the Wolves",
     "code": "garou",
-    "templateFile": "template1.json",
-    "replacements": {
-      "0xPVC-Cart": "0x00000000",
-      "0xSMA-Cart": "0x00000002",
-      "0xCMC-Chip": "0x00000001"
+    "memory_writes": {
+      "PVC-Cart": "0x00000000",
+      "SMA-Cart": "0x00000002",
+      "CMC-Chip": "0x00000001"
     }
   },
   {
     "name": "Garou - Mark of the Wolves (AES)",
     "code": "garouh",
-    "templateFile": "template1.json",
-    "replacements": {
-      "0xPVC-Cart": "0x00000000",
-      "0xSMA-Cart": "0x00000003",
-      "0xCMC-Chip": "0x00000001"
+    "memory_writes": {
+      "PVC-Cart": "0x00000000",
+      "SMA-Cart": "0x00000003",
+      "CMC-Chip": "0x00000001"
     }
   },
   {
@@ -262,19 +255,17 @@
   {
     "name": "Ghost Pilots",
     "code": "gpilots",
-    "templateFile": "template2.json",
-    "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00280000"
+    "memory_writes": {
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00280000"
     }
   },
   {
     "name": "Ghost Pilots (AES)",
     "code": "gpilotsh",
-    "templateFile": "template2.json",
-    "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00280000"
+    "memory_writes": {
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00280000"
     }
   },
   {
@@ -306,8 +297,8 @@
     "name": "Puzzled",
     "code": "joyjoy",
     "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00200000"
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00200000"
     }
   },
   {
@@ -333,11 +324,10 @@
   {
     "name": "King of Fighters 2000",
     "code": "kof2000",
-    "templateFile": "template1.json",
-    "replacements": {
-      "0xPVC-Cart": "0x00000000",
-      "0xSMA-Cart": "0x00000005",
-      "0xCMC-Chip": "0x00000002"
+    "memory_writes": {
+      "PVC-Cart": "0x00000000",
+      "SMA-Cart": "0x00000005",
+      "CMC-Chip": "0x00000002"
     }
   },
   {
@@ -355,11 +345,10 @@
   {
     "name": "King of Fighters 2003, The",
     "code": "kof2003",
-    "templateFile": "template1.json",
-    "replacements": {
-      "0xPVC-Cart": "0x00000001",
-      "0xSMA-Cart": "0x00000000",
-      "0xCMC-Chip": "0x00000002"
+    "memory_writes": {
+      "PVC-Cart": "0x00000001",
+      "SMA-Cart": "0x00000000",
+      "CMC-Chip": "0x00000002"
     }
   },
   {
@@ -437,21 +426,19 @@
   {
     "name": "King of Fighters '99, The Millennium Battle",
     "code": "kof99",
-    "templateFile": "template1.json",
-    "replacements": {
-      "0xPVC-Cart": "0x00000000",
-      "0xSMA-Cart": "0x00000001",
-      "0xCMC-Chip": "0x00000000"
+    "memory_writes": {
+      "PVC-Cart": "0x00000000",
+      "SMA-Cart": "0x00000001",
+      "CMC-Chip": "0x00000000"
     }
   },
   {
     "name": "King of Fighters '99, The Millennium Battle (earlier)",
     "code": "kof99e",
-    "templateFile": "template1.json",
-    "replacements": {
-      "0xPVC-Cart": "0x00000000",
-      "0xSMA-Cart": "0x00000001",
-      "0xCMC-Chip": "0x00000000"
+    "memory_writes": {
+      "PVC-Cart": "0x00000000",
+      "SMA-Cart": "0x00000001",
+      "CMC-Chip": "0x00000000"
     }
   },
   {
@@ -501,10 +488,9 @@
   {
     "name": "League Bowling",
     "code": "lbowling",
-    "templateFile": "template2.json",
-    "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00200000"
+    "memory_writes": {
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00200000"
     }
   },
   {
@@ -530,19 +516,17 @@
   {
     "name": "Magician Lord",
     "code": "maglord",
-    "templateFile": "template2.json",
-    "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00200000"
+    "memory_writes": {
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00200000"
     }
   },
   {
     "name": "Magician Lord (AES)",
     "code": "maglordh",
-    "templateFile": "template2.json",
-    "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00200000"
+    "memory_writes": {
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00200000"
     }
   },
   {
@@ -552,10 +536,9 @@
   {
     "name": "Mahjong Kyo Retsuden",
     "code": "mahretsu",
-    "templateFile": "template2.json",
-    "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00200000"
+    "memory_writes": {
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00200000"
     }
   },
   {
@@ -565,11 +548,10 @@
   {
     "name": "Power Instinct Matrimelee",
     "code": "matrim",
-    "templateFile": "template1.json",
-    "replacements": {
-      "0xPVC-Cart": "0x00000000",
-      "0xSMA-Cart": "0x00000000",
-      "0xCMC-Chip": "0x00000002"
+    "memory_writes": {
+      "PVC-Cart": "0x00000000",
+      "SMA-Cart": "0x00000000",
+      "CMC-Chip": "0x00000002"
     }
   },
   {
@@ -579,10 +561,9 @@
   {
     "name": "Minasan no Okagesamadesu! Dai Sugoroku Taikai",
     "code": "minasan",
-    "templateFile": "template2.json",
-    "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00280000"
+    "memory_writes": {
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00280000"
     }
   },
   {
@@ -608,41 +589,37 @@
   {
     "name": "Metal Slug 3",
     "code": "mslug3",
-    "templateFile": "template1.json",
-    "replacements": {
-      "0xPVC-Cart": "0x00000000",
-      "0xSMA-Cart": "0x00000004",
-      "0xCMC-Chip": "0x00000001"
+    "memory_writes": {
+      "PVC-Cart": "0x00000000",
+      "SMA-Cart": "0x00000004",
+      "CMC-Chip": "0x00000001"
     }
   },
   {
     "name": "Metal Slug 3 (AES)",
     "code": "mslug3h",
-    "templateFile": "template1.json",
-    "replacements": {
-      "0xPVC-Cart": "0x00000000",
-      "0xSMA-Cart": "0x00000004",
-      "0xCMC-Chip": "0x00000001"
+    "memory_writes": {
+      "PVC-Cart": "0x00000000",
+      "SMA-Cart": "0x00000004",
+      "CMC-Chip": "0x00000001"
     }
   },
   {
     "name": "Metal Slug 4",
     "code": "mslug4",
-    "templateFile": "template1.json",
-    "replacements": {
-      "0xPVC-Cart": "0x00000000",
-      "0xSMA-Cart": "0x00000000",
-      "0xCMC-Chip": "0x00000001"
+    "memory_writes": {
+      "PVC-Cart": "0x00000000",
+      "SMA-Cart": "0x00000000",
+      "CMC-Chip": "0x00000001"
     }
   },
   {
     "name": "Metal Slug 4 (AES)",
     "code": "mslug4h",
-    "templateFile": "template1.json",
-    "replacements": {
-      "0xPVC-Cart": "0x00000000",
-      "0xSMA-Cart": "0x00000000",
-      "0xCMC-Chip": "0x00000001"
+    "memory_writes": {
+      "PVC-Cart": "0x00000000",
+      "SMA-Cart": "0x00000000",
+      "CMC-Chip": "0x00000001"
     }
   },
   {
@@ -652,21 +629,19 @@
   {
     "name": "Metal Slug 5",
     "code": "mslug5",
-    "templateFile": "template1.json",
-    "replacements": {
-      "0xPVC-Cart": "0x00000001",
-      "0xSMA-Cart": "0x00000000",
-      "0xCMC-Chip": "0x00000000"
+    "memory_writes": {
+      "PVC-Cart": "0x00000001",
+      "SMA-Cart": "0x00000000",
+      "CMC-Chip": "0x00000000"
     }
   },
   {
     "name": "Metal Slug 5 (AES)",
     "code": "mslug5h",
-    "templateFile": "template1.json",
-    "replacements": {
-      "0xPVC-Cart": "0x00000001",
-      "0xSMA-Cart": "0x00000000",
-      "0xCMC-Chip": "0x00000000"
+    "memory_writes": {
+      "PVC-Cart": "0x00000001",
+      "SMA-Cart": "0x00000000",
+      "CMC-Chip": "0x00000000"
     }
   },
   {
@@ -684,28 +659,25 @@
   {
     "name": "NAM-1975",
     "code": "nam1975",
-    "templateFile": "template2.json",
-    "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00200000"
+    "memory_writes": {
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00200000"
     }
   },
   {
     "name": "Ninja Combat",
     "code": "ncombat",
-    "templateFile": "template2.json",
-    "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00200000"
+    "memory_writes": {
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00200000"
     }
   },
   {
     "name": "Ninja Combat (AES)",
     "code": "ncombath",
-    "templateFile": "template2.json",
-    "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00200000"
+    "memory_writes": {
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00200000"
     }
   },
   {
@@ -859,21 +831,19 @@
   {
     "name": "Riding Hero",
     "code": "ridhero",
-    "templateFile": "template4.json",
-    "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00200000",
-      "0xCTOLINK": "0x00000002"
+    "memory_writes": {
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00200000",
+      "CTOLINK": "0x00000002"
     }
   },
   {
     "name": "Riding Hero (AES)",
     "code": "ridheroh",
-    "templateFile": "template4.json",
-    "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00200000",
-      "0xCTOLINK": "0x00000002"
+    "memory_writes": {
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00200000",
+      "CTOLINK": "0x00000002"
     }
   },
   {
@@ -1031,9 +1001,8 @@
   {
     "name": "Super Sidekicks",
     "code": "ssideki",
-    "templateFile": "template3.json",
-    "replacements": {
-      "0xCTOLINK": "0x00000001"
+    "memory_writes": {
+      "CTOLINK": "0x00000001"
     }
   },
   {
@@ -1063,10 +1032,9 @@
   {
     "name": "Super Spy, The",
     "code": "superspy",
-    "templateFile": "template2.json",
-    "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00280000"
+    "memory_writes": {
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00280000"
     }
   },
   {
@@ -1076,11 +1044,10 @@
   {
     "name": "SNK vs. Capcom",
     "code": "svc",
-    "templateFile": "template1.json",
-    "replacements": {
-      "0xPVC-Cart": "0x00000001",
-      "0xSMA-Cart": "0x00000000",
-      "0xCMC-Chip": "0x00000002"
+    "memory_writes": {
+      "PVC-Cart": "0x00000001",
+      "SMA-Cart": "0x00000000",
+      "CMC-Chip": "0x00000002"
     }
   },
   {
@@ -1102,10 +1069,9 @@
   {
     "name": "Top Players Golf",
     "code": "tpgolf",
-    "templateFile": "template2.json",
-    "replacements": {
-      "0xPCM": "0xFFFFFFFF",
-      "0xOFFSET": "0x00200000"
+    "memory_writes": {
+      "PCM": "0xFFFFFFFF",
+      "OFFSET": "0x00200000"
     }
   },
   {
