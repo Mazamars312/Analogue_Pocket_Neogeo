@@ -31,11 +31,11 @@
     "memory_writes": [
       {
         "address": "0xf0000028",
-        "data": "0xFFFFFFFF"
+        "data": "0xPCM"
       },
       {
         "address": "0xf000003C",
-        "data": "0x00200000"
+        "data": "0xOFFSET"
       }
     ]
   }
