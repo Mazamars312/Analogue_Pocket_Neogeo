@@ -1,134 +1,28 @@
 <sld_project_info>
   <project>
-    <hash md5_digest_80b="f7eca1179bb43df1fd39"/>
+    <hash md5_digest_80b="2e62a95a1faed1c30e03"/>
   </project>
   <file_info>
     <file device="5CEBA4F23C8" path="ap_core.sof" usercode="0xFFFFFFFF"/>
   </file_info>
-  <hub_info hub_ir_width="10" ir_width="10" node_addr_width="2" node_count="2"/>
+  <hub_info hub_ir_width="10" ir_width="10" node_addr_width="1" node_count="1"/>
   <node_info>
-    <node hpath="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|altsource_probe:issp_impl" instance_id="0" mfg_id="110" node_id="9" sld_node_info="0x486E00" version="0">
-      <parameters>
-        <parameter name="lpm_type" type="string" value="altsource_probe"/>
-        <parameter name="lpm_hint" type="string" value="UNUSED"/>
-        <parameter name="sld_auto_instance_index" type="string" value="YES"/>
-        <parameter name="sld_instance_index" type="dec" value="0"/>
-        <parameter name="SLD_NODE_INFO" type="dec" value="4746752"/>
-        <parameter name="sld_ir_width" type="dec" value="4"/>
-        <parameter name="instance_id" type="string" value="VMUX"/>
-        <parameter name="probe_width" type="dec" value="32"/>
-        <parameter name="source_width" type="dec" value="32"/>
-        <parameter name="source_initial_value" type="string" value="13"/>
-        <parameter name="enable_metastability" type="string" value="YES"/>
-      </parameters>
-      <inputs>
-        <port name="probe[0]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[0]"/>
-        <port name="probe[1]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[1]"/>
-        <port name="probe[2]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[2]"/>
-        <port name="probe[3]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[3]"/>
-        <port name="probe[4]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[4]"/>
-        <port name="probe[5]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[5]"/>
-        <port name="probe[6]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[6]"/>
-        <port name="probe[7]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[7]"/>
-        <port name="probe[8]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[8]"/>
-        <port name="probe[9]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[9]"/>
-        <port name="probe[10]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[10]"/>
-        <port name="probe[11]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[11]"/>
-        <port name="probe[12]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[12]"/>
-        <port name="probe[13]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[13]"/>
-        <port name="probe[14]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[14]"/>
-        <port name="probe[15]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[15]"/>
-        <port name="probe[16]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[16]"/>
-        <port name="probe[17]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[17]"/>
-        <port name="probe[18]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[18]"/>
-        <port name="probe[19]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[19]"/>
-        <port name="probe[20]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[20]"/>
-        <port name="probe[21]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[21]"/>
-        <port name="probe[22]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[22]"/>
-        <port name="probe[23]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[23]"/>
-        <port name="probe[24]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[24]"/>
-        <port name="probe[25]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[25]"/>
-        <port name="probe[26]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[26]"/>
-        <port name="probe[27]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[27]"/>
-        <port name="probe[28]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[28]"/>
-        <port name="probe[29]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[29]"/>
-        <port name="probe[30]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[30]"/>
-        <port name="probe[31]" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|probe[31]"/>
-        <port name="source_clk" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|source_clk"/>
-        <port name="source_ena" source="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0|altsource_probe_top:in_system_sources_probes_0|source_ena"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_raw_tck" source="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_raw_tck"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_tdi" source="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_tdi"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_usr1" source="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_usr1"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_jtag_state_cdr" source="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_jtag_state_cdr"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_jtag_state_sdr" source="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_jtag_state_sdr"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_jtag_state_e1dr" source="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_jtag_state_e1dr"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_jtag_state_udr" source="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_jtag_state_udr"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_jtag_state_cir" source="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_jtag_state_cir"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_jtag_state_uir" source="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_jtag_state_uir"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_jtag_state_tlr" source="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_jtag_state_tlr"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_clr" source="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_clr"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_ena" source="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_ena"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_ir_in_0_" source="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_ir_in_0_"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_ir_in_1_" source="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_ir_in_1_"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_ir_in_2_" source="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_ir_in_2_"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_ir_in_3_" source="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_ir_in_3_"/>
-      </inputs>
-      <outputs>
-        <port name="source[0]"/>
-        <port name="source[1]"/>
-        <port name="source[2]"/>
-        <port name="source[3]"/>
-        <port name="source[4]"/>
-        <port name="source[5]"/>
-        <port name="source[6]"/>
-        <port name="source[7]"/>
-        <port name="source[8]"/>
-        <port name="source[9]"/>
-        <port name="source[10]"/>
-        <port name="source[11]"/>
-        <port name="source[12]"/>
-        <port name="source[13]"/>
-        <port name="source[14]"/>
-        <port name="source[15]"/>
-        <port name="source[16]"/>
-        <port name="source[17]"/>
-        <port name="source[18]"/>
-        <port name="source[19]"/>
-        <port name="source[20]"/>
-        <port name="source[21]"/>
-        <port name="source[22]"/>
-        <port name="source[23]"/>
-        <port name="source[24]"/>
-        <port name="source[25]"/>
-        <port name="source[26]"/>
-        <port name="source[27]"/>
-        <port name="source[28]"/>
-        <port name="source[29]"/>
-        <port name="source[30]"/>
-        <port name="source[31]"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_ir_out_0_"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_ir_out_1_"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_ir_out_2_"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_ir_out_3_"/>
-        <port name="jtag.bp.ic_Neogeo_LSPC_RSTP_u0_in_system_sources_probes_0_issp_impl_tdo"/>
-      </outputs>
-    </node>
-    <node hpath="sld_signaltap:auto_signaltap_1" instance_id="1" mfg_id="110" node_id="0" sld_node_info="0x30006E01" version="6">
+    <node hpath="sld_signaltap:auto_signaltap_0" instance_id="0" mfg_id="110" node_id="0" sld_node_info="0x30006E00" version="6">
       <parameters>
         <parameter name="lpm_type" type="string" value="sld_signaltap"/>
-        <parameter name="sld_node_info" type="unknown" value="805334529"/>
+        <parameter name="sld_node_info" type="unknown" value="805334528"/>
         <parameter name="SLD_SECTION_ID" type="string" value="hdl_signaltap_0"/>
         <parameter name="SLD_IP_VERSION" type="dec" value="6"/>
         <parameter name="SLD_IP_MINOR_VERSION" type="dec" value="0"/>
         <parameter name="SLD_COMMON_IP_VERSION" type="dec" value="0"/>
-        <parameter name="sld_data_bits" type="unknown" value="191"/>
-        <parameter name="sld_trigger_bits" type="unknown" value="191"/>
+        <parameter name="sld_data_bits" type="unknown" value="415"/>
+        <parameter name="sld_trigger_bits" type="unknown" value="415"/>
         <parameter name="SLD_NODE_CRC_BITS" type="dec" value="32"/>
         <parameter name="SLD_NODE_CRC_HIWORD" type="dec" value="41394"/>
         <parameter name="SLD_NODE_CRC_LOWORD" type="dec" value="50132"/>
         <parameter name="sld_incremental_routing" type="unknown" value="1"/>
-        <parameter name="sld_sample_depth" type="unknown" value="128"/>
-        <parameter name="sld_segment_size" type="unknown" value="128"/>
+        <parameter name="sld_sample_depth" type="unknown" value="512"/>
+        <parameter name="sld_segment_size" type="unknown" value="512"/>
         <parameter name="sld_ram_block_type" type="unknown" value="AUTO"/>
         <parameter name="sld_state_bits" type="unknown" value="11"/>
         <parameter name="sld_buffer_full_stop" type="unknown" value="1"/>
@@ -156,14 +50,14 @@
         <parameter name="SLD_ADVANCED_TRIGGER_8" type="string" value="NONE"/>
         <parameter name="SLD_ADVANCED_TRIGGER_9" type="string" value="NONE"/>
         <parameter name="SLD_ADVANCED_TRIGGER_10" type="string" value="NONE"/>
-        <parameter name="sld_inversion_mask_length" type="unknown" value="594"/>
-        <parameter name="sld_inversion_mask" type="unknown" value="000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"/>
+        <parameter name="sld_inversion_mask_length" type="unknown" value="1268"/>
+        <parameter name="sld_inversion_mask" type="unknown" value="00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"/>
         <parameter name="sld_power_up_trigger" type="unknown" value="0"/>
         <parameter name="SLD_STATE_FLOW_MGR_ENTITY" type="string" value="state_flow_mgr_entity.vhd"/>
         <parameter name="sld_state_flow_use_generated" type="unknown" value="0"/>
         <parameter name="sld_current_resource_width" type="unknown" value="1"/>
         <parameter name="sld_attribute_mem_mode" type="unknown" value="OFF"/>
-        <parameter name="sld_storage_qualifier_bits" type="unknown" value="191"/>
+        <parameter name="sld_storage_qualifier_bits" type="unknown" value="415"/>
         <parameter name="SLD_STORAGE_QUALIFIER_GAP_RECORD" type="dec" value="0"/>
         <parameter name="SLD_STORAGE_QUALIFIER_MODE" type="string" value="OFF"/>
         <parameter name="SLD_STORAGE_QUALIFIER_ENABLE_ADVANCED_CONDITION" type="dec" value="0"/>
@@ -178,12 +72,6 @@
     </node>
   </node_info>
   <sld_infos>
-    <sld_info hpath="core_top:ic|emu:Neogeo|lspc2_a2:LSPC|resetp:RSTP|Video_change:u0" name="u0">
-      <assignment_values>
-        <assignment_value text="QSYS_NAME Video_change HAS_SOPCINFO 1 GENERATION_ID 1661147519"/>
-      </assignment_values>
-      <parameters/>
-    </sld_info>
     <sld_info hpath="sld_hub:auto_hub|alt_sld_fab:\instrumentation_fabric_with_node_gen:instrumentation_fabric" library="alt_sld_fab" name="instrumentation_fabric">
       <assignment_values>
         <assignment_value text="QSYS_NAME alt_sld_fab HAS_SOPCINFO 1"/>

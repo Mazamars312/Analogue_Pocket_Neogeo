@@ -8,6 +8,7 @@ module dpram #(parameter ADDRWIDTH=8, DATAWIDTH=8, NUMWORDS=1<<ADDRWIDTH, MEM_IN
 
 	input	                 clock_b,
 	input	 [ADDRWIDTH-1:0] address_b,
+	input 					  ce_b,
 	input	 [DATAWIDTH-1:0] data_b,
 	input	                 wren_b,
 	output [DATAWIDTH-1:0] q_b
@@ -36,7 +37,7 @@ altsyncram altsyncram_component (
 			.clocken3 (1'b1),
 			.eccstatus (),
 			.rden_a (1'b1),
-			.rden_b (1'b1));
+			.rden_b (ce_b));
 defparam
 	altsyncram_component.wrcontrol_wraddress_reg_b = "CLOCK1",
 	altsyncram_component.address_reg_b = "CLOCK1",

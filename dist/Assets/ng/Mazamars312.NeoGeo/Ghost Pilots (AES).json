@@ -35,7 +35,11 @@
 				},
 				{
 						"address": "0xf000003C",
-						"data": "0x00280000"
+						"data": "0x00000000"
+				},
+				{
+						"address": "0xf000004C",
+						"data": "0x00ffffff"
 				}
 			]
     }

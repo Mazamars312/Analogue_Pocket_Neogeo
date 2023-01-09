@@ -81,14 +81,14 @@ assign {phy_ras, phy_cas, phy_we} = cmd;
 	localparam		CMD_SELFENTER		= 3'b001;
 	localparam		CMD_SELFEXIT		= 3'b111;
 
-	localparam		CAS						= 	4'd3;	// timings are for 166mhz
+	localparam		CAS						= 	4'd2;	// timings are for 96mhz
 	localparam		TIMING_LMR				= 	4'd2;	// tLMR = 2ck
-	localparam		TIMING_AUTOREFRESH	=	4'd12;	// tRFC = 80
-	localparam		TIMING_PRECHARGE		=	4'd3;	// tRP = 18
-	localparam		TIMING_ACT_ACT			=	4'd9;	// tRC = 60
-	localparam		TIMING_ACT_RW			=	4'd3;	// tRCD = 18
-	localparam		TIMING_ACT_PRECHG		=	4'd7;	// tRAS = 42
-	localparam		TIMING_WRITE			=	4'd3;	// tWR = 2ck
+	localparam		TIMING_AUTOREFRESH	=	4'd8;	// tRFC = 80
+	localparam		TIMING_PRECHARGE		=	4'd2;	// tRP = 18
+	localparam		TIMING_ACT_ACT			=	4'd8;	// tRC = 60
+	localparam		TIMING_ACT_RW			=	4'd2;	// tRCD = 18
+	localparam		TIMING_ACT_PRECHG		=	4'd6;	// tRAS = 42
+	localparam		TIMING_WRITE			=	4'd2;	// tWR = 2ck
 
 	reg		[5:0]	state;
 	
@@ -223,7 +223,7 @@ always @(posedge controller_clk) begin
 	// delayed by CAS latency for reads
 	// this is triggered by the read FSM but delayed by 3 clocks
 	// this makes the FSM simple and everybody happy
-	if(enable_dq_read_4) begin
+	if(enable_dq_read_2) begin
 		enable_dq_read_toggle <= ~enable_dq_read_toggle;
 		
 		if(word_op) begin
@@ -304,7 +304,7 @@ always @(posedge controller_clk) begin
 			dc <= 0;
 			cmd <= CMD_LMR;
 			phy_ba <= 'b00;
-			phy_a <= 13'b000000_011_0_000; // CAS 3, burst length 1, sequential
+			phy_a <= 13'b000000_010_0_000; // CAS 3, burst length 1, sequential
 	
 			state <= ST_BOOT_4;
 		end
@@ -343,13 +343,13 @@ always @(posedge controller_clk) begin
 			state <= ST_ADDRESS;
 			fifo_rdreq <= 1'b1;
 		end else 
-		if(burst_rd_queue) begin
+		if(burst_rd_queue || burst_rd) begin
 			burst_rd_queue <= 0;
 			addr <= burst_addr[25:1];
 			length <= burst_len;
 			state <= ST_READ_0;
 		end else
-		if(burstwr_queue) begin
+		if(burstwr_queue || burstwr) begin
 			burstwr_queue <= 0;
 			addr <= burstwr_addr[25:1];
 			state <= ST_BURSTWR_0;
@@ -367,7 +367,7 @@ always @(posedge controller_clk) begin
 	
 	ST_WRITE_0: begin
 		dc <= 0;
-		
+		if (burstwr_queue) burstwr_queue <= 0;
 		phy_ba <= addr[24:23];
 		phy_a <= addr[22:10]; // A0-A12 column address
 		cmd <= CMD_ACT;
@@ -415,7 +415,7 @@ always @(posedge controller_clk) begin
 		phy_ba <= addr[24:23];
 		phy_a <= addr[22:10]; // A0-A12 column address
 		cmd <= CMD_ACT;
-		
+		if (burst_rd_queue) burst_rd_queue <= 0;
 		state <= ST_READ_1;
 	end
 	ST_READ_1: begin
@@ -578,41 +578,7 @@ always @(posedge controller_clk) begin
 		refresh_count <= 0;
 	end
 end
-/*
-pin_ddio_clk	isdrck (
-	.datain_h 	( 1'b1 ),
-	.datain_l 	( 1'b0 ),
-	.outclock 	( clk_90 ),
-	.dataout 	( phy_clk )
-);
-*/
 
-/*
-altddio_out
-#(
-	.extend_oe_disable("OFF"),
-	.intended_device_family("Cyclone V"),
-	.invert_output("OFF"),
-	.lpm_hint("UNUSED"),
-	.lpm_type("altddio_out"),
-	.oe_reg("UNREGISTERED"),
-	.power_up_high("OFF"),
-	.width(1)
-)
-sdramclk_ddr
-(
-	.datain_h(1'b0),
-	.datain_l(1'b1),
-	.outclock(chip_clk),
-	.dataout(phy_clk),
-	.aclr(1'b0),
-	.aset(1'b0),
-	.oe(1'b1),
-	.outclocken(1'b1),
-	.sclr(1'b0),
-	.sset(1'b0)
-);
-*/
 
 assign phy_clk = chip_clk;
 

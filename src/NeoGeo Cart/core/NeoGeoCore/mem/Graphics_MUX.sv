@@ -53,7 +53,7 @@ module Graphics_MUX(
 	reg PCK1_reg2, PCK1_reg1;
 	reg 			CA4_reg;
 
-	wire REQ_CROM_RD_FIRST = |{~PCK1 && PCK1_reg1, ~PCK1_reg1 && PCK1_reg2};
+	wire REQ_CROM_RD_FIRST = PCK1 && ~PCK1_reg1;
 	reg  REQ_CROM_RD_FIRST_REG;
 	reg old_ready;
 	
@@ -104,7 +104,7 @@ module Graphics_MUX(
 					end
 				end
 				default : begin
-					if (CROM_request && nRESET) begin
+					if (REQ_CROM_RD_FIRST && nRESET) begin
 						burst_addr	<= {CROM_ADDR[22:20], CROM_ADDR[15:0], CROM_ADDR[19:16], 3'b000} & {CROM_MASK[22:20], CROM_MASK[19:0], 3'b000}; // Demuxing
 						burst_rd 	<= 'b1;
 						sdram_state <= sdram_read_1;

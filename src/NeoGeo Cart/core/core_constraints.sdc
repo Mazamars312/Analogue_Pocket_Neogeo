@@ -34,27 +34,14 @@
 set_time_format -unit ns -decimal_places 3
 
 
-
 #**************************************************************
 # Create Clock
 #**************************************************************
-
-create_clock -name {altera_reserved_tck} -period 33.333 -waveform { 0.000 16.666 } [get_ports {altera_reserved_tck}]
-create_clock -name {clk_74a} -period 13.468 -waveform { 0.000 6.734 } [get_ports {clk_74a}]
-create_clock -name {clk_74b} -period 13.468 -waveform { 0.000 6.734 } [get_ports {clk_74b}]
-create_clock -name {bridge_spiclk} -period 13.468 -waveform { 0.000 6.734 } [get_ports {bridge_spiclk}]
-create_clock -name {scal_clk} -period 166.660 -waveform { 0.000 83.330 } [get_ports {scal_clk}]
 
 
 #**************************************************************
 # Create Generated Clock
 #**************************************************************
-
-create_generated_clock -name {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk} -source [get_pins {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|vco0ph[0]}] -duty_cycle 50/1 -multiply_by 1 -divide_by 7 -master_clock {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|fpll_0|fpll|vcoph[0]} [get_pins {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] 
-create_generated_clock -name {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|fpll_0|fpll|vcoph[0]} -source [get_pins {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|fpll_0|fpll|refclkin}] -duty_cycle 50/1 -multiply_by 1163 -divide_by 128 -master_clock {clk_74a} [get_pins {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|fpll_0|fpll|vcoph[0]}] 
-create_generated_clock -name {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]} -source [get_pins {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|refclkin}] -duty_cycle 50/1 -multiply_by 1143 -divide_by 128 -master_clock {clk_74a} [get_pins {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]}] 
-create_generated_clock -name {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk} -source [get_pins {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|vco0ph[0]}] -duty_cycle 50/1 -multiply_by 1 -divide_by 5 -master_clock {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]} [get_pins {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] 
-
 
 #**************************************************************
 # Set Clock Latency
@@ -66,107 +53,49 @@ create_generated_clock -name {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|ge
 # Set Clock Uncertainty
 #**************************************************************
 
-set_clock_uncertainty -rise_from [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -rise_to [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -setup 0.120  
-set_clock_uncertainty -rise_from [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -rise_to [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -hold 0.060  
-set_clock_uncertainty -rise_from [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -fall_to [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -setup 0.120  
-set_clock_uncertainty -rise_from [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -fall_to [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -hold 0.060  
-set_clock_uncertainty -rise_from [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -rise_to [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}]  0.160  
-set_clock_uncertainty -rise_from [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -fall_to [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}]  0.160  
-set_clock_uncertainty -fall_from [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -rise_to [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -setup 0.120  
-set_clock_uncertainty -fall_from [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -rise_to [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -hold 0.060  
-set_clock_uncertainty -fall_from [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -fall_to [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -setup 0.120  
-set_clock_uncertainty -fall_from [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -fall_to [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -hold 0.060  
-set_clock_uncertainty -fall_from [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -rise_to [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}]  0.160  
-set_clock_uncertainty -fall_from [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}] -fall_to [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}]  0.160  
-set_clock_uncertainty -rise_from [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -rise_to [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}]  0.160  
-set_clock_uncertainty -rise_from [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -fall_to [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}]  0.160  
-set_clock_uncertainty -rise_from [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -rise_to [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -setup 0.120  
-set_clock_uncertainty -rise_from [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -rise_to [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -hold 0.060  
-set_clock_uncertainty -rise_from [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -fall_to [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -setup 0.120  
-set_clock_uncertainty -rise_from [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -fall_to [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -hold 0.060  
-set_clock_uncertainty -rise_from [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -rise_to [get_clocks {clk_74a}]  0.220  
-set_clock_uncertainty -rise_from [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -fall_to [get_clocks {clk_74a}]  0.220  
-set_clock_uncertainty -fall_from [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -rise_to [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}]  0.160  
-set_clock_uncertainty -fall_from [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -fall_to [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}]  0.160  
-set_clock_uncertainty -fall_from [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -rise_to [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -setup 0.120  
-set_clock_uncertainty -fall_from [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -rise_to [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -hold 0.060  
-set_clock_uncertainty -fall_from [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -fall_to [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -setup 0.120  
-set_clock_uncertainty -fall_from [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -fall_to [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -hold 0.060  
-set_clock_uncertainty -fall_from [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -rise_to [get_clocks {clk_74a}]  0.220  
-set_clock_uncertainty -fall_from [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] -fall_to [get_clocks {clk_74a}]  0.220  
-set_clock_uncertainty -rise_from [get_clocks {bridge_spiclk}] -rise_to [get_clocks {bridge_spiclk}] -setup 0.100  
-set_clock_uncertainty -rise_from [get_clocks {bridge_spiclk}] -rise_to [get_clocks {bridge_spiclk}] -hold 0.060  
-set_clock_uncertainty -rise_from [get_clocks {bridge_spiclk}] -fall_to [get_clocks {bridge_spiclk}] -setup 0.100  
-set_clock_uncertainty -rise_from [get_clocks {bridge_spiclk}] -fall_to [get_clocks {bridge_spiclk}] -hold 0.060  
-set_clock_uncertainty -fall_from [get_clocks {bridge_spiclk}] -rise_to [get_clocks {bridge_spiclk}] -setup 0.100  
-set_clock_uncertainty -fall_from [get_clocks {bridge_spiclk}] -rise_to [get_clocks {bridge_spiclk}] -hold 0.060  
-set_clock_uncertainty -fall_from [get_clocks {bridge_spiclk}] -fall_to [get_clocks {bridge_spiclk}] -setup 0.100  
-set_clock_uncertainty -fall_from [get_clocks {bridge_spiclk}] -fall_to [get_clocks {bridge_spiclk}] -hold 0.060  
-set_clock_uncertainty -rise_from [get_clocks {clk_74a}] -rise_to [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}]  0.220  
-set_clock_uncertainty -rise_from [get_clocks {clk_74a}] -fall_to [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}]  0.220  
-set_clock_uncertainty -rise_from [get_clocks {clk_74a}] -rise_to [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}]  0.220  
-set_clock_uncertainty -rise_from [get_clocks {clk_74a}] -fall_to [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}]  0.220  
-set_clock_uncertainty -rise_from [get_clocks {clk_74a}] -rise_to [get_clocks {clk_74a}] -setup 0.280  
-set_clock_uncertainty -rise_from [get_clocks {clk_74a}] -rise_to [get_clocks {clk_74a}] -hold 0.270  
-set_clock_uncertainty -rise_from [get_clocks {clk_74a}] -fall_to [get_clocks {clk_74a}] -setup 0.280  
-set_clock_uncertainty -rise_from [get_clocks {clk_74a}] -fall_to [get_clocks {clk_74a}] -hold 0.270  
-set_clock_uncertainty -fall_from [get_clocks {clk_74a}] -rise_to [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}]  0.220  
-set_clock_uncertainty -fall_from [get_clocks {clk_74a}] -fall_to [get_clocks {ic|Neogeo|pll_sdram|pll_sdram_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}]  0.220  
-set_clock_uncertainty -fall_from [get_clocks {clk_74a}] -rise_to [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}]  0.220  
-set_clock_uncertainty -fall_from [get_clocks {clk_74a}] -fall_to [get_clocks {ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}]  0.220  
-set_clock_uncertainty -fall_from [get_clocks {clk_74a}] -rise_to [get_clocks {clk_74a}] -setup 0.280  
-set_clock_uncertainty -fall_from [get_clocks {clk_74a}] -rise_to [get_clocks {clk_74a}] -hold 0.270  
-set_clock_uncertainty -fall_from [get_clocks {clk_74a}] -fall_to [get_clocks {clk_74a}] -setup 0.280  
-set_clock_uncertainty -fall_from [get_clocks {clk_74a}] -fall_to [get_clocks {clk_74a}] -hold 0.270  
-set_clock_uncertainty -rise_from [get_clocks {altera_reserved_tck}] -rise_to [get_clocks {altera_reserved_tck}] -setup 0.280  
-set_clock_uncertainty -rise_from [get_clocks {altera_reserved_tck}] -rise_to [get_clocks {altera_reserved_tck}] -hold 0.270  
-set_clock_uncertainty -rise_from [get_clocks {altera_reserved_tck}] -fall_to [get_clocks {altera_reserved_tck}] -setup 0.280  
-set_clock_uncertainty -rise_from [get_clocks {altera_reserved_tck}] -fall_to [get_clocks {altera_reserved_tck}] -hold 0.270  
-set_clock_uncertainty -fall_from [get_clocks {altera_reserved_tck}] -rise_to [get_clocks {altera_reserved_tck}] -setup 0.280  
-set_clock_uncertainty -fall_from [get_clocks {altera_reserved_tck}] -rise_to [get_clocks {altera_reserved_tck}] -hold 0.270  
-set_clock_uncertainty -fall_from [get_clocks {altera_reserved_tck}] -fall_to [get_clocks {altera_reserved_tck}] -setup 0.280  
-set_clock_uncertainty -fall_from [get_clocks {altera_reserved_tck}] -fall_to [get_clocks {altera_reserved_tck}] -hold 0.270  
-
 
 #**************************************************************
 # Set Input Delay
 #**************************************************************
 
 
+set dram_chip_clk "ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk"
+
+set_input_delay -clock $dram_chip_clk -reference_pin [get_ports {dram_clk}] -max 5.9 [get_ports dram_dq[*]]
+set_input_delay -clock $dram_chip_clk -reference_pin [get_ports {dram_clk}] -min 0.9 [get_ports dram_dq[*]] 
 
 #**************************************************************
 # Set Output Delay
 #**************************************************************
 
-
+set_output_delay -clock $dram_chip_clk -reference_pin [get_ports {dram_clk}] -max 2.0 [get_ports {dram_cke dram_a* dram_ba* dram_cas_n dram_ras_n dram_we_n}]
+set_output_delay -clock $dram_chip_clk -reference_pin [get_ports {dram_clk}] -min -1.0 [get_ports {dram_cke dram_a* dram_ba* dram_cas_n dram_ras_n dram_we_n}]
 
 #**************************************************************
 # Set Clock Groups
 #**************************************************************
 
-set_clock_groups -asynchronous -group [get_clocks {altera_reserved_tck}] 
-set_clock_groups -asynchronous -group [get_clocks { bridge_spiclk }] -group [get_clocks { clk_74a }] -group [get_clocks { clk_74b }] -group [get_clocks { ic|mp1|mf_pllbase_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk }] -group [get_clocks { ic|mp1|mf_pllbase_inst|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk }] -group [get_clocks { ic|mp1|mf_pllbase_inst|altera_pll_i|general[2].gpll~PLL_OUTPUT_COUNTER|divclk }] -group [get_clocks { ic|mp1|mf_pllbase_inst|altera_pll_i|general[3].gpll~PLL_OUTPUT_COUNTER|divclk }] 
-set_clock_groups -asynchronous -group [get_clocks { bridge_spiclk }] -group [get_clocks { clk_74a }] -group [get_clocks { clk_74b }] -group [get_clocks { ic|mp1|mf_pllbase_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk }] -group [get_clocks { ic|mp1|mf_pllbase_inst|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk }] -group [get_clocks { ic|mp1|mf_pllbase_inst|altera_pll_i|general[2].gpll~PLL_OUTPUT_COUNTER|divclk }] -group [get_clocks { ic|mp1|mf_pllbase_inst|altera_pll_i|general[3].gpll~PLL_OUTPUT_COUNTER|divclk }] 
-
+set_clock_groups -asynchronous \
+ -group { bridge_spiclk } \
+ -group { clk_74a } \
+ -group { clk_74b } \
+ -group { ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk } \
+ -group { ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[1].output_counter|divclk } \
+ -group { ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[2].output_counter|divclk } \
+ -group { ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[3].output_counter|divclk } \
+ -group { ic|Neogeo|pll_sys|pll_inst|altera_pll_i|cyclonev_pll|counter[4].output_counter|divclk }     
 
 #**************************************************************
 # Set False Path
 #**************************************************************
 
+set_false_path -from {core_top:ic|emu:Neogeo|apf_io:apf_io|RTC[*]} -to {core_top:ic|emu:Neogeo|uPD4990:RTC|SHIFT_REG[*]}
 
 
 #**************************************************************
 # Set Multicycle Path
 #**************************************************************
 
-set_multicycle_path -setup -start -from [get_keepers {*fx68k:*|Ir[*]}] -to [get_keepers {*fx68k:*|microAddr[*]}] 2
-set_multicycle_path -hold -start -from [get_keepers {*fx68k:*|Ir[*]}] -to [get_keepers {*fx68k:*|microAddr[*]}] 1
-set_multicycle_path -setup -start -from [get_keepers {*fx68k:*|Ir[*]}] -to [get_keepers {*fx68k:*|nanoAddr[*]}] 2
-set_multicycle_path -hold -start -from [get_keepers {*fx68k:*|Ir[*]}] -to [get_keepers {*fx68k:*|nanoAddr[*]}] 1
-set_multicycle_path -setup -start -from [get_keepers {*|nanoLatch[*]}] -to [get_keepers {*|excUnit|alu|pswCcr[*]}] 2
-set_multicycle_path -hold -start -from [get_keepers {*|nanoLatch[*]}] -to [get_keepers {*|excUnit|alu|pswCcr[*]}] 1
-set_multicycle_path -setup -start -from [get_keepers {*|excUnit|alu|oper[*]}] -to [get_keepers {*|excUnit|alu|pswCcr[*]}] 2
-set_multicycle_path -hold -start -from [get_keepers {*|excUnit|alu|oper[*]}] -to [get_keepers {*|excUnit|alu|pswCcr[*]}] 1
 
 
 #**************************************************************

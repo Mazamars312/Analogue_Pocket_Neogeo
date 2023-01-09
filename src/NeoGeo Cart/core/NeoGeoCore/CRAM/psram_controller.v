@@ -103,7 +103,7 @@ parameter		idle					=	'd1,
 					PSRAM_Mem_OEN			<= HIGH;
 					PSRAM_Mem_WE			<= HIGH;
 					
-					if (OPB_select_reg_1 == HIGH && OPB_select_reg_2 == LOW) begin // We want the HIGH change of the clock and sync it
+					if (OPB_select == HIGH && OPB_select_reg_1 == LOW) begin // We want the HIGH change of the clock and sync it
 						Sln_xferAck			<= LOW;
 						PSRAM_Mem_ADV 		<= LOW;
 						PSRAM_Mem_CEN0 	<=  OPB_ABus[23];
@@ -223,8 +223,8 @@ parameter		idle					=	'd1,
 							PSRAM_Mem_CEN1 		<= HIGH;
 							PSRAM_Mem_OEN			<= HIGH;
 							PSRAM_Mem_WE			<= HIGH;
-							Sln_xferAck				<= HIGH;
 							cram_status				<= idle;
+							Sln_xferAck				<= HIGH;
 						end
 					end
 

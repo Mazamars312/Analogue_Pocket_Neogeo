@@ -26,10 +26,8 @@
 
 module lspc2_a2(
 	input CLK_24M,
-	input clk_sys,
-	input CLK_12M,  
-	input CLK_6MB,
-	input CLK_1HB,
+	output CLK_12MB,
+	output CLK_6MB,
 	input RESET,
 	output [15:0] PBUS_OUT,
 	inout [23:16] PBUS_IO,
@@ -139,7 +137,8 @@ module lspc2_a2(
 	
 	assign S1H1 = LSPC_3M;
 	assign S2H1 = LSPC_1_5M;
-	
+	assign CLK_6MB = LSPC_6M;
+	assign CLK_12MB = LSPC_12M;
 	//FD2 T168A(CLK_24M, T160A_OUT, PCK1, nPCK1);
 	//FD2 T162A(CLK_24M, T160B_OUT, PCK2);
 	//FDM T172(nPCK1, SPR_TILE_HFLIP, T172_Q);
@@ -458,7 +457,12 @@ module lspc2_a2(
 	
 	// SS1/2 outputs, periodic
 	wire nFLIP, nCHG_D, R15_QD, S48_nQ;
-	FDPCell O69(CLK_24MB, nFLIP, nRESETP, 1'b1, , FLIP_nQ);
+	
+	// Credit to paulb-nl
+	// Latch nFLIP at pixel 264 (O62_Q). That will make the line buffers switch at pixel 267.
+	// The first write of the new line to the line buffer happens at pixel 268.
+	//FDPCell O69(CLK_24MB, nFLIP, nRESETP, 1'b1, , FLIP_nQ);
+	FDPCell O69(O62_Q, nFLIP, nRESETP, 1'b1, , FLIP_nQ);
 	FDPCell R63(PIXELC[2], FLIP_nQ, 1'b1, nRESETP, CHG_D, nCHG_D);
 	FDM S48(LSPC_3M, R15_QD, , S48_nQ);
 	// S40A
@@ -597,13 +601,7 @@ module lspc2_a2(
 	lspc_timer TIMER(LSPC_6M, nRESETP, M68K_DATA, WR_TIMER_HIGH, WR_TIMER_LOW, VMODE, TIMER_MODE, TIMER_STOP,
 						RASTERC, TIMER_IRQ_EN, R74_nQ, BNKB, D46A_OUT);
 	
-	resetp RSTP(
-	.clk_sys		(clk_sys),
-	.CLK_6MB		(CLK_6MB),
-	.CLK_1HB		(CLK_1HB),
-	.nRESET		(RESET),
-	.nRESETP		(nRESETP)
-	);
+	resetp RSTP(CLK_24MB, RESET, nRESETP);
 	
 	wire BNK;
 	irq IRQ(WR_IRQ_ACK, M68K_DATA[2:0], RESET, D46A_OUT, BNK, LSPC_6M, IPL0, IPL1);

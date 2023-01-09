@@ -6,7 +6,7 @@
 					"name": "Game JSON Setup",
 					"id": 0,
 					"required": true,
-					"parameters": "0x12",
+					"parameters": "0x1D3",
 					"extensions": [
 						"json"
 					]

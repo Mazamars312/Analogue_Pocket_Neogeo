@@ -154,7 +154,8 @@ module apf_io
 
 	// System Configuration
 	output reg			start_system,
-	output reg [64:0] RTC,
+	output     [31:0] rtc_date_bcd,
+	output     [31:0] rtc_time_bcd,
 	output reg [7:0]	DIPSW,
 	output reg [1:0]	SYSTEM_TYPE,
 	output reg [1:0]	memory_card_enable,
@@ -163,6 +164,8 @@ module apf_io
 	output reg [3:0]	snd_enable,
 	output reg [5:0]	ch_enable,
 	output reg [15:0]	pixel_mux_change,
+	output reg 			high_res,
+	output reg 			screen_rotation,
 	
 	output reg [3:0] 	cart_pchip,
 	output reg       	use_pcm,
@@ -175,6 +178,8 @@ module apf_io
 	output reg [23:0] V1ROM_MASK, 
 	output reg [18:0] MROM_MASK,
 	output reg [23:0] V2_offset,
+	output reg [23:0] V2ROM_MASK,
+	output reg [2:0]	C1_wait,
 	
 
 	// Seconds since 1970-01-01 00:00:00
@@ -366,7 +371,6 @@ assign debug_led = dataslot_requestwrite;
 core_bridge_cmd icb (
 
 	.clk								( clk_74a ),
-	.reset_l_main					(reset_l_main),
 	// 
 	.bridge_addr					( bridge_addr ),
 	.bridge_rd						( bridge_rd ),
@@ -383,6 +387,8 @@ core_bridge_cmd icb (
 	.dataslot_requestread_id	( dataslot_requestread_id ),
 	.dataslot_requestread_ack	( 1'b1 ),
 	.dataslot_requestread_ok	( 1'b1 ),
+	.rtc_time_bcd					(rtc_time_bcd),
+	.rtc_date_bcd					(rtc_date_bcd),
 
 	.dataslot_requestwrite		( dataslot_requestwrite ),
 	.dataslot_requestwrite_id	( dataslot_requestwrite_id ),
@@ -416,7 +422,16 @@ core_bridge_cmd icb (
 );
 
 
-reg [1:0] save_loop_update;
+reg [5:0] save_loop_update;
+
+parameter reset_hold				=  0,
+			 search_address		=	1,
+			 search_hold			=	2,
+			 search_check			= 	3,
+			 search_found_update	=	4;
+			 
+parameter memory_card_id 	= 'h101;
+parameter sram_id 			= 'h101;
 
 always @(posedge clk_74a or negedge reset_l_main) begin
 	if (~reset_l_main) begin
@@ -426,19 +441,48 @@ always @(posedge clk_74a or negedge reset_l_main) begin
 		datatable_addr 	<= 'd0;
 	end
 	else begin
+		datatable_wren <= 1'b0;
 		case (save_loop_update)
-			'd1 		: begin
-				save_loop_update  <= 0;
-				datatable_data		<= 'd65536;
-				datatable_wren		<= 'd1;
-				datatable_addr 	<= 'd05;
-			end			
-			default : begin
-				save_loop_update 	<= 1;
-				datatable_data		<= 'd16384; // this will force the dataslot for the memory card to know there is 16K
-				datatable_wren		<= 'd1;
-				datatable_addr 	<= 'd3;
+			reset_hold : begin
+				save_loop_update <= search_address;
+				datatable_wren <= 1'b0;
 			end
+			search_address : begin
+				save_loop_update <= search_hold;
+				datatable_addr <= datatable_addr;
+				datatable_wren <= 1'b0;
+			end
+			search_hold : begin
+				save_loop_update <= search_check;
+				datatable_addr <= datatable_addr;
+				datatable_wren <= 1'b0;
+			end
+			search_check : begin
+				if (|{datatable_q == memory_card_id, datatable_q == sram_id}) begin
+					if (datatable_q == memory_card_id) begin
+						datatable_addr <= {datatable_addr[9:1], 1'b1};
+						datatable_wren <= 1'b1;
+						datatable_data <= 16'd16384;
+					end
+					else if (datatable_q == sram_id) begin
+						datatable_addr <= {datatable_addr[9:1], 1'b1};
+						datatable_wren <= 1'b1;
+						datatable_data <= 16'd65536;
+					end
+					save_loop_update <= search_found_update;
+				end
+				else begin
+					save_loop_update <= search_address;
+					if (datatable_addr >= 16'd127) datatable_addr <= 0;
+					else datatable_addr <= {datatable_addr[9:1] + 1, 1'b0};
+				end
+			end
+			search_found_update : begin
+				save_loop_update <= search_address;
+				datatable_addr <= {datatable_addr[9:1] + 1, 1'b0};
+				datatable_wren <= 1'b0;
+			end
+			
 		endcase
 	end
 end
@@ -564,6 +608,9 @@ always @(posedge clk_74a or negedge reset_l_main) begin
 		V2_offset			 	<= 32'h00000000;
 		cart_chip				<= 32'h00000000;
 		PROM1_access			<= 1'b0;
+		high_res					<= 1'b0;
+		screen_rotation		<= 1'b0;
+		C1_wait					<= 2'b0;
 	end
 	else begin
 	bridge_addr_reg <= bridge_addr[25:0];
@@ -610,8 +657,11 @@ always @(posedge clk_74a or negedge reset_l_main) begin
 			32'hF0000038 : screen_y_pos			<= bridge_wr_data;
 			32'hF000003C : V2_offset				<= bridge_wr_data;
 			32'hF0000040 : cart_chip				<= bridge_wr_data;
-			32'hF1000000 : RTC[63:32]				<= bridge_wr_data;
-			32'hF1000004 : RTC[31: 0]				<= bridge_wr_data;
+			32'hF0000044 : high_res					<= bridge_wr_data;
+			32'hF0000048 : screen_rotation		<= bridge_wr_data;
+			32'hF000004C : V2ROM_MASK				<= bridge_wr_data;
+			32'hF0000050 : V1ROM_MASK				<= bridge_wr_data;
+			32'hF0000054 : C1_wait					<= bridge_wr_data;
 
 		endcase
 	
@@ -681,28 +731,33 @@ end
 
 always @(posedge clk_74a) begin
 	if (bridge_rd) begin
-		case (bridge_addr[15:0])
-			16'h0000 : Neogeo_status <= controller_map_1;
-			16'h0004 : Neogeo_status <= controller_map_2;
-			16'h0008 : Neogeo_status <= DIPSW;
-			16'h000c : Neogeo_status <= SYSTEM_TYPE;
-			16'h0010 : Neogeo_status <= memory_card_enable;
-			16'h0014 : Neogeo_status <= use_mouse_reg;
-			16'h0018 : Neogeo_status <= video_mode;
-			16'h001c : Neogeo_status <= ch_enable;
-			16'h0020 : Neogeo_status <= snd_enable;
-			16'h0024 : Neogeo_status <= cart_pchip_main;
-			16'h0028 : Neogeo_status <= use_pcm;
-			16'h002C : Neogeo_status <= cart_pchip_sub;
-			16'h0030 : Neogeo_status <= cmc_chip;
-			16'h0034 : Neogeo_status <= screen_x_pos;
-			16'h0038 : Neogeo_status <= screen_y_pos;
-			16'h003C : Neogeo_status <= V2_offset;
-			16'h0040 : Neogeo_status <= cart_chip;
-			16'h0000 : Neogeo_status <= RTC[63:32];
-			16'h0004 : Neogeo_status <= RTC[31: 0];
-			default  : Neogeo_status <= controller_map_1;
-		endcase
+		if (bridge_addr[31:24] == 8'hF0) begin
+			case (bridge_addr[15:0])
+				16'h0000 : Neogeo_status <= controller_map_1;
+				16'h0004 : Neogeo_status <= controller_map_2;
+				16'h0008 : Neogeo_status <= DIPSW;
+				16'h000c : Neogeo_status <= SYSTEM_TYPE;
+				16'h0010 : Neogeo_status <= memory_card_enable;
+				16'h0014 : Neogeo_status <= use_mouse_reg;
+				16'h0018 : Neogeo_status <= video_mode;
+				16'h001c : Neogeo_status <= ch_enable;
+				16'h0020 : Neogeo_status <= snd_enable;
+				16'h0024 : Neogeo_status <= cart_pchip_main;
+				16'h0028 : Neogeo_status <= use_pcm;
+				16'h002C : Neogeo_status <= cart_pchip_sub;
+				16'h0030 : Neogeo_status <= cmc_chip;
+				16'h0034 : Neogeo_status <= screen_x_pos;
+				16'h0038 : Neogeo_status <= screen_y_pos;
+				16'h003C : Neogeo_status <= V2_offset;
+				16'h0040 : Neogeo_status <= cart_chip;
+				16'h0044 : Neogeo_status <= high_res;
+				16'h0048 : Neogeo_status <= screen_rotation;
+				16'h004C : Neogeo_status <= V2ROM_MASK;
+				16'h0050 : Neogeo_status <= V1ROM_MASK;
+				16'h0054 : Neogeo_status <= C1_wait;
+				default  : Neogeo_status <= controller_map_1;
+			endcase
+		end
 	end
 end
 

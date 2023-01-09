@@ -36,11 +36,10 @@ This helps keep these chips in sync with the PLL
 module neo_b1(
 	input CLK,					// For linebuffers RAM
 	input CLK_6MB,				// Pixel clock
-	input CLK_1HB,				// 3MHz 2px Even/odd pixel selection
 	input nRESETP,
 	
 	input [23:0] PBUS,		// Used to retrieve LB addresses loads, SPR palette # and FIX palette # from LSPC
-	input [7:0] FIXD,			// 2 fix pixels
+	input [15:0] FIXD,			// 2 fix pixels
 	input PCK1,
 	input PCK2,
 	input CHBL,					// Force PA to zeros
@@ -52,6 +51,7 @@ module neo_b1(
 	input LD1, LD2,			// Load LB addresses
 	input SS1, SS2,			// Clearing enable for each LB
 	input S1H1,					// 3MHz offset from CLK_1HB
+	input S2H1,					// 3MHz offset from CLK_1HB
 	
 	input A23I, A22I,
 	output [11:0] PA,			// Palette address bus
@@ -89,8 +89,15 @@ module neo_b1(
 
 	// 2px fix data reg
 	// BEKU AKUR...
-	always @(posedge CLK_1HB)
-		FIXD_REG <= FIXD;
+	reg S2H1_REG;
+	reg [15:0] FIXD_MAIN_REG;
+	always @(posedge CLK) begin
+		S2H1_REG <= S2H1;
+		FIXD_MAIN_REG <= FIXD;
+	end
+		
+	always @(negedge S1H1)
+		FIXD_REG <= S2H1_REG ? FIXD_MAIN_REG[7:0] : FIXD_MAIN_REG[15:8];
 	
 	// Switch between odd/even fix pixel
 	// BEVU AWEQ...
@@ -98,27 +105,17 @@ module neo_b1(
 	
 	// We want to see where the CLK_1HB from the PLL is. If the CLK_1HB on the rise of the resetp then 
 	// S1H1 is equal to nRESETP_state. this is the opersite if the CLK_1HB is on the fall on resetp
-	reg nRESETP_state;
-	
-	always @(posedge nRESETP)
-	nRESETP_state <= CLK_1HB;
-	
-	
+
 	assign FIX_COLOR = S1H1 ? FIXD_REG[7:4] : FIXD_REG[3:0];
 
 	// IDUF
 	// EN_FIX gate for Neo CD only
 	wire FIX_OPAQUE = |{FIX_COLOR};
 
-	reg [3:0] FIX_PAL_REG_PCK;
 	// GETU FUCA...
 	always @(posedge PCK1)
 		FIX_PAL_REG <= PBUS[19:16];
-		
 
-		
-	// Placed the FIX_PAL_REG_PCK in the delay for color correction on the SROM core in the CLK_1HB
-//	always @(posedge CLK_1HB) FIX_PAL_REG <= FIX_PAL_REG_PCK;
 
 	assign SPR_PAL = PBUS[23:16];
 	

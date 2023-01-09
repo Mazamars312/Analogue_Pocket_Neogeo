@@ -25,116 +25,18 @@
 // This should now give us a clock acurate system now
 
 module resetp(
-	input clk_sys,
-	input CLK_6MB,
-	input CLK_1HB,
+	input CLK_24MB,
 	input nRESET,
 	output reg nRESETP
-
 );
-
-
+	reg O49_nQ;
 	// 24MB    ""__""__""__""__""__
 	// nRESET  ____________""""""""
 	// nRESETP """"""""""""""____""
-
-	parameter 		startup_reset		=	0,	// this is where the reset line is low we make sure that the reset_p is still high
-						wait_for_6_rlow	= 	1, // We watch for a fall on the 6mhz clock 
-						delay_reset 		= 	2,	// we wait for one cycle for the 6mhz and then place the reset on high
-						running_core		=	3;	// the reset cycle is complete and if we see another reset we go back to the startup
-						
-	reg [1:0] 		reset_state = 0;
-	reg [1:0]		reset_state_c;
-	reg prev_CLK_6MB;
-	reg CLK_6MB_reg;
-	reg prev_nRESET;
-	reg [31:0] cnt, cnt_c;
-	wire [31:0] cnt_test;// = 32'd33;
-	
-	
-	
-	always @(posedge clk_sys) begin
-		CLK_6MB_reg 	<= CLK_6MB;
-		prev_CLK_6MB 	<= CLK_6MB_reg;
-		prev_nRESET   	<= nRESET;
-		reset_state		<= reset_state_c;
-		cnt				<= cnt_c;
-	end
-	
-	Video_change u0 (
-		.probe		(cnt_test),
-		.source_clk (clk_sys), // source_clk.clk
-		.source     (cnt_test)      //    sources.source
-	);
-	
-	wire fall_6mhz = &{~CLK_6MB, prev_CLK_6MB, ~CLK_1HB};
-	
-	// States
-	always @* begin
-		case (reset_state)
-			wait_for_6_rlow : begin
-				if (fall_6mhz) reset_state_c <= delay_reset;
-				else reset_state_c <= wait_for_6_rlow;
-			end
-			delay_reset : begin
-			// We have to make sure that he 3mhz clock is high as the PLL will make it low once the 6mhz counter starts
-			// If this is low it will cause an issue with the SROM access. This will increase compile times but it is worth it
-				if (cnt >= cnt_test) reset_state_c <= running_core;
-				else reset_state_c <= delay_reset;
-			end
-			running_core : begin
-				if (~nRESET &&  prev_nRESET) reset_state_c <= startup_reset;
-				else reset_state_c <= running_core;
-			end
-			default : begin	// this is out Startup_reset
-				if ( nRESET && ~prev_nRESET) reset_state_c <= wait_for_6_rlow;
-				else reset_state_c <= reset_state;
-			end
-		endcase
-	end
-	
-	// reset core
-	
-	always @* begin
-		case (reset_state)
-			wait_for_6_rlow : begin
-				nRESETP <= 1'b0;
-			end
-			delay_reset : begin
-			// We have to make sure that he 3mhz clock is high as the PLL will make it low once the 6mhz counter starts
-			// If this is low it will cause an issue with the SROM access. This will increase compile times but it is worth it
-				if (cnt >= cnt_test) nRESETP <= 1'b1;
-				else nRESETP <= 1'b0;
-			end
-			running_core : begin
-				nRESETP <= 1'b1;
-			end
-			default : begin	// this is out Startup_reset
-				if ( nRESET && ~prev_nRESET) nRESETP <= 1'b0;
-				else nRESETP <= 1'b1;
-			end
-		endcase
-	end
-	
-	// Counter 
-	
-	always @* begin
-		case (reset_state)
-			wait_for_6_rlow : begin
-				cnt_c		<= 'd0;
-			end
-			delay_reset : begin
-			// We have to make sure that he 3mhz clock is high as the PLL will make it low once the 6mhz counter starts
-			// If this is low it will cause an issue with the SROM access. This will increase compile times but it is worth it
-				cnt_c <= cnt + 1;
-			end
-			running_core : begin
-				cnt_c		<= 'd0;
-			end
-			default : begin	// this is out Startup_reset
-				cnt_c		<= 'd0;
-			end
-		endcase
+	always @(posedge CLK_24MB)
+	begin
+		O49_nQ <= ~nRESET;
+		nRESETP <= ~&{O49_nQ, nRESET};
 	end
 	
 endmodule

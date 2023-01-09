@@ -70,8 +70,7 @@ module cram_16bit
 	input      [15:0] 	PBUS,
 	input       [1:0] 	FIX_BANK,
 	input 					PCK2,
-	input 					S2H1,
-	output reg [7:0]  	SROM_DATA,	// 4 pixels
+	output reg [15:0]  	SROM_DATA,	// 4 pixels
 
 
 		// Z80 controls
@@ -161,7 +160,6 @@ module cram_16bit
 	reg			nAS_PREV;
 	reg  			REQ_M68K_RD_SIG_REG;
 	reg			REQ_M68K_WD_SIG_REG;
-	reg			z80clk_reg;
 	reg 			z80Highclock;
 	reg			OPB_32Bit; // are we doing a 32 or 16 bit transfer
 	reg [20:1] 	M68K_ADDR_REG;
@@ -174,25 +172,31 @@ module cram_16bit
 	wire REQ_Z80_RD_SIG 	= &{~z80_nSDROM, ~z80_nSDMRD};
 	wire REQ_Z80_RD 		=  (~REQ_Z80_RD_SIG_REG & REQ_Z80_RD_SIG);
 	
-	wire REQ_SROM_RD = ~PCK2_reg & PCK2; // We do a double check here.
+	wire REQ_SROM_RD = PCK2_reg_1 & ~PCK2;
 	
 	reg [7:0] REQ_Z80_RD_counter;
 	reg REQ_Z80_REQ;
-	reg M68K_RD_REQ_1;
 	reg old_clk;
 	reg z80_ready_reg;
 	
-	reg [15:0] 	SROM_DATA_reg, SROM_DATA_reg1;
 	reg 			REQ_SROM_REQ;
 	reg 			S_LATCH12reg;
-	reg 			PCK2_reg;
+	reg 			PCK2_reg_1, PCK2_reg_2, PCK2_reg_3;
 	reg [15:0]	PBUS_REG;
-	
+	reg 			S2H1_reg;
 	reg [6:0]	Ram_wait;
+	
+	reg [31:0]	word_q_reg;
+	reg [ 7:0]	z80_dout_reg;
+	reg [15:0]	SROM_DATA_reg;
+	reg [15:0]	SROM_DATA_reg_1;
+	reg [15:0]	PROM_DATA_reg;
+	
+	reg			PROM_DATA_READY_C;
 	
 	always @(posedge sys_clk or negedge reset_l_main) begin
 		if (~reset_l_main) begin
-			PROM_DATA_READY 		<=  1'b0;
+			PROM_DATA_READY_C 		<=  1'b0;
 			RAM_Access 				<= 'b0;
 			word_busy 				<= 'b0;
 			ram_state 				<= init_reset;
@@ -202,7 +206,6 @@ module cram_16bit
 			REQ_M68K_WD_SIG_REG	<= 'b0;
 			RAM_DATA_WRITE			<= 'b0;
 			M68K_RD_REQ 			<= 0;
-			z80clk_reg				<= 0;
 			OPB_32Bit				<= 1'b1;
 			M68K_WD_REQ				<= 1'b0;
 			M68K_DATA_SAVE			<= 16'h0;
@@ -212,22 +215,22 @@ module cram_16bit
 			REQ_Z80_RD_SIG_REG	<= 'b0;
 			z80_ready_reg			<= 1'b1;
 			REQ_Z80_REQ				<= 1'b0;
-			M68K_RD_REQ_1			<= 1'b0;
 			old_clk					<= 1'b0;
-			z80_ready				<= 1'b1;
 			REQ_Z80_RD_counter 	<= 1'b0;
 			REQ_SROM_REQ			<= 1'b0;
 			S_LATCH12reg			<= 1'b0;
-			PCK2_reg					<= 1'b0;
+			PCK2_reg_1					<= 1'b0;
+			PCK2_reg_2					<= 1'b0;
+			PCK2_reg_3					<= 1'b0;
 		end
 		else begin
 			
 			Sln_xferAck_reg 		<= Sln_xferAck;
 			
-			z80clk_reg				<= z80_clk;
 			S_LATCH12reg 			<= PBUS_REG[12];
-			PCK2_reg				<= PCK2;
-			M68K_RD_REQ_1			<= M68K_RD_REQ; // We need another delay for the core
+			PCK2_reg_1				<= PCK2;
+			PCK2_reg_2				<= PCK2_reg_1;
+			PCK2_reg_3				<= PCK2_reg_2;
 			// This is for the 68K core Access
 			if (nRESET) begin
 				REQ_M68K_RD_SIG_REG 							<= REQ_M68K_RD_SIG;
@@ -235,48 +238,56 @@ module cram_16bit
 				nAS_PREV 										<= nAS;
 				
 				old_clk <= z80_clk;
-				z80_ready <= z80_ready_reg;
-				
-				if (REQ_M68K_RD) 	M68K_RD_REQ 			<= 1;
-				
-				if (REQ_Z80_RD) 	begin	
-					REQ_Z80_REQ 								<= 1'b1;
-					z80_ready_reg								<= 1'b0;
-					z80_ready									<= 1'b0;
-				end
 				
 				if (REQ_SROM_RD) 	begin	
 					REQ_SROM_REQ 								<= 1'b1;
 					PBUS_REG										<= PBUS;
 				end
 				
+				if (REQ_M68K_RD) 	M68K_RD_REQ 			<= 1;
+				
+				if (REQ_Z80_RD) 	begin	
+					REQ_Z80_REQ 								<= 1'b1;
+					z80_ready_reg								<= 1'b0;
+				end
+				else z80_ready_reg		<= z80_ready;
+				
 				if (~nAS_PREV & nAS) begin
-					PROM_DATA_READY 							<= 1'b0;
+					PROM_DATA_READY_C							<= 1'b0;
 					P2ROM_ADDR_REG								<= P2ROM_ADDR;
 					M68K_ADDR_REG								<= M68K_ADDR;
 				end
-				if (~PCK2_reg & PCK2) Ram_wait <= 1'd0;
+				else begin
+					PROM_DATA_READY_C <= PROM_DATA_READY;
+				end
+				if (REQ_SROM_RD) Ram_wait <= 1'd0;
 				else Ram_wait <= Ram_wait + 1;
 				
 			end
 			else begin // Reset cores
 				REQ_M68K_RD_SIG_REG 							<= 1'b0;
 				REQ_M68K_WD_SIG_REG 							<= 1'b0;
+				REQ_SROM_REQ									<= 1'b0;
+				PROM_DATA_READY_C								<= 1;
 				M68K_RD_RUN 									<= 1'b0;
 				nAS_PREV											<= 1'b0;
 				M68K_RD_REQ 									<= 0;
 				REQ_Z80_RD_SIG_REG							<= 0;
-				z80clk_reg										<= 0;
+				REQ_Z80_REQ										<= 0;
 				z80_ready_reg									<= 1'b1;
 				Ram_wait											<= 0;
 			end
 			
 			// Z80 Rise and fall signal to the controller.
-			
+			word_q_reg 		<= word_q;
+			z80_dout_reg 	<= z80_dout;
+			SROM_DATA_reg	<= SROM_DATA;
+			PROM_DATA_reg 	<= PROM_DATA;
 			
 			case (ram_state)
 				idle : begin
 					word_busy 			<= 1'b0;
+					// APF Access for writting
 					if (|{word_rd, word_wr}) begin
 						RAM_READ 			<= word_rd;
 						RAM_Access 			<= 1'b1;
@@ -292,37 +303,9 @@ module cram_16bit
 						channel_read		<= 3'd0;
 						RAM_ADDR 			<= word_addr; // Add the address MUX in the waiter
 						OPB_32Bit			<= word_32bit;
-					end					
-					
-					else if(REQ_SROM_REQ) begin
-						RAM_READ 		<= 1'b1;
-						RAM_Access 		<= 1'b1;
-						word_busy 		<= 1'b1;
-						ram_state 		<= read_16bit;
-						channel_read	<= 3'd3;
-//						if (REQ_SROM_REQ) begin
-//						RAM_ADDR 		<= nSYSTEM_G ? {4'b1100, 1'b0, FIX_BANK[1:0], PBUS[11:0], PBUS[14:12], PBUS[15], 1'b0}: 
-//																{4'b1101, 1'b0, 2'b00,         PBUS[11:0], PBUS[14:12], PBUS[15], 1'b0};
-//						end
-//						else begin
-						RAM_ADDR 		<= nSYSTEM_G ? {4'b1100, 1'b0, FIX_BANK[1:0], PBUS_REG[11:0], PBUS_REG[14:12], PBUS_REG[15], 1'b0}: 
-																{4'b1101, 1'b0, 2'b00,         PBUS_REG[11:0], PBUS_REG[14:12], PBUS_REG[15], 1'b0};
-//						end
-						
-						OPB_BE 			<= 4'hF;
-					end
-					
-					else if(REQ_Z80_REQ && Ram_wait <= 'd53) begin
-						RAM_READ 		<= 1'b1;
-						RAM_Access 		<= 1'b1;
-						word_busy 		<= 1'b1;
-						ram_state 		<= read_16bit;
-						channel_read	<= 3'd2;
-						RAM_ADDR 		<= {5'b1111_1, z80_rdaddr};
-						OPB_BE 			<= 4'hF;
-					end
-					
-					else if(M68K_RD_REQ && Ram_wait <= 'd53) begin
+					end			
+					// 68K cpu access
+					else if(|{REQ_M68K_RD, M68K_RD_REQ}) begin
 						RAM_READ 			<= 1'b1;
 						RAM_Access 			<= 1'b1;
 						word_busy 			<= 1'b1;
@@ -332,7 +315,6 @@ module cram_16bit
 						channel_read		<= 3'd1;
 						OPB_BE 				<= 4'hF;
 						casez ({nROMOE, nPORTOE})
-							
 							// P1 ROM 32'h1000_0000 - 100F_FFFF
 							2'b0z: begin
 								RAM_ADDR 		<= {4'b0000, M68K_ADDR[19:1],1'b0};
@@ -347,38 +329,48 @@ module cram_16bit
 							end
 						endcase
 					end
-					
-					
+					// srom access
+					else if(REQ_SROM_REQ) begin
+						RAM_READ 		<= 1'b1;
+						RAM_Access 		<= 1'b1;
+						word_busy 		<= 1'b1;
+						ram_state 		<= read_16bit;
+						channel_read	<= 3'd3;
+						OPB_32Bit			<= 1'b0;
+						RAM_ADDR 		<= nSYSTEM_G ? {4'b1100, 1'b0, FIX_BANK[1:0], PBUS_REG[11:0], PBUS_REG[14:12], PBUS_REG[15], 1'b0}: 
+																{4'b1101, 1'b0, 2'b00,         PBUS_REG[11:0], PBUS_REG[14:12], PBUS_REG[15], 1'b0};
+						OPB_BE 			<= 4'hF;
+					end
+					// Z80 CPU
+					else if(|{REQ_Z80_RD ,REQ_Z80_REQ} && Ram_wait <= 'd53) begin
+						RAM_READ 		<= 1'b1;
+						RAM_Access 		<= 1'b1;
+						word_busy 		<= 1'b1;
+						ram_state 		<= read_16bit;
+						channel_read	<= 3'd2;
+						RAM_ADDR 		<= {5'b1111_1, z80_rdaddr};
+						OPB_BE 			<= 4'hF;
+						OPB_32Bit			<= 1'b0;
+					end
 				end
 				read_32bit, // need to work on this next
 				read_16bit : begin
+					RAM_Access 		<= 1'b0;
 					if (Sln_xferAck && ~Sln_xferAck_reg) begin
 						ram_state 		<= idle;
 						word_busy 		<= 1'b0;
 						RAM_Access 		<= 1'b0;
 						case (channel_read)
-							3'd0 : begin
-								word_q <= Sln_DBus;
-							end
-							
 							3'd2 : begin
-								case (RAM_ADDR[0])
-									1'b1 		: z80_dout <= Sln_DBus[15: 8];
-									default 	: z80_dout <= Sln_DBus[ 7: 0];
-								endcase
-								z80_ready_reg		<= 1'b1;
 								REQ_Z80_REQ			<= 1'b0;
 							end
 							
 							3'd3 : begin
-								SROM_DATA_reg <= Sln_DBus;
-								REQ_SROM_REQ	<= 1'b0;
+								REQ_SROM_REQ	   <= 1'b0;
 							end
 							
 							default : begin
-								PROM_DATA 			<= Sln_DBus[15:0]; 
 								M68K_RD_REQ		 	<= 1'b0;
-								PROM_DATA_READY 	<= 1'b1;
 							end
 						endcase
 					end
@@ -400,18 +392,63 @@ module cram_16bit
 					ram_state <= idle;
 				end
 			endcase
-			SROM_DATA_reg1 <= SROM_DATA_reg;
 		end
 	end
 
+	// 68K core
 	always @* begin
-		case(S2H1)
-			1'b0 		: SROM_DATA <= SROM_DATA_reg[15:8];
-			default 	: SROM_DATA <= SROM_DATA_reg[ 7:0];
+		if (&{channel_read == 3'd1, Sln_xferAck, ~Sln_xferAck_reg}) begin 
+			PROM_DATA <= Sln_DBus;
+			PROM_DATA_READY 	<= 1'b1;
+		end
+		else begin
+			PROM_DATA_READY 	<= PROM_DATA_READY_C;
+			PROM_DATA 			<= PROM_DATA_reg;
+		end
+	end
+	
+	// SROM core
+	always @* begin
+		if (&{channel_read == 3'd3, Sln_xferAck, ~Sln_xferAck_reg}) begin 
+			SROM_DATA <= Sln_DBus;
+		end
+		else SROM_DATA <= SROM_DATA_reg;
+	end
+	
+	// Z80 core
+	always @* begin
+		if (&{channel_read == 3'd2, Sln_xferAck, ~Sln_xferAck_reg}) begin 
+			case (RAM_ADDR[0])
+				1'b1 		: z80_dout <= Sln_DBus[15: 8];
+				default 	: z80_dout <= Sln_DBus[ 7: 0];
+			endcase
+			z80_ready <= 1;
+		end
+		else begin
+			z80_ready <= z80_ready_reg;
+			z80_dout <= z80_dout_reg;
+		end
+	end
+	
+	// APF core
+	always @* begin
+		case (ram_state)
+			read_32bit, // need to work on this next
+			read_16bit : begin
+				if (&{channel_read == 3'd0, Sln_xferAck, ~Sln_xferAck_reg}) begin 
+					word_q <= Sln_DBus;
+				end
+			end
+			default : begin
+			 word_q <= word_q_reg;
+			end
 		endcase
 	end
 	
 	// CRAM Controller
+	
+	// Fast Access times
+	
 	
 	opb_psram_v opb_psram_v(
       .OPB_ABus        	(RAM_ADDR),

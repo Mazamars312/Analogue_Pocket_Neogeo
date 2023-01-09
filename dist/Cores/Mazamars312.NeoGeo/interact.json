@@ -2,95 +2,51 @@
     "interact": {
         "magic": "APF_VER_1",
         "variables": [
-			{
-                "name": "Screen X Position",
-                "id": 1,
-                "type": "slider_u32",
-                "enabled": true,
-				"persist": true,
-                "address": "0xF0000034",
-                "mask": "0x00000000",
-                "graphical": {
-                    "defaultval": "0",
-                    "signed": true,
-                    "min": -40,
-                    "max": 40,
-                    "adjust_small": 1,
-                    "adjust_large": 2
-                }
-            },
-			{
-                "name": "Screen Y Position",
-                "id": 2,
-                "type": "slider_u32",
-                "enabled": true,
-				"persist": true,
-                "address": "0xF0000038",
-                "mask": "0x00000000",
-                "graphical": {
-                    "defaultval": "0",
-                    "signed": true,
-                    "min": -16,
-                    "max": 16,
-                    "adjust_small": 1,
-                    "adjust_large": 1
-                }
-            },
             {
-                "name": "Player Type 1",
-                "id": 3,
-                "type": "slider_u32",
-                "enabled": true,
+                "name": "Reset Core",
+                "id": 1,
+                "type": "check",
+				"enabled": true,
 				"persist": true,
-                "address": "0xF0000000",
-                "mask": "0xFFFFFFFC",
-                "graphical": {
-                    "defaultval": "0",
-                    "signed": false,
-                    "min": 0,
-                    "max": 2,
-                    "adjust_small": 1,
-                    "adjust_large": 1
-                }
+				"defaultval": 0,
+                "address": "0xF000004c",
+				"value": "0x1",
+				"value_off": "0x0",
+                "mask": "0xFFFFFFFE"
             },
 			{
-                "name": "Player Type 2",
-                "id": 4,
-                "type": "slider_u32",
-                "enabled": true,
+                "name": "Hi-res Output",
+                "id": 2,
+                "type": "check",
+				"enabled": true,
 				"persist": true,
-                "address": "0xF0000004",
-                "mask": "0xFFFFFFFC",
-                "graphical": {
-                    "defaultval": "0",
-                    "signed": false,
-                    "min": 0,
-                    "max": 2,
-                    "adjust_small": 1,
-                    "adjust_large": 1
-                }
+				"defaultval": 0,
+                "address": "0xF0000044",
+				"value": "0x1",
+				"value_off": "0x0",
+                "mask": "0xFFFFFFFE"
+            },
+			{
+                "name": "Rotate Screen Output",
+                "id": 3,
+                "type": "check",
+				"enabled": true,
+				"persist": true,
+				"defaultval": 0,
+                "address": "0xF0000048",
+				"value": "0x1",
+				"value_off": "0x0",
+                "mask": "0xFFFFFFFE"
             },
 			{
                 "name": "PAL Output",
-                "id": 5,
-                "type": "radio",
+                "id": 4,
+                "type": "check",
                 "enabled": true,
 				"group": 101,
 				"persist": true,
                 "address": "0xF0000018",
 				"value": "0x1",
-                "mask": "0xFFFFFFFE"
-                
-            },
-			{
-                "name": "NTSC Output",
-                "id": 6,
-                "type": "radio",
-                "enabled": true,
-				"group": 101,
-				"persist": true,
-                "address": "0xF0000018",
-				"value": "0x0",
                 "mask": "0xFFFFFFFE"
                 
             }

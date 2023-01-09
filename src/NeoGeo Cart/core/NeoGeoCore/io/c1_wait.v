@@ -34,7 +34,9 @@ module c1_wait(
 	
 	// When nROMWAIT == 1, nDTACK = nAS for nROM_ZONE (no wait)
 	wire WAIT_MUX = (!nROM_ZONE & !nROMWAIT) ? (WAIT_CNT > 3) :
-			(!nPORT_ZONE & (!nPWAIT1 | !nPWAIT0)) ? (WAIT_CNT > 3) :
+			// Fix by paulb-nl -09/01/2023
+			(!nPORT_ZONE & ( nPWAIT1 & !nPWAIT0)) ? (WAIT_CNT > 3) :
+			(!nPORT_ZONE & (!nPWAIT1 &  nPWAIT0)) ? (WAIT_CNT > 2) :
 			(!nCARD_ZONE) ? (WAIT_CNT > 3) :		// Maybe 2 but not important here, used JEIDA compliance
 			1'b0;
 	
