@@ -2,11 +2,11 @@
 
 This is the port of the Neogeo Core made by [Furrtek](https://www.patreon.com/furrtek/posts) to the Analogue Pocket using the APF framework and some of my own code.
 
-This version fixes all the memory controllers and locations for every OG Neogeo game to atleast run on the pocket.
+This version fixes alot of the slow downs, Video timings and most sound issues (I need to find all the masking and offset stuff now)
 
 ## Installation and Usage 
 
-If you have version 0.7.0 or below installed, it is recommended that you remove it and re-install with the new release
+If you have version 0.7.5 or below installed, it is recommended that you remove it and re-install with the new release
 
 * There is a added file sfix.sfix required for this installation as well. please see below
 
@@ -34,14 +34,7 @@ If you want more BIOS to access, First open the "/Cores/Mazamars312.NeoGeo/data.
 
 ## Controllers 
 
-* First and second player work with the Analogue Dock.
-* While in Alpha 0.7.5 the left trigger on the Pocket or on the first player controller is set to the system reset.
-* Currently it is setup for SNES controller layout. Analogue will allow you to change the layout in the input.json for your own enjoyment. 
-
-I have added in the interact.json file to switch between the SNES, Normal Neogeo controller and the Neogeo CD controller layouts for instant changes. Press the home button then goto "/Core Settings/Player Type 1" and selectet between the 3 types
-* Option 1 - SNES Controller layout 
-* Option 2 - NeoGeo Normal controller 
-* Option 3 - NeoGeo CDrom Controller 
+These are all mapped by the Interact menu with Analogue Key mapper. So I have removed the player controler types in the interact.
 
 ## Are Memories Supported?
 No at this moment, there are a lot of moving parts in the Neogeo, but once the compatibility is up to a good point then I can get this part done. 
@@ -69,13 +62,11 @@ Yes. Once in the game, press the Anaolgue Pocket's Home button then direct yours
 ## Why is the refresh different then to the Mister core?
 First off the core runs in MSV mode (so a straight 24mhz) So I bet that is one of the two issues.
 
-Secondly, I am using a PLL and not counters for dividing the clocks internally on the Neogeo, My theory is that the counters ran a bit faster on the set and hold stage of the regs then the PLL.
-
 Will be making a PLL Configuration tool soon to correct this.
 
 ## Some games are cut off on the sides of the image
 
-It looks like some games like to use about 304 pixel output and others like 320 pixels. The next build will have this option to select between these two options.
+Try running in High Res mode as that will run the game in 320 pixels and adjust both the screen X and Y to get the best image output.
 
 ## Why where you late with this release?
 I have been both moving house and renovating at the same time. So I didnt want dust on and in my computer and Pocket. 20sq meters of ripping up tiles is a fun task but very dusty job.
@@ -93,6 +84,7 @@ I would like to ask that you support the people like [Furrtek](https://www.patre
 * [Jorge Cwik] (fx68k@fxatari.com) The FX68K M68000 cycle accurate, fully synchronous CPU 
 * [sorg - Alexey Melnikov] (https://github.com/sorgelig) Has created many of the special chips in the core and operates the Mister distribution 
 * [Mister team](https://github.com/MiSTer-devel) Everyone that is in this to build great cores
+* [paulb-nl] (https://github.com/paulb-nl) Great finds on the last sprites not getting rendered, JT11 bug fixes for sound in cores and the C1 wait stat bugs.
 * Please advise if there are others in this core as I do want to thank them and make sure they are supported on this.
 
 ## Special Thanks

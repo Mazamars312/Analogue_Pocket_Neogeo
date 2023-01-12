@@ -30,8 +30,20 @@
 		    ],
 			"memory_writes": [
 				{
-						"address": "0xF0000410",
-						"data": "0xCTOLINK"
+						"address": "0xF000030c",
+						"data": "0xPCM"
+				},
+				{
+						"address": "0xF0000310",
+						"data": "0xV2OFFSET"
+				},
+				{
+						"address": "0xF0000314",
+						"data": "0xV2MASK"
+				},
+				{
+						"address": "0xF0000400",
+						"data": "0xC1WAIT"
 				}
 			]
     }

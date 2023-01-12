@@ -5,8 +5,16 @@
             {
                 "width": 304,
                 "height": 224,
-                "aspect_w": 4,
-                "aspect_h": 3,
+                "aspect_w": 19,
+                "aspect_h": 15,
+                "rotation": 0,
+                "mirror": 0
+            },
+			{
+                "width": 304,
+                "height": 224,
+                "aspect_w": 160,
+                "aspect_h": 144,
                 "rotation": 0,
                 "mirror": 0
             },
@@ -19,10 +27,26 @@
                 "mirror": 0
             },
 			{
+                "width": 304,
+                "height": 224,
+                "aspect_w": 16,
+                "aspect_h": 9,
+                "rotation": 0,
+                "mirror": 0
+            },
+			{
                 "width": 320,
                 "height": 224,
-                "aspect_w": 4,
-                "aspect_h": 3,
+                "aspect_w": 19,
+                "aspect_h": 15,
+                "rotation": 0,
+                "mirror": 0
+            },
+			{
+                "width": 320,
+                "height": 224,
+                "aspect_w": 160,
+                "aspect_h": 144,
                 "rotation": 0,
                 "mirror": 0
             },
@@ -35,35 +59,11 @@
                 "mirror": 0
             },
 			{
-                "width": 304,
-                "height": 224,
-                "aspect_w": 4,
-                "aspect_h": 3,
-                "rotation": 90,
-                "mirror": 0
-            },
-			{
-                "width": 304,
-                "height": 224,
-                "aspect_w": 4,
-                "aspect_h": 3,
-                "rotation": 90,
-                "mirror": 0
-            },
-			{
                 "width": 320,
                 "height": 224,
-                "aspect_w": 4,
-                "aspect_h": 3,
-                "rotation": 90,
-                "mirror": 0
-            },
-			{
-                "width": 320,
-                "height": 224,
-                "aspect_w": 4,
-                "aspect_h": 3,
-                "rotation": 90,
+                "aspect_w": 16,
+                "aspect_h": 9,
+                "rotation": 0,
                 "mirror": 0
             }
         ]

@@ -5,51 +5,110 @@
             {
                 "name": "Reset Core",
                 "id": 1,
-                "type": "check",
+                "type": "action",
 				"enabled": true,
-				"persist": true,
-				"defaultval": 0,
-                "address": "0xF000004c",
+                "address": "0xF0000100",
+				"defaultval": "0x1",
 				"value": "0x1",
 				"value_off": "0x0",
                 "mask": "0xFFFFFFFE"
             },
 			{
-                "name": "Hi-res Output",
+                "name": "Screen X Position",
                 "id": 2,
-                "type": "check",
-				"enabled": true,
+                "type": "slider_u32",
+                "enabled": true,
 				"persist": true,
-				"defaultval": 0,
-                "address": "0xF0000044",
-				"value": "0x1",
-				"value_off": "0x0",
-                "mask": "0xFFFFFFFE"
+                "address": "0xF0000204",
+                "mask": "0x00000000",
+                "graphical": {
+                    "defaultval": -2,
+                    "signed": true,
+                    "min": -32,
+                    "max": 32,
+                    "adjust_small": 1,
+                    "adjust_large": 2
+                }
             },
 			{
-                "name": "Rotate Screen Output",
+                "name": "Screen Y Position",
                 "id": 3,
+                "type": "slider_u32",
+                "enabled": true,
+				"persist": true,
+                "address": "0xF0000208",
+                "mask": "0x00000000",
+                "graphical": {
+                    "defaultval": "0",
+                    "signed": true,
+                    "min": -16,
+                    "max": 16,
+                    "adjust_small": 1,
+                    "adjust_large": 1
+                }
+            },
+			{
+                "name": "MVS/AES",
+                "id": 4,
                 "type": "check",
 				"enabled": true,
 				"persist": true,
-				"defaultval": 0,
-                "address": "0xF0000048",
+                "address": "0xF000000c",
 				"value": "0x1",
-				"value_off": "0x0",
                 "mask": "0xFFFFFFFE"
             },
 			{
                 "name": "PAL Output",
-                "id": 4,
+                "id": 5,
                 "type": "check",
                 "enabled": true,
-				"group": 101,
 				"persist": true,
-                "address": "0xF0000018",
+                "address": "0xF0000200",
 				"value": "0x1",
+				"value_off": "0x0",
                 "mask": "0xFFFFFFFE"
                 
-            }
+            },
+			{
+                "name": "320/304 H Video Output",
+                "id": 6,
+                "type": "check",
+				"enabled": true,
+				"persist": true,
+				"defaultval": 0,
+                "address": "0xF000020C",
+				"value": "0x4",
+				"value_off": "0x0",
+                "mask": "0xFFFFFFFB"
+            },
+			{
+				"name": "Video Scaller output",
+				"id": 7,
+				"type": "list",
+				"enabled": true,
+				"persist": true,
+				"address": "0xF000020C",
+				"defaultval": 0,
+				"mask": "0xFFFFFFFC",
+				"options": [
+					{
+					"value": "0x00",
+					"name": "Aspect ratio 19:15"
+					},
+					{
+					"value": "0x01",
+					"name": "Aspect ratio 160:144"
+					},
+					{
+					"value": "0x02",
+					"name": "Aspect ratio 4:3"
+					},
+					{
+					"value": "0x03",
+					"name": "Dock Widescreen 16:9"
+					}
+				]
+			}
 		],
         "messages": []
     }

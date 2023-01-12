@@ -17,9 +17,11 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 module uPD4990(
+	input clk_74a,
 	input nRESET,
 	input CLK,			// 12MHz please
 	input [64:0] rtc,
+	input rtc_valid,
 	input CS, OE,		// Both always low
 	input DATA_CLK,
 	input DATA_IN,
@@ -46,6 +48,17 @@ module uPD4990(
 	reg [1:0] DATA_CLK_G_SR;
 	reg [1:0] STROBE_G_SR;
 	
+	reg	rtc_valid_reg;
+	wire [63:0] rtc_reg = {8'b01000000, rtc[55:48], rtc[47:40], rtc[39:31], rtc[23:0]};
+	
+//	always @(posedge clk_74a) begin
+//		if (rtc_valid && rtc_valid_reg) begin
+//			rtc_reg <= {8'b01000000, rtc[55:48], rtc[47:40], rtc[39:31], rtc[23:0]};
+//		end
+//		
+//		
+//	end
+	
 	
 	// "rtc" format:
 	// 64 63       55       47       39       31       23       15       7
@@ -61,9 +74,9 @@ module uPD4990(
 	// CCCC YYYYYYYY MMMM WWWW DDDDDDDD HHHHHHHH MMMMMMMM SSSSSSSS
 	
 	// BCD to hex
-	assign MONTH_HEX = rtc[36] ? rtc[35:32] + 4'd10 : rtc[35:32];
+	assign MONTH_HEX = rtc_reg[36] ? rtc_reg[35:32] + 4'd10 : rtc_reg[35:32];
 	
-	assign TIME_DATA = {rtc[47:40], MONTH_HEX, 1'b0, rtc[50:48], rtc[31:24], 2'b00, rtc[21:0]};
+	assign TIME_DATA = {rtc_reg[47:40], MONTH_HEX, 1'b0, rtc_reg[50:48], rtc_reg[31:24], 2'b00, rtc_reg[21:0]};
 	
 	wire [14:0] DIV15_INC = DIV15 + 1'b1;	// Look-ahead for edge detection
 	wire [5:0] DIV6_INC = DIV6 + 1'b1;		// Look-ahead for edge detection

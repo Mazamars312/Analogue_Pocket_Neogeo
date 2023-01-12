@@ -223,24 +223,14 @@ wire [31:0]		pixel_mux_change;
 ////////////////////   CLOCKS   ///////////////////
 
 wire locked_1;
-wire locked_2;
 wire clk_sys;
 wire CLK_24M = counter_p[1];
 wire sdram_int_clk;
-wire sdram_int_clk_pll;
-
-//pll_sdram pll_sdram(
-//	.refclk(clk_74a),
-//	.rst(0),
-//	.outclk_0(sdram_int_clk_pll),
-//	.locked(locked_1)
-//);
 
 assign sdram_int_clk = clk_sys;
 
 // Clocks
 wire CLK_12M, CLK_12MB, CLK_68KCLK, CLK_68KCLKB, CLK_8M, CLK_6MB, CLK_4M, CLK_4MB;
-wire cascade_out;
 
 pll pll_sys(
 	.refclk(clk_74a),
@@ -250,19 +240,13 @@ pll pll_sys(
 	.outclk_2(CLK_VIDEO_90),
 	.outclk_3(CLK_8M),
 	.outclk_4(CLK_4M),
-	.cascade_out(cascade_out),
 	.reconfig_to_pll(reconfig_to_pll),
 	.reconfig_from_pll(reconfig_from_pll),
 	.locked(locked_1)
 );
 
-
 reg [1:0] counter_p = 0;
 always @(posedge clk_sys) counter_p <= counter_p + 1'd1;
-
-//assign CLK_12M = CLK_68KCLK;
-
-//assign clk_sys = clk_74a;
 
 wire [63:0] reconfig_to_pll;
 wire [63:0] reconfig_from_pll;
@@ -285,22 +269,23 @@ pll_cfg pll_cfg
 	.reconfig_from_pll(reconfig_from_pll)
 );
 
+
+	reg [2:0] state = 0;
+
 always @(posedge clk_74a) begin
 	reg sys_mvs = 0, sys_mvs2 = 0;
-	reg [2:0] state = 0;
 	reg sys_mvs_r;
 
 	sys_mvs  <= SYSTEM_MVS;
 	sys_mvs2 <= sys_mvs;
-
 	cfg_write <= 0;
 	if(sys_mvs2 == sys_mvs && sys_mvs2 != sys_mvs_r) begin
-		state <= 0;
+		state <= 1;
 		sys_mvs_r <= sys_mvs2;
 	end
 
 	if(!cfg_waitrequest) begin
-		if(state) state<=state+1'd0;
+		if(state) state<=state+1'd1;
 		case(state)
 			1: begin
 					cfg_address <= 0;
@@ -309,7 +294,8 @@ always @(posedge clk_74a) begin
 				end
 			5: begin
 					cfg_address <= 7;
-					cfg_data <= sys_mvs_r ? 1325963058 : 357388034;
+//					cfg_data <= sys_mvs_r ? 243111298 : 515118929;//74.2mhz
+					cfg_data <= sys_mvs_r ? 216917482 : 488741884;//74.25mhz
 					cfg_write <= 1;
 				end
 			7: begin
@@ -324,7 +310,7 @@ end
 wire  [1:0] SYSTEM_TYPE;
 reg nRESET;
 always @(posedge CLK_24M) begin
-	if (start_system && reset_l_main) begin
+	if (start_system && reset_l_main && locked_1 && state == 0) begin
 			nRESET <= 1'b1;
 		end
 		else begin
@@ -356,7 +342,8 @@ wire [1:0]	memory_card_enable;
 
 wire [7:0]	DIPSW;
 
-wire [64:0] rtc;
+wire [63:0] rtc;
+wire 			rtc_valid;
 
 wire [3:0]	snd_enable;
 wire [5:0]	ch_enable;
@@ -367,9 +354,9 @@ wire [7:0]	LO_RAM_word_data;
 wire [7:0]	LO_RAM_word_q;
 
 wire [15:0]		backup_ram_addr;
-wire [15:0]		backup_ram_dout;
+wire [31:0]		backup_ram_dout;
 wire 				backup_ram_wr;
-wire [15:0]		backup_ram_din;
+wire [31:0]		backup_ram_din;
 
 wire SYSTEM_MVS = (SYSTEM_TYPE == 2'd1);
 wire SYSTEM_CDx = 1'b0;
@@ -379,13 +366,13 @@ wire [25:0] CROM_MASK;
 wire [23:0] V1ROM_MASK; 
 wire [18:0] MROM_MASK;
 wire [23:0]	V2_offset;
+wire [18:0] SROM_MASK;
 
 wire 			start_system;
 
 wire [31:0]	screen_x_pos;
 wire [31:0]	screen_y_pos;
-wire 			high_res;
-wire 			screen_rotation;
+wire [2:0]	APF_Video_ratio;
 wire [23:0] V2ROM_MASK;
 wire [2:0]  C1_wait;
 
@@ -418,13 +405,13 @@ apf_io apf_io
 	.start_system				(start_system),
 	.rtc_time_bcd				(rtc[31:0]),
 	.rtc_date_bcd				(rtc[63:32]),
+	.rtc_valid					(rtc_valid),
 	.DIPSW						(DIPSW),
 	.SYSTEM_TYPE				(SYSTEM_TYPE),
 	.memory_card_enable		(memory_card_enable),
 	.use_mouse_reg				(use_mouse_reg),
 	.video_mode					(video_mode),
-	.high_res					(high_res),
-	.screen_rotation			(screen_rotation),
+	.APF_Video_ratio			(APF_Video_ratio),
 	.snd_enable					(snd_enable),
 	.ch_enable					(ch_enable),
 	
@@ -436,6 +423,7 @@ apf_io apf_io
 	
 	.P2ROM_MASK					(P2ROM_MASK), 
 	.CROM_MASK					(CROM_MASK), 
+	.SROM_MASK					(SROM_MASK),
 	.V1ROM_MASK					(V1ROM_MASK), 
 	.MROM_MASK					(MROM_MASK),
 	.V2_offset					(V2_offset),
@@ -489,25 +477,6 @@ apf_io apf_io
 	.screen_y_pos				(screen_y_pos)
 
 );
-
-reg dbg_menu = 0;
-always @(posedge clk_sys) begin
-	reg old_stb;
-	reg enter = 0;
-	reg esc = 0;
-	
-	old_stb <= ps2_key[10];
-	if(old_stb ^ ps2_key[10]) begin
-		if(ps2_key[7:0] == 'h5A) enter <= ps2_key[9];
-		if(ps2_key[7:0] == 'h76) esc   <= ps2_key[9];
-	end
-	
-	if(enter & esc) begin
-		dbg_menu <= ~dbg_menu;
-		enter <= 0;
-		esc <= 0;
-	end
-end
 
 //////////////////   Her Majesty   ///////////////////
 
@@ -632,10 +601,10 @@ wire nPORTOE = nPORTOEL & nPORTOEU;
 *******************************************************************/
 wire PROM_DATA_READY;
 
-wire [12:0] neogeo_memcard_addr;
+wire [15:0] neogeo_memcard_addr;
 wire 			neogeo_memcard_wr;
-wire [15:0] neogeo_memcard_dout;
-wire [15:0] neogeo_memcard_din;
+wire [31:0] neogeo_memcard_dout;
+wire [31:0] neogeo_memcard_din;
 
 wire 			z80rd_req, z80_ready;
 
@@ -675,12 +644,12 @@ wire [20:1] M68K_ADDR_RAM = M68K_ADDR;
 
 backup BACKUP(
 	.CLK_24M(CLK_24M),
-	.M68K_ADDR(M68K_ADDR[15:1]),
+	.M68K_ADDR({M68K_ADDR[15:1], 1'b0}),
 	.M68K_DATA(M68K_DATA),
 	.nBWL(nBWL), .nBWU(nBWU),
 	.SRAM_OUT(SRAM_OUT),
 	.clk_sys(clk_74a),
-	.sram_addr(backup_ram_addr[15:1]),
+	.sram_addr(backup_ram_addr[15:0]),
 	.sram_wr(backup_ram_wr),
 	.sd_buff_dout(backup_ram_dout),
 	.sd_buff_din_sram(backup_ram_din)
@@ -714,6 +683,7 @@ cram_16bit CPU68K_z80_RAM_CONTROLLER(
 	.word_busy			(cram0_word_busy),
 	
 	.nSYSTEM_G			(nSYSTEM_G),
+	.SROM_MASK			(SROM_MASK),
 	.PBUS					(PBUS[15:0]),
 	.PCK2					(PCK2),
 	.FIX_BANK			(FIX_BANK),
@@ -946,7 +916,7 @@ memcard MEMCARD(
 	.CARD_WE					(CARD_WE),
 	.M68K_DATA				(M68K_DATA[7:0]),
 	.clk_sys					(clk_74a),
-	.memcard_addr			(neogeo_memcard_addr[12:1]),
+	.memcard_addr			(neogeo_memcard_addr[15:0]),
 	.memcard_wr				(neogeo_memcard_wr),
 	.sd_buff_dout			(neogeo_memcard_dout),
 	.sd_buff_din_memcard	(neogeo_memcard_din)
@@ -1087,7 +1057,9 @@ neo_f0 F0(
 );
 
 uPD4990 RTC(
+	.clk_74a(clk_74a),
 	.rtc(rtc),
+	.rtc_valid(rtc_valid),
 	.nRESET(nRESET),
 	.CLK(CLK_12M),
 	.DATA_CLK(RTC_CLK), 
@@ -1399,7 +1371,7 @@ always @(posedge clk_sys or negedge nRESET) begin
 			ADPCMB_READ_REQ <= ~ADPCMB_READ_REQ;
 //			ADPCMB_ADDR_LATCH <= use_pcm ? {1'b1, ADPCMB_ADDR[22:0] & V1ROM_MASK[22:0]} : ADPCMB_ADDR[23:0] & V1ROM_MASK[23:0];
 // We do not require these for the Darksoft roms once we get the chip32 this will move things correcly
-			ADPCMB_ADDR_LATCH <= use_pcm ? (ADPCMB_ADDR[23:0] + V2_offset) & V2ROM_MASK[23:0] : ADPCMB_ADDR[23:0]  & V1ROM_MASK[23:0];
+			ADPCMB_ADDR_LATCH <= use_pcm ? (ADPCMB_ADDR[23:0] & V2ROM_MASK[23:0]) + V2_offset  : ADPCMB_ADDR[23:0]  & V1ROM_MASK[23:0];
 			// Data is needed on one previous 8MHz clk before next 55KHz clock->(96MHz/55KHz = 1728)-144-4=1580
 			ADPCMB_ACK_COUNTER <= 11'd1579;
 //			ADPCMB_DATA_READY	<= 1'b0;
@@ -1569,7 +1541,7 @@ wire [7:0] VGA_B_wire = B6[6] ? 8'd0 : {B6[5:0],  B6[4:3]};
 
 *******************************************************************/
 
-	localparam		VID_H_BPORCH = 10'd35;
+	localparam		VID_H_BPORCH_DEFAULT = 10'd34;
 	localparam		VID_H_ACTIVE = 10'd304;
 	localparam		VID_H_ACTIVE_HD = 10'd320;
    localparam		VID_V_ACTIVE = 10'd224;
@@ -1581,6 +1553,7 @@ wire [7:0] VGA_B_wire = B6[6] ? 8'd0 : {B6[5:0],  B6[4:3]};
 	reg VSync_reg;
 	reg [9:0] VID_H_ACTIVE_REG;
 	reg [9:0] VID_V_BPORCH;
+	reg [9:0] VID_H_BPORCH;
 	
 	reg [2:0] res_reg;
 	reg video_mode_reg;
@@ -1606,85 +1579,52 @@ always @(posedge CLK_VIDEO) begin
 	if (VSync_reg && ~VSync) begin
 		y_count <= 'b0;
 		VGA_VS <= 1;
-		VID_V_BPORCH <= video_mode_reg ? VID_V_BPORCH_PAL : VID_V_BPORCH_NTSC;
+		VID_V_BPORCH <= (video_mode_reg ? VID_V_BPORCH_PAL : VID_V_BPORCH_NTSC) + screen_y_pos;
+		VID_H_BPORCH <= VID_H_BPORCH_DEFAULT - screen_x_pos;
 	end
 	else if (HSync_reg && ~HSync)	begin
 		y_count <= y_count + 1'b1;
-		res_reg <= {screen_rotation, high_res, 1'b0}; 
+		res_reg <= APF_Video_ratio; 
 		video_mode_reg <= video_mode;
-		VID_H_ACTIVE_REG <= high_res ? VID_H_ACTIVE_HD : VID_H_ACTIVE;
+		VID_H_ACTIVE_REG <= APF_Video_ratio[2] ? VID_H_ACTIVE_HD : VID_H_ACTIVE;
 		VGA_HS <= 1;
 	end
 	
 	// inactive screen areas are black
-	
 	VGA_R_reg <= ~SHADOW ? VGA_R_wire : {1'b0, VGA_R_wire[7:1]};
 	VGA_G_reg <= ~SHADOW ? VGA_G_wire : {1'b0, VGA_G_wire[7:1]};
 	VGA_B_reg <= ~SHADOW ? VGA_B_wire : {1'b0, VGA_B_wire[7:1]};
-//	if (~video_mode_reg) begin
-		if(x_count >= VID_H_BPORCH && x_count < VID_H_ACTIVE_REG + VID_H_BPORCH) begin
-			if((y_count >= VID_V_BPORCH) && (y_count < (VID_V_ACTIVE + VID_V_BPORCH))) begin
-				// data enable. this is the active region of the line
-				VGA_R <= VGA_R_reg;
-				VGA_G <= VGA_G_reg;
-				VGA_B <= VGA_B_reg;
-			end 
-		end
-		else if ((x_count == VID_H_ACTIVE_REG + VID_H_BPORCH) && 
-					(y_count >= VID_V_BPORCH) && (y_count < (VID_V_ACTIVE + VID_V_BPORCH))) begin
-			case (res_reg)
-				3'd7		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h7, 13'd0};
-				3'd6		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h6, 13'd0};
-				3'd5		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h5, 13'd0};
-				3'd4		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h4, 13'd0};
-				3'd3		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h3, 13'd0};
-				3'd2		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h2, 13'd0};
-				3'd1		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h1, 13'd0};
-				default : {VGA_R, VGA_G, VGA_B} 	<= 24'h0;
-			endcase
-		end
-		
-		if(x_count >= VID_H_BPORCH && x_count < VID_H_ACTIVE_REG + VID_H_BPORCH) begin
-			if((y_count >= VID_V_BPORCH) && (y_count < (VID_V_ACTIVE + VID_V_BPORCH))) begin
-				// data enable. this is the active region of the line
-				VGA_DE <= 1'b1;
-			end 
-		end
-//	end
 	
-//	
-//	else begin
-//		if(x_count >= VID_H_BPORCH && x_count < VID_H_ACTIVE_REG + VID_H_BPORCH) begin
-//			if((y_count >= VID_V_BPORCH_PAL) && (y_count < (VID_V_ACTIVE + VID_V_BPORCH_PAL))) begin
-//				// data enable. this is the active region of the line
-//				VGA_R <= VGA_R_reg;
-//				VGA_G <= VGA_G_reg;
-//				VGA_B <= VGA_B_reg;
-//			end 
-//		end
-//		else if ((x_count == VID_H_ACTIVE_REG + VID_H_BPORCH) && 
-//					(y_count >= VID_V_BPORCH_PAL) && (y_count < (VID_V_ACTIVE + VID_V_BPORCH_PAL))) begin
-//			case (res_reg)
-//				3'd7		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h7, 13'd0};
-//				3'd6		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h6, 13'd0};
-//				3'd5		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h5, 13'd0};
-//				3'd4		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h4, 13'd0};
-//				3'd3		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h3, 13'd0};
-//				3'd2		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h2, 13'd0};
-//				3'd1		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h1, 13'd0};
-//				default : {VGA_R, VGA_G, VGA_B} 	<= 24'h0;
-//			endcase
-//		end
-//		
-//		if(x_count >= VID_H_BPORCH && x_count < VID_H_ACTIVE + VID_H_BPORCH) begin
-//			if((y_count >= VID_V_BPORCH_PAL) && (y_count < (VID_V_ACTIVE + VID_V_BPORCH_PAL))) begin
-//				// data enable. this is the active region of the line
-//				VGA_DE <= 1'b1;
-//			end 
-//		end
-//	
-//	end
+	// Video Output and select video mode to scaler
+	if(x_count >= VID_H_BPORCH && x_count < VID_H_ACTIVE_REG + VID_H_BPORCH) begin
+		if((y_count >= VID_V_BPORCH) && (y_count < (VID_V_ACTIVE + VID_V_BPORCH))) begin
+			// data enable. this is the active region of the line
+			VGA_R <= VGA_R_reg;
+			VGA_G <= VGA_G_reg;
+			VGA_B <= VGA_B_reg;
+		end 
+	end
+	else if ((x_count == VID_H_ACTIVE_REG + VID_H_BPORCH) && 
+				(y_count >= VID_V_BPORCH) && (y_count < (VID_V_ACTIVE + VID_V_BPORCH))) begin
+		case (res_reg)
+			3'd7		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h7, 13'd0};
+			3'd6		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h6, 13'd0};
+			3'd5		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h5, 13'd0};
+			3'd4		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h4, 13'd0};
+			3'd3		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h3, 13'd0};
+			3'd2		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h2, 13'd0};
+			3'd1		: {VGA_R, VGA_G, VGA_B} 	<= {10'd0, 3'h1, 13'd0};
+			default : {VGA_R, VGA_G, VGA_B} 	<= 24'h0;
+		endcase
+	end
 	
+	// Video Enable
+	if(x_count >= VID_H_BPORCH && x_count < VID_H_ACTIVE_REG + VID_H_BPORCH) begin
+		if((y_count >= VID_V_BPORCH) && (y_count < (VID_V_ACTIVE + VID_V_BPORCH))) begin
+			// data enable. this is the active region of the line
+			VGA_DE <= 1'b1;
+		end 
+	end	
 end
 
 

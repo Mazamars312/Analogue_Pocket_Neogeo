@@ -159,6 +159,7 @@ wire [ 7:0] aeg_b;         // Envelope Generator Control
 wire [ 5:0] adpcma_flags;  // ADPMC-A read over flags
 wire        adpcmb_flag;
 wire [ 6:0] flag_ctl;
+wire [ 6:0] flag_mask;
 
 
 wire clk_en_2, clk_en_666, clk_en_111, clk_en_55;
@@ -286,8 +287,8 @@ jt12_dout #(.use_ssg(use_ssg),.use_adpcm(use_adpcm)) u_dout(
     .flag_A         ( flag_A        ),
     .flag_B         ( flag_B        ),
     .busy           ( busy          ),
-    .adpcma_flags   ( adpcma_flags  ),
-    .adpcmb_flag    ( adpcmb_flag   ),
+    .adpcma_flags   ( adpcma_flags & flag_mask[5:0] ),
+    .adpcmb_flag    ( adpcmb_flag & flag_mask[6]    ),
     .psg_dout       ( psg_dout      ),
     .addr           ( addr          ),
     .dout           ( dout          )
@@ -353,6 +354,7 @@ jt12_mmr #(.use_ssg(use_ssg),.num_ch(num_ch),.use_pcm(use_pcm), .use_adpcm(use_a
     .adeltan_b  ( adeltan_b     ),  // Delta-N
     .aeg_b      ( aeg_b         ),  // Envelope Generator Control    
     .flag_ctl   ( flag_ctl      ),
+    .flag_mask  ( flag_mask     ),
     // Operator
     .xuse_prevprev1 ( xuse_prevprev1  ),
     .xuse_internal  ( xuse_internal   ),

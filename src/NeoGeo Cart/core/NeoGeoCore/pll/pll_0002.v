@@ -25,9 +25,6 @@ module  pll_0002(
 	// interface 'locked'
 	output wire locked,
 
-	// interface 'cascade_out'
-	output wire [4:0] cascade_out,
-
 	// interface 'reconfig_to_pll'
 	input wire [63:0] reconfig_to_pll,
 
@@ -37,7 +34,7 @@ module  pll_0002(
 
 	altera_pll #(
 		.fractional_vco_multiplier("true"),
-		.reference_clock_frequency("74.2 MHz"),
+		.reference_clock_frequency("74.25 MHz"),
 		.pll_fractional_cout(32),
 		.pll_dsm_out_sel("1st_order"),
 		.operation_mode("direct"),
@@ -236,7 +233,7 @@ module  pll_0002(
 		.pll_cp_current(30),
 		.pll_bwctrl(2000),
 		.pll_output_clk_frequency("671.999999 MHz"),
-		.pll_fractional_division("243111298"),
+		.pll_fractional_division("216917482"),
 		.mimic_fbclk_type("none"),
 		.pll_fbclk_mux_1("glb"),
 		.pll_fbclk_mux_2("m_cnt"),
@@ -250,7 +247,6 @@ module  pll_0002(
 		.fboutclk	( ),
 		.fbclk	(1'b0),
 		.refclk	(refclk),
-		.cascade_out	(cascade_out),
 		.reconfig_from_pll	(reconfig_from_pll)
 	);
 endmodule

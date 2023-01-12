@@ -29,6 +29,11 @@
                         "id": 4,
                         "name": "Pad 1 Start",
                         "key": "pad_btn_start"
+                    },
+                    {
+                        "id": 5,
+                        "name": "Pad 1 Select",
+                        "key": "pad_btn_select"
                     }
                 ]
             }

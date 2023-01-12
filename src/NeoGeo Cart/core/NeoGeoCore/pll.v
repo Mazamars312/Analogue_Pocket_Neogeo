@@ -14,7 +14,6 @@ module pll (
 		output wire        outclk_3,          //           outclk3.clk
 		output wire        outclk_4,          //           outclk4.clk
 		output wire        locked,            //            locked.export
-		output wire [4:0]  cascade_out,       //       cascade_out.export
 		input  wire [63:0] reconfig_to_pll,   //   reconfig_to_pll.reconfig_to_pll
 		output wire [63:0] reconfig_from_pll  // reconfig_from_pll.reconfig_from_pll
 	);
@@ -28,7 +27,6 @@ module pll (
 		.outclk_3          (outclk_3),          //           outclk3.clk
 		.outclk_4          (outclk_4),          //           outclk4.clk
 		.locked            (locked),            //            locked.export
-		.cascade_out       (cascade_out),       //       cascade_out.export
 		.reconfig_to_pll   (reconfig_to_pll),   //   reconfig_to_pll.reconfig_to_pll
 		.reconfig_from_pll (reconfig_from_pll)  // reconfig_from_pll.reconfig_from_pll
 	);
@@ -67,7 +65,7 @@ endmodule
 // Retrieval info: 	<generic name="device" value="5CEBA2F17A7" />
 // Retrieval info: 	<generic name="gui_device_speed_grade" value="2" />
 // Retrieval info: 	<generic name="gui_pll_mode" value="Fractional-N PLL" />
-// Retrieval info: 	<generic name="gui_reference_clock_frequency" value="74.2" />
+// Retrieval info: 	<generic name="gui_reference_clock_frequency" value="74.25" />
 // Retrieval info: 	<generic name="gui_channel_spacing" value="0.0" />
 // Retrieval info: 	<generic name="gui_operation_mode" value="direct" />
 // Retrieval info: 	<generic name="gui_feedback_clock" value="Global Clock" />
@@ -247,7 +245,7 @@ endmodule
 // Retrieval info: 	<generic name="gui_en_dps_ports" value="false" />
 // Retrieval info: 	<generic name="gui_en_phout_ports" value="false" />
 // Retrieval info: 	<generic name="gui_phout_division" value="1" />
-// Retrieval info: 	<generic name="gui_mif_generate" value="false" />
+// Retrieval info: 	<generic name="gui_mif_generate" value="true" />
 // Retrieval info: 	<generic name="gui_enable_mif_dps" value="false" />
 // Retrieval info: 	<generic name="gui_dps_cntr" value="C0" />
 // Retrieval info: 	<generic name="gui_dps_num" value="1" />
@@ -258,7 +256,7 @@ endmodule
 // Retrieval info: 	<generic name="gui_switchover_delay" value="0" />
 // Retrieval info: 	<generic name="gui_active_clk" value="false" />
 // Retrieval info: 	<generic name="gui_clk_bad" value="false" />
-// Retrieval info: 	<generic name="gui_enable_cascade_out" value="true" />
+// Retrieval info: 	<generic name="gui_enable_cascade_out" value="false" />
 // Retrieval info: 	<generic name="gui_cascade_outclk_index" value="0" />
 // Retrieval info: 	<generic name="gui_enable_cascade_in" value="false" />
 // Retrieval info: 	<generic name="gui_pll_cascading_mode" value="Create an adjpllin signal to connect with an upstream PLL" />

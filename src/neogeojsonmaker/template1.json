@@ -30,15 +30,15 @@
 		    ],
 			"memory_writes": [
 				{
-						"address": "0xf0000024",
+						"address": "0xF0000404",
 						"data": "0xPVC-Cart"
 				},
 				{
-						"address": "0xf000002C",
+						"address": "0xF0000408",
 						"data": "0xSMA-Cart"
 				},
 				{
-						"address": "0xf0000030",
+						"address": "0xF000040c",
 						"data": "0xCMC-Chip"
 				}
 				

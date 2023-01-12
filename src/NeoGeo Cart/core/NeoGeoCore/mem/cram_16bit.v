@@ -67,6 +67,7 @@ module cram_16bit
 		// SROM access control
 	
 	input             	nSYSTEM_G,
+	input 	  [18:0]		SROM_MASK,
 	input      [15:0] 	PBUS,
 	input       [1:0] 	FIX_BANK,
 	input 					PCK2,
@@ -193,6 +194,8 @@ module cram_16bit
 	reg [15:0]	PROM_DATA_reg;
 	
 	reg			PROM_DATA_READY_C;
+	
+	wire [17:0] SROM_ADDRESS = {FIX_BANK[1:0],PBUS_REG[15:0]} & SROM_MASK[18:1];
 	
 	always @(posedge sys_clk or negedge reset_l_main) begin
 		if (~reset_l_main) begin
@@ -337,8 +340,8 @@ module cram_16bit
 						ram_state 		<= read_16bit;
 						channel_read	<= 3'd3;
 						OPB_32Bit			<= 1'b0;
-						RAM_ADDR 		<= nSYSTEM_G ? {4'b1100, 1'b0, FIX_BANK[1:0], PBUS_REG[11:0], PBUS_REG[14:12], PBUS_REG[15], 1'b0}: 
-																{4'b1101, 1'b0, 2'b00,         PBUS_REG[11:0], PBUS_REG[14:12], PBUS_REG[15], 1'b0};
+						RAM_ADDR 		<= nSYSTEM_G ? {4'b1100, 1'b0, SROM_ADDRESS[17:16], SROM_ADDRESS[11:0], SROM_ADDRESS[14:12], SROM_ADDRESS[15], 1'b0}: 
+																{4'b1101, 1'b0, 2'b00, PBUS_REG[11:0], PBUS_REG[14:12], PBUS_REG[15], 1'b0};
 						OPB_BE 			<= 4'hF;
 					end
 					// Z80 CPU

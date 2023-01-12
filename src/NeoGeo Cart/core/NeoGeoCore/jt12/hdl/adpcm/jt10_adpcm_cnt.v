@@ -54,7 +54,7 @@ reg [3:0] bank1, bank2, bank3, bank4, bank5, bank6;
 reg [11:0] start1, start2, start3, start4, start5, start6,
            end1,   end2,   end3,   end4,   end5,   end6;
 reg on1, on2, on3, on4, on5, on6;
-reg done5, done6, done1;
+reg done1, done2, done3, done4, done5, done6;
 reg [5:0] done_sr, zero;
 
 reg roe_n1, decon1;
@@ -135,6 +135,7 @@ always @(posedge clk or negedge rst_n)
         addr2  <= addr1;
         on2    <= aoff ? 1'b0 : (aon | (on1 && ~done1));
         clr2   <= aoff || aon || done1; // Each time a A-ON is sent the address counter restarts
+        done2  <= done1;
         start2 <=  (up_start && up1) ? addr_in[11:0] : start1;
         end2   <=  (up_end   && up1) ? addr_in[11:0] : end1;
         bank2  <=  (up_start && up1) ? addr_in[15:12] : bank1;
@@ -143,6 +144,7 @@ always @(posedge clk or negedge rst_n)
         addr3  <= addr2; // clr2 ? {start2,9'd0} : addr2;
         on3    <= on2;
         clr3   <= clr2;
+        done3  <= done2;
         start3 <= start2;
         end3   <= end2;
         bank3  <= bank2;
@@ -151,6 +153,7 @@ always @(posedge clk or negedge rst_n)
         addr4  <= addr3;
         on4    <= on3;
         clr4   <= clr3;
+        done4  <= done3;
         start4 <= start3;
         end4   <= end3;
         bank4  <= bank3;
@@ -159,7 +162,7 @@ always @(posedge clk or negedge rst_n)
         addr5  <= addr4;
         on5    <= on4;
         clr5   <= clr4;
-        done5  <= addr4[20:9] == end4 && addr4[8:0]==~9'b0 && ~(clr4 && on4);
+        done5  <= ~on4 ? done4 : (addr4[20:9] == end4 && addr4[8:0]==~9'b0 && ~clr4);
         start5 <= start4;
         end5   <= end4;
         bank5  <= bank4;

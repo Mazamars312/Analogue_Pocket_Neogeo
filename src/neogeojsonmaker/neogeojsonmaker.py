@@ -388,7 +388,7 @@ for line in fileinput.input("./Game.json/Bang Bead.json", inplace=True):
     
     
     # open both files
-with open('template2.json','r') as firstfile, open ('./Game.json/Blue\'s Journey.json','w') as secondfile:
+with open('template5.json','r') as firstfile, open ('./Game.json/Blue\'s Journey.json','w') as secondfile:
       
     # read content from first file
     for line in firstfile:
@@ -403,7 +403,9 @@ for line in fileinput.input("./Game.json/Blue\'s Journey.json", inplace=True):
     # This will replace string "GameFolder/" with "bjourney" in each line
     line = line.replace("GameFolder/", "bjourney")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00200000")
+    line = line.replace("0xV2OFFSET", "0x00200000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
+    line = line.replace("0xC1WAIT", "0x00000001")
     
     # write() method of sys module redirects the .stdout is redirected to the file
     sys.stdout.write(line)
@@ -501,7 +503,8 @@ for line in fileinput.input("./Game.json/Baseball Stars Professional.json", inpl
     # This will replace string "GameFolder/" with "bstars" in each line
     line = line.replace("GameFolder/", "bstars")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00200000")
+    line = line.replace("0xV2OFFSET", "0x00200000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
     
     
     # write() method of sys module redirects the .stdout is redirected to the file
@@ -526,8 +529,8 @@ for line in fileinput.input("./Game.json/Baseball Stars Professional (AES).json"
     # This will replace string "GameFolder/" with "bstarsh" in each line
     line = line.replace("GameFolder/", "bstarsh")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00200000")
-    
+    line = line.replace("0xV2OFFSET", "0x00200000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
     
     # write() method of sys module redirects the .stdout is redirected to the file
     sys.stdout.write(line)   
@@ -775,7 +778,8 @@ for line in fileinput.input("./Game.json/Cyber-Lip.json", inplace=True):
     # This will replace string "GameFolder/" with "cyberlip" in each line
     line = line.replace("GameFolder/", "cyberlip")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00200000")
+    line = line.replace("0xV2OFFSET", "0x00200000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
     
     
     # write() method of sys module redirects the .stdout is redirected to the file
@@ -1419,7 +1423,8 @@ for line in fileinput.input("./Game.json/Ghost Pilots.json", inplace=True):
     # This will replace string "GameFolder/" with "gpilots" in each line
     line = line.replace("GameFolder/", "gpilots")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00280000")
+    line = line.replace("0xV2OFFSET", "0x00000000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
     
     
     # write() method of sys module redirects the .stdout is redirected to the file
@@ -1444,7 +1449,8 @@ for line in fileinput.input("./Game.json/Ghost Pilots (AES).json", inplace=True)
     # This will replace string "GameFolder/" with "gpilotsh" in each line
     line = line.replace("GameFolder/", "gpilotsh")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00280000")
+    line = line.replace("0xV2OFFSET", "0x00000000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
     
     
     # write() method of sys module redirects the .stdout is redirected to the file
@@ -1617,7 +1623,8 @@ for line in fileinput.input("./Game.json/Puzzled.json", inplace=True):
     # This will replace string "GameFolder/" with "joyjoy" in each line
     line = line.replace("GameFolder/", "joyjoy")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00200000")
+    line = line.replace("0xV2OFFSET", "0x00200000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
     
     
     # write() method of sys module redirects the .stdout is redirected to the file
@@ -2657,7 +2664,8 @@ for line in fileinput.input("./Game.json/League Bowling.json", inplace=True):
     # This will replace string "GameFolder/" with "lbowling" in each line
     line = line.replace("GameFolder/", "lbowling")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00200000")
+    line = line.replace("0xV2OFFSET", "0x00200000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
     
     
     # write() method of sys module redirects the .stdout is redirected to the file
@@ -2806,7 +2814,8 @@ for line in fileinput.input("./Game.json/Magician Lord.json", inplace=True):
     # This will replace string "GameFolder/" with "maglord" in each line
     line = line.replace("GameFolder/", "maglord")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00200000")
+    line = line.replace("0xV2OFFSET", "0x00200000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
     
     
     # write() method of sys module redirects the .stdout is redirected to the file
@@ -2832,7 +2841,8 @@ for line in fileinput.input("./Game.json/Magician Lord (AES).json", inplace=True
     # This will replace string "GameFolder/" with "maglordh" in each line
     line = line.replace("GameFolder/", "maglordh")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00200000")
+    line = line.replace("0xV2OFFSET", "0x00200000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
     
     
     # write() method of sys module redirects the .stdout is redirected to the file
@@ -2883,7 +2893,8 @@ for line in fileinput.input("./Game.json/Mahjong Kyo Retsuden.json", inplace=Tru
     # This will replace string "GameFolder/" with "mahretsu" in each line
     line = line.replace("GameFolder/", "mahretsu")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00200000")
+    line = line.replace("0xV2OFFSET", "0x00200000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
     
     
     # write() method of sys module redirects the .stdout is redirected to the file
@@ -2984,7 +2995,8 @@ for line in fileinput.input("./Game.json/Minasan no Okagesamadesu! Dai Sugoroku 
     # This will replace string "GameFolder/" with "minasan" in each line
     line = line.replace("GameFolder/", "minasan")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00280000")
+    line = line.replace("0xV2OFFSET", "0x00000000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
     
     
     # write() method of sys module redirects the .stdout is redirected to the file
@@ -3385,7 +3397,8 @@ for line in fileinput.input("./Game.json/NAM-1975.json", inplace=True):
     # This will replace string "GameFolder/" with "nam1975" in each line
     line = line.replace("GameFolder/", "nam1975")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00200000")
+    line = line.replace("0xV2OFFSET", "0x00200000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
     
     
     # write() method of sys module redirects the .stdout is redirected to the file
@@ -3409,7 +3422,8 @@ for line in fileinput.input("./Game.json/Ninja Combat.json", inplace=True):
     # This will replace string "GameFolder/" with "ncombat" in each line
     line = line.replace("GameFolder/", "ncombat")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00200000")
+    line = line.replace("0xV2OFFSET", "0x00200000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
     
     
     # write() method of sys module redirects the .stdout is redirected to the file
@@ -3434,7 +3448,8 @@ for line in fileinput.input("./Game.json/Ninja Combat (AES).json", inplace=True)
     # This will replace string "GameFolder/" with "ncombath" in each line
     line = line.replace("GameFolder/", "ncombath")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00200000")
+    line = line.replace("0xV2OFFSET", "0x00200000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
     
     
     # write() method of sys module redirects the .stdout is redirected to the file
@@ -3445,7 +3460,7 @@ for line in fileinput.input("./Game.json/Ninja Combat (AES).json", inplace=True)
     
     
     # open both files
-with open('template.json','r') as firstfile, open ('./Game.json/Ninja Commando.json','w') as secondfile:
+with open('template6.json','r') as firstfile, open ('./Game.json/Ninja Commando.json','w') as secondfile:
       
     # read content from first file
     for line in firstfile:
@@ -3459,7 +3474,7 @@ for line in fileinput.input("./Game.json/Ninja Commando.json", inplace=True):
     
     # This will replace string "GameFolder/" with "ncommand" in each line
     line = line.replace("GameFolder/", "ncommand")
-    
+    line = line.replace("0xC1WAIT", "0x00000001")
     
     
     # write() method of sys module redirects the .stdout is redirected to the file
@@ -4377,7 +4392,8 @@ for line in fileinput.input("./Game.json/Riding Hero.json", inplace=True):
     # This will replace string "GameFolder/" with "ridhero" in each line
     line = line.replace("GameFolder/", "ridhero")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00200000")
+    line = line.replace("0xV2OFFSET", "0x00200000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
     line = line.replace("0xCTOLINK", "0x00000002")
     
     # write() method of sys module redirects the .stdout is redirected to the file
@@ -4403,7 +4419,8 @@ for line in fileinput.input("./Game.json/Riding Hero (AES).json", inplace=True):
     # This will replace string "GameFolder/" with "ridheroh" in each line
     line = line.replace("GameFolder/", "ridheroh")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00200000")
+    line = line.replace("0xV2OFFSET", "0x00200000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
     line = line.replace("0xCTOLINK", "0x00000002")
     
     # write() method of sys module redirects the .stdout is redirected to the file
@@ -5541,7 +5558,8 @@ for line in fileinput.input("./Game.json/Super Spy, The.json", inplace=True):
     # This will replace string "GameFolder/" with "superspy" in each line
     line = line.replace("GameFolder/", "superspy")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00280000")
+    line = line.replace("0xV2OFFSET", "0x00000000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
     
     
     # write() method of sys module redirects the .stdout is redirected to the file
@@ -5716,7 +5734,8 @@ for line in fileinput.input("./Game.json/Top Players Golf.json", inplace=True):
     # This will replace string "GameFolder/" with "tpgolf" in each line
     line = line.replace("GameFolder/", "tpgolf")
     line = line.replace("0xPCM", "0xFFFFFFFF")
-    line = line.replace("0xOFFSET", "0x00200000")
+    line = line.replace("0xV2OFFSET", "0x00200000")
+    line = line.replace("0xV2MASK", "0x003FFFFF")
     
     
     # write() method of sys module redirects the .stdout is redirected to the file

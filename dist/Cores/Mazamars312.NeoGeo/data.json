@@ -21,14 +21,14 @@
 						"sav"
 					],
 					"size_exact": null,
-					"size_maximum": 16384,
+					"size_maximum": 8192,
 					"address": "0x60000000"
 				},
 				{
 					"name": "Backup Ram",
 					"id": "0x102",
 					"required": false,
-					"parameters": 34,
+					"parameters": 32,
 					"nonvolatile": true,
 					"filename" : "backup.bak",
 					"extensions": [
@@ -43,7 +43,7 @@
 					"id": 1,
 					"required": true,
 					"parameters": 65,
-					"filename" : "uni-bios_1_0.rom",
+					"filename" : "uni-bios_4_0.rom",
 					"extensions": [
 						"rom", "sp1", "bin"
 					],

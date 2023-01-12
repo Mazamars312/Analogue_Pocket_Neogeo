@@ -156,16 +156,16 @@ module apf_io
 	output reg			start_system,
 	output     [31:0] rtc_date_bcd,
 	output     [31:0] rtc_time_bcd,
+	output 				rtc_valid,
 	output reg [7:0]	DIPSW,
 	output reg [1:0]	SYSTEM_TYPE,
 	output reg [1:0]	memory_card_enable,
 	output reg [1:0]	use_mouse_reg,
-	output reg			video_mode,
+	output reg  		video_mode,
+	output reg [2:0]	APF_Video_ratio,
 	output reg [3:0]	snd_enable,
 	output reg [5:0]	ch_enable,
 	output reg [15:0]	pixel_mux_change,
-	output reg 			high_res,
-	output reg 			screen_rotation,
 	
 	output reg [3:0] 	cart_pchip,
 	output reg       	use_pcm,
@@ -175,6 +175,7 @@ module apf_io
 	
 	output reg [23:0] P2ROM_MASK, 
 	output reg [25:0] CROM_MASK, 
+	output reg [18:0] SROM_MASK,
 	output reg [23:0] V1ROM_MASK, 
 	output reg [18:0] MROM_MASK,
 	output reg [23:0] V2_offset,
@@ -185,15 +186,15 @@ module apf_io
 	// Seconds since 1970-01-01 00:00:00
 	output reg [32:0] TIMESTAMP,	
 	
-	output [11:0]		neogeo_memcard_addr,
+	output [12:0]		neogeo_memcard_addr,
 	output 				neogeo_memcard_wr,
-	output [15:0]		neogeo_memcard_dout,
-	input  [15:0]		neogeo_memcard_din,
+	output [31:0]		neogeo_memcard_dout,
+	input  [31:0]		neogeo_memcard_din,
 	
 	output [15:0]		backup_ram_addr,
-	output [15:0]		backup_ram_dout,
+	output [31:0]		backup_ram_dout,
 	output 				backup_ram_wr,
-	input  [15:0]		backup_ram_din,
+	input  [31:0]		backup_ram_din,
 	
 	output reg [31:0] 	screen_x_pos,
 	output reg [31:0] 	screen_y_pos
@@ -225,8 +226,8 @@ wire [31:0]	ram_CRAM1_controller_rd_data;
 wire [31:0]	ram_SDRAM_controller_rd_data;
 wire [31:0]	ram_SROM_controller_rd_data;
 wire [31:0]	ram_lo_rom_controller_rd_data;
-wire [31:0]	neogeo_sram_controller_rd_data;
-wire [31:0]	neogeo_memorycard_controller_rd_data;
+reg  [31:0]	neogeo_sram_controller_rd_data;
+reg  [31:0]	neogeo_memorycard_controller_rd_data;
 	
 	
 io_pad_controller ipm (
@@ -281,20 +282,11 @@ io_pad_controller ipm (
 reg [3:0] controller_map_1, controller_map_2;
 
 always @(posedge clk_sys) begin
-	case (controller_map_1)												//		D					C				B					A
-		4'h1	  : joystick_0 <= {cont1_key[14], cont1_key[15], cont1_key[4], cont1_key[6], cont1_key[5], cont1_key[7], cont1_key[0], cont1_key[1], cont1_key[2], cont1_key[3]}; // Neogeo outlay
-		4'h2	  : joystick_0 <= {cont1_key[14], cont1_key[15], cont1_key[6], cont1_key[7], cont1_key[4], cont1_key[5], cont1_key[0], cont1_key[1], cont1_key[2], cont1_key[3]}; // Neogeo CD outlay
-		default : joystick_0 <= {cont1_key[14], cont1_key[15], cont1_key[7:4], cont1_key[0], cont1_key[1], cont1_key[2], cont1_key[3]}; // Xbox Controller/Snes controller
-	endcase
-	case (controller_map_2)												//		D					C				B					A
-		4'h1	  : joystick_1 <= {cont2_key[14], cont2_key[15], cont2_key[4], cont2_key[6], cont2_key[5], cont2_key[7], cont2_key[0], cont2_key[1], cont2_key[2], cont2_key[3]}; // Neogeo outlay
-		4'h2	  : joystick_1 <= {cont2_key[14], cont2_key[15], cont2_key[6], cont2_key[7], cont2_key[4], cont2_key[5], cont2_key[0], cont2_key[1], cont2_key[2], cont2_key[3]}; // Neogeo CD outlay
-		default : joystick_1 <= {cont2_key[14], cont2_key[15], cont2_key[7:4], cont2_key[0], cont2_key[1], cont2_key[2], cont2_key[3]}; // Xbox Controller/Snes controller
-	endcase
+	joystick_0 <= {cont1_key[14], cont1_key[15], cont1_key[7:4], cont1_key[0], cont1_key[1], cont1_key[2], cont1_key[3]}; // Xbox Controller/Snes controller
+	joystick_1 <= {cont2_key[14], cont2_key[15], cont2_key[7:4], cont2_key[0], cont2_key[1], cont2_key[2], cont2_key[3]}; // Xbox Controller/Snes controller
 end
 
-//	assign joystick_0 = {cont1_key[14], cont1_key[15], cont1_key[7:4], cont1_key[0], cont1_key[1], cont1_key[2], cont1_key[3]};
-//	assign joystick_1 = {cont2_key[14], cont2_key[15], cont2_key[7:4], cont2_key[0], cont2_key[1], cont2_key[2], cont2_key[3]};
+
 	
 // virtual pmp bridge
 	wire				bridge_endian_little = 0; //
@@ -389,6 +381,7 @@ core_bridge_cmd icb (
 	.dataslot_requestread_ok	( 1'b1 ),
 	.rtc_time_bcd					(rtc_time_bcd),
 	.rtc_date_bcd					(rtc_date_bcd),
+	.rtc_valid						(rtc_valid),
 
 	.dataslot_requestwrite		( dataslot_requestwrite ),
 	.dataslot_requestwrite_id	( dataslot_requestwrite_id ),
@@ -431,7 +424,7 @@ parameter reset_hold				=  0,
 			 search_found_update	=	4;
 			 
 parameter memory_card_id 	= 'h101;
-parameter sram_id 			= 'h101;
+parameter sram_id 			= 'h102;
 
 always @(posedge clk_74a or negedge reset_l_main) begin
 	if (~reset_l_main) begin
@@ -462,17 +455,18 @@ always @(posedge clk_74a or negedge reset_l_main) begin
 					if (datatable_q == memory_card_id) begin
 						datatable_addr <= {datatable_addr[9:1], 1'b1};
 						datatable_wren <= 1'b1;
-						datatable_data <= 16'd16384;
+						datatable_data <= 32'd8192;
 					end
 					else if (datatable_q == sram_id) begin
 						datatable_addr <= {datatable_addr[9:1], 1'b1};
 						datatable_wren <= 1'b1;
-						datatable_data <= 16'd65536;
+						datatable_data <= 32'd65536;
 					end
 					save_loop_update <= search_found_update;
 				end
 				else begin
 					save_loop_update <= search_address;
+					datatable_wren <= 1'b0;
 					if (datatable_addr >= 16'd127) datatable_addr <= 0;
 					else datatable_addr <= {datatable_addr[9:1] + 1, 1'b0};
 				end
@@ -582,7 +576,9 @@ wire [7:0] test_crom_bits = { // this is a trick Im doing to check if anything i
 									
 reg 			cart_pchip_main;
 reg [2:0] 	cart_pchip_sub;
-reg			PROM1_access;							
+reg			PROM1_access;	
+reg			Core_reset;
+reg [16:0]	Core_reset_counter;						
 // APF write access over the 32bit address system and setup of the core
 always @(posedge clk_74a or negedge reset_l_main) begin
 	if (~reset_l_main) begin
@@ -590,6 +586,7 @@ always @(posedge clk_74a or negedge reset_l_main) begin
 		CROM_MASK				<= 32'h00000000;
 		V1ROM_MASK				<= 32'h00000000;
 		MROM_MASK				<= 32'h00000000;
+		SROM_MASK				<= 32'h00000000;
 		controller_map_1	 	<= 32'h00000000;
 		controller_map_2	 	<= 32'h00000000;
 		DIPSW 				 	<= 32'h000000FF;
@@ -608,65 +605,92 @@ always @(posedge clk_74a or negedge reset_l_main) begin
 		V2_offset			 	<= 32'h00000000;
 		cart_chip				<= 32'h00000000;
 		PROM1_access			<= 1'b0;
-		high_res					<= 1'b0;
-		screen_rotation		<= 1'b0;
 		C1_wait					<= 2'b0;
+		Core_reset				<= 1'b0;
+		Core_reset_counter	<= 'd0;
+		APF_Video_ratio		<= 'b0;
 	end
 	else begin
-	bridge_addr_reg <= bridge_addr[25:0];
-	CROM_MASK_STAGE_1 <= {test_crom_bits};
-	CROM_MASK 	<= {CROM_MASK_STAGE_1, {16{|CROM_MASK_STAGE_1}}};
-	
-	if (bridge_wr) begin
-		if (bridge_addr[31:24] == 8'h10) begin
-			if (bridge_addr[23:20] == 4'h8) PROM1_access <= 1'b1;
-			else if (bridge_addr[23] == 1'b0)PROM1_access <= 1'b0;
-		end
-		casex(bridge_addr)
-			32'h4xxxxxxx: begin
-				crom_addr_reg <= bridge_addr[25:0];
+		bridge_addr_reg <= bridge_addr[25:0];
+		Core_reset				<= 1'b0;
+		CROM_MASK_STAGE_1 <= {test_crom_bits};
+		CROM_MASK 	<= {CROM_MASK_STAGE_1, {16{|CROM_MASK_STAGE_1}}};
+		if (bridge_wr) begin
+			if (bridge_addr[31:24] == 8'h10) begin
+				if (bridge_addr[23:20] == 4'h8) PROM1_access <= 1'b1;
+				else if (bridge_addr[23] == 1'b0)PROM1_access <= 1'b0;
 			end
-			// these will monitor the masking side of the roms
-			32'b0001_0000_0xxx_xxxx_xxxx_xxxx_xxxx_xxxx: begin
-				P2ROM_MASK 	<= {PROM1_access, test_23_bits};
-			end
-			32'b0001_0000_1111_1xxx_xxxx_xxxx_xxxx_xxxx: begin
-				MROM_MASK 	<= test_19_bits;
-			end
-			32'b0010_0000_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx: begin
-				V1ROM_MASK 	<= test_24_bits;
-			end
-//			32'b0010_0000_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx: begin
-//				V2ROM_MASK 	<= test_23_bits;
-//			end
-			// here is the config sid of things of the core. Moved the RTC so that this can be configured by the APF directly
-			32'hF0000000 : controller_map_1		<= bridge_wr_data[3:0];
-			32'hF0000004 : controller_map_2		<= bridge_wr_data[3:0];
-			32'hF0000008 : DIPSW 					<= bridge_wr_data;
-			32'hF000000c : SYSTEM_TYPE 			<= bridge_wr_data;
-			32'hF0000010 : memory_card_enable 	<= bridge_wr_data;
-			32'hF0000014 : use_mouse_reg 			<= bridge_wr_data;
-			32'hF0000018 : video_mode 				<= bridge_wr_data;
-			32'hF000001c : ch_enable				<= bridge_wr_data;
-			32'hF0000020 : snd_enable				<= bridge_wr_data;
-			32'hF0000024 : cart_pchip_main		<= bridge_wr_data;
-			32'hF0000028 : use_pcm					<= bridge_wr_data;
-			32'hF000002C : cart_pchip_sub			<= bridge_wr_data;
-			32'hF0000030 : cmc_chip					<= bridge_wr_data;
-			32'hF0000034 : screen_x_pos			<= bridge_wr_data;
-			32'hF0000038 : screen_y_pos			<= bridge_wr_data;
-			32'hF000003C : V2_offset				<= bridge_wr_data;
-			32'hF0000040 : cart_chip				<= bridge_wr_data;
-			32'hF0000044 : high_res					<= bridge_wr_data;
-			32'hF0000048 : screen_rotation		<= bridge_wr_data;
-			32'hF000004C : V2ROM_MASK				<= bridge_wr_data;
-			32'hF0000050 : V1ROM_MASK				<= bridge_wr_data;
-			32'hF0000054 : C1_wait					<= bridge_wr_data;
+			casex(bridge_addr)
+				32'h4xxxxxxx: begin
+					crom_addr_reg <= bridge_addr[25:0];
+				end
+				// these will monitor the masking side of the roms
+				32'b0001_0000_0xxx_xxxx_xxxx_xxxx_xxxx_xxxx: begin
+					P2ROM_MASK 	<= {PROM1_access, test_23_bits};
+				end
+				32'b0001_0000_1111_1xxx_xxxx_xxxx_xxxx_xxxx: begin
+					MROM_MASK 	<= test_19_bits;
+				end
+				32'b0010_0000_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx: begin
+					V1ROM_MASK 	<= test_24_bits;
+				end
+				32'b0001_0000_1100_xxxx_xxxx_xxxx_xxxx_xxxx: begin
+					SROM_MASK 	<= test_19_bits;
+				end
+	//			32'b0010_0000_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx: begin
+	//				V2ROM_MASK 	<= test_23_bits;
+	//			end
+				// here is the config sid of things of the core. Moved the RTC so that this can be configured by the APF directly
+				// These are the old JSON regs locations.
+				32'hF0000008 : DIPSW 					<= bridge_wr_data;
+				32'hF000000c : SYSTEM_TYPE 			<= bridge_wr_data;
+				32'hF0000010 : memory_card_enable 	<= bridge_wr_data;
+				32'hF0000014 : use_mouse_reg 			<= bridge_wr_data;
+				32'hF000001c : ch_enable				<= bridge_wr_data;
+				32'hF0000020 : snd_enable				<= bridge_wr_data;
+				32'hF0000024 : cart_pchip_main		<= bridge_wr_data;
+				32'hF0000028 : use_pcm					<= bridge_wr_data;
+				32'hF000002C : cart_pchip_sub			<= bridge_wr_data;
+				32'hF0000030 : cmc_chip					<= bridge_wr_data;
+				32'hF000003C : V2_offset				<= bridge_wr_data;
+				32'hF0000040 : cart_chip				<= bridge_wr_data;
+				32'hF000004C : V2ROM_MASK				<= bridge_wr_data;
+				32'hF0000050 : V1ROM_MASK				<= bridge_wr_data;
+				32'hF0000054 : C1_wait					<= bridge_wr_data;
+				
+				// Core changes
+				32'hF0000100 : Core_reset				<= bridge_wr_data;
+				32'hF0000104 : DIPSW 					<= bridge_wr_data;
+				32'hF0000108 : SYSTEM_TYPE 			<= bridge_wr_data;
+				32'hF000010C : memory_card_enable 	<= bridge_wr_data;
+				
+				// Video Modes
+				32'hF0000200 : video_mode				<= bridge_wr_data;
+				32'hF0000204 : screen_x_pos			<= bridge_wr_data;
+				32'hF0000208 : screen_y_pos			<= bridge_wr_data;
+				32'hF000020C : APF_Video_ratio		<= bridge_wr_data;
+				
+				// Sound Modes
+				32'hF0000300 : ch_enable				<= bridge_wr_data;
+				32'hF0000304 : snd_enable				<= bridge_wr_data;
+				32'hF0000308 : V1ROM_MASK				<= bridge_wr_data;
+				32'hF000030c : use_pcm					<= bridge_wr_data;
+				32'hF0000310 : V2_offset				<= bridge_wr_data;
+				32'hF0000314 : V2ROM_MASK				<= bridge_wr_data;
+				
+				
+				// CHIP Modes
+				32'hF0000400 : C1_wait					<= bridge_wr_data;
+				32'hF0000404 : cart_pchip_main		<= bridge_wr_data;
+				32'hF0000408 : cart_pchip_sub			<= bridge_wr_data;
+				32'hF000040c : cmc_chip					<= bridge_wr_data;
+				32'hF0000410 : cart_chip				<= bridge_wr_data;
 
-		endcase
-	
-	end
-	start_system <= (&{dataslot_allcomplete, reset_n, ~cont1_key[8]}); // I just made a reset system.... with a button.. Should I debounce this......... 
+			endcase
+		end
+		if (Core_reset) Core_reset_counter <= 'hFFFFFFFF;
+		else if (|Core_reset_counter) Core_reset_counter <= Core_reset_counter - 1;
+		start_system <= (&{dataslot_allcomplete, reset_n, ~(|{Core_reset_counter})}); // I just made a reset system.... with a button.. Should I debounce this......... 
 
 	end
 end
@@ -733,28 +757,31 @@ always @(posedge clk_74a) begin
 	if (bridge_rd) begin
 		if (bridge_addr[31:24] == 8'hF0) begin
 			case (bridge_addr[15:0])
-				16'h0000 : Neogeo_status <= controller_map_1;
-				16'h0004 : Neogeo_status <= controller_map_2;
 				16'h0008 : Neogeo_status <= DIPSW;
 				16'h000c : Neogeo_status <= SYSTEM_TYPE;
 				16'h0010 : Neogeo_status <= memory_card_enable;
 				16'h0014 : Neogeo_status <= use_mouse_reg;
-				16'h0018 : Neogeo_status <= video_mode;
 				16'h001c : Neogeo_status <= ch_enable;
 				16'h0020 : Neogeo_status <= snd_enable;
 				16'h0024 : Neogeo_status <= cart_pchip_main;
 				16'h0028 : Neogeo_status <= use_pcm;
 				16'h002C : Neogeo_status <= cart_pchip_sub;
 				16'h0030 : Neogeo_status <= cmc_chip;
-				16'h0034 : Neogeo_status <= screen_x_pos;
-				16'h0038 : Neogeo_status <= screen_y_pos;
 				16'h003C : Neogeo_status <= V2_offset;
 				16'h0040 : Neogeo_status <= cart_chip;
-				16'h0044 : Neogeo_status <= high_res;
-				16'h0048 : Neogeo_status <= screen_rotation;
 				16'h004C : Neogeo_status <= V2ROM_MASK;
 				16'h0050 : Neogeo_status <= V1ROM_MASK;
 				16'h0054 : Neogeo_status <= C1_wait;
+				
+				// Core changes
+				16'h0100 : Neogeo_status <= Core_reset;
+				
+				// Video Modes
+				16'h0200 : Neogeo_status <= video_mode;
+				16'h0204 : Neogeo_status <= screen_x_pos;
+				16'h0208 : Neogeo_status <= screen_y_pos;
+				16'h020C : Neogeo_status <= APF_Video_ratio;
+				
 				default  : Neogeo_status <= controller_map_1;
 			endcase
 		end
@@ -926,30 +953,34 @@ ram_8_bit_state_controller ram_lo_rom_controller(
 *********************************************************/
 
 
-ram_16_bit_state_controller neogeo_memorycard_controller(
-	.clk_74a							(clk_74a),
-	.clk_sys							(clk_74a),
-	.reset_l							(reset_l_main),
-	.bigendin						(bridge_endian_little),
-	
-	// Ram Controller
-	.word_rd							(),
-	.word_wr							(neogeo_memcard_wr),
-	.word_addr						(neogeo_memcard_addr),
-	.word_data						(neogeo_memcard_dout),
-	.word_q							(neogeo_memcard_din),
-	.word_busy						(1'b0),
-	
-	// SPI interface
-	.bridge_addr					(bridge_addr),
-	.bridge_rd						(bridge_rd && (bridge_addr[31:28] == 4'h6)), //APF address 0x6XXX_XXXX
-	.bridge_rd_data				(neogeo_memorycard_controller_rd_data),
-	.bridge_wr						(bridge_wr && (bridge_addr[31:28] == 4'h6)),
-	.bridge_wr_data				(bridge_wr_data),
-	.bridge_processing			(),
-	.bridge_completed				()
-);
+//ram_16_bit_state_controller neogeo_memorycard_controller(
+//	.clk_74a							(clk_74a),
+//	.clk_sys							(clk_74a),
+//	.reset_l							(reset_l_main),
+//	.bigendin						(bridge_endian_little),
+//	
+//	// Ram Controller
+//	.word_rd							(),
+//	.word_wr							(neogeo_memcard_wr),
+//	.word_addr						(neogeo_memcard_addr),
+//	.word_data						(neogeo_memcard_dout),
+//	.word_q							(neogeo_memcard_din),
+//	.word_busy						(1'b0),
+//	
+//	// SPI interface
+//	.bridge_addr					(bridge_addr),
+//	.bridge_rd						(bridge_rd && (bridge_addr[31:28] == 4'h6)), //APF address 0x6XXX_XXXX
+//	.bridge_rd_data				(neogeo_memorycard_controller_rd_data),
+//	.bridge_wr						(bridge_wr && (bridge_addr[31:28] == 4'h6)),
+//	.bridge_wr_data				(bridge_wr_data),
+//	.bridge_processing			(),
+//	.bridge_completed				()
+//);
 
+assign neogeo_memcard_wr 				= bridge_wr && (bridge_addr[31:28] == 4'h6);
+assign neogeo_memcard_addr 			= bridge_addr[15:0];
+always @(posedge clk_74a) if (bridge_rd) neogeo_memorycard_controller_rd_data <= neogeo_memcard_din;
+assign neogeo_memcard_dout 			= bridge_wr_data;
 
 /*********************************************************
 
@@ -958,29 +989,34 @@ ram_16_bit_state_controller neogeo_memorycard_controller(
 *********************************************************/
 
 
-ram_16_bit_state_controller backup_ram_controller(
-	.clk_74a							(clk_74a),
-	.clk_sys							(clk_74a),
-	.reset_l							(reset_l_main),
-	.bigendin						(~bridge_endian_little),
-	
-	// Ram Controller
-	.word_rd							(),
-	.word_wr							(backup_ram_wr),
-	.word_addr						(backup_ram_addr),
-	.word_data						(backup_ram_dout),
-	.word_q							(backup_ram_din),
-	.word_busy						(1'b0),
-	
-	// SPI interface
-	.bridge_addr					(bridge_addr),
-	.bridge_rd						(bridge_rd && (bridge_addr[31:28] == 4'h7)), //APF address 0x6XXX_XXXX
-	.bridge_rd_data				(neogeo_sram_controller_rd_data),
-	.bridge_wr						(bridge_wr && (bridge_addr[31:28] == 4'h7)),
-	.bridge_wr_data				(bridge_wr_data),
-	.bridge_processing			(),
-	.bridge_completed				()
-);
+//ram_16_bit_state_controller backup_ram_controller(
+//	.clk_74a							(clk_74a),
+//	.clk_sys							(clk_74a),
+//	.reset_l							(reset_l_main),
+//	.bigendin						(~bridge_endian_little),
+//	
+//	// Ram Controller
+//	.word_rd							(),
+//	.word_wr							(backup_ram_wr),
+//	.word_addr						(backup_ram_addr),
+//	.word_data						(backup_ram_dout),
+//	.word_q							(backup_ram_din),
+//	.word_busy						(1'b0),
+//	
+//	// SPI interface
+//	.bridge_addr					(bridge_addr),
+//	.bridge_rd						(bridge_rd && (bridge_addr[31:28] == 4'h7)), //APF address 0x6XXX_XXXX
+//	.bridge_rd_data				(neogeo_sram_controller_rd_data),
+//	.bridge_wr						(bridge_wr && (bridge_addr[31:28] == 4'h7)),
+//	.bridge_wr_data				(bridge_wr_data),
+//	.bridge_processing			(),
+//	.bridge_completed				()
+//);
+
+assign backup_ram_wr 					= bridge_wr && (bridge_addr[31:28] == 4'h7);
+assign backup_ram_addr 					= bridge_addr[15:0];
+always @(posedge clk_74a) if (bridge_rd) neogeo_sram_controller_rd_data <= backup_ram_din;
+assign backup_ram_dout 					= bridge_wr_data;
 
 endmodule
 

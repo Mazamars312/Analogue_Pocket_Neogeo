@@ -30,8 +30,8 @@
 		    ],
 			"memory_writes": [
 				{
-						"address": "0xF0000410",
-						"data": "0xCTOLINK"
+						"address": "0xF0000400",
+						"data": "0xC1WAIT"
 				}
 			]
     }

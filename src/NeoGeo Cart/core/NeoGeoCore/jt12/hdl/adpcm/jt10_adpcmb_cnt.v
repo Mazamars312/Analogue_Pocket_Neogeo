@@ -41,7 +41,7 @@ module jt10_adpcmb_cnt(
     output  reg         chon,
     output  reg         flag,
     input               clr_flag,
-    output  reg         restart,
+    output  reg         clr_dec,
 
     output  reg         adv
 );
@@ -69,6 +69,7 @@ always @(posedge clk or negedge rst_n)
     end
 
 reg set_flag, last_set;
+reg restart;
 
 always @(posedge clk or negedge rst_n)
     if(!rst_n) begin
@@ -88,9 +89,11 @@ always @(posedge clk or negedge rst_n)
         set_flag   <= 'd0;
         chon       <= 'b0;
         restart    <= 'b0;
+		  clr_dec    <= 'b1;
     end else if( !on || clr ) begin
         restart <= 'd0;
         chon <= 'd0;
+		  clr_dec <= 'd1;
     end else if( acmd_up_b && on ) begin
         restart <= 'd1;
     end else if( cen ) begin
@@ -99,15 +102,18 @@ always @(posedge clk or negedge rst_n)
             nibble_sel <= 'b0;
             restart <= 'd0;
             chon <= 'd1;
+            clr_dec <= 'd0;
         end else if( chon && adv ) begin
             if( { addr, nibble_sel } != { aend, 8'hFF, 1'b1 } ) begin
                 { addr, nibble_sel } <= { addr, nibble_sel } + 25'd1;
                 set_flag <= 'd0;
             end else if(arepeat) begin
                 restart <= 'd1;
+                clr_dec <= 'd1;
             end else begin
                 set_flag <= 'd1;
                 chon <= 'd0;
+                clr_dec <= 'd1;
             end
         end
     end // cen

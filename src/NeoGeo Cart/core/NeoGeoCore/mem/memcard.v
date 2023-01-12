@@ -24,52 +24,77 @@ module memcard(
 	input [12:0] CDA,
 	input CARD_WE,
 	input [7:0] M68K_DATA,
-	output [7:0] CDD,
+	output reg [7:0] CDD,
 	input clk_sys,
-	input [11:0] memcard_addr,
+	input [12:0] memcard_addr,
 	input memcard_wr,
-	input [15:0] sd_buff_dout,
-	output [15:0] sd_buff_din_memcard
+	input [31:0] sd_buff_dout,
+	output [31:0] sd_buff_din_memcard
 );
+	
+wire [12:0] CDA_MASKED = SYSTEM_CDx ? CDA[12:0] : {2'b00, CDA[10:0]};
 
-	wire [7:0] CDD_L;
-	wire [7:0] CDD_U;
+wire [7:0] CDD_7, CDD_15, CDD_23, CDD_31;
 	
-	wire [11:0] CDA_MASKED = SYSTEM_CDx ? CDA[12:1] : {2'b00, CDA[10:1]};
+Mem_card_APF Mem_card_APF_1 (
+	.clock_a		(CLK_24M),
+	.address_a	(CDA_MASKED[12:2]),
+	.wren_a		((CARD_WE && (CDA_MASKED[1:0] == 0))),
+	.data_a		(M68K_DATA),
+	.q_a			(CDD_7),
 	
-	// Split the 8kB 8-bit memory card into two 1kB dual-port RAMs so the HPS
-	// can access it in 16-bits. The lower address bit (CDA[0]) selects which
-	// one is accessed from the NeoGeo side. The HPS always accesess in words.
-	// In cart mode, there's one 2kB memory card for each game.
-	// In CD mode, there's one 8kB memory card for all games.
-	dpram #(.ADDRWIDTH(12)) MEMCARDL(
-		.clock_a(CLK_24M),
-		.address_a(CDA_MASKED),
-		.wren_a(CARD_WE & CDA[0]),
-		.data_a(M68K_DATA),
-		.q_a(CDD_L),
-		
-		.clock_b(clk_sys),
-		.address_b(memcard_addr),
-		.wren_b(memcard_wr),
-		.data_b(sd_buff_dout[7:0]),
-		.q_b(sd_buff_din_memcard[7:0])
-	);
+	.clock_b		(clk_sys),
+	.address_b	(memcard_addr[12:2]),
+	.wren_b		(memcard_wr),
+	.data_b		(sd_buff_dout[7:0]),
+	.q_b			(sd_buff_din_memcard[7:0]));
+
+Mem_card_APF Mem_card_APF_2 (
+	.clock_a		(CLK_24M),
+	.address_a	(CDA_MASKED[12:2]),
+	.wren_a		((CARD_WE && (CDA_MASKED[1:0] == 1))),
+	.data_a		(M68K_DATA),
+	.q_a			(CDD_15),
 	
-	dpram #(.ADDRWIDTH(12)) MEMCARDU(
-		.clock_a(CLK_24M),
-		.address_a(CDA_MASKED),
-		.wren_a(CARD_WE & ~CDA[0]),
-		.data_a(M68K_DATA),
-		.q_a(CDD_U),
-		
-		.clock_b(clk_sys),
-		.address_b(memcard_addr),
-		.wren_b(memcard_wr),
-		.data_b(sd_buff_dout[15:8]),
-		.q_b(sd_buff_din_memcard[15:8])
-	);
+	.clock_b		(clk_sys),
+	.address_b	(memcard_addr[12:2]),
+	.wren_b		(memcard_wr),
+	.data_b		(sd_buff_dout[15:8]),
+	.q_b			(sd_buff_din_memcard[15:8]));
+
+Mem_card_APF Mem_card_APF_3 (
+	.clock_a		(CLK_24M),
+	.address_a	(CDA_MASKED[12:2]),
+	.wren_a		((CARD_WE && (CDA_MASKED[1:0] == 2))),
+	.data_a		(M68K_DATA),
+	.q_a			(CDD_23),
 	
-	assign CDD = CDA[0] ? CDD_L : CDD_U;
+	.clock_b		(clk_sys),
+	.address_b	(memcard_addr[12:2]),
+	.wren_b		(memcard_wr),
+	.data_b		(sd_buff_dout[23:16]),
+	.q_b			(sd_buff_din_memcard[23:16]));
+	
+Mem_card_APF Mem_card_APF_4 (
+	.clock_a		(CLK_24M),
+	.address_a	(CDA_MASKED[12:2]),
+	.wren_a		((CARD_WE && (CDA_MASKED[1:0] == 3))),
+	.data_a		(M68K_DATA),
+	.q_a			(CDD_31),
+	
+	.clock_b		(clk_sys),
+	.address_b	(memcard_addr[12:2]),
+	.wren_b		(memcard_wr),
+	.data_b		(sd_buff_dout[31:24]),
+	.q_b			(sd_buff_din_memcard[31:24]));
+	
+always @* begin
+	case (CDA_MASKED[1:0])
+		2'b11 	: CDD <= CDD_31;
+		2'b10 	: CDD <= CDD_23;
+		2'b01 	: CDD <= CDD_15;
+		default 	: CDD <= CDD_7;
+	endcase
+end
 	
 endmodule

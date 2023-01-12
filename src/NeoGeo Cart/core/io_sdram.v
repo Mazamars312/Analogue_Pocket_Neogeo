@@ -57,7 +57,7 @@ input	wire					burstwr_done,
 
 input	wire					word_rd, // can be from other clock domain. we synchronize these
 input	wire					word_wr,
-input	wire		[25:0]	word_addr,
+input	wire		[27:0]	word_addr,
 input	wire		[15:0]	word_data,
 output	reg	[31:0]	word_q,
 output	reg				word_busy
@@ -141,7 +141,7 @@ assign {phy_ras, phy_cas, phy_we} = cmd;
 	
 	wire reset_n_s;
 synch_3 s1(reset_n, reset_n_s, controller_clk);	
-	wire	[25:0]	word_addr_s;
+	wire	[27:0]	word_addr_s;
 	wire	[15:0]	word_data_s;
 	reg word_rd_queue;
 
@@ -162,7 +162,7 @@ SDRAM_FIFO SDRAM_FIFO (
 	.data		({word_addr, word_data})
 	);
 
-	wire [24:0] word_addr_neogeo = word_addr_s[25:1];
+	wire [25:0] word_addr_neogeo = word_addr_s[26:1];
 	
 	reg burst_rd_queue;
 	reg	burstwr_queue;
@@ -359,7 +359,8 @@ always @(posedge controller_clk) begin
 	end
 	
 	ST_ADDRESS : begin
-		addr <= {word_addr_neogeo[24:6], word_addr_neogeo[4], word_addr_neogeo[3:0], word_addr_neogeo[5]};
+		// the 25th bit is for the APCMA Audio so the addressing does not get (fucked up)
+		addr <= word_addr_neogeo[25] ? {1'b1, word_addr_neogeo[23:0]} : {word_addr_neogeo[24:6], word_addr_neogeo[4], word_addr_neogeo[3:0], word_addr_neogeo[5]};
 		word_data_reg <= word_data_s;
 		state <= ST_WRITE_0;
 	end
