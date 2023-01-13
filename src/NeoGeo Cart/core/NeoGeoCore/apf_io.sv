@@ -158,7 +158,7 @@ module apf_io
 	output     [31:0] rtc_time_bcd,
 	output 				rtc_valid,
 	output reg [7:0]	DIPSW,
-	output reg [1:0]	SYSTEM_TYPE,
+	output reg 			SYSTEM_TYPE,
 	output reg [1:0]	memory_card_enable,
 	output reg [1:0]	use_mouse_reg,
 	output reg  		video_mode,
@@ -166,6 +166,7 @@ module apf_io
 	output reg [3:0]	snd_enable,
 	output reg [5:0]	ch_enable,
 	output reg [15:0]	pixel_mux_change,
+	output reg 			CPU_overclock,
 	
 	output reg [3:0] 	cart_pchip,
 	output reg       	use_pcm,
@@ -578,7 +579,9 @@ reg 			cart_pchip_main;
 reg [2:0] 	cart_pchip_sub;
 reg			PROM1_access;	
 reg			Core_reset;
-reg [16:0]	Core_reset_counter;						
+reg [25:0]	Core_reset_counter;	
+reg			system_change;
+reg			overclock_change;			
 // APF write access over the 32bit address system and setup of the core
 always @(posedge clk_74a or negedge reset_l_main) begin
 	if (~reset_l_main) begin
@@ -609,6 +612,8 @@ always @(posedge clk_74a or negedge reset_l_main) begin
 		Core_reset				<= 1'b0;
 		Core_reset_counter	<= 'd0;
 		APF_Video_ratio		<= 'b0;
+		system_change			<= 'b0;
+		CPU_overclock			<= 'b0;
 	end
 	else begin
 		bridge_addr_reg <= bridge_addr[25:0];
@@ -663,6 +668,7 @@ always @(posedge clk_74a or negedge reset_l_main) begin
 				32'hF0000104 : DIPSW 					<= bridge_wr_data;
 				32'hF0000108 : SYSTEM_TYPE 			<= bridge_wr_data;
 				32'hF000010C : memory_card_enable 	<= bridge_wr_data;
+				32'hF0000110 : CPU_overclock 			<= bridge_wr_data;
 				
 				// Video Modes
 				32'hF0000200 : video_mode				<= bridge_wr_data;
@@ -688,9 +694,11 @@ always @(posedge clk_74a or negedge reset_l_main) begin
 
 			endcase
 		end
-		if (Core_reset) Core_reset_counter <= 'hFFFFFFFF;
+		system_change <= (bridge_wr && bridge_addr == 32'hF0000108);
+		overclock_change <= (bridge_wr && bridge_addr == 32'hF0000110);
+		if (|{Core_reset, system_change, overclock_change}) Core_reset_counter <= 'hFFFFFFFF;
 		else if (|Core_reset_counter) Core_reset_counter <= Core_reset_counter - 1;
-		start_system <= (&{dataslot_allcomplete, reset_n, ~(|{Core_reset_counter})}); // I just made a reset system.... with a button.. Should I debounce this......... 
+		start_system <= (&{dataslot_allcomplete, reset_n, ~(|{Core_reset_counter})});
 
 	end
 end
@@ -772,15 +780,24 @@ always @(posedge clk_74a) begin
 				16'h004C : Neogeo_status <= V2ROM_MASK;
 				16'h0050 : Neogeo_status <= V1ROM_MASK;
 				16'h0054 : Neogeo_status <= C1_wait;
+
 				
 				// Core changes
 				16'h0100 : Neogeo_status <= Core_reset;
+				16'h0104 : Neogeo_status <= DIPSW;
+				16'h0108 : Neogeo_status <= SYSTEM_TYPE;
+				16'h010C : Neogeo_status <= memory_card_enable;
+				32'h0110 : Neogeo_status <= CPU_overclock;
 				
 				// Video Modes
 				16'h0200 : Neogeo_status <= video_mode;
 				16'h0204 : Neogeo_status <= screen_x_pos;
 				16'h0208 : Neogeo_status <= screen_y_pos;
 				16'h020C : Neogeo_status <= APF_Video_ratio;
+				
+				// Sound Modes
+				16'h0300 : Neogeo_status <= ch_enable;
+				16'h0304 : Neogeo_status <= snd_enable;
 				
 				default  : Neogeo_status <= controller_map_1;
 			endcase

@@ -30,16 +30,16 @@
 		    ],
 			"memory_writes": [
 				{
-						"address": "0xf0000028",
+						"address": "0xF000030c",
 						"data": "0xFFFFFFFF"
 				},
 				{
-						"address": "0xf000003C",
+						"address": "0xF0000310",
 						"data": "0x00000000"
 				},
 				{
-						"address": "0xf000004C",
-						"data": "0x00ffffff"
+						"address": "0xF0000314",
+						"data": "0x003FFFFF"
 				}
 			]
     }

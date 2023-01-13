@@ -230,7 +230,7 @@ wire sdram_int_clk;
 assign sdram_int_clk = clk_sys;
 
 // Clocks
-wire CLK_12M, CLK_12MB, CLK_68KCLK, CLK_68KCLKB, CLK_8M, CLK_6MB, CLK_4M, CLK_4MB;
+wire CLK_32M, CLK_12M, CLK_12MB, CLK_68KCLK, CLK_68KCLKB, CLK_8M, CLK_6MB, CLK_4M, CLK_4MB;
 
 pll pll_sys(
 	.refclk(clk_74a),
@@ -240,6 +240,7 @@ pll pll_sys(
 	.outclk_2(CLK_VIDEO_90),
 	.outclk_3(CLK_8M),
 	.outclk_4(CLK_4M),
+	.outclk_5(CLK_32M),
 	.reconfig_to_pll(reconfig_to_pll),
 	.reconfig_from_pll(reconfig_from_pll),
 	.locked(locked_1)
@@ -294,7 +295,6 @@ always @(posedge clk_74a) begin
 				end
 			5: begin
 					cfg_address <= 7;
-//					cfg_data <= sys_mvs_r ? 243111298 : 515118929;//74.2mhz
 					cfg_data <= sys_mvs_r ? 216917482 : 488741884;//74.25mhz
 					cfg_write <= 1;
 				end
@@ -307,7 +307,7 @@ always @(posedge clk_74a) begin
 	end
 end
 
-wire  [1:0] SYSTEM_TYPE;
+wire  SYSTEM_TYPE;
 reg nRESET;
 always @(posedge CLK_24M) begin
 	if (start_system && reset_l_main && locked_1 && state == 0) begin
@@ -358,7 +358,7 @@ wire [31:0]		backup_ram_dout;
 wire 				backup_ram_wr;
 wire [31:0]		backup_ram_din;
 
-wire SYSTEM_MVS = (SYSTEM_TYPE == 2'd1);
+wire SYSTEM_MVS = SYSTEM_TYPE;
 wire SYSTEM_CDx = 1'b0;
 
 wire [23:0] P2ROM_MASK; 
@@ -375,6 +375,7 @@ wire [31:0]	screen_y_pos;
 wire [2:0]	APF_Video_ratio;
 wire [23:0] V2ROM_MASK;
 wire [2:0]  C1_wait;
+wire			CPU_overclock;
 
 apf_io apf_io
 (
@@ -414,6 +415,7 @@ apf_io apf_io
 	.APF_Video_ratio			(APF_Video_ratio),
 	.snd_enable					(snd_enable),
 	.ch_enable					(ch_enable),
+	.CPU_overclock				(CPU_overclock),
 	
 	.cart_pchip					(cart_pchip),
 	.use_pcm						(use_pcm),
@@ -595,7 +597,7 @@ wire nPORTOE = nPORTOEL & nPORTOEU;
 
 /*******************************************************************
 
-	68K and Z80 Ram controller using CRAM core 0
+	68K and Z80 Ram controller using CRAM and sram core 0
 
 
 *******************************************************************/
@@ -609,35 +611,82 @@ wire [31:0] neogeo_memcard_din;
 wire 			z80rd_req, z80_ready;
 
 // RAM outputs
-wire [15:0] SRAM_OUT;
+wire [15:0] backup_data;
 wire [15:0] WORK_RAM;
 
 // Backup RAM
 wire nBWL = nSRAMWEL | nSRAMWEN_G;
 wire nBWU = nSRAMWEU | nSRAMWEN_G;
 
-assign sram_a = {2'b0, M68K_ADDR_RAM[15:1]};
-assign sram_dq[7:0]  = cram_nWWL ? 8'bzz : M68K_DATA_RAM[7:0];
-assign sram_dq[15:8] = cram_nWWU ? 8'bzz : M68K_DATA_RAM[15:8];
-assign sram_oe_n = &{nWRL, nWRU};
-assign sram_we_n = &{cram_nWWL, cram_nWWU};
-assign sram_ub_n = &{cram_nWWU, nWRU};
-assign sram_lb_n = &{cram_nWWL, nWRL};
+SRAM_CONTROLLER_NEOGEO SRAM_CONTROLLER_NEOGEO (
+
+	.clk				(CLK_24M),
+	.reset_n			(nRESET),
+	
+	.sram_a			(sram_a),
+	.sram_dq			(sram_dq),
+	.sram_oe_n		(sram_oe_n),
+	.sram_we_n		(sram_we_n),
+	.sram_ub_n		(sram_ub_n),
+	.sram_lb_n		(sram_lb_n),
+	
+	.M68K_ADDR_RAM	({M68K_ADDR_RAM[15:1], 1'b0}),
+	.M68K_DATA_RAM	(M68K_DATA_RAM),
+	.SRAM_OUT		(WORK_RAM),
+	.nWRL				(nWRL),
+	.nWRU				(nWRU),
+	.sram_nWWL		(sram_nWWL),
+	.sram_nWWU		(sram_nWWU)
+
+);
+
+// 68k work RAM
+//dpram #(15) WRAML(
+//	.clock_a(CLK_24M),
+//	.address_a(M68K_ADDR[15:1]),
+//	.data_a(M68K_DATA[7:0]),
+//	.wren_a(~nWWL),
+//	.q_a(WORK_RAM[7:0]),
+//
+//	.clock_b(CLK_24M),
+//	.address_b(reset_counter),
+//	.data_b(reset_counter[7:0]),
+//	.wren_b(~nRESET)
+//);
+//
+//dpram #(15) WRAMU(
+//	.clock_a(CLK_24M),
+//	.address_a(M68K_ADDR[15:1]),
+//	.data_a(M68K_DATA[15:8]),
+//	.wren_a(~nWWU),
+//	.q_a(WORK_RAM[15:8]),
+//
+//	.clock_b(CLK_24M),
+//	.address_b(reset_counter),
+//	.data_b(reset_counter[7:0]),
+//	.wren_b(~nRESET)
+//);
 
 
-assign M68K_DATA[7:0] = (nSRAMOEL | ~SYSTEM_MVS) ? 8'bzzzzzzzz : SRAM_OUT[7:0];
-assign M68K_DATA[15:8] = (nSRAMOEU | ~SYSTEM_MVS) ? 8'bzzzzzzzz : SRAM_OUT[15:8];
 
 // Work RAM or CD extended RAM read
-assign M68K_DATA[7:0]  = nWRL ? 8'bzzzzzzzz : sram_dq[7:0];
-assign M68K_DATA[15:8] = nWRU ? 8'bzzzzzzzz : sram_dq[15:8];
+assign M68K_DATA[7:0]  = nWRL ? 8'bzzzzzzzz : WORK_RAM[7:0];
+assign M68K_DATA[15:8] = nWRU ? 8'bzzzzzzzz : WORK_RAM[15:8];
 
-// Because of the SDRAM latency, nDTACK is handled differently for ROM zones
-// If the address is in a ROM zone, PROM_DATA_READY is used to extend the normal nDTACK output by NEO-C1
-wire nDTACK_ADJ = ~&{nSROMOE, nROMOE, nPORTOE} ? ~PROM_DATA_READY | nDTACK : nDTACK;
+//wire nDTACK_ADJ = ~&{nSROMOE, nROMOE, nPORTOE} ? ~PROM_DATA_READY | nDTACK : nDTACK;
 
-wire cram_nWWL = nWWL;
-wire cram_nWWU = nWWU;
+reg nDTACK_ADJ;
+
+always @* begin
+	casez (~&{nSROMOE, nROMOE, nPORTOE})
+		'b1 : nDTACK_ADJ <= ~PROM_DATA_READY | nDTACK;
+		default : nDTACK_ADJ <= nDTACK; // Normal
+	
+	endcase
+end
+
+wire sram_nWWL = nWWL;
+wire sram_nWWU = nWWU;
 
 wire [15:0]	M68K_DATA_RAM = M68K_DATA;
 wire [20:1] M68K_ADDR_RAM = M68K_ADDR;
@@ -647,13 +696,16 @@ backup BACKUP(
 	.M68K_ADDR({M68K_ADDR[15:1], 1'b0}),
 	.M68K_DATA(M68K_DATA),
 	.nBWL(nBWL), .nBWU(nBWU),
-	.SRAM_OUT(SRAM_OUT),
+	.SRAM_OUT(backup_data),
 	.clk_sys(clk_74a),
 	.sram_addr(backup_ram_addr[15:0]),
 	.sram_wr(backup_ram_wr),
 	.sd_buff_dout(backup_ram_dout),
 	.sd_buff_din_sram(backup_ram_din)
 );
+
+assign M68K_DATA[7:0]  = (nSRAMOEL | ~SYSTEM_MVS) ? 8'bzzzzzzzz : backup_data[7:0];
+assign M68K_DATA[15:8] = (nSRAMOEU | ~SYSTEM_MVS) ? 8'bzzzzzzzz : backup_data[15:8];
 
 cram_16bit CPU68K_z80_RAM_CONTROLLER(
 	.reset_l_main		(reset_l_main),
@@ -824,7 +876,7 @@ wire IPL1_OUT = IPL1;
 wire IPL2_OUT = 1'b1;
 
 cpu_68k M68KCPU(
-	.CLK_24M			(CLK_24M),
+	.CLK_24M			(CPU_overclock ? CLK_32M : CLK_24M),
 	.nRESET			(nRESET_WD),
 	.M68K_ADDR		(M68K_ADDR),
 	.FX68K_DATAIN	(FX68K_DATAIN), 
@@ -875,7 +927,7 @@ wire [23:0] P2ROM_ADDR = (!cart_pchip) ? {P_BANK, M68K_ADDR[19:1], 1'b0} : 24'bZ
 neo_pvc neo_pvc
 (
 	.nRESET(nRESET),
-	.CLK_24M(CLK_24M),
+	.CLK_24M(CPU_overclock ? CLK_32M : CLK_24M),
 	.ENABLE(cart_pchip == 2),
 	.M68K_ADDR(M68K_ADDR),
 	.M68K_DATA(M68K_DATA),
@@ -890,7 +942,7 @@ neo_pvc neo_pvc
 neo_sma neo_sma
 (
 	.nRESET(nRESET),
-	.CLK_24M(CLK_24M),
+	.CLK_24M(CPU_overclock ? CLK_32M : CLK_24M),
 	.TYPE(cart_pchip),
 	.M68K_ADDR(M68K_ADDR),
 	.M68K_DATA(M68K_DATA),
@@ -1135,7 +1187,7 @@ neo_c1 C1(
 	.nDIPRD0		(nDIPRD0), 
 	.nDIPRD1		(nDIPRD1),
 	.nPAL_ZONE	(nPAL),
-	.SYSTEM_TYPE(SYSTEM_TYPE)
+	.SYSTEM_TYPE({1'b0,SYSTEM_TYPE})
 );
 
 reg       use_sp;
@@ -1541,7 +1593,8 @@ wire [7:0] VGA_B_wire = B6[6] ? 8'd0 : {B6[5:0],  B6[4:3]};
 
 *******************************************************************/
 
-	localparam		VID_H_BPORCH_DEFAULT = 10'd34;
+	localparam		VID_H_BPORCH_SD = 10'd38;
+	localparam		VID_H_BPORCH_HD = 10'd30;
 	localparam		VID_H_ACTIVE = 10'd304;
 	localparam		VID_H_ACTIVE_HD = 10'd320;
    localparam		VID_V_ACTIVE = 10'd224;
@@ -1580,7 +1633,7 @@ always @(posedge CLK_VIDEO) begin
 		y_count <= 'b0;
 		VGA_VS <= 1;
 		VID_V_BPORCH <= (video_mode_reg ? VID_V_BPORCH_PAL : VID_V_BPORCH_NTSC) + screen_y_pos;
-		VID_H_BPORCH <= VID_H_BPORCH_DEFAULT - screen_x_pos;
+		VID_H_BPORCH <= APF_Video_ratio[2] ? VID_H_BPORCH_HD - screen_x_pos : VID_H_BPORCH_SD - screen_x_pos;
 	end
 	else if (HSync_reg && ~HSync)	begin
 		y_count <= y_count + 1'b1;

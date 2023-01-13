@@ -53,7 +53,7 @@
                 "type": "check",
 				"enabled": true,
 				"persist": true,
-                "address": "0xF000000c",
+                "address": "0xF0000108",
 				"value": "0x1",
                 "mask": "0xFFFFFFFE"
             },
@@ -92,23 +92,33 @@
 				"mask": "0xFFFFFFFC",
 				"options": [
 					{
-					"value": "0x00",
+					"value": 0,
 					"name": "Aspect ratio 19:15"
 					},
 					{
-					"value": "0x01",
+					"value": 1,
 					"name": "Aspect ratio 160:144"
 					},
 					{
-					"value": "0x02",
+					"value": 2,
 					"name": "Aspect ratio 4:3"
 					},
 					{
-					"value": "0x03",
+					"value": 3,
 					"name": "Dock Widescreen 16:9"
 					}
 				]
-			}
+			},
+			{
+                "name": "CPU 16mhz",
+                "id": 8,
+                "type": "check",
+				"enabled": true,
+				"persist": true,
+                "address": "0xF0000110",
+				"value": "0x1",
+                "mask": "0xFFFFFFFE"
+            }
 		],
         "messages": []
     }
