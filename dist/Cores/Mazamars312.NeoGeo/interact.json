@@ -108,17 +108,7 @@
 					"name": "Dock Widescreen 16:9"
 					}
 				]
-			},
-			{
-                "name": "CPU 16mhz",
-                "id": 8,
-                "type": "check",
-				"enabled": true,
-				"persist": true,
-                "address": "0xF0000110",
-				"value": "0x1",
-                "mask": "0xFFFFFFFE"
-            }
+			}
 		],
         "messages": []
     }

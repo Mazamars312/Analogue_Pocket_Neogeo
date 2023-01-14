@@ -73,7 +73,11 @@ Yes. Once in the game, press the Anaolgue Pocket's Home button then direct yours
 
 ## Can I play in AES mode
 
-Yes. Once in the game, press the Anaolgue Pocket's Home button then direct yourself to the /Core Settings/ then to MVS/AES. In there you can select between MVS and AES and this does change the clock speeds too but causes a reboot due to the clock change
+Yes. Once in the game, press the Anaolgue Pocket's Home button then direct yourself to the /Core Settings/ then to MVS/AES. In there you can select between MVS and AES and this does change the clock speeds too but causes a reboot due to the clock change. This will not change in the UniBios startup display as that is a feature of the Bios, so go into the UniBios setup and change it in there :-) Thanks
+
+## Are there bugs?
+
+Yes. the current known bugs are in AOF 1 where some of the sprites are not displayed correcty (Im guessing a masking issue), and sometimes I have seen The Super Spy's logo will not come up. The next build I hope to have these done.
 
 ## Why is the refresh different then to the Mister core?
 Not anymore. im out by only .001 of a frame now!!! YAY
@@ -99,9 +103,13 @@ Yes that is why I have configered the core so you can have 4 options between 304
 ## No the Aspect rations are really weird!!!
 
 Well if you dont like them, you can change them yourself........ in the following json files :-)
-* Video.json - in here there are the top 4 entrys are for the 304 resolution and the bottom 4 are for outputting in 320. From there you can change each one to the aspect ratio you want to see. Look for the aspect_h and aspect_v entries.
-* interact.json - search for "name": "Video Scaller output", "id": 7, and in that list there are only 4 entrys that work with top and bottom 4 entrys in the Video.json. From here you can name them to what ever you want for your own reference.
+* Video.json - in here there are the top 4 entrys are for the 304 resolution and the bottom 4 are for outputting in 320. From there you can change each one to the aspect ratio you want to see. Look for the aspect_h and aspect_v entries. Make sure you do this for both the 304 and 320 groups. Or mix it up thats your option here :-)
+* interact.json - search for "name": "Video Scaller output", "id": 7, and in that list there are only 4 entrys that work with top and bottom 4 entrys in the Video.json. From here you can name them to what ever you want for your own reference from the Video.json.
 Have a play with it as it will only affect the scaller. Hell, have a go with the rotation with values of 90 or 180 and give yourself a challange :-)
+
+## The clock does not work
+
+Yes, I need to build the rtc and timer for the core for this to do this. in the list for the next build.
 
 ## Why where you late with this release and the one before?
 

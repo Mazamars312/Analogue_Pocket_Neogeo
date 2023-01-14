@@ -13,7 +13,6 @@ module pll (
 		output wire        outclk_2,          //           outclk2.clk
 		output wire        outclk_3,          //           outclk3.clk
 		output wire        outclk_4,          //           outclk4.clk
-		output wire        outclk_5,          //           outclk5.clk
 		output wire        locked,            //            locked.export
 		input  wire [63:0] reconfig_to_pll,   //   reconfig_to_pll.reconfig_to_pll
 		output wire [63:0] reconfig_from_pll  // reconfig_from_pll.reconfig_from_pll
@@ -27,7 +26,6 @@ module pll (
 		.outclk_2          (outclk_2),          //           outclk2.clk
 		.outclk_3          (outclk_3),          //           outclk3.clk
 		.outclk_4          (outclk_4),          //           outclk4.clk
-		.outclk_5          (outclk_5),          //           outclk5.clk
 		.locked            (locked),            //            locked.export
 		.reconfig_to_pll   (reconfig_to_pll),   //   reconfig_to_pll.reconfig_to_pll
 		.reconfig_from_pll (reconfig_from_pll)  // reconfig_from_pll.reconfig_from_pll
@@ -75,7 +73,7 @@ endmodule
 // Retrieval info: 	<generic name="gui_dsm_out_sel" value="1st_order" />
 // Retrieval info: 	<generic name="gui_use_locked" value="true" />
 // Retrieval info: 	<generic name="gui_en_adv_params" value="false" />
-// Retrieval info: 	<generic name="gui_number_of_clocks" value="6" />
+// Retrieval info: 	<generic name="gui_number_of_clocks" value="5" />
 // Retrieval info: 	<generic name="gui_multiply_factor" value="9" />
 // Retrieval info: 	<generic name="gui_frac_multiply_factor" value="2865308404" />
 // Retrieval info: 	<generic name="gui_divide_factor_n" value="1" />

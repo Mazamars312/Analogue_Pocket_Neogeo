@@ -230,7 +230,7 @@ wire sdram_int_clk;
 assign sdram_int_clk = clk_sys;
 
 // Clocks
-wire CLK_32M, CLK_12M, CLK_12MB, CLK_68KCLK, CLK_68KCLKB, CLK_8M, CLK_6MB, CLK_4M, CLK_4MB;
+wire CLK_12M, CLK_12MB, CLK_68KCLK, CLK_68KCLKB, CLK_8M, CLK_6MB, CLK_4M, CLK_4MB;
 
 pll pll_sys(
 	.refclk(clk_74a),
@@ -240,7 +240,6 @@ pll pll_sys(
 	.outclk_2(CLK_VIDEO_90),
 	.outclk_3(CLK_8M),
 	.outclk_4(CLK_4M),
-	.outclk_5(CLK_32M),
 	.reconfig_to_pll(reconfig_to_pll),
 	.reconfig_from_pll(reconfig_from_pll),
 	.locked(locked_1)
@@ -375,7 +374,6 @@ wire [31:0]	screen_y_pos;
 wire [2:0]	APF_Video_ratio;
 wire [23:0] V2ROM_MASK;
 wire [2:0]  C1_wait;
-wire			CPU_overclock;
 
 apf_io apf_io
 (
@@ -415,7 +413,6 @@ apf_io apf_io
 	.APF_Video_ratio			(APF_Video_ratio),
 	.snd_enable					(snd_enable),
 	.ch_enable					(ch_enable),
-	.CPU_overclock				(CPU_overclock),
 	
 	.cart_pchip					(cart_pchip),
 	.use_pcm						(use_pcm),
@@ -876,7 +873,7 @@ wire IPL1_OUT = IPL1;
 wire IPL2_OUT = 1'b1;
 
 cpu_68k M68KCPU(
-	.CLK_24M			(CPU_overclock ? CLK_32M : CLK_24M),
+	.CLK_24M			(CLK_24M),
 	.nRESET			(nRESET_WD),
 	.M68K_ADDR		(M68K_ADDR),
 	.FX68K_DATAIN	(FX68K_DATAIN), 
@@ -927,7 +924,7 @@ wire [23:0] P2ROM_ADDR = (!cart_pchip) ? {P_BANK, M68K_ADDR[19:1], 1'b0} : 24'bZ
 neo_pvc neo_pvc
 (
 	.nRESET(nRESET),
-	.CLK_24M(CPU_overclock ? CLK_32M : CLK_24M),
+	.CLK_24M(CLK_24M),
 	.ENABLE(cart_pchip == 2),
 	.M68K_ADDR(M68K_ADDR),
 	.M68K_DATA(M68K_DATA),
@@ -942,7 +939,7 @@ neo_pvc neo_pvc
 neo_sma neo_sma
 (
 	.nRESET(nRESET),
-	.CLK_24M(CPU_overclock ? CLK_32M : CLK_24M),
+	.CLK_24M(CLK_24M),
 	.TYPE(cart_pchip),
 	.M68K_ADDR(M68K_ADDR),
 	.M68K_DATA(M68K_DATA),
