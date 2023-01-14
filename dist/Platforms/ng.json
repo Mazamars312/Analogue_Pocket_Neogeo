@@ -1,7 +1,8 @@
 {
   "platform": {
+    "category": "Console",
     "name": "Neo Geo",
-    "year": 1990,
-    "manufacturer": "SNK"
+    "manufacturer": "SNK",
+    "year": 1990
   }
 }
