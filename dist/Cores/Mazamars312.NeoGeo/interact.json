@@ -82,7 +82,7 @@
                 "mask": "0xFFFFFFFB"
             },
 			{
-				"name": "Video Scaller output",
+				"name": "Video Scaler output",
 				"id": 7,
 				"type": "list",
 				"enabled": true,

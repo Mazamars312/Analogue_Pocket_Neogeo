@@ -104,8 +104,8 @@ Yes that is why I have configered the core so you can have 4 options between 304
 
 Well if you dont like them, you can change them yourself........ in the following json files :-)
 * Video.json - in here there are the top 4 entrys are for the 304 resolution and the bottom 4 are for outputting in 320. From there you can change each one to the aspect ratio you want to see. Look for the aspect_h and aspect_v entries. Make sure you do this for both the 304 and 320 groups. Or mix it up thats your option here :-)
-* interact.json - search for "name": "Video Scaller output", "id": 7, and in that list there are only 4 entrys that work with top and bottom 4 entrys in the Video.json. From here you can name them to what ever you want for your own reference from the Video.json.
-Have a play with it as it will only affect the scaller. Hell, have a go with the rotation with values of 90 or 180 and give yourself a challange :-)
+* interact.json - search for "name": "Video Scaler output", "id": 7, and in that list there are only 4 entrys that work with top and bottom 4 entrys in the Video.json. From here you can name them to what ever you want for your own reference from the Video.json.
+Have a play with it as it will only affect the scaler. Hell, have a go with the rotation with values of 90 or 180 and give yourself a challange :-)
 
 ## The clock does not work
 
