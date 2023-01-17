@@ -195,7 +195,7 @@ module cram_16bit
 	
 	reg			PROM_DATA_READY_C;
 	
-	wire [17:0] SROM_ADDRESS = {FIX_BANK[1:0],PBUS_REG[15:0]} & SROM_MASK[18:1];
+	wire [17:0] SROM_ADDRESS = {FIX_BANK[1:0],PBUS_REG[15:0]} & SROM_MASK[17:0];
 	
 	always @(posedge sys_clk or negedge reset_l_main) begin
 		if (~reset_l_main) begin

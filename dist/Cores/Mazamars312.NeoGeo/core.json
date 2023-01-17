@@ -7,8 +7,8 @@
             "description": "Neogeo cart based core",
             "author": "Mazamars312",
             "url": "https://github.com/Mazamars312/Analogue_Pocket_Neogeo",
-            "version": "Alpha 0.8.0",
-            "date_release": "2023-01-15"
+            "version": "0.8.1",
+            "date_release": "2023-01-17"
         },
         "framework": {
             "target_product": "Analogue Pocket",

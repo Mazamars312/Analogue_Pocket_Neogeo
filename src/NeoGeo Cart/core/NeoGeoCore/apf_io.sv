@@ -492,8 +492,8 @@ end
 
 
 reg [31:0] bridge_addr_reg;
-reg [25:0] crom_addr_reg;
-reg [7:0] CROM_MASK_STAGE_1;
+reg [9:0] crom_addr_reg;
+reg [9:0] CROM_MASK_STAGE_1;
 
 // this writes the masking directly to the regs while watching the writes to the ram locations
 wire [18:0] test_19_bits = {bridge_addr_reg[18],
@@ -565,15 +565,30 @@ wire [23:0] test_24_bits = {bridge_addr_reg[23],
 									|bridge_addr_reg[23:1],
 									|bridge_addr_reg[23:0]};
 
-wire [7:0] test_crom_bits = { // this is a trick Im doing to check if anything is above a range. Compination LUT are a pain...
-									crom_addr_reg > 'h200_0000, // Greater then 32mbyte [22]
-									crom_addr_reg > 'h100_0000, // Greater then 16mbyte [21]
-									crom_addr_reg > 'h80_0000, // Greater then 8mbyte [20]
-									crom_addr_reg > 'h40_0000, // Greater then 4mbyte [19]
-									crom_addr_reg > 'h20_0000, // Greater then 2mbyte [18]
-									crom_addr_reg > 'h10_0000, // Greater then 1mbyte [17]
-									crom_addr_reg > 'h8_0000, // Greater then .5mbyte [16]
-									crom_addr_reg > 'h4_0000}; // Greater then .25mbyte [15]
+reg [9:0] test_crom_bits; //= { // this is a trick Im doing to check if anything is above a range. Compination LUT are a pain...
+//									crom_addr_reg > 'h200_0000, // Greater then 32mbyte [22]
+//									crom_addr_reg > 'h100_0000, // Greater then 16mbyte [21]
+//									crom_addr_reg > 'h80_0000, // Greater then 8mbyte [20]
+//									crom_addr_reg > 'h40_0000, // Greater then 4mbyte [19]
+//									crom_addr_reg > 'h20_0000, // Greater then 2mbyte [18]
+//									crom_addr_reg > 'h10_0000, // Greater then 1mbyte [17]
+//									crom_addr_reg > 'h8_0000, // Greater then .5mbyte [16]
+//									crom_addr_reg > 'h4_0000}; // Greater then .25mbyte [15]
+		always @* begin							
+			casez (crom_addr_reg)
+				10'b1z_zzzz_zzzz 	: test_crom_bits <= 10'b11_1111_1111;
+				10'b01_zzzz_zzzz 	: test_crom_bits <= 10'b01_1111_1111;
+				10'b00_1zzz_zzzz 	: test_crom_bits <= 10'b00_1111_1111;
+				10'b00_01zz_zzzz 	: test_crom_bits <= 10'b00_0111_1111;
+				10'b00_001z_zzzz 	: test_crom_bits <= 10'b00_0011_1111;
+				10'b00_0001_zzzz 	: test_crom_bits <= 10'b00_0001_1111;
+				10'b00_0000_1zzz 	: test_crom_bits <= 10'b00_0000_1111;
+				10'b00_0000_01zz 	: test_crom_bits <= 10'b00_0000_0111;
+				10'b00_0000_001z 	: test_crom_bits <= 10'b00_0000_0011;
+				10'b00_0000_0001 	: test_crom_bits <= 10'b00_0000_0001;
+				default 				: test_crom_bits <= 10'b00_0000_0000;
+			endcase
+		end
 									
 reg 			cart_pchip_main;
 reg [2:0] 	cart_pchip_sub;
@@ -619,7 +634,7 @@ always @(posedge clk_74a or negedge reset_l_main) begin
 		bridge_addr_reg <= bridge_addr[25:0];
 		Core_reset				<= 1'b0;
 		CROM_MASK_STAGE_1 <= {test_crom_bits};
-		CROM_MASK 	<= {CROM_MASK_STAGE_1, {16{|CROM_MASK_STAGE_1}}};
+		CROM_MASK 	<= {CROM_MASK_STAGE_1, {16{1'b1}}};
 		if (bridge_wr) begin
 			if (bridge_addr[31:24] == 8'h10) begin
 				if (bridge_addr[23:20] == 4'h8) PROM1_access <= 1'b1;
@@ -627,7 +642,7 @@ always @(posedge clk_74a or negedge reset_l_main) begin
 			end
 			casex(bridge_addr)
 				32'h4xxxxxxx: begin
-					crom_addr_reg <= bridge_addr[25:0];
+					crom_addr_reg <= bridge_addr[25:16];
 				end
 				// these will monitor the masking side of the roms
 				32'b0001_0000_0xxx_xxxx_xxxx_xxxx_xxxx_xxxx: begin

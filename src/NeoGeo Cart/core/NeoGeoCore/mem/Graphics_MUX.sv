@@ -105,7 +105,7 @@ module Graphics_MUX(
 				end
 				default : begin
 					if (REQ_CROM_RD_FIRST && nRESET) begin
-						burst_addr	<= {CROM_ADDR[22:20], CROM_ADDR[15:0], CROM_ADDR[19:16], 3'b000} & {CROM_MASK[22:20], CROM_MASK[19:0], 3'b000}; // Demuxing
+						burst_addr	<= {CROM_ADDR[22:20], CROM_ADDR[15:0], CROM_ADDR[19:16], 3'b000} & {CROM_MASK[25:20], CROM_MASK[19:3], 3'b000}; // Demuxing
 						burst_rd 	<= 'b1;
 						sdram_state <= sdram_read_1;
 					end
