@@ -1,10 +1,10 @@
-# Neogeo for Pocket (0.8.0)
+# Neogeo for Pocket (0.8.1)
 
 This is the port of the Neogeo Core made by [Furrtek](https://www.patreon.com/furrtek/posts) to the Analogue Pocket using the APF framework and some of my own code.
 
 ### NOTE! read the installation and Usage as the default Bios file has changed and saves can cause an issue. 
 
-## Bug fixes in 0.8.0
+## Bug fixes in 0.8.1
 
 * Increased the memory access from the ASYNC CRAM cores.
 * Changed the PLL timing and clocks to the cores. And changed how the B1 chip gets its video clock now from the LSPC chip. Audio still on its own clock from the PLL.
@@ -16,6 +16,7 @@ This is the port of the Neogeo Core made by [Furrtek](https://www.patreon.com/fu
 * Reloadable bios and game jsons while in the core.
 * Reset has been removed from th eleft trigger to the interact menu.
 * 320 or 304 output for some of thos games that dont use the full screen.
+* masking fixed to CROMS in some games
 
 ## Installation and Usage 
 
